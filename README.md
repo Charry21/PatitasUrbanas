@@ -33,3 +33,8 @@ Datos de conexión local:
 - Base de datos: `patitas_urbanas`
 - Usuario: `admin`
 - Contraseña: `adminpassword`
+
+## Evidencia de Ejecución Local (Semana 1)
+A continuación, se demuestra la correcta inicialización del contenedor y la conexión exitosa al motor de base de datos PostgreSQL en el entorno de desarrollo local.
+
+![Evidencia de ejecución](ejecucion_local.png)
