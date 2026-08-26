@@ -38,3 +38,7 @@ Datos de conexión local:
 A continuación, se demuestra la correcta inicialización del contenedor y la conexión exitosa al motor de base de datos PostgreSQL en el entorno de desarrollo local.
 
 ![Evidencia de ejecución](ejecucion_local.png)
+
+## Evidencia de Ejecución de la API
+
+![Ejecución de la API](evidencia_ejecucion_api.png)
