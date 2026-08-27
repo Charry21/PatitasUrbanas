@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   postgres_db:
-    image: postgres:15
+    image: postgres:16
     container_name: patitas_urbanas_db
     environment:
       POSTGRES_USER: admin
@@ -11,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata_v16:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d patitas_urbanas"]
       interval: 10s
@@ -33,4 +33,4 @@ services:
       - DB_HOST=postgres_db
 
 volumes:
-  pgdata:
+  pgdata_v16:

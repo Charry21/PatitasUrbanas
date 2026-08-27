@@ -12,7 +12,7 @@ El proyecto utiliza PostgreSQL mediante Docker Compose. Para levantar la base de
 docker compose up -d
 ```
 
-Este comando crea el contenedor `patitas_urbanas_db`, inicia PostgreSQL y conserva los datos en el volumen `pgdata`.
+Este comando crea el contenedor `patitas_urbanas_db`, inicia PostgreSQL 16 y conserva los datos nuevos en el volumen `pgdata_v16`.
 
 Para comprobar el estado del servicio:
 
@@ -46,3 +46,5 @@ A continuación, se demuestra la correcta inicialización del contenedor y la co
 ## Validación de pruebas
 
 Las pruebas de validación confirman de manera consistente que el *healthcheck* de la base de datos se mantiene en estado `healthy` y que el endpoint de la API responde con el código de estado HTTP `200`.
+
+![Evidencia de Pruebas Spring Boot](evidencia_pruebas_java.png)
