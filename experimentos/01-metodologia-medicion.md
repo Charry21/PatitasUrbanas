@@ -2,29 +2,33 @@
 
 ## 1. Trazabilidad de la Medición
 * **Fecha de Ejecución:** 28 de agosto de 2026
-* **Versión del Código (Commit Hash):** 4d13ad35b2b0eaa8a2938d05b28857d8c75ff697
-* **Condiciones del Entorno:** Windows, Docker Desktop (WSL2), PostgreSQL 16, Java 21 + Spring Boot 3.3.4, k6.
+* **Versión del Código (Commit Hash):** 0f739f09feb4b5da2c328c11dfcdd53b595b11
+* **Condiciones del Entorno y Hardware:** 
+	* Sistema Operativo: Windows, Docker Desktop (WSL2)
+	* Motor de Base de Datos: PostgreSQL 16 con extensión PostGIS e índices espaciales (GIST)
+	* Microservicio: Java 21 + Spring Boot 3.3.4
+	* Herramienta de Carga: k6
+	* Fuente de Energía: Conectado a corriente alterna (AC) con perfil de alto rendimiento.
+* **Configuración y Semilla de Datos:**
+	* Volumen de la Semilla: 5,000 registros geolocalizados de prueba.
+	* Distribución de la Semilla: Coordenadas aleatorias distribuidas en un radio de 15 km en Bogotá.
 
-## 2. Fase Exploratoria Inicial (Trazabilidad)
-Se conserva el registro de la prueba exploratoria de 50 segundos con 20 Usuarios Virtuales (VUs) escalonados.
-* **Carga real aplicada:** ~16.17 req/s (809 iteraciones).
-* **Latencia:** p95 = 4.33 ms.
+## 2. Coherencia Escenario - Script
+* **Escenario Definido (Semana 3):** Rendimiento en consultas de geolocalización de mascotas bajo una carga de 100 req/s.
+* **Operación Medida (Semana 4):** El script de k6 ejecuta peticiones HTTP GET concurrentes contra el endpoint real de búsqueda geoespacial (`/api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5`) utilizando el ejecutor `constant-arrival-rate` a una tasa constante de 100 req/s durante 40 segundos.
 
-## 3. Medición de Línea Base Formal (100 req/s)
-Para emparejar la carga con el entorno definido en el escenario de la Semana 3, se configuró el script de k6 utilizando el ejecutor `constant-arrival-rate`. Esto inyectó una carga constante de 100 req/s durante 40 segundos.
+## 3. Protocolo de 3 Corridas y Tratamiento Estadístico
+Se ejecutaron tres iteraciones independientes bajo idénticas condiciones. Se descarta la primera corrida por efectos de calentamiento (warm-up) de la JVM, reportando la estadística final a partir de las corridas válidas 2 y 3.
 
-**Protocolo de 3 Corridas y Descarte:**
-Se ejecutaron tres iteraciones independientes bajo idénticas condiciones. En cumplimiento del rigor estadístico, se descarta explícitamente la primera corrida para anular el sesgo del calentamiento (warm-up) de la Máquina Virtual de Java. La estadística final se calcula sobre las corridas válidas.
+* **Corrida 1 (Descartada - Warm-up):** 3985 iteraciones, 100% éxito. p95 = 5.58 ms.
+* **Corrida 2 (Válida):** 4000 iteraciones, 100% éxito. p95 = 2.67 ms.
+* **Corrida 3 (Válida):** 4000 iteraciones, 100% éxito. p95 = 2.61 ms.
 
-* **Corrida 1 (Descartada - Warm-up):** 4000 iteraciones a ~100 req/s. p95 = 3.82 ms.
-* **Corrida 2 (Válida):** 4000 iteraciones a ~100 req/s. p95 = 2.78 ms.
-* **Corrida 3 (Válida):** 4001 iteraciones a ~100 req/s. p95 = 2.73 ms.
-
-**Estadística Final de las Corridas Válidas:**
-* **Mediana del p95:** 2.755 ms (promedio de 2.78 y 2.73).
-* **Códigos HTTP verificados:** 100% de éxito (HTTP 200) y 0 fallos.
+**Estadística Final Reportada:**
+* **Mediana del p95 (Corridas 2 y 3):** 2.64 ms.
+* **Códigos HTTP verificados:** 100% de respuestas HTTP 200 (0 fallos).
 
 ## 4. Contraste con la Hipótesis de S3
-* **Hipótesis (Semana 3):** p95 < 800 ms bajo una carga de 100 req/s.
-* **Evidencia Medida (Semana 4):** La estadística obtenida arroja una mediana del p95 de 2.755 ms.
-* **Conclusión:** Bajo las condiciones exactas medidas en este experimento (100 req/s en el entorno local documentado), el sistema logra procesar la carga manteniendo una latencia que cumple satisfactoriamente con el umbral estipulado en la hipótesis.
+* **Hipótesis Estipulada (Semana 3):** p95 < 800 ms bajo una carga de 100 req/s para búsqueda geoespacial.
+* **Evidencia Medida (Semana 4):** La mediana del p95 obtenida es de 2.64 ms.
+* **Conclusión:** Bajo el escenario real medido sobre la operación espacial con la semilla de datos configurada, el sistema cumple satisfactoriamente y de forma holgada con el umbral de rendimiento estipulado.

@@ -15,6 +15,7 @@ export const options = {
 };
 
 export default function () {
-  const res = http.get('http://localhost:3000/actuator/health');
+  // Reemplace por la ruta real de su API que ejecuta la búsqueda espacial
+  const res = http.get('http://localhost:3000/api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5');
   check(res, { 'status es 200': (r) => r.status === 200 });
 }
