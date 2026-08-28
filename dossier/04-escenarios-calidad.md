@@ -26,6 +26,15 @@
 ### Escenario Reformulado 2: Disponibilidad ante Fallos de Infraestructura (Riesgo R02)
 
 * **Estímulo:** Caída inesperada y total del contenedor principal de la base de datos o de la API.
-* **Ambiente:** Operación en producción.
-* **Respuesta:** El orquestador detecta el fallo del servicio mediante health checks, reinicia el contenedor de manera automática y el balanceador de carga notifica el estado 503 temporal.
+* **Entorno:** [Condición Hipotética/Futura] Sistema en producción operando con alta disponibilidad. (Nota: El sistema base actual en la Semana 3 consta de un único nodo de despliegue local; este escenario asume la futura implementación de un balanceador de carga y políticas de autorrecuperación).
+* **Respuesta:** El orquestador hipotético detecta el fallo del servicio mediante health checks, reinicia el contenedor de manera automática y el balanceador de carga notifica el estado 503 temporal.
 * **Medida:** El Tiempo Objetivo de Recuperación (RTO) no debe exceder los 120 segundos para restablecer el servicio a los clientes de Patitas Urbanas.
+
+## 4. Registro de Trazabilidad de IA
+
+Para cumplir con la política de uso de IA, a continuación se detalla el tratamiento de los escenarios propuestos originalmente por el agente evaluador:
+
+* **Propuesta original de la IA:** Riesgo R02 - "El servidor principal puede sufrir una caída debido a un corte de energía, dejando la plataforma inaccesible".
+* **Modificación realizada:** Se transformó este riesgo genérico de hardware en el *Escenario Reformulado 2*, enfocándolo en el fallo del contenedor lógico y definiendo un umbral de recuperación (RTO de 120 segundos).
+* **Justificación de la modificación:** La sugerencia original carecía de métricas verificables y estructuración arquitectónica (estímulo, respuesta, medida). Se adaptó para que sea auditable mediante pruebas de estrés.
+* **Propuestas descartadas:** Se rechazó en su totalidad el riesgo original R03 ("Altos costos de licenciamiento"), ya que la IA generó una alucinación técnica al afirmar que PostgreSQL requería licenciamiento corporativo pago.
