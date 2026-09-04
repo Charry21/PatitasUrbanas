@@ -185,7 +185,38 @@
   .node.external .tag{ color:var(--ink-soft); }
   .node.container{ border-color:var(--blue); }
   .node.container .tag{ color:var(--blue); }
-  .node.container.cache{ border-style:dashed; }
+
+  .node.planned{
+    border-style:dashed !important;
+    border-color:#999999 !important;
+    background:#f5f5f0;
+    opacity:.85;
+  }
+  .node.planned .tag{ color:#666666 !important; }
+  .node.planned .label{ color:#555555; }
+  .node.planned::after{
+    content:"planificado";
+    display:block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px;
+    color:#999999;
+    margin-top:4px;
+    letter-spacing:.03em;
+  }
+
+  .legend{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:12px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend .swatch{ width:14px; height:14px; border-radius:3px; display:inline-block; }
+  .legend .swatch.verified{ border:2px solid var(--ink); background:#fff; }
+  .legend .swatch.planned{ border:2px dashed #999999; background:#f5f5f0; }
 
   svg.wires{ position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:visible; }
   svg.wires path{ fill:none; stroke:var(--graphite); stroke-width:1.6; opacity:.55; }
@@ -230,6 +261,14 @@
   .comp-card:hover{ transform:translateY(-3px); }
   .comp-card .label{ font-weight:700; margin-bottom:6px; }
   .comp-card .tag{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--amber); }
+  .comp-card.planned{
+    border-color:#999999;
+    border-style:dashed;
+    background:#f5f5f0;
+    box-shadow:3px 3px 0 rgba(153,153,153,0.10);
+  }
+  .comp-card.planned .tag{ color:#666666; }
+  .comp-card.planned .label{ color:#555555; }
 
   .code-note{
     border:2px dashed var(--ink-soft);
@@ -289,22 +328,31 @@
         <path d="M330,90 C300,150 260,150 300,180"></path>
         <path d="M400,220 C480,220 520,220 560,150"></path>
       </svg>
-      <div class="node actor" style="left:20px; top:30px;" data-id="ciudadano">
+      <div class="node actor planned" style="left:20px; top:30px;" data-id="ciudadano">
         <span class="label">Ciudadano / Adoptante</span>
         <span class="tag">persona</span>
       </div>
-      <div class="node actor" style="left:250px; top:30px;" data-id="admin">
+      <div class="node actor planned" style="left:250px; top:30px;" data-id="admin">
         <span class="label">Administrador de Refugio</span>
         <span class="tag">persona</span>
       </div>
-      <div class="node system" style="left:170px; top:190px;" data-id="sistema">
-        <span class="label">Patitas Urbanas</span>
-        <span class="tag">sistema de software</span>
+      <div class="node actor" style="left:20px; top:130px;" data-id="qa">
+        <span class="label">Equipo de Desarrollo / QA</span>
+        <span class="tag">persona</span>
       </div>
-      <div class="node external" style="left:490px; top:130px;" data-id="mapas">
+      <div class="node system" style="left:170px; top:230px;" data-id="sistema">
+        <span class="label">Patitas Urbanas</span>
+        <span class="tag">línea base operativa</span>
+      </div>
+      <div class="node external planned" style="left:490px; top:170px;" data-id="mapas">
         <span class="label">Servicio de Mapas y Geolocalización</span>
         <span class="tag">sistema externo</span>
       </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch verified"></i> Verificado en código</span>
+      <span><i class="swatch planned"></i> Planificado, aún no implementado</span>
     </div>
 
     <div class="detail" id="detail-contexto">
@@ -322,40 +370,39 @@
       <span class="level-badge">NIVEL 2</span>
     </div>
 
-    <div class="canvas" style="min-height:460px;">
-      <svg class="wires" viewbox="0 0 720 460">
+    <div class="canvas" style="min-height:400px;">
+      <svg class="wires" viewbox="0 0 720 400">
         <path d="M120,90 C170,140 260,150 320,190"></path>
         <path d="M420,90 C400,140 360,150 320,190"></path>
         <path d="M370,230 C370,270 370,270 370,300"></path>
-        <path d="M420,220 C520,220 560,220 610,150"></path>
-        <path d="M330,260 C260,290 220,300 180,330"></path>
       </svg>
 
-      <div class="node container" style="left:30px; top:30px;" data-id="web">
+      <div class="node container planned" style="left:30px; top:30px;" data-id="web">
         <span class="label">Front-end Web</span>
-        <span class="tag">Next.js (SSR)</span>
+        <span class="tag">no implementado aún</span>
       </div>
-      <div class="node container" style="left:350px; top:30px;" data-id="movil">
+      <div class="node container planned" style="left:350px; top:30px;" data-id="movil">
         <span class="label">Front-end Móvil</span>
         <span class="tag">Kotlin / Jetpack Compose</span>
       </div>
       <div class="node container" style="left:190px; top:190px;" data-id="api">
-        <span class="label">API Backend</span>
-        <span class="tag">Next.js API Routes</span>
+        <span class="label">API Backend (api_app)</span>
+        <span class="tag">Spring Boot 3.3.4 / Java 21</span>
       </div>
       <div class="node container" style="left:190px; top:320px;" data-id="db">
-        <span class="label">Base de Datos Transaccional</span>
-        <span class="tag">PostgreSQL</span>
-      </div>
-      <div class="node container cache" style="left:20px; top:320px;" data-id="cache">
-        <span class="label">Caché de Foros y Geolocalización</span>
-        <span class="tag">MongoDB / Firestore</span>
-      </div>
-      <div class="node external" style="left:530px; top:190px;" data-id="mapas2">
-        <span class="label">Servicio de Mapas y Geolocalización</span>
-        <span class="tag">sistema externo</span>
+        <span class="label">Base de Datos Transaccional (postgres_db)</span>
+        <span class="tag">PostgreSQL 16</span>
       </div>
     </div>
+
+    <div class="legend">
+      <span><i class="swatch verified"></i> Verificado en código</span>
+      <span><i class="swatch planned"></i> Planificado, aún no implementado</span>
+    </div>
+
+    <p style="font-size:13.5px; color:var(--ink-soft); margin-top:16px; max-width:600px;">
+      El contenedor de caché (Firestore/MongoDB) propuesto en las notas iniciales <strong>no aparece en este diagrama</strong>: fue descartado por decisión de arquitectura del equipo (ver <code>dossier/02-stakeholders-drivers.md</code>, riesgo R-03), no por falta de tiempo. Detalle completo en <code>07-c4-componentes.md</code>.
+    </p>
 
     <div class="detail" id="detail-contenedores">
       <p class="placeholder">Selecciona un contenedor para ver su descripción y su tecnología.</p>
@@ -373,22 +420,35 @@
     </div>
 
     <div class="comp-grid">
-      <div class="comp-card" data-id="auth">
-        <span class="tag">MÓDULO</span>
+      <div class="comp-card" data-id="entrypoint" style="border-color:var(--amber);">
+        <span class="tag">VERIFICADO</span>
+        <div class="label">Punto de entrada (PatitasUrbanasApplication)</div>
+      </div>
+      <div class="comp-card" data-id="health" style="border-color:var(--amber);">
+        <span class="tag">VERIFICADO</span>
+        <div class="label">Endpoint /actuator/health</div>
+      </div>
+      <div class="comp-card planned" data-id="auth">
+        <span class="tag">PLANIFICADO</span>
         <div class="label">Autenticación y Autorización</div>
       </div>
-      <div class="comp-card" data-id="adopciones">
-        <span class="tag">MÓDULO</span>
+      <div class="comp-card planned" data-id="adopciones">
+        <span class="tag">PLANIFICADO</span>
         <div class="label">Gestión de Adopciones y Mascotas</div>
       </div>
-      <div class="comp-card" data-id="reportes">
-        <span class="tag">MÓDULO</span>
+      <div class="comp-card planned" data-id="reportes">
+        <span class="tag">PLANIFICADO</span>
         <div class="label">Reportes de Animales Perdidos</div>
       </div>
-      <div class="comp-card" data-id="foros">
-        <span class="tag">MÓDULO</span>
+      <div class="comp-card planned" data-id="foros">
+        <span class="tag">PLANIFICADO</span>
         <div class="label">Foros Comunitarios</div>
       </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch verified"></i> Verificado en código</span>
+      <span><i class="swatch planned"></i> Planificado, aún no implementado</span>
     </div>
 
     <div class="detail" id="detail-componentes">
@@ -418,79 +478,84 @@
 <script>
 const data = {
   contexto: {
+    qa: {
+      title: "Equipo de Desarrollo / QA",
+      tag: "PERSONA · VERIFICADO",
+      text: "Único actor con interacción real confirmada: ejecuta y valida el sistema vía peticiones HTTP (Postman/curl). Evidencia: evidencia_ejecucion_api.png y evidencia_pruebas_java.png."
+    },
     ciudadano: {
       title: "Ciudadano / Adoptante",
-      tag: "PERSONA",
-      text: "Usuario que interactúa con la plataforma vía HTTP/S para buscar adopciones, reportar animales perdidos o participar en la comunidad."
+      tag: "PERSONA · PLANIFICADO",
+      text: "Declarado como usuario objetivo en dossier/01-contexto-sistema.md, pero sin canal de interacción implementado todavía (no existe frontend web ni móvil en el repositorio)."
     },
     admin: {
       title: "Administrador de Refugio",
-      tag: "PERSONA",
-      text: "Encargado de gestionar la publicación de mascotas disponibles para adopción en nombre de un refugio."
+      tag: "PERSONA · PLANIFICADO",
+      text: "Declarado como usuario objetivo en el dossier arquitectónico. Sin canal de interacción implementado por la misma razón que el Ciudadano/Adoptante."
     },
     sistema: {
       title: "Patitas Urbanas",
-      tag: "SISTEMA DE SOFTWARE",
-      text: "Plataforma centralizada para la adopción de mascotas, el rastreo de animales perdidos y la interacción comunitaria."
+      tag: "SISTEMA DE SOFTWARE · VERIFICADO (alcance parcial)",
+      text: "En su estado actual es una línea base operativa: un backend Spring Boot conectado a PostgreSQL, sin lógica de negocio ni clientes todavía. La visión completa (adopción, rastreo, comunidad) sigue siendo el objetivo del proyecto."
     },
     mapas: {
       title: "Servicio de Mapas y Geolocalización",
-      tag: "SISTEMA EXTERNO",
-      text: "Proveedor externo que renderiza mapas interactivos y ubica geográficamente los refugios y los reportes de pérdida."
+      tag: "SISTEMA EXTERNO · PLANIFICADO",
+      text: "Ningún archivo del repositorio (dependencias, variables de entorno, llamadas salientes) evidencia una integración real con un proveedor de mapas todavía."
     }
   },
   contenedores: {
     web: {
       title: "Front-end Web",
-      tag: "NEXT.JS · SSR + CLIENTE",
-      text: "Aplicación web optimizada para renderizado del lado del servidor, orientada a la experiencia de usuario general."
+      tag: "PLANIFICADO · NO IMPLEMENTADO",
+      text: "Declarado como restricción de despliegue en dossier/01-contexto-sistema.md (compatible con Vercel), pero no existe proyecto de frontend en el repositorio todavía."
     },
     movil: {
       title: "Front-end Móvil",
-      tag: "KOTLIN · JETPACK COMPOSE",
-      text: "Aplicación nativa para dispositivos móviles, orientada al reporte rápido de animales perdidos y notificaciones en tiempo real."
+      tag: "KOTLIN / JETPACK COMPOSE · PLANIFICADO",
+      text: "Declarado como restricción técnica en el dossier arquitectónico, pero no existe módulo Android en el repositorio todavía."
     },
     api: {
-      title: "API Backend",
-      tag: "NEXT.JS API ROUTES · REST",
-      text: "Contenedor central que expone los endpoints RESTful. Gestiona la autenticación basada en roles y procesa las reglas de negocio de la comunidad y las adopciones."
+      title: "API Backend (api_app)",
+      tag: "SPRING BOOT 3.3.4 · JAVA 21 · VERIFICADO",
+      text: "Único contenedor de aplicación verificado. Expone el endpoint /actuator/health y se conecta a PostgreSQL vía JDBC. Aún no tiene controladores, servicios ni repositorios de negocio (sin spring-security ni spring-data-jpa en pom.xml)."
     },
     db: {
-      title: "Base de Datos Transaccional",
-      tag: "POSTGRESQL",
-      text: "Motor relacional encargado de la persistencia segura de usuarios, perfiles de mascotas e historiales médicos, operando bajo la normativa de datos personales vigente en Colombia."
-    },
-    cache: {
-      title: "Caché / Almacenamiento no estructurado",
-      tag: "MONGODB / FIRESTORE",
-      text: "Contenedor auxiliar para el almacenamiento rápido de mensajes de foros y estados efímeros de geolocalización. Añadido para que el Módulo de Foros Comunitarios (nivel 3) tenga dónde persistir."
-    },
-    mapas2: {
-      title: "Servicio de Mapas y Geolocalización",
-      tag: "SISTEMA EXTERNO",
-      text: "Consultado por la API Backend vía REST/SDK para resolver ubicaciones y renderizar mapas."
+      title: "Base de Datos Transaccional (postgres_db)",
+      tag: "POSTGRESQL 16 · VERIFICADO",
+      text: "Motor relacional definido en docker-compose.yml con healthcheck (pg_isready) y volumen persistente pgdata_v16. Aún sin esquema de tablas de negocio en el repositorio."
     }
   },
   componentes: {
+    entrypoint: {
+      title: "Punto de entrada (PatitasUrbanasApplication)",
+      tag: "COMPONENTE · VERIFICADO",
+      text: "Clase anotada con @SpringBootApplication que arranca el contexto de Spring. Archivo: app/src/main/java/com/patitasurbanas/PatitasUrbanasApplication.java."
+    },
+    health: {
+      title: "Endpoint /actuator/health",
+      tag: "COMPONENTE · VERIFICADO",
+      text: "Auto-configurado por spring-boot-starter-actuator y habilitado en application.properties (management.endpoints.web.exposure.include=health). Es el único endpoint HTTP de negocio confirmado hoy."
+    },
     auth: {
       title: "Autenticación y Autorización",
-      tag: "COMPONENTE",
-      text: "Encargado de la validación de credenciales, gestión de sesiones y control de acceso basado en roles dentro del backend y las aplicaciones cliente."
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin dependencia spring-security ni clases de seguridad en el repositorio todavía. Diseño declarado, pendiente de implementación."
     },
     adopciones: {
       title: "Gestión de Adopciones y Mascotas",
-      tag: "COMPONENTE",
-      text: "Encapsula la lógica de negocio para el registro, filtrado, actualización y consulta de los perfiles de animales disponibles."
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin paquetes controller/service/repository/model en app/src todavía. Diseño declarado, pendiente de implementación."
     },
     reportes: {
       title: "Reportes de Animales Perdidos",
-      tag: "COMPONENTE",
-      text: "Responsable de procesar las coordenadas geográficas, descripciones y alertas asociadas a las mascotas extraviadas."
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin código correspondiente en el repositorio todavía. Diseño declarado, pendiente de implementación."
     },
     foros: {
       title: "Foros Comunitarios",
-      tag: "COMPONENTE",
-      text: "Gestiona la creación de publicaciones, hilos de discusión e interacción entre los usuarios de la plataforma."
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin código correspondiente todavía. Su almacenamiento ya no depende de Firestore/MongoDB (descartado): la implementación futura deberá apoyarse en PostgreSQL."
     }
   }
 };
