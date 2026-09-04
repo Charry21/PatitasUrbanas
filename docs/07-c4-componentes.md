@@ -8,7 +8,9 @@ Está dirigida al equipo de desarrollo que continuará implementando el sistema:
 
 ## Hallazgo principal de la auditoría
 
-El contenedor **API Backend** (`api_app`) se encuentra en un estado de **línea base operativa**: contiene únicamente el arranque de Spring Boot y la configuración de conexión a base de datos. **No existen todavía controladores, servicios ni repositorios de negocio en el repositorio** (no hay paquetes `controller/`, `service/`, `repository/` ni `model/` dentro de [`app/src`](../app/src)). Los módulos de negocio descritos en el diseño original (Autenticación, Adopciones, Reportes, Foros) siguen siendo **diseño planificado (to-be)** y se representan como tal, sin implicar que ya tengan código asociado.
+El contenedor **API Backend** (`api_app`) evolucionó de una línea base operativa a un **primer componente de negocio verificado**: existe un paquete `controller/` con una clase, `MascotaController` (`app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java`), que expone un endpoint REST real. **No existen todavía servicios ni repositorios de negocio** (no hay paquetes `service/`, `repository/` ni `model/`, ni dependencia `spring-data-jpa` en `pom.xml`): el controlador no persiste ni consulta datos, solo devuelve una respuesta simulada. Los tres módulos de negocio restantes (Autenticación, Reportes, Foros) siguen siendo **diseño planificado (to-be)**.
+
+**Nota de trazabilidad importante:** el endpoint `GET /api/mascotas/buscar` recibe parámetros geoespaciales (`lat`, `lng`, `radio`) pero **no ejecuta ninguna consulta a PostgreSQL/PostGIS**. El propio código lo declara explícitamente en un comentario: `// Simulación de carga de respuesta para la medición de la línea base S4`. No debe presentarse como "búsqueda geoespacial implementada"; es un endpoint activo que devuelve un JSON estático.
 
 ## Diagrama de componentes (validado contra el código)
 
@@ -17,10 +19,12 @@ flowchart TD
     subgraph API["API Backend (api_app)"]
         MAIN["PatitasUrbanasApplication<br/>(punto de entrada Spring Boot)"]
         HEALTH["Endpoint /actuator/health<br/>(auto-configurado por Actuator)"]
+        MASCOTA["MascotaController<br/>GET /api/mascotas/buscar<br/>(respuesta simulada)"]
         MAIN --> HEALTH
+        MAIN --> MASCOTA
 
         AUTH["Módulo de Autenticación<br/>y Autorización<br/>(planificado)"] -.-> MAIN
-        ADOP["Módulo de Gestión de<br/>Adopciones y Mascotas<br/>(planificado)"] -.-> MAIN
+        ADOP["Módulo de Gestión de<br/>Adopciones y Mascotas<br/>(persistencia real, planificado)"] -.-> MASCOTA
         REP["Módulo de Reportes de<br/>Animales Perdidos<br/>(planificado)"] -.-> MAIN
         FOR["Módulo de Foros<br/>Comunitarios<br/>(planificado)"] -.-> MAIN
     end
@@ -28,6 +32,7 @@ flowchart TD
     style API fill:none,stroke:#b5791f,stroke-dasharray: 2 2
     style MAIN fill:#f2e6d2,stroke:#b5791f
     style HEALTH fill:#f2e6d2,stroke:#b5791f
+    style MASCOTA fill:#f2e6d2,stroke:#b5791f
     style AUTH fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
     style ADOP fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
     style REP fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
@@ -40,10 +45,11 @@ flowchart TD
 
 - **Punto de entrada de la aplicación**: clase `PatitasUrbanasApplication` ([`app/src/main/java/com/patitasurbanas/PatitasUrbanasApplication.java`](../app/src/main/java/com/patitasurbanas/PatitasUrbanasApplication.java)), anotada con `@SpringBootApplication`, arranca el contexto de Spring.
 - **Endpoint de verificación de salud**: expuesto automáticamente por `spring-boot-starter-actuator` en `/actuator/health`, habilitado en [`application.properties`](../app/src/main/resources/application.properties) (`management.endpoints.web.exposure.include=health`).
+- **Controlador de búsqueda de mascotas**: clase `MascotaController` ([`app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java`](../app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java)), anotada con `@RestController` y `@RequestMapping("/api/mascotas")`, expone `GET /buscar` recibiendo `lat`, `lng` y `radio` como `@RequestParam`. Devuelve una respuesta HTTP 200 con un cuerpo JSON estático (`{"status":"success","mensaje":"Endpoint geoespacial activo"}`); no invoca ningún servicio, repositorio ni consulta a base de datos.
 
 ## Componentes planificados, aún no implementados
 
-Los cuatro módulos de negocio (Autenticación, Adopciones, Reportes, Foros) están declarados como intención de diseño desde el taller de modelado inicial, pero no tienen paquete, clase ni dependencia que los respalde todavía en [`app/src`](../app/src) ni en `pom.xml` (no hay `spring-security`, ni `spring-data-jpa`, ni controladores REST más allá del healthcheck automático). Se muestran en el diagrama con estilo punteado para conservar la hoja de ruta del proyecto sin presentarlos como ya construidos.
+Los módulos de Autenticación, Reportes y Foros siguen sin paquete, clase ni dependencia que los respalde en [`app/src`](../app/src) ni en `pom.xml` (no hay `spring-security` ni controladores REST propios). El módulo de Gestión de Adopciones y Mascotas ya tiene un primer punto de entrada real (`MascotaController`), pero sigue sin capa de persistencia: no hay `spring-data-jpa` en `pom.xml`, ni paquetes `service/`, `repository/` o `model/` en `app/src`. Se muestran en el diagrama con estilo punteado para conservar la hoja de ruta del proyecto sin presentarlos como ya construidos por completo.
 
 ## Registro de correcciones (auditoría vs. modelo inicial)
 
@@ -55,6 +61,7 @@ Los cuatro módulos de negocio (Autenticación, Adopciones, Reportes, Foros) est
 | Actores "Ciudadano/Adoptante" y "Administrador de Refugio" | Marcados como planificados en el Nivel 1 | No existe canal de interacción (UI web o móvil) implementado; permanecen como usuarios objetivo declarados en [`[dossier/01-contexto-sistema.md](../dossier/01-contexto-sistema.md)`](../[dossier/01-contexto-sistema.md](../dossier/01-contexto-sistema.md)). |
 | Módulos de Autenticación, Adopciones, Reportes y Foros | Marcados como planificados en el Nivel 3 | No existen paquetes `controller/`, `service/`, `repository/` ni `model/` en [`app/src`](../app/src); tampoco hay dependencia `spring-security` ni `spring-data-jpa` en `pom.xml` que los soporte. |
 | Backend en Next.js API Routes (asumido en el prototipo interactivo inicial) | Corregido a Spring Boot / Java 21 | [`app/pom.xml`](../app/pom.xml) (parent `spring-boot-starter-parent` 3.3.4) y [`app/Dockerfile`](../app/Dockerfile) (imagen `maven:3.9.9-eclipse-temurin-21`) confirman Java, no Next.js. |
+| Afirmación previa: "no existen controladores... en el repositorio" | Corregido: existe `MascotaController` (componente verificado, sin persistencia) | Commit `22b0ac0`, incorporado a `main` en el merge `877b849`; verificado contra [`app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java`](../app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java) y ausencia de `spring-data-jpa` en `pom.xml`. |
 
 ## Tabla de trazado C4
 
@@ -76,6 +83,7 @@ Los cuatro módulos de negocio (Autenticación, Adopciones, Reportes, Foros) est
 | C4-14 | Nivel 3 | Módulo de Gestión de Adopciones y Mascotas | Registro y consulta de perfiles de animales | — | — | — | Planificado (no implementado) | Sin paquetes `controller/service/repository/model` todavía. |
 | C4-15 | Nivel 3 | Módulo de Reportes de Animales Perdidos | Procesar coordenadas y alertas de mascotas extraviadas | — | — | — | Planificado (no implementado) | Sin código correspondiente en el repositorio todavía. |
 | C4-16 | Nivel 3 | Módulo de Foros Comunitarios | Publicaciones e hilos de discusión | — | — | — | Planificado (no implementado) | Sin código correspondiente todavía; su almacenamiento (C4-10) fue descartado, así que su implementación futura deberá apoyarse en PostgreSQL. |
+| C4-17 | Nivel 3 | Controlador de búsqueda de mascotas | Recibir coordenadas y radio de búsqueda; responder si el endpoint está activo | [`app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java`](../app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java) | Clase `MascotaController`, anotaciones `@RestController`, `@RequestMapping("/api/mascotas")`, `@GetMapping("/buscar")` | Expuesto por API Backend → responde sin tocar Base de Datos Transaccional | Verificado (sin persistencia) | Respuesta simulada (JSON estático); no ejecuta consulta JDBC ni PostGIS. No confundir con "búsqueda geoespacial implementada". |
 
 ## Conclusión de la auditoría
 
