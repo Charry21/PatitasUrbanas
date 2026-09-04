@@ -73,10 +73,10 @@ Reutilicen aquí lo que ya está en el "Registro de correcciones" de `docs/06-c4
 
 | # | Hallazgo | Clasificación | Commit de corrección | Evidencia que motivó el hallazgo |
 |---|---|---|---|---|
-| 1 | Firestore/MongoDB presentado como contenedor real | Sustantivo | > [RELLENAR hash] | Sin dependencia, servicio ni configuración en `docker-compose.yml`/`pom.xml`; decisión de arquitectura documentada en `dossier/02-stakeholders-drivers.md` (riesgo R-03) |
-| 2 | Backend asumido como Next.js API Routes | Sustantivo | > [RELLENAR hash] | `app/pom.xml` (Spring Boot 3.3.4) y `app/Dockerfile` (Java 21) confirman lo contrario |
-| 3 | `07-c4-componentes.md` afirmaba que no existían controladores | Sustantivo | > [RELLENAR hash — commit donde se corrigió, ver conversación previa] | Existe `MascotaController.java` en `app/src/main/java/com/patitasurbanas/api/controller/` |
-| 4 | Duplicación de C4 Nivel 1/2 en `dossier/` con contenido desactualizado y contradictorio (Firestore/MongoDB sin marcar como eliminado) | Sustantivo | > [RELLENAR hash del `git rm`] | `dossier/05-c4-contexto.md` y `dossier/06-c4-contenedores.md` (ya eliminados) |
+| 1 | Firestore/MongoDB presentado como contenedor real | Sustantivo | 6bd39c1 | Sin dependencia, servicio ni configuración en `docker-compose.yml`/`pom.xml`; decisión de arquitectura documentada en `dossier/02-stakeholders-drivers.md` (riesgo R-03) |
+| 2 | Backend asumido como Next.js API Routes | Sustantivo | 773d97a1502bcc1012110f70acd0578a2003d17a | `app/pom.xml` (Spring Boot 3.3.4) y `app/Dockerfile` (Java 21) confirman lo contrario |
+| 3 | `07-c4-componentes.md` afirmaba que no existían controladores | Sustantivo | 18ed28e71c2c1a4b036d1f023652b28bc2fae2a7 | Existe `MascotaController.java` en `app/src/main/java/com/patitasurbanas/api/controller/` |
+| 4 | Duplicación de C4 Nivel 1/2 en `dossier/` con contenido desactualizado y contradictorio (Firestore/MongoDB sin marcar como eliminado) | Sustantivo | 6bd39c1 | `dossier/05-c4-contexto.md` y `dossier/06-c4-contenedores.md` (ya eliminados) |
 | 5 | > [RELLENAR — agregar cualquier hallazgo cosmético: redacción, formato, nombres de secciones, etc.] | Cosmético | > [RELLENAR] | > [RELLENAR] |
 
 ---
