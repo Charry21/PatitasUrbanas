@@ -28,7 +28,7 @@ C4Container
   Rel(web, api, "Consume servicios", "JSON/HTTPS")
   Rel(movil, api, "Consume servicios", "JSON/HTTPS")
   
-  Rel(api, db, "Lee y escribe datos relacionales/espaciales", "JDBC/TCP")
-  Rel(api, cache, "Lee y escribe hilos de discusión", "Controlador NoSQL")
+  Rel(api, db, "Lee y escribe datos", "JDBC/TCP")
+  Rel(api, cache, "Lee y escribe hilos", "Controlador NoSQL")
   Rel(api, mapas, "Consulta coordenadas", "REST/SDK")
 ```
