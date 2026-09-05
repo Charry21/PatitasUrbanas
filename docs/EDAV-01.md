@@ -9,7 +9,7 @@
 |---|---|
 | Fecha de esta auditoría | 2026-09-04 |
 | Integrante(s) que redactan y firman este EDAV | [Kevin Torres / Daniel Charry] |
-| Herramienta/agente delegado | Gemini |
+| Herramienta/agente delegado | Gemini / Tutor(Chatgpt) |
 | Artefacto producido por el agente | Diagramas C4 Nivel 1, 2 y 3 (`docs/05-c4-contexto.md`, `docs/06-c4-contenedores.md`, `docs/07-c4-componentes.md`) |
 
 ---
