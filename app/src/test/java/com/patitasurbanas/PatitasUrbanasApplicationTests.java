@@ -2,8 +2,10 @@ package com.patitasurbanas; // Asegúrese de que coincida con la ruta de su paqu
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
+@ActiveProfiles("test")
 class PatitasUrbanasApplicationTests {
 
     @Test
