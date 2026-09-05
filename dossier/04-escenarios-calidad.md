@@ -14,6 +14,8 @@
 - **Respuesta:** La arquitectura intercepta la petición, deniega el acceso y registra el evento en el log de auditoría del servidor.
 - **Medida:** El 100% de los intentos de acceso no autorizados son bloqueados retornando un código HTTP 401 en menos de 500 milisegundos.
 
+**Nota de auditoría:** este escenario está diseñado en la arquitectura del sistema, pero en el repositorio actual no existe dependencia de Spring Security en el [app/pom.xml](../app/pom.xml) ni código de autenticación implementado todavía. Por tanto, no hay evidencia real de medición de acceso ni de validación JWT; esta sección representa la estructura de diseño prevista y no un resultado verificado en ejecución.
+
 ## Reformulación de Escenarios Propuestos por la IA
 
 ### Escenario Reformulado 1: Rendimiento en Consultas Espaciales (Riesgo R01)
@@ -38,3 +40,20 @@ Para cumplir con la política de uso de IA, a continuación se detalla el tratam
 * **Modificación realizada:** Se transformó este riesgo genérico de hardware en el *Escenario Reformulado 2*, enfocándolo en el fallo del contenedor lógico y definiendo un umbral de recuperación (RTO de 120 segundos).
 * **Justificación de la modificación:** La sugerencia original carecía de métricas verificables y estructuración arquitectónica (estímulo, respuesta, medida). Se adaptó para que sea auditable mediante pruebas de estrés.
 * **Propuestas descartadas:** Se rechazó en su totalidad el riesgo original R03 ("Altos costos de licenciamiento"), ya que la IA generó una alucinación técnica al afirmar que PostgreSQL requería licenciamiento corporativo pago.
+
+## Escenarios Propuestos — Pendientes de Implementación
+
+### QA-02 — Mantenibilidad e Integridad de Datos [Estado: propuesto, no medido]
+
+- **Descripción:** Verificación de integridad transaccional en el flujo de adopción, garantizando que una operación con fallo simulado no deje registros huérfanos ni estados inconsistentes.
+- **Evidencia pendiente:** Prueba de rollback de base de datos para confirmar que la transacción completa queda revertida y no persisten `SolicitudAdopcion` ni `EtapaAdopcion` cuando se lanza la excepción simulada.
+
+### QA-03 — Revisión de Calidad de Código y Cobertura de Pruebas [Estado: propuesto, no medido]
+
+- **Descripción:** Evaluación de mantenibilidad del backend, cobertura de pruebas unitarias/integración y claridad del diseño de servicios, controladores y repositorios.
+- **Evidencia pendiente:** Medición de cobertura y revisión de complejidad del código para validar que la solución cumple estándares de mantenibilidad.
+
+### BIZ-01 — Concurrencia y Consistencia del Flujo de Adopción [Estado: propuesto, no medido]
+
+- **Descripción:** Ejecución simultánea de peticiones POST para la creación de solicitudes de adopción bajo carga concurrente, evaluando consistencia del negocio y ausencia de errores derivados de condiciones de carrera o deadlocks.
+- **Evidencia pendiente:** Carga concurrente con k6 y análisis de errores HTTP, timeouts y percentil p95 para confirmar que el flujo de negocio no degrada ni queda incoherente.
