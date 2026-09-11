@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patitas Urbanas — Modelo C4</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+  :root{
+    --paper:#faf8f2;
+    --paper-line:#dcd6c4;
+    --ink:#232420;
+    --ink-soft:#5b5c54;
+    --red:#c0392b;      /* nivel 1 - contexto, como el bolígrafo rojo del cuaderno */
+    --red-soft:#f4e0dc;
+    --blue:#2c5f8a;     /* nivel 2 - contenedores */
+    --blue-soft:#dde8f0;
+    --amber:#b5791f;    /* nivel 3 - componentes */
+    --amber-soft:#f2e6d2;
+    --graphite:#3a3c34;
+    --card:#ffffff;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, var(--paper-line) 27px, var(--paper-line) 28px),
+      repeating-linear-gradient(90deg, transparent, transparent 27px, var(--paper-line) 27px, var(--paper-line) 28px),
+      var(--paper);
+    background-attachment: fixed;
+    color:var(--ink);
+    font-family:'Source Sans 3', sans-serif;
+    min-height:100vh;
+  }
+
+  header{
+    padding:48px 32px 24px;
+    max-width:1100px;
+    margin:0 auto;
+    border-bottom:2px solid var(--ink);
+  }
+  header .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+  }
+  header h1{
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:clamp(32px, 5vw, 52px);
+    margin:8px 0 6px;
+    line-height:1.05;
+  }
+  header h1 .paw{
+    color:var(--red);
+  }
+  header p.sub{
+    font-size:16px;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 0 20px;
+  }
+
+  nav.levels{
+    display:flex;
+    gap:0;
+    max-width:1100px;
+    margin:0 auto;
+    border-bottom:2px solid var(--ink);
+    flex-wrap:wrap;
+  }
+  nav.levels button{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    background:none;
+    border:none;
+    border-right:1px solid var(--paper-line);
+    padding:16px 20px;
+    cursor:pointer;
+    color:var(--ink-soft);
+    position:relative;
+    transition:color .15s ease, background .15s ease;
+  }
+  nav.levels button .n{
+    display:inline-block;
+    width:20px;
+    height:20px;
+    line-height:20px;
+    text-align:center;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--paper);
+    font-size:11px;
+    margin-right:8px;
+  }
+  nav.levels button.active{
+    color:var(--ink);
+    font-weight:700;
+    background:var(--card);
+  }
+  nav.levels button.active::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:-2px;
+    height:3px;
+    background:var(--accent, var(--red));
+  }
+  nav.levels button:hover{ color:var(--ink); }
+
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:36px 32px 80px;
+  }
+
+  .level-panel{ display:none; }
+  .level-panel.active{ display:block; animation:fade .25s ease; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .level-intro{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:28px;
+    flex-wrap:wrap;
+  }
+  .level-intro h2{
+    font-family:'Fraunces', serif;
+    font-size:28px;
+    margin:0 0 6px;
+  }
+  .level-intro p{
+    margin:0;
+    color:var(--ink-soft);
+    max-width:560px;
+    font-size:15px;
+  }
+  .level-badge{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    padding:5px 10px;
+    border:1px solid var(--ink);
+    border-radius:20px;
+    white-space:nowrap;
+  }
+
+  .canvas{
+    position:relative;
+    min-height:420px;
+    padding:20px;
+  }
+
+  .node{
+    position:absolute;
+    background:var(--card);
+    border:2px solid var(--ink);
+    border-radius:6px;
+    padding:12px 14px;
+    width:170px;
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(35,36,32,0.12);
+    transition:transform .12s ease, box-shadow .12s ease;
+    text-align:center;
+  }
+  .node:hover{ transform:translateY(-3px); box-shadow:4px 6px 0 rgba(35,36,32,0.18); }
+  .node.selected{ box-shadow:4px 6px 0 rgba(35,36,32,0.18); }
+  .node .label{ font-weight:700; font-size:14px; line-height:1.25; }
+  .node .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    color:var(--ink-soft);
+    margin-top:5px;
+    display:block;
+  }
+  .node.actor{ border-color:var(--red); }
+  .node.actor .tag{ color:var(--red); }
+  .node.system{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .node.system .label{ font-family:'Fraunces', serif; font-size:17px; }
+  .node.system .tag{ color:#c8c8bd; }
+  .node.external{ border-style:dashed; border-color:var(--ink-soft); }
+  .node.external .tag{ color:var(--ink-soft); }
+  .node.container{ border-color:var(--blue); }
+  .node.container .tag{ color:var(--blue); }
+
+  .node.planned{
+    border-style:dashed !important;
+    border-color:#999999 !important;
+    background:#f5f5f0;
+    opacity:.85;
+  }
+  .node.planned .tag{ color:#666666 !important; }
+  .node.planned .label{ color:#555555; }
+  .node.planned::after{
+    content:"planificado";
+    display:block;
+    font-family:'JetBrains Mono', monospace;
+    font-size:9px;
+    color:#999999;
+    margin-top:4px;
+    letter-spacing:.03em;
+  }
+
+  .legend{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    margin-top:12px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:6px; }
+  .legend .swatch{ width:14px; height:14px; border-radius:3px; display:inline-block; }
+  .legend .swatch.verified{ border:2px solid var(--ink); background:#fff; }
+  .legend .swatch.planned{ border:2px dashed #999999; background:#f5f5f0; }
+
+  svg.wires{ position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; overflow:visible; }
+  svg.wires path{ fill:none; stroke:var(--graphite); stroke-width:1.6; opacity:.55; }
+  svg.wires text{ font-family:'JetBrains Mono', monospace; font-size:10.5px; fill:var(--ink-soft); }
+
+  .detail{
+    margin-top:28px;
+    border-top:2px solid var(--ink);
+    padding-top:20px;
+    min-height:90px;
+  }
+  .detail .placeholder{ color:var(--ink-soft); font-style:italic; font-size:14px; }
+  .detail h3{
+    font-family:'Fraunces', serif;
+    font-size:22px;
+    margin:0 0 4px;
+  }
+  .detail .detail-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    margin-bottom:12px;
+    display:block;
+  }
+  .detail p{ font-size:15px; line-height:1.55; max-width:680px; margin:0; }
+
+  /* components grid (nivel 3) */
+  .comp-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:16px;
+  }
+  .comp-card{
+    background:var(--card);
+    border:2px solid var(--amber);
+    border-radius:6px;
+    padding:16px;
+    cursor:pointer;
+    box-shadow:3px 3px 0 rgba(181,121,31,0.12);
+    transition:transform .12s ease;
+  }
+  .comp-card:hover{ transform:translateY(-3px); }
+  .comp-card .label{ font-weight:700; margin-bottom:6px; }
+  .comp-card .tag{ font-family:'JetBrains Mono', monospace; font-size:10.5px; color:var(--amber); }
+  .comp-card.planned{
+    border-color:#999999;
+    border-style:dashed;
+    background:#f5f5f0;
+    box-shadow:3px 3px 0 rgba(153,153,153,0.10);
+  }
+  .comp-card.planned .tag{ color:#666666; }
+  .comp-card.planned .label{ color:#555555; }
+
+  .code-note{
+    border:2px dashed var(--ink-soft);
+    border-radius:8px;
+    padding:28px;
+    text-align:center;
+    color:var(--ink-soft);
+  }
+  .code-note strong{ color:var(--ink); }
+
+  footer{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 32px 50px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+  }
+
+  @media (max-width:640px){
+    .canvas{ min-height:auto; }
+    .node{ position:static; width:100%; margin-bottom:14px; }
+    svg.wires{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="kicker">ARQUITECTURA DE SOFTWARE · UTADEO · 2026</span>
+  <h1>Patitas <span class="paw">Urbanas</span></h1>
+  <p class="sub">Modelo C4 interactivo — adopción de mascotas, rastreo de animales perdidos e interacción comunitaria. Haz clic en cualquier elemento del diagrama para ver su detalle.</p>
+</header>
+
+<nav class="levels">
+  <button class="active" data-level="contexto" style="--accent:var(--red)"><span class="n">1</span>Contexto</button>
+  <button data-level="contenedores" style="--accent:var(--blue)"><span class="n">2</span>Contenedores</button>
+  <button data-level="componentes" style="--accent:var(--amber)"><span class="n">3</span>Componentes</button>
+  <button data-level="codigo" style="--accent:var(--graphite)"><span class="n">4</span>Código</button>
+</nav>
+
+<main>
+
+  <!-- NIVEL 1 -->
+  <section class="level-panel active" id="panel-contexto">
+    <div class="level-intro">
+      <div>
+        <h2>Diagrama de contexto</h2>
+        <p>Quién usa el sistema y con qué otros sistemas se comunica. La vista más alta del modelo C4.</p>
+      </div>
+      <span class="level-badge">NIVEL 1</span>
+    </div>
+
+    <div class="canvas" style="min-height:380px;">
+      <svg class="wires" viewbox="0 0 720 380">
+        <path d="M110,90 C160,150 250,150 300,180"></path>
+        <path d="M330,90 C300,150 260,150 300,180"></path>
+        <path d="M400,220 C480,220 520,220 560,150"></path>
+      </svg>
+      <div class="node actor planned" style="left:20px; top:30px;" data-id="ciudadano">
+        <span class="label">Ciudadano / Adoptante</span>
+        <span class="tag">persona</span>
+      </div>
+      <div class="node actor planned" style="left:250px; top:30px;" data-id="admin">
+        <span class="label">Administrador de Refugio</span>
+        <span class="tag">persona</span>
+      </div>
+      <div class="node actor" style="left:20px; top:130px;" data-id="qa">
+        <span class="label">Equipo de Desarrollo / QA</span>
+        <span class="tag">persona</span>
+      </div>
+      <div class="node system" style="left:170px; top:230px;" data-id="sistema">
+        <span class="label">Patitas Urbanas</span>
+        <span class="tag">línea base operativa</span>
+      </div>
+      <div class="node external planned" style="left:490px; top:170px;" data-id="mapas">
+        <span class="label">Servicio de Mapas y Geolocalización</span>
+        <span class="tag">sistema externo</span>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch verified"></i> Verificado en código</span>
+      <span><i class="swatch planned"></i> Planificado, aún no implementado</span>
+    </div>
+
+    <div class="detail" id="detail-contexto">
+      <p class="placeholder">Selecciona un elemento del diagrama para ver su descripción.</p>
+    </div>
+  </section>
+
+  <!-- NIVEL 2 -->
+  <section class="level-panel" id="panel-contenedores">
+    <div class="level-intro">
+      <div>
+        <h2>Diagrama de contenedores</h2>
+        <p>Las aplicaciones y almacenes de datos que componen Patitas Urbanas, y cómo se comunican entre sí.</p>
+      </div>
+      <span class="level-badge">NIVEL 2</span>
+    </div>
+
+    <div class="canvas" style="min-height:400px;">
+      <svg class="wires" viewbox="0 0 720 400">
+        <path d="M120,90 C170,140 260,150 320,190"></path>
+        <path d="M420,90 C400,140 360,150 320,190"></path>
+        <path d="M370,230 C370,270 370,270 370,300"></path>
+      </svg>
+
+      <div class="node container planned" style="left:30px; top:30px;" data-id="web">
+        <span class="label">Front-end Web</span>
+        <span class="tag">no implementado aún</span>
+      </div>
+      <div class="node container planned" style="left:350px; top:30px;" data-id="movil">
+        <span class="label">Front-end Móvil</span>
+        <span class="tag">Kotlin / Jetpack Compose</span>
+      </div>
+      <div class="node container" style="left:190px; top:190px;" data-id="api">
+        <span class="label">API Backend (api_app)</span>
+        <span class="tag">Spring Boot 3.3.4 / Java 21</span>
+      </div>
+      <div class="node container" style="left:190px; top:320px;" data-id="db">
+        <span class="label">Base de Datos Transaccional (postgres_db)</span>
+        <span class="tag">PostgreSQL 16</span>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch verified"></i> Verificado en código</span>
+      <span><i class="swatch planned"></i> Planificado, aún no implementado</span>
+    </div>
+
+    <p style="font-size:13.5px; color:var(--ink-soft); margin-top:16px; max-width:600px;">
+      El contenedor de caché (Firestore/MongoDB) propuesto en las notas iniciales <strong>no aparece en este diagrama</strong>: fue descartado por decisión de arquitectura del equipo (ver <code>dossier/02-stakeholders-drivers.md</code>, riesgo R-03), no por falta de tiempo. Detalle completo en <code>07-c4-componentes.md</code>.
+    </p>
+
+    <div class="detail" id="detail-contenedores">
+      <p class="placeholder">Selecciona un contenedor para ver su descripción y su tecnología.</p>
+    </div>
+  </section>
+
+  <!-- NIVEL 3 -->
+  <section class="level-panel" id="panel-componentes">
+    <div class="level-intro">
+      <div>
+        <h2>Diagrama de componentes</h2>
+        <p>Los módulos internos del contenedor <strong>API Backend</strong> y sus responsabilidades.</p>
+      </div>
+      <span class="level-badge">NIVEL 3</span>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp-card" data-id="entrypoint" style="border-color:var(--amber);">
+        <span class="tag">VERIFICADO</span>
+        <div class="label">Punto de entrada (PatitasUrbanasApplication)</div>
+      </div>
+      <div class="comp-card" data-id="health" style="border-color:var(--amber);">
+        <span class="tag">VERIFICADO</span>
+        <div class="label">Endpoint /actuator/health</div>
+      </div>
+      <div class="comp-card planned" data-id="auth">
+        <span class="tag">PLANIFICADO</span>
+        <div class="label">Autenticación y Autorización</div>
+      </div>
+      <div class="comp-card planned" data-id="adopciones">
+        <span class="tag">PLANIFICADO</span>
+        <div class="label">Gestión de Adopciones y Mascotas</div>
+      </div>
+      <div class="comp-card planned" data-id="reportes">
+        <span class="tag">PLANIFICADO</span>
+        <div class="label">Reportes de Animales Perdidos</div>
+      </div>
+      <div class="comp-card planned" data-id="foros">
+        <span class="tag">PLANIFICADO</span>
+        <div class="label">Foros Comunitarios</div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="swatch verified"></i> Verificado en código</span>
+      <span><i class="swatch planned"></i> Planificado, aún no implementado</span>
+    </div>
+
+    <div class="detail" id="detail-componentes">
+      <p class="placeholder">Selecciona un módulo para ver su responsabilidad dentro del backend.</p>
+    </div>
+  </section>
+
+  <!-- NIVEL 4 -->
+  <section class="level-panel" id="panel-codigo">
+    <div class="level-intro">
+      <div>
+        <h2>Diagrama de código</h2>
+        <p>El nivel más detallado del modelo C4: clases, interfaces y relaciones dentro de un componente.</p>
+      </div>
+      <span class="level-badge">NIVEL 4</span>
+    </div>
+    <div class="code-note">
+      <strong>Este nivel aún no fue desarrollado en el taller.</strong><br>
+      Normalmente se detalla solo para el componente más crítico — por ejemplo, el Módulo de Reportes de Animales Perdidos — mostrando sus clases principales (controlador, servicio, repositorio) y sus relaciones.
+    </div>
+  </section>
+
+</main>
+
+<footer>Basado en el taller práctico Modelo C4 — Arquitectura de Software (702302-1-2S-2026), UTADEO.</footer>
+
+<script>
+const data = {
+  contexto: {
+    qa: {
+      title: "Equipo de Desarrollo / QA",
+      tag: "PERSONA · VERIFICADO",
+      text: "Único actor con interacción real confirmada: ejecuta y valida el sistema vía peticiones HTTP (Postman/curl). Evidencia: evidencia_ejecucion_api.png y evidencia_pruebas_java.png."
+    },
+    ciudadano: {
+      title: "Ciudadano / Adoptante",
+      tag: "PERSONA · PLANIFICADO",
+      text: "Declarado como usuario objetivo en dossier/01-contexto-sistema.md, pero sin canal de interacción implementado todavía (no existe frontend web ni móvil en el repositorio)."
+    },
+    admin: {
+      title: "Administrador de Refugio",
+      tag: "PERSONA · PLANIFICADO",
+      text: "Declarado como usuario objetivo en el dossier arquitectónico. Sin canal de interacción implementado por la misma razón que el Ciudadano/Adoptante."
+    },
+    sistema: {
+      title: "Patitas Urbanas",
+      tag: "SISTEMA DE SOFTWARE · VERIFICADO (alcance parcial)",
+      text: "En su estado actual es una línea base operativa: un backend Spring Boot conectado a PostgreSQL, sin lógica de negocio ni clientes todavía. La visión completa (adopción, rastreo, comunidad) sigue siendo el objetivo del proyecto."
+    },
+    mapas: {
+      title: "Servicio de Mapas y Geolocalización",
+      tag: "SISTEMA EXTERNO · PLANIFICADO",
+      text: "Ningún archivo del repositorio (dependencias, variables de entorno, llamadas salientes) evidencia una integración real con un proveedor de mapas todavía."
+    }
+  },
+  contenedores: {
+    web: {
+      title: "Front-end Web",
+      tag: "PLANIFICADO · NO IMPLEMENTADO",
+      text: "Declarado como restricción de despliegue en dossier/01-contexto-sistema.md (compatible con Vercel), pero no existe proyecto de frontend en el repositorio todavía."
+    },
+    movil: {
+      title: "Front-end Móvil",
+      tag: "KOTLIN / JETPACK COMPOSE · PLANIFICADO",
+      text: "Declarado como restricción técnica en el dossier arquitectónico, pero no existe módulo Android en el repositorio todavía."
+    },
+    api: {
+      title: "API Backend (api_app)",
+      tag: "SPRING BOOT 3.3.4 · JAVA 21 · VERIFICADO",
+      text: "Único contenedor de aplicación verificado. Expone el endpoint /actuator/health y se conecta a PostgreSQL vía JDBC. Aún no tiene controladores, servicios ni repositorios de negocio (sin spring-security ni spring-data-jpa en pom.xml)."
+    },
+    db: {
+      title: "Base de Datos Transaccional (postgres_db)",
+      tag: "POSTGRESQL 16 · VERIFICADO",
+      text: "Motor relacional definido en docker-compose.yml con healthcheck (pg_isready) y volumen persistente pgdata_v16. Aún sin esquema de tablas de negocio en el repositorio."
+    }
+  },
+  componentes: {
+    entrypoint: {
+      title: "Punto de entrada (PatitasUrbanasApplication)",
+      tag: "COMPONENTE · VERIFICADO",
+      text: "Clase anotada con @SpringBootApplication que arranca el contexto de Spring. Archivo: app/src/main/java/com/patitasurbanas/PatitasUrbanasApplication.java."
+    },
+    health: {
+      title: "Endpoint /actuator/health",
+      tag: "COMPONENTE · VERIFICADO",
+      text: "Auto-configurado por spring-boot-starter-actuator y habilitado en application.properties (management.endpoints.web.exposure.include=health). Es el único endpoint HTTP de negocio confirmado hoy."
+    },
+    auth: {
+      title: "Autenticación y Autorización",
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin dependencia spring-security ni clases de seguridad en el repositorio todavía. Diseño declarado, pendiente de implementación."
+    },
+    adopciones: {
+      title: "Gestión de Adopciones y Mascotas",
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin paquetes controller/service/repository/model en app/src todavía. Diseño declarado, pendiente de implementación."
+    },
+    reportes: {
+      title: "Reportes de Animales Perdidos",
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin código correspondiente en el repositorio todavía. Diseño declarado, pendiente de implementación."
+    },
+    foros: {
+      title: "Foros Comunitarios",
+      tag: "COMPONENTE · PLANIFICADO",
+      text: "Sin código correspondiente todavía. Su almacenamiento ya no depende de Firestore/MongoDB (descartado): la implementación futura deberá apoyarse en PostgreSQL."
+    }
+  }
+};
+
+function wireLevel(levelKey, panelId, detailId){
+  const panel = document.getElementById(panelId);
+  const detail = document.getElementById(detailId);
+  panel.querySelectorAll('[data-id]').forEach(el => {
+    el.addEventListener('click', () => {
+      panel.querySelectorAll('[data-id]').forEach(n => n.classList.remove('selected'));
+      el.classList.add('selected');
+      const d = data[levelKey][el.dataset.id];
+      if(!d) return;
+      detail.innerHTML = `<h3>${d.title}</h3><span class="detail-tag">${d.tag}</span><p>${d.text}</p>`;
+    });
+  });
+}
+wireLevel('contexto', 'panel-contexto', 'detail-contexto');
+wireLevel('contenedores', 'panel-contenedores', 'detail-contenedores');
+wireLevel('componentes', 'panel-componentes', 'detail-componentes');
+
+document.querySelectorAll('nav.levels button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('nav.levels button').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.level-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + btn.dataset.level).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
