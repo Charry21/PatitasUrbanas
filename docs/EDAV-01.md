@@ -46,6 +46,7 @@ Sin embargo, para el ciclo de estabilización actual, la trazabilidad se estable
 * **Hallazgo de auditoría interna:** Se identifica la ausencia de un commit de especificación previa al primer resultado generado por el agente en la fase inicial de delegación.
 * **Justificación técnica:** El prompt inicial se ejecutó fuera del control de versiones directo antes de establecer de forma estricta la disciplina de ramas y commits atómicos.
 * **Evidencia compensatoria:** La trazabilidad se restablece mediante la incorporación y auditoría de los artefactos resultantes (05-c4-contexto.md, 06-c4-contenedores.md, 07-c4-componentes.md), los registros formales de corrección as-is frente al código real y los commits subsecuentes en la rama principal, garantizando que el estado actual del repositorio sea completamente verificable y reproducible.
+* **Nota para el docente:** Para los ciclos posteriores se corrigió la secuencia mediante ramas de trabajo, commits atómicos y evidencia vinculada directamente al código y a los artefactos auditados. Se deja constancia de la consulta sobre la validez de esta evidencia compensatoria para cerrar la trazabilidad temporal del ciclo inicial.
 
 ---
 
