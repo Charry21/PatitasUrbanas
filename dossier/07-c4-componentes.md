@@ -12,10 +12,11 @@
 | Repositorio (Solicitudes) | `SolicitudAdopcionRepository` | Implementado | Importado y utilizado por `AdopcionService` |
 | Repositorio (Etapas) | `EtapaAdopcionRepository` | Implementado | Importado y utilizado por `AdopcionService` |
 | Entidades de Dominio | `EtapaAdopcion`, `SolicitudAdopcion` | Implementado | Modelos respaldados por JPA |
+| Dependencia de Persistencia | `spring-boot-starter-data-jpa` | Implementado | Declarada en `app/pom.xml` |
 | Controlador Geoespacial | `MascotaController` | Implementado | Expone el endpoint medido en Semana 4 |
 
 **Registro Formal de Correcciones**
-* **Qué mostraba inicialmente:** El documento afirmaba que no existían servicios, repositorios de negocio ni persistencia para el módulo de adopciones.
-* **Qué encontró el código:** La auditoría sobre `main` desmintió esta carencia. Se localizaron las clases `AdopcionController`, `AdopcionService`, y los repositorios asociados que gestionan las entidades.
-* **Qué se corrigió:** Se reclasificaron los componentes de adopción a estado "Implementado" en la tabla de trazado, referenciando directamente los endpoints y operaciones (ej. `@Transactional`) detectados.
-* **Por qué:** El modelo C4 as-is no debe presentar como "planificado" o inexistente un módulo que el código demuestra que ya opera con respaldo de sus dependencias.
+* **Qué mostraba inicialmente:** La documentación no reflejaba los servicios, repositorios de negocio ni la persistencia JPA que forman parte del módulo de adopciones.
+* **Qué encontró el código:** La auditoría sobre `main` confirmó las clases `AdopcionController`, `AdopcionService`, los repositorios asociados y las entidades respaldadas por JPA.
+* **Qué se corrigió:** Se actualizaron los componentes de adopción a estado "Implementado" en la tabla de trazado, referenciando directamente los endpoints, la operación `@Transactional` y la dependencia `spring-boot-starter-data-jpa`.
+* **Por qué:** El modelo C4 as-is debe representar fielmente el código actual y sus dependencias de persistencia.
