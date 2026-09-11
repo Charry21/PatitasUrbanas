@@ -18,7 +18,7 @@ C4Container
     Container(api, "API Backend", "Java 21, Spring Boot 3.3.4", "Contenedor central que expone endpoints RESTful de negocio y transacciones (ej. Adopciones y geolocalización).")
     
     ContainerDb(db, "Base de Datos Transaccional", "PostgreSQL, PostGIS", "Persistencia relacional y espacial operada vía Spring Data JPA.")
-    ContainerDb(cache, "Almacenamiento No Estructurado", "MongoDB / Firestore", "Almacenamiento rápido para foros comunitarios.")
+    ContainerDb(cache, "Almacenamiento No Estructurado", "MongoDB / Firestore (alternativa planificada)", "Alternativa evaluada para foros comunitarios; no forma parte de la persistencia implementada.")
   }
 
   Rel_D(ciudadano, web, "Navega y consulta", "HTTPS")

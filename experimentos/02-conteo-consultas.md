@@ -60,6 +60,20 @@ La medición corresponde al componente **Controlador Geoespacial — `MascotaCon
 
 La persistencia JPA y los componentes de adopción (`AdopcionController`, `AdopcionService`, `SolicitudAdopcionRepository` y `EtapaAdopcionRepository`) son componentes implementados y trazados por separado en el mismo documento C4. Su existencia no implica que sean invocados por `MascotaController` en la petición evaluada.
 
+## Prueba de trazabilidad en 30 segundos
+
+Cada elemento verificado de la tabla C4 puede abrirse directamente desde estas rutas existentes:
+
+| Elemento verificado | Ruta de evidencia |
+|---|---|
+| `AdopcionController` | `app/src/main/java/com/patitasurbanas/api/controller/AdopcionController.java` |
+| `AdopcionService` | `app/src/main/java/com/patitasurbanas/api/service/AdopcionService.java` |
+| `SolicitudAdopcionRepository` | `app/src/main/java/com/patitasurbanas/api/repository/SolicitudAdopcionRepository.java` |
+| `EtapaAdopcionRepository` | `app/src/main/java/com/patitasurbanas/api/repository/EtapaAdopcionRepository.java` |
+| `EtapaAdopcion` y `SolicitudAdopcion` | `app/src/main/java/com/patitasurbanas/api/model/` |
+| `spring-boot-starter-data-jpa` | `app/pom.xml` |
+| `MascotaController` | `app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java` |
+
 ## Conclusión
 
 Para el endpoint actual de mascotas, el conteo as-is es **0 consultas SQL por petición**. La instrumentación queda preparada para detectar consultas cuando el controlador sea conectado a una capa de servicio y persistencia real, sin afirmar anticipadamente que esa funcionalidad ya existe.
