@@ -42,6 +42,11 @@ No existe un commit donde la especificación original dada al agente (Copilot) h
 
 Sin embargo, para el ciclo de estabilización actual, la trazabilidad se establece mediante los commits de corrección (`6bd39c1`, `773d97a` y `18ed28e`), los cuales demuestran la depuración de las dependencias fantasma (Firestore, Next.js) y la consolidación de la arquitectura verificada (Java 21, Spring Boot, PostgreSQL) validada en los archivos `05-c4-contexto.md`, `06-c4-contenedores.md` y `07-c4-componentes.md`. Se declara explícitamente que la especificación inicial carece de trazabilidad temporal en Git, consultado con el docente sobre la validez de los registros de auditoría posteriores como evidencia compensatoria.
 
+## Nota de Compensación Metodológica y Trazabilidad Temporal
+* **Hallazgo de auditoría interna:** Se identifica la ausencia de un commit de especificación previa al primer resultado generado por el agente en la fase inicial de delegación.
+* **Justificación técnica:** El prompt inicial se ejecutó fuera del control de versiones directo antes de establecer de forma estricta la disciplina de ramas y commits atómicos.
+* **Evidencia compensatoria:** La trazabilidad se restablece mediante la incorporación y auditoría de los artefactos resultantes (05-c4-contexto.md, 06-c4-contenedores.md, 07-c4-componentes.md), los registros formales de corrección as-is frente al código real y los commits subsecuentes en la rama principal, garantizando que el estado actual del repositorio sea completamente verificable y reproducible.
+
 ---
 
 ## 3. Resultado entregado por el agente (antes de auditoría/corrección)
