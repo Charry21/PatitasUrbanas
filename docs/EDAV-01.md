@@ -131,6 +131,6 @@ Fecha: 2026-09-04
 
 ## Anexo: preguntas de auditoría abiertas (heredadas de revisiones previas del tutor)
 
-1. ¿La hipótesis `p95 < 800 ms bajo 100 req/s` fue commiteada antes de tener resultados de medición? (Ver commit `e75b94d` y compararlo temporalmente con `experimentos/resultado-linea-base.txt`.)
+1. [RESUELTO] ¿La hipótesis `p95 < 800 ms bajo 100 req/s` fue commiteada antes de tener resultados de medición? Sí. El commit `e75b94d` (2026-08-27 18:30:10 -0500), que introduce la hipótesis en `dossier/05-atributos-calidad.md`, es anterior al commit `4d13ad3` (2026-08-28 13:21:40 -0500), que introduce por primera vez `experimentos/resultado-linea-base.txt`. La trazabilidad temporal de esta hipótesis queda confirmada con evidencia de Git.
 2. ¿El equipo interpretó "mínimo tres corridas, descartar la primera" como tres corridas *totales* o tres corridas *válidas* además de la descartada? Esta es una pregunta de criterio que corresponde resolver con el docente, no unilateralmente.
 3. Para cada fila "Verificado" de la tabla de trazado en `07-c4-componentes.md`: ¿puede el equipo, ante el profesor, abrir el archivo exacto en menos de 30 segundos?
