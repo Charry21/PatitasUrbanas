@@ -61,12 +61,19 @@ Resumen de lo que el agente afirmó inicialmente que existía, sin haber sido to
 
 ## 4. Auditoría humana: hallazgos clasificados
 
+### 4.1 Hallazgos sustantivos
+
 | # | Hallazgo | Clasificación | Commit de corrección | Evidencia que motivó el hallazgo |
 |---|---|---|---|---|
 | 1 | Firestore/MongoDB presentado como contenedor real | Sustantivo | 6bd39c1 | Sin dependencia, servicio ni configuración en `docker-compose.yml`/`pom.xml`; decisión de arquitectura documentada en `dossier/02-stakeholders-drivers.md` (riesgo R-03) |
 | 2 | Backend asumido como Next.js API Routes | Sustantivo | 773d97a1502bcc1012110f70acd0578a2003d17a | `app/pom.xml` (Spring Boot 3.3.4) y `app/Dockerfile` (Java 21) confirman lo contrario |
 | 3 | `07-c4-componentes.md` afirmaba que no existían controladores | Sustantivo | 18ed28e71c2c1a4b036d1f023652b28bc2fae2a7 | Existe `MascotaController.java` en `app/src/main/java/com/patitasurbanas/api/controller/` |
 | 4 | Duplicación de C4 Nivel 1/2 en `dossier/` con contenido desactualizado y contradictorio (Firestore/MongoDB sin marcar como eliminado) | Sustantivo | 6bd39c1 | `dossier/05-c4-contexto.md` y `dossier/06-c4-contenedores.md` (ya eliminados) |
+
+### 4.2 Hallazgos cosméticos
+
+| # | Hallazgo | Clasificación | Commit de corrección | Evidencia que motivó el hallazgo |
+|---|---|---|---|---|
 | 5 | Sintaxis de Mermaid generada con identificadores incompatibles que impedían la renderización correcta en GitHub | Cosmético | 18ed28e71c2c1a4b036d1f023652b28bc2fae2a7 | Visualización rota en la vista previa de Markdown del repositorio |
 
 ---
@@ -90,6 +97,10 @@ Se corrigió la tecnología del backend, ajustándola a Java 21 y Spring Boot 3.
 - Revisión exhaustiva de configuraciones residuales en directorios fuera del alcance principal (`app/`, `docs/`, `experimentos/`) que pudieran contradecir el modelo C4 actual.
 
 ---
+
+## Resultado integrado
+
+La versión final integrad a los diagramas C4 quedó consolidada en los artefactos de `docs/05-c4-contexto.md`, `docs/06-c4-contenedores.md` y `docs/07-c4-componentes.md`, con la arquitectura corregida frente a la evidencia real del repositorio. La depuración de dependencias fantasma y las correcciones de trazabilidad quedaron documentadas en los commits `6bd39c1`, `773d97a1502bcc1012110f70acd0578a2003d17a` y `18ed28e71c2c1a4b036d1f023652b28bc2fae2a7` referidos en la sección 2. El resultado final consolidado se mantiene como línea base verificable y reproducible para la auditoría del ciclo.
 
 ## 7. Firma y responsabilidad de integración
 
