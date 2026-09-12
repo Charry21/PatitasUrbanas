@@ -37,6 +37,8 @@ flowchart TD
 | Administrador de Refugio | Persona | Planificado (no implementado) |
 | Servicio de Mapas y Geolocalización | Sistema externo | Planificado / simulado, no implementado como integración real |
 
+Nota de decisión: el equipo confirma que 'Equipo de Desarrollo / QA' se mantiene como actor de contexto porque interactúa operativamente con el sistema en producción (despliegue, monitoreo, pruebas), no únicamente como constructor del sistema.
+
 ## Elementos planificados, aún no implementados
 
 Los tres elementos marcados como "Planificado" están formalmente declarados en [`01-contexto-sistema.md`](01-contexto-sistema.md) como parte de la visión del producto, pero ninguno tiene hoy un canal de interacción real en el repositorio: no existe cliente web, cliente móvil, ni integración con un proveedor de mapas en el código fuente. El servicio de mapas se mantiene como contexto planificado / simulado y no se presenta como integración real. Se mantienen en el diagrama —con estilo punteado— para no perder de vista el alcance objetivo, pero no se presentan como parte de la arquitectura ya construida.
