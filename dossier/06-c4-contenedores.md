@@ -3,32 +3,63 @@
 **Audiencia:** Arquitectos de software y desarrolladores.
 **Propósito:** Desglosar el sistema en sus unidades de despliegue físico, evidenciando las decisiones tecnológicas reales y los flujos de comunicación internos.
 
+## Diagrama de contenedores (as-is verificado)
+
 ```mermaid
 C4Container
-  title Diagrama de Contenedores - Patitas Urbanas
+  title Diagrama de Contenedores - Patitas Urbanas (as-is verificado)
 
   Person(ciudadano, "Ciudadano / Adoptante", "Usuario final de la plataforma.")
   Person(admin, "Administrador de Refugio", "Gestor de datos de adopción.")
-  System_Ext(mapas, "Servicio de Mapas", "Servicio externo de geolocalización.")
 
   System_Boundary(patitas_boundary, "Sistema Patitas Urbanas") {
-    Container(web, "Front-end Web", "Next.js (SSR)", "Aplicación web optimizada para renderizado del lado del servidor.")
-    Container(movil, "Front-end Móvil", "Kotlin, Jetpack Compose", "Aplicación nativa para dispositivos móviles.")
-    
-    Container(api, "API Backend", "Java 21, Spring Boot 3.3.4", "Contenedor central que expone endpoints RESTful de negocio y transacciones (ej. Adopciones y geolocalización).")
-    
-    ContainerDb(db, "Base de Datos Transaccional", "PostgreSQL, PostGIS", "Persistencia relacional y espacial operada vía Spring Data JPA.")
-    ContainerDb(cache, "Almacenamiento No Estructurado", "MongoDB / Firestore (alternativa planificada)", "Alternativa evaluada para foros comunitarios; no forma parte de la persistencia implementada.")
+    Container(api, "API Backend", "Java 21, Spring Boot 3.3.4", "Microservicio que expone endpoints REST para negocio y transacciones.")
+    ContainerDb(db, "Base de Datos", "PostgreSQL 16", "Persistencia relacional operada mediante Spring Data JPA y el driver PostgreSQL.")
   }
 
-  Rel_D(ciudadano, web, "Navega y consulta", "HTTPS")
-  Rel_D(ciudadano, movil, "Navega y reporta", "HTTPS")
-  Rel_D(admin, web, "Administra catálogo", "HTTPS")
-  
-  Rel_D(web, api, "Consume servicios", "JSON/HTTPS")
-  Rel_D(movil, api, "Consume servicios", "JSON/HTTPS")
-  
-  Rel_D(api, db, "Lee y escribe datos relacionales/espaciales", "JDBC/ORM")
-  Rel_D(api, cache, "Lee y escribe hilos", "Controlador NoSQL")
-  Rel_R(api, mapas, "Consulta coordenadas", "REST/SDK")
+  Rel_D(ciudadano, api, "Consulta y registra solicitudes", "JSON/HTTPS")
+  Rel_D(admin, api, "Administra catálogo y adopciones", "JSON/HTTPS")
+  Rel_D(api, db, "Lee y escribe datos relacionales", "JDBC/JPA")
 ```
+
+## Elementos planificados (fuera del as-is)
+
+Los siguientes elementos no tienen evidencia real de implementación en el repositorio y se mantienen solo como contexto de negocio, con estilo punteado para distinguirlos del estado actual.
+
+```mermaid
+flowchart LR
+    subgraph FUT["Planificado / no implementado"]
+        WEB["Front-end Web<br/>Next.js (SSR)"]
+        MOVIL["Front-end Móvil<br/>Kotlin / Jetpack Compose"]
+        CACHE["Almacenamiento No Estructurado<br/>MongoDB / Firestore"]
+        MAPAS["Servicio de Mapas externo"]
+        API["API Backend"]
+        DB["Base de Datos<br/>PostgreSQL 16"]
+    end
+
+    API -.->|planificado| WEB
+    API -.->|planificado| MOVIL
+    API -.->|planificado| CACHE
+    API -.->|planificado| MAPAS
+    DB -.->|planificado| MAPAS
+
+    style WEB fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    style MOVIL fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    style CACHE fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    style MAPAS fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    style API fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    style DB fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+```
+
+## Trazabilidad de contenedores
+
+| Contenedor del C4 | Evidencia real (archivo/ruta) | Estado |
+|---|---|---|
+| API Backend | `docker-compose.yml`, `app/pom.xml`, `app/src/main/java/com/patitasurbanas/` | Verificado |
+| Base de Datos | `docker-compose.yml`, `app/src/main/resources/application.properties`, `app/src/test/resources/application-test.properties` | Verificado |
+
+## Registro de correcciones
+
+Antes el diagrama mostraba un contenedor web, móvil, caché NoSQL y un servicio de mapas como parte del sistema actual. Se corrigió a la realidad del repositorio: el backend es Spring Boot y la base de datos es PostgreSQL 16 sin PostGIS, evidenciado por `docker-compose.yml` y los artefactos de la app. Los elementos no implementados se mantienen como futuros con estilo punteado, sin mezclarlos con el as-is. Esta corrección evita presentar requisitos planeados como si ya estuvieran desplegados.
+
+**Evidencia utilizada:** `docker-compose.yml`, `app/pom.xml`, `app/src/main/resources/application.properties`.

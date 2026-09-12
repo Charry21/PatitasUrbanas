@@ -25,6 +25,8 @@ flowchart TD
 
 **Leyenda:** línea sólida = relación verificada en código · línea punteada = relación planificada, aún no implementada.
 
+> La vista de contexto solo incluye la línea base operativa y los elementos cuyo canal o integración tiene evidencia real en el repositorio. Los perfiles de usuario y los servicios externos que aún no están implementados permanecen en estilo punteado para no confundirse con el as-is real.
+
 ## Elementos representados
 
 | Elemento | Tipo | Estado |
