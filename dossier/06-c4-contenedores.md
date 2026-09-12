@@ -24,7 +24,7 @@ C4Container
 
 ## Elementos planificados (fuera del as-is)
 
-Los siguientes elementos no tienen evidencia real de implementación en el repositorio y se mantienen solo como contexto de negocio, con estilo punteado para distinguirlos del estado actual.
+Los siguientes elementos no tienen evidencia real de implementación en el repositorio y se mantienen solo como contexto de negocio, con estilo punteado para distinguirlos del estado actual. El servicio de mapas aparece como planificado / simulado, no como integración real.
 
 ```mermaid
 flowchart LR
@@ -47,6 +47,7 @@ flowchart LR
 |---|---|---|
 | API Backend | `docker-compose.yml`, `app/pom.xml`, `app/src/main/java/com/patitasurbanas/` | Verificado |
 | Base de Datos | `docker-compose.yml`, `app/src/main/resources/application.properties`, `app/src/test/resources/application-test.properties` | Verificado |
+| Servicio de Mapas y Geolocalización | sin integración real en `docker-compose.yml`, `app/` ni servicios externos configurados | Planificado / simulado |
 
 ## Registro de correcciones
 

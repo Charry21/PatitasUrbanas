@@ -13,7 +13,7 @@
 | Repositorio (Etapas) | `EtapaAdopcionRepository` | Implementado | Importado y utilizado por `AdopcionService` |
 | Entidades de Dominio | `EtapaAdopcion`, `SolicitudAdopcion` | Implementado | Modelos respaldados por JPA |
 | Dependencia de Persistencia | `spring-boot-starter-data-jpa` | Implementado | Declarada en `app/pom.xml` |
-| Controlador Geoespacial | `MascotaController` | Implementado | Expone el endpoint medido en Semana 4 |
+| Controlador Geoespacial | `MascotaController` | Implementado como endpoint local de simulación (no realiza consulta geoespacial real ni integración con proveedor externo de mapas) | Expone el endpoint medido en Semana 4; el comentario del código indica: "Simulación de carga de respuesta para la medición de la línea base S4" |
 
 **Registro Formal de Correcciones**
 * **Qué mostraba inicialmente:** La documentación no reflejaba los servicios, repositorios de negocio ni la persistencia JPA que forman parte del módulo de adopciones.
