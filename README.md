@@ -29,7 +29,8 @@ docker compose down
 Datos de conexión local:
 
 - Host: `localhost`
-- Puerto: `5432`
+- Puerto: `5433`
+- Nota: 5433 al conectarte desde tu máquina; 5432 es el puerto interno usado entre contenedores de Docker.
 - Base de datos: `patitas_urbanas`
 - Usuario: `admin`
 - Contraseña: `adminpassword`
