@@ -32,23 +32,13 @@ flowchart LR
         WEB["Front-end Web<br/>Next.js (SSR)"]
         MOVIL["Front-end Móvil<br/>Kotlin / Jetpack Compose"]
         CACHE["Almacenamiento No Estructurado<br/>MongoDB / Firestore"]
-        MAPAS["Servicio de Mapas externo"]
-        API["API Backend"]
-        DB["Base de Datos<br/>PostgreSQL 16"]
+        MAPS["Servicio de Mapas y Geolocalización<br/>(sistema externo)"]
     end
-
-    API -.->|planificado| WEB
-    API -.->|planificado| MOVIL
-    API -.->|planificado| CACHE
-    API -.->|planificado| MAPAS
-    DB -.->|planificado| MAPAS
 
     style WEB fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
     style MOVIL fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
     style CACHE fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
-    style MAPAS fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
-    style API fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
-    style DB fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    style MAPS fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
 ```
 
 ## Trazabilidad de contenedores
