@@ -46,3 +46,25 @@ Se descarta la primera corrida por efectos de calentamiento (warm-up) de la JVM.
 * **Hipótesis Estipulada (Semana 3):** p95 < 800 ms bajo carga de 100 req/s en búsqueda espacial.
 * **Evidencia Medida (Semana 4):** La mediana p95 obtenida es de 1.81 ms, **medida sobre el endpoint simulado**, no sobre una consulta espacial real contra PostgreSQL/PostGIS.
 * **Conclusión:** El sistema cumple el umbral de rendimiento para la carga HTTP del endpoint tal como existe hoy. Esta conclusión **no puede extenderse** a "el sistema cumple el umbral en una búsqueda geoespacial real", porque esa capa (PostGIS, persistencia, datos sembrados) no está implementada todavía.
+
+## 6. Actualización S5: segunda ronda de medición (cumplimiento de criterio de 3 corridas válidas)
+
+El docente confirmó que el protocolo exige un número **IMPAR** de corridas válidas (3 o más), además de las corridas descartadas por warm-up. La sección 4 original solo reportaba 2 corridas válidas.
+
+Las cinco corridas de esta segunda ronda se ejecutaron el 12 de septiembre de 2026 contra el endpoint `GET /api/mascotas/buscar`, usando el mismo script `experimentos/escenario-rendimiento.js`, con una tasa constante de 100 req/s durante 40 segundos.
+
+| Corrida | p95 | Iteraciones | Fallos HTTP | Estado | Motivo |
+|---|---:|---:|---:|---|---|
+| 4 | 6.5 ms | 3999 | 0% | Descartada | Se ejecutó justo después de `docker compose up -d`, que reconstruyó la imagen de la API y reintrodujo el efecto de arranque en frío (warm-up de JVM). |
+| 5 | 3.12 ms | 3999 | 0% | Descartada | Todavía muestra decaimiento del warm-up; no se había estabilizado. |
+| 6 | 2.49 ms | 4001 | 0% | Válida | Corrida válida de la ronda estable. |
+| 7 | 2.52 ms | 4001 | 0% | Válida | Corrida válida de la ronda estable. |
+| 8 | 2.08 ms | 4000 | 0% | Válida | Corrida válida de la ronda estable. |
+
+Esta ronda **no se combina** con las corridas 2 y 3 de la sección 4. Aquellas corresponden a la Semana 4, se ejecutaron en otra sesión y posiblemente bajo condiciones de entorno distintas. Por ello, esta segunda ronda se reporta como una ronda de medición independiente y completa, sin mezclar condiciones distintas.
+
+**Nota honesta:** en esta ronda el warm-up tomó 2 corridas en estabilizarse (corridas 4 y 5), no 1 como en la medición original de la Semana 4. Esta es una observación válida, no un error que deba ocultarse.
+
+**Mediana final de esta ronda:** 2.49 ms (corridas válidas 6, 7 y 8).
+
+La mediana final de 2.49 ms sigue muy por debajo del umbral de la hipótesis de S3 (p95 < 800 ms). La conclusión de la sección 5 se mantiene sin cambios: el sistema cumple el umbral para el endpoint simulado, no para una búsqueda geoespacial real.
