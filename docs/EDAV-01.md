@@ -102,6 +102,24 @@ Se corrigió la tecnología del backend, ajustándola a Java 21 y Spring Boot 3.
 
 La versión final integrad a los diagramas C4 quedó consolidada en los artefactos de `docs/05-c4-contexto.md`, `docs/06-c4-contenedores.md` y `docs/07-c4-componentes.md`, con la arquitectura corregida frente a la evidencia real del repositorio. La depuración de dependencias fantasma y las correcciones de trazabilidad quedaron documentadas en los commits `6bd39c1`, `773d97a1502bcc1012110f70acd0578a2003d17a` y `18ed28e71c2c1a4b036d1f023652b28bc2fae2a7` referidos en la sección 2. El resultado final consolidado se mantiene como línea base verificable y reproducible para la auditoría del ciclo.
 
+## Nota de proceso: commits sin revisión por PR
+
+Los siguientes 4 commits, correspondientes a las correcciones de Semana 5
+(instrumentación de pg_stat_statements, reestructuración del EDAV-01,
+corrección de trazabilidad en 06-c4-contenedores.md, y evidencia de
+consultas por petición), se subieron directamente a la rama `main` sin
+pasar por un Pull Request, debido a un error en el flujo de trabajo:
+
+- feat: habilitar pg_stat_statements en postgres_db
+- docs: reestructurar EDAV-01 con hallazgos sustantivos/cosmeticos y resultado integrado
+- fix: corregir C4 contenedores contra codigo real y agregar tabla de trazabilidad
+- docs: agregar evidencia de conteo de consultas por peticion
+
+Se deja esta constancia en vez de reescribir el historial de Git para
+simular una revisión por PR que no ocurrió. A partir de este punto, todo
+cambio adicional del proyecto se realizará en una rama separada con
+Pull Request hacia `main`.
+
 ## 7. Firma y responsabilidad de integración
 
 Quien(es) suscribe(n) este documento confirma(n) haber revisado personalmente los hallazgos de la sección 4 contra el código fuente en `main`, y asume(n) la responsabilidad de defender cada fila de la tabla de trazado de `docs/07-c4-componentes.md` ante el docente, incluyendo poder señalar en menos de 30 segundos el archivo que sostiene cada elemento marcado como 'Verificado'.
