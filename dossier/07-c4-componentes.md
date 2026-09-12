@@ -7,7 +7,7 @@
 
 | Componente C4 | Clase/Módulo Real | Estado | Evidencia en Código |
 | :--- | :--- | :--- | :--- |
-| Controlador de Adopciones | `AdopcionController` | Implementado | Expone `POST /api/adopciones` y `POST /api/adopciones/test-fallo` |
+| Controlador de Adopciones | `AdopcionController` | Implementado | Ruta base `@RequestMapping("/api/adopciones")` a nivel de clase; método `crearSolicitud` con `@PostMapping` (sin ruta adicional) resuelve a `POST /api/adopciones`; método `crearSolicitudConFalloSimulado` con `@PostMapping("/test-fallo")` resuelve a `POST /api/adopciones/test-fallo`. Las rutas no aparecen como texto literal completo en el código: se componen sumando la anotación de clase con la de cada método. |
 | Servicio de Adopciones | `AdopcionService` | Implementado | Contiene operación `@Transactional` (`crearSolicitudConEtapaInicial`) |
 | Repositorio (Solicitudes) | `SolicitudAdopcionRepository` | Implementado | Importado y utilizado por `AdopcionService` |
 | Repositorio (Etapas) | `EtapaAdopcionRepository` | Implementado | Importado y utilizado por `AdopcionService` |
