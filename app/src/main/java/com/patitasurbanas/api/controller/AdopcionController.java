@@ -2,6 +2,8 @@ package com.patitasurbanas.api.controller;
 
 import com.patitasurbanas.api.model.SolicitudAdopcion;
 import com.patitasurbanas.api.service.AdopcionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +18,7 @@ import java.util.Map;
 @RequestMapping("/api/adopciones")
 public class AdopcionController {
 
+    private static final Logger log = LoggerFactory.getLogger(AdopcionController.class);
     private final AdopcionService adopcionService;
 
     public AdopcionController(AdopcionService adopcionService) {
@@ -27,6 +30,7 @@ public class AdopcionController {
             @RequestParam(defaultValue = "PENDIENTE") String estado,
             @RequestParam(defaultValue = "SOLICITUD_RECIBIDA") String nombreEtapa) {
 
+        long inicioNs = System.nanoTime();
         SolicitudAdopcion solicitud = adopcionService.crearSolicitudConEtapaInicial(estado, nombreEtapa, false);
 
         Map<String, Object> response = new HashMap<>();
@@ -34,6 +38,9 @@ public class AdopcionController {
         response.put("estado", solicitud.getEstado());
         response.put("etapaInicial", nombreEtapa);
 
+        long finNs = System.nanoTime();
+        double tiempoControladorMs = (finNs - inicioNs) / 1_000_000.0;
+        log.info("MEDICION_S6_CONTROLADOR_MS={}", tiempoControladorMs);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
