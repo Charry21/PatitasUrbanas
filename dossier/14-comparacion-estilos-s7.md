@@ -203,9 +203,12 @@ PR, que el equipo ya practica (evidencia: PRs #16, #17, #18, #22,
 La alternativa C entrega independencia tecnológica total que B no
 ofrece: el dominio puro no conoce Spring ni JPA. Sin embargo, ese
 beneficio adicional tiene un costo de implementación desproporcionado
-para el plazo disponible. B entrega aproximadamente el 70 % del
-beneficio de C con el 20 % del costo. C es la evolución natural de B
-si el sistema crece más allá del alcance universitario.
+para el plazo disponible. La alternativa B entrega la mayor parte del beneficio de C —
+mantenibilidad y fronteras explícitas — con una fracción del costo de
+implementación. Esa estimación es cualitativa y se basa en que B no
+requiere rediseñar los modelos JPA existentes ni aprender el patrón de
+puertos y adaptadores, mientras que C sí lo exige. C es la evolución
+natural de B si el sistema crece más allá del alcance universitario.
 
 ### D vs todas
 Los microservicios no resuelven ningún driver activo y violan la
