@@ -76,10 +76,15 @@ double tiempoControladorMs = (finNs - inicioNs) / 1_000_000.0;
 log.info("MEDICION_S6_CONTROLADOR_MS={}", tiempoControladorMs);
 ```
 
-**Estado:** la instrumentación está mergeada en `main` pero los valores
-de ejecución aún no están registrados en el repositorio como evidencia
-versionada. Pendiente de ejecución y registro antes del cierre de
-Semana 7.
+**Estado:** la instrumentación está mergeada en `main` y los valores
+de ejecución están registrados en
+`experimentos/resultado-medicion-controlador-s7.txt` (dos sesiones:
+2026-09-13 y 2026-09-14). Los resultados muestran cold starts de
+~120 ms en la primera petición tras arranque del contenedor y tiempos
+de 7–35 ms en estado caliente, incluyendo dos escrituras
+@Transactional a PostgreSQL. No se confirma cuello de botella bajo
+carga individual. Queda pendiente una corrida K6 sostenida contra
+este endpoint real para evaluar comportamiento bajo concurrencia.
 
 ---
 
