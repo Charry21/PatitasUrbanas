@@ -12,7 +12,7 @@ MEDICION_S6_CONTROLADOR_MS=10.848652   # JVM caliente
 MEDICION_S6_CONTROLADOR_MS=9.585254    # JVM caliente
 MEDICION_S6_CONTROLADOR_MS=15.972056   # JVM caliente
 
-## Sesión 2 — 2026-09-15
+## Sesión 2 — 2026-09-14 (~18:00 hora local)
 
 MEDICION_S6_CONTROLADOR_MS=123.932258  # cold start — nuevo arranque del contenedor
 MEDICION_S6_CONTROLADOR_MS=10.324557   # JVM caliente
@@ -51,6 +51,6 @@ Comando de medición:
   docker logs patitas_urbanas_api 2>&1 | Select-String "MEDICION_S6"
 
 Fecha de ejecución sesión 1: 2026-09-13
-Fecha de ejecución sesión 2: 2026-09-15
+Fecha de ejecución sesión 2: 2026-09-14 (~18:00 hora local)
 Rama: feat/decision-estilo-s7
 PR de instrumentación: #41
