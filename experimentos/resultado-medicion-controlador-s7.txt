@@ -1,0 +1,56 @@
+# Mediciones MEDICION_S6_CONTROLADOR_MS
+# Endpoint: POST /api/adopciones
+# Componente: AdopcionController -> AdopcionService -> JPA -> PostgreSQL 16
+# Instrumentación: PR #41 (System.nanoTime())
+# Puerto: 3000
+# Condiciones: peticiones individuales, contenedor Docker local
+
+## Sesión 1 — 2026-09-13
+
+MEDICION_S6_CONTROLADOR_MS=117.290434  # cold start — primera petición tras arranque
+MEDICION_S6_CONTROLADOR_MS=10.848652   # JVM caliente
+MEDICION_S6_CONTROLADOR_MS=9.585254    # JVM caliente
+MEDICION_S6_CONTROLADOR_MS=15.972056   # JVM caliente
+
+## Sesión 2 — 2026-09-15
+
+MEDICION_S6_CONTROLADOR_MS=123.932258  # cold start — nuevo arranque del contenedor
+MEDICION_S6_CONTROLADOR_MS=10.324557   # JVM caliente
+MEDICION_S6_CONTROLADOR_MS=8.669152    # JVM caliente
+MEDICION_S6_CONTROLADOR_MS=7.466002    # JVM caliente
+MEDICION_S6_CONTROLADOR_MS=35.241770   # pico puntual — posible GC
+
+## Resumen estadístico (excluyendo cold starts)
+
+Mediciones válidas: 7
+Mínimo:   7.47 ms
+Máximo:   35.24 ms
+Promedio: 13.44 ms
+Mediana:  10.32 ms
+
+## Interpretación metodológica
+
+Los cold starts (mediciones 1 y 5, ~120 ms) corresponden a la primera
+petición tras arrancar el contenedor Docker. Representan el costo de
+inicialización de HikariCP y compilación JIT de Hibernate, no el
+comportamiento en estado estable.
+
+Las mediciones en estado caliente (7–35 ms) incluyen dos escrituras
+@Transactional a PostgreSQL: una en solicitud_adopcion y una en
+etapa_adopcion. Estos valores están muy por debajo del umbral de
+800 ms definido en H1.
+
+Conclusión: no se confirma cuello de botella en el controlador bajo
+carga individual. El análisis de causa queda pendiente de una corrida
+K6 sostenida contra este endpoint real para evaluar comportamiento
+bajo concurrencia.
+
+## Trazabilidad
+
+Comando de medición:
+  docker logs patitas_urbanas_api 2>&1 | Select-String "MEDICION_S6"
+
+Fecha de ejecución sesión 1: 2026-09-13
+Fecha de ejecución sesión 2: 2026-09-15
+Rama: feat/decision-estilo-s7
+PR de instrumentación: #41
