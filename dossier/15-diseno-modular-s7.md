@@ -52,6 +52,80 @@ decisión corrige esa inconsistencia de terminología.
 
 ## 3. Estado objetivo (to-be)
 
+### Diagrama modular objetivo
+
+```mermaid
+graph TD
+  subgraph API["com.patitasurbanas.api"]
+
+    subgraph ADO["adopciones/"]
+      AC["AdopcionController\n(público — REST)"]
+      AS["AdopcionService\n(público — negocio)"]
+      SAR["SolicitudAdopcionRepository\n(interno)"]
+      EAR["EtapaAdopcionRepository\n(interno)"]
+      subgraph ADO_M["model/"]
+        SA["SolicitudAdopcion"]
+        EA["EtapaAdopcion"]
+      end
+    end
+
+    subgraph MAS["mascotas/"]
+      MC["MascotaController\n(público — REST)"]
+      MS["MascotaService\n(público — negocio)"]
+      MR["MascotaRepository\n(interno)"]
+      subgraph MAS_M["model/"]
+        M["Mascota"]
+      end
+    end
+
+    subgraph VET["veterinarias/"]
+      VT["por definir\n(sin código real aún)"]
+    end
+
+    subgraph SHR["shared/"]
+      EXC["excepciones base"]
+      DTO["DTOs comunes"]
+    end
+
+    subgraph CFG["config/"]
+      SPR["beans Spring\nCORS · seguridad"]
+    end
+  end
+
+  AC --> AS
+  AS --> SAR
+  AS --> EAR
+  SAR --> SA
+  EAR --> EA
+
+  MC --> MS
+  MS --> MR
+  MR --> M
+
+  AS -.->|"solo MascotaService\nsi aplica"| MS
+
+  ADO --> SHR
+  MAS --> SHR
+  VET --> SHR
+  ADO --> CFG
+  MAS --> CFG
+  VET --> CFG
+
+  classDef publico fill:#1e3a2f,stroke:#4ade80,color:#bbf7d0
+  classDef interno fill:#1a1f35,stroke:#6366f1,color:#c7d2fe
+  classDef modelo fill:#2d1f1f,stroke:#f87171,color:#fecaca
+  classDef shared fill:#2d2a12,stroke:#eab308,color:#fef08a
+  classDef config fill:#1f2937,stroke:#9ca3af,color:#e5e7eb
+  classDef pendiente fill:#1c1c1c,stroke:#4b5563,color:#6b7280,stroke-dasharray: 5 5
+
+  class AC,AS,MC,MS publico
+  class SAR,EAR,MR interno
+  class SA,EA,M modelo
+  class EXC,DTO shared
+  class SPR config
+  class VT pendiente
+```
+
 ### Estructura de paquetes propuesta
 
 com.patitasurbanas.api
