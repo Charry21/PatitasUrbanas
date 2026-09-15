@@ -108,9 +108,11 @@ La reorganización consiste en:
    `adr/adr-02-modularidad.md`).
 4. Verificar que los tests existentes pasan tras la reorganización.
 
-El sistema se comporta exactamente igual antes y después de la
-reorganización en tiempo de ejecución. El cambio es exclusivamente
-estructural.
+El sistema debería comportarse exactamente igual antes y después de la
+reorganización en tiempo de ejecución, dado que el cambio es
+exclusivamente estructural. Esta es una consecuencia esperada, no un
+hecho verificado: la reorganización aún no ha sido implementada y
+debe verificarse ejecutando la suite de tests tras mover los archivos.
 
 ---
 
