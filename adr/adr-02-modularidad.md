@@ -197,6 +197,43 @@ ni lógica específica de un dominio.
 
 ---
 
+## Implicaciones de seguridad
+
+`dossier/03-atributos-calidad.md` clasifica la Seguridad como
+atributo de calidad de prioridad **Alta** por el manejo de datos
+personales bajo la Ley 1581 de 2012. Las reglas de dependencia
+declaradas en este ADR son el mecanismo concreto que sostiene esa
+prioridad a nivel de código:
+
+- Al prohibir que un módulo importe repositorios o modelos de
+  otro dominio (por ejemplo, que `mascotas/` acceda directamente
+  a `EntidadDAO` o a los modelos de `adopciones/`), se reduce la
+  superficie por la que datos personales de un dominio podrían
+  filtrarse hacia lógica de negocio no relacionada.
+- Obligar a que la comunicación entre módulos pase por interfaces
+  de servicio públicas permite concentrar en un solo punto por
+  módulo la validación de qué datos se exponen hacia afuera,
+  en lugar de que cada clase decida individualmente.
+- El criterio de admisión de `shared/` (sin entidades JPA ni
+  repositorios) evita que datos sensibles terminen accesibles
+  desde un paquete transversal sin control de dominio.
+
+**Riesgo residual:** la Alternativa A (convención + revisión de
+PR) no impide automáticamente una violación; depende de que el
+revisor detecte el acceso indebido. Esto es relevante para
+seguridad porque una violación no detectada podría exponer datos
+personales de un módulo a otro sin que el build falle. Este
+riesgo es la razón concreta por la que se deja definida la ruta
+de escalamiento a ArchUnit (Alternativa B) como condición de
+revisión.
+
+**Condición de revisión:** si el mini-comité de Semana 8 considera
+que el riesgo de exposición de datos personales entre módulos es
+inaceptable para una convención manual, se adopta ArchUnit de
+inmediato en lugar de esperar a una futura iteración.
+
+---
+
 ## Reversibilidad
 
 Alta. Esta decisión es documentación y convención. Revertirla
