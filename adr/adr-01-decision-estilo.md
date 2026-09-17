@@ -140,6 +140,43 @@ debe verificarse ejecutando la suite de tests tras mover los archivos.
 
 ---
 
+## Implicaciones de seguridad
+
+`dossier/03-atributos-calidad.md` clasifica la Seguridad como
+atributo de calidad de prioridad **Alta**, dado que el sistema
+gestiona datos personales de usuarios y fundaciones bajo el
+cumplimiento de la Ley 1581 de 2012 (Colombia).
+
+El monolito modular no cambia el perímetro de seguridad actual:
+sigue existiendo un único proceso desplegado, una única base de
+datos (PostgreSQL) y un único punto de autenticación. Adoptar
+esta alternativa no introduce comunicación entre procesos ni
+nuevos canales de red que deban asegurarse, a diferencia de la
+Alternativa D (microservicios), que sí habría exigido definir
+autenticación y cifrado entre servicios.
+
+Sin embargo, las fronteras de módulo declaradas aquí sí tienen un
+efecto positivo indirecto en seguridad: al restringir qué clases
+pueden acceder a los repositorios y modelos de cada dominio (ver
+`adr/adr-02-modularidad.md`), se reduce la superficie por la que
+un error de programación podría exponer datos personales de un
+módulo (por ejemplo, `entidades`) a través de la lógica de otro
+módulo no relacionado.
+
+**Riesgo residual:** dado que las fronteras se mantienen por
+convención y no por refuerzo estructural automático (ADR-02,
+Alternativa A), un descuido en la revisión de PR podría permitir
+que un módulo acceda directamente a datos personales de otro sin
+pasar por su interfaz de servicio. Este riesgo queda documentado
+como condición de revisión en ADR-02.
+
+**Condición de revisión:** si en una futura iteración se separan
+módulos en servicios independientes, este ADR debe revisarse para
+incorporar autenticación entre servicios y cifrado en tránsito,
+que hoy no son necesarios por tratarse de un único proceso.
+
+---
+
 ## Reversibilidad
 
 Alta. Revertir implica mover los archivos al paquete plano original.
