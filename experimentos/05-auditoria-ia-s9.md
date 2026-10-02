@@ -50,7 +50,7 @@ No cambiar lógica, endpoints, `pom.xml`, `application.properties`, persistencia
 | Primer resultado del agente (reorganización) | `1e522df` (control de Y2: `4883f9c`, 17:05:16) | 2026-10-02 17:05:49 +0000 | `experimentos/spike-s10/alcance-diff.txt` |
 | Commit del resultado integrado en la rama de trabajo | `d97cbf3` (mediciones), `e9bcd93` (registro) | 2026-10-02 17:07:22 / 17:08:31 +0000 | `experimentos/spike-s10/despues/`, `experimentos/06-spike-resultado-s10.md` |
 | Auditoría humana | [Completa el equipo] | | Esta sección §4–§8 |
-| Correcciones posteriores, si las hubo | [Completa el equipo] | | |
+| Correcciones posteriores, si las hubo | Eliminación del import de control fusionado por error (PR #50) — ver D5 / S5. [El equipo añade las suyas] | 2026-10-02 | `git diff 1e522df -- app` vacío |
 
 ### 2.1 Declaración de trazabilidad temporal
 
@@ -82,6 +82,7 @@ Veredicto propuesto por el agente: hipótesis soportada en las condiciones regis
 | S2 | El medidor Y2 solo analiza `import`; las referencias entre clases del mismo paquete no se cuentan (los imports evaluados bajan de 8 a 5). | `spike-s10/antes/y2-y4-y5.txt` vs `spike-s10/despues/y2-y4-y5.txt`; desviación D4 | Sustantivo (limitación del instrumento) | [Equipo] | |
 | S3 | La ejecución se hizo en Linux con Maven local; no se verificó Windows/WSL2 ni la construcción de la imagen Docker de la API. | `spike-s10/entorno.txt`; desviaciones D1–D2 | Sustantivo (validez externa) | [Equipo] | |
 | S4 | No se crearon `shared/`, `config/` ni `veterinarias/`: ninguna clase existente pertenece a ellos. | `spike-s10/despues/listado-clases.txt` | Sustantivo (alcance) | [Equipo] | |
+| S5 | La rama de control de Y2 se fusionó en `main` por error (PR #50, `af92e3f`) e introdujo el import prohibido. Se eliminó en la rama del spike; tras fusionar el PR del spike, `main` queda sin el import. | `git show af92e3f`; desviación D5 en `06-spike-resultado-s10.md` | Sustantivo (integridad del procedimiento) | [Equipo] | (commit de esta corrección) |
 
 ### 4.2 Hallazgos cosméticos
 

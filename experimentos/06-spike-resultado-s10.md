@@ -91,6 +91,7 @@ Salidas: [`spike-s10/antes/`](./spike-s10/antes/), [`spike-s10/despues/`](./spik
 | D2 | Los tests se ejecutaron con Maven 3.9.11 local; no se ejecutó `docker run maven:3.9.9-eclipse-temurin-21 mvn -v` ni la construcción de la imagen de `app/Dockerfile`. | Ninguno sobre Y1–Y5 (misma herramienta antes y después). La construcción de la imagen Docker de la API queda sin verificar. |
 | D3 | `medir_y3.sh` hace una solicitud `GET /api/mascotas/buscar?lat=0&lng=0&radio=1` para detectar que la aplicación arrancó, antes de S1–S3. | Ninguno: el endpoint es simulado y no escribe datos; no se cuenta en Y3. |
 | D4 | El número de imports evaluados por Y2 baja de 8 a 5 porque las clases que pasan a compartir paquete ya no necesitan `import`. | El script solo analiza imports; las referencias dentro del mismo paquete no se cuentan. Todas están dentro de `adopciones/`, así que no pueden ser violaciones entre módulos. |
+| D5 | La rama de control `spike/control-y2-descartable` se fusionó en `main` por error (PR #50, merge `af92e3f`, 2026-10-02 17:11 UTC), aunque la especificación dice que no se integra. Introdujo en `main` el import prohibido de control. | Ninguno sobre las mediciones: todas se hicieron antes (17:05–17:08 UTC). Se corrigió en la rama del spike quitando el import al traer `main`; `app/` queda idéntico al estado medido (`git diff 1e522df -- app` vacío). |
 
 Ninguna desviación afecta a los criterios de confirmación o refutación.
 
