@@ -6,7 +6,7 @@
 
 **Decisión:** probar ADR-01 (monolito modular con fronteras por paquete) y las reglas de dependencia de ADR-02.
 
-La especificación se limita a probar la reorganización estructural prevista por ADR-01. Las reglas de dependencia se describen en [ADR-02](../adr/adr-02-modularidad.md), que permanece en propuesta; esta especificación no cambia el estado ni el veredicto de ningún ADR.
+La especificación se limita a probar la reorganización estructural prevista por ADR-01. Las reglas de dependencia se describen en [ADR-02](../adr/adr-02-modularidad.md), en estado Ajustada tras el mini-comité de Semana 8; esta especificación no cambia el estado ni el veredicto de ningún ADR.
 
 ## 2. Hipótesis numérica y falsable
 
@@ -19,16 +19,24 @@ La especificación se limita a probar la reorganización estructural prevista po
 - **Y1 — Tests existentes que pasan:** suite completa, incluido `AdopcionControllerRollbackIntegrationTest`.
 - **Y2 — Imports prohibidos:** número de imports que incumplen las reglas prohibidas de [ADR-02](../adr/adr-02-modularidad.md), contado con un script de revisión de imports guardado en `experimentos/` (no en `app/`). En el estado previo, donde las clases no están separadas en paquetes por dominio, el script debe clasificar las clases según el mapeo de clases a módulos de `dossier/15-diseno-modular-s7.md`; después debe aplicar la misma clasificación a los paquetes reorganizados.
 - **Y3 — Respuestas de endpoints:** diferencia entre el código HTTP y la estructura JSON de `POST /api/adopciones` y `GET /api/mascotas/buscar` antes y después, ignorando `id` y fecha.
+- **Y4 — Clases de producción ubicadas en su módulo objetivo:** porcentaje de las 7 clases de producción listadas en la tabla de la sección 7 de `dossier/15-diseno-modular-s7.md` (`AdopcionController`, `AdopcionService`, `SolicitudAdopcionRepository`, `EtapaAdopcionRepository`, `SolicitudAdopcion`, `EtapaAdopcion`, `MascotaController`) cuyo paquete está dentro del módulo objetivo indicado en esa tabla (`...api.adopciones` o `...api.mascotas`, incluidos subpaquetes como `adopciones.model`). Se cuenta con el mismo script de `experimentos/` que Y2. No cuentan `PatitasUrbanasApplication` (paquete raíz `com.patitasurbanas`) ni las clases de test.
+- **Y5 — Paquetes que mezclan dominios:** número de paquetes bajo `com.patitasurbanas.api` que contienen clases de producción de más de un dominio según el mismo mapeo. Se cuenta con el mismo script.
 
-**Umbral Z e hipótesis falsable:** tras la reorganización, Y1 = 100% de los tests que pasaban antes siguen pasando; Y2 = 0 violaciones; Y3 = 0 diferencias.
+**Naturaleza de las métricas.** Y1, Y2 y Y3 son métricas de **no regresión**: comprueban que la reorganización no rompe tests, no introduce dependencias prohibidas y no altera el comportamiento observable. Una revisión preliminar de imports hecha al preparar esta especificación sugiere que la línea base de Y2 ya es 0, porque hoy no existen clases de mascotas que puedan ser importadas por adopciones ni a la inversa; el valor oficial de la línea base lo fija el script en Semana 10. Por eso Y2 por sí sola no demuestra mejora y se usa como guarda. Y4 e Y5 son las métricas de **mejora**: miden directamente lo que ADR-01 promete (fronteras de módulo visibles en la estructura de paquetes). En el estado base las clases están organizadas por capa técnica (`controller/`, `service/`, `repository/`, `model/`), por lo que se espera Y4 = 0% y Y5 ≥ 1 (`controller/` contiene `AdopcionController` y `MascotaController`); los valores oficiales de línea base los registra el script antes de reorganizar.
+
+**Umbral Z e hipótesis falsable:** si se aplica la reorganización de ADR-01, la estructura de paquetes pasará a reflejar las fronteras de módulo —Y4 sube de su línea base a **100%** (7/7 clases en su módulo) y Y5 baja de su línea base a **0** paquetes mezclados— **sin coste funcional**: Y1 = 100% de los tests que pasaban antes siguen pasando; Y2 = 0 violaciones; Y3 = 0 diferencias.
+
+Si el script registra en la línea base Y4 = 100% o Y5 = 0, la mejora no es observable con estas métricas: se registra como desviación y la hipótesis de mejora no podrá darse por soportada (solo la de no regresión).
 
 ## 3. Criterios predefinidos
 
-**Criterio de confirmación:** la hipótesis se considera soportada únicamente si el 100% de los tests que pasaban antes siguen pasando, el script detecta cero imports prohibidos después y los códigos HTTP y estructuras JSON comparados para ambos endpoints no presentan diferencias al ignorar `id` y fecha. El resultado solo aplicaría a este cambio y a las condiciones registradas.
+**Criterio de confirmación:** la hipótesis se considera soportada únicamente si se cumplen las cinco condiciones: Y4 = 100% después (y menor en la línea base), Y5 = 0 después (y ≥ 1 en la línea base), el 100% de los tests que pasaban antes siguen pasando, el script detecta cero imports prohibidos después y los códigos HTTP y estructuras JSON comparados para ambos endpoints no presentan diferencias al ignorar `id` y fecha. El resultado solo aplicaría a este cambio y a las condiciones registradas.
 
-**Criterio de refutación:** la hipótesis se considera refutada si algún test que pasaba antes deja de pasar, el script detecta una o más violaciones, o existe una o más diferencias en las respuestas comparadas. Basta con que falle cualquiera de las tres métricas.
+**Criterio de refutación:** la hipótesis se considera refutada si Y4 < 100% después, Y5 ≥ 1 después, algún test que pasaba antes deja de pasar, el script detecta una o más violaciones, o existe una o más diferencias en las respuestas comparadas. Basta con que falle cualquiera de las cinco métricas. Si Y4/Y5 cumplen pero falla Y1, Y2 o Y3, la conclusión es que la reorganización tal como se especificó no es estructural pura y ADR-01 debe revisarse; si Y1–Y3 cumplen pero Y4/Y5 no, el cambio no materializó las fronteras prometidas.
 
-**Control del medidor Y2:** en una rama descartable se inyectará un import prohibido de prueba. El script debe contar una o más violaciones. Si no lo detecta, Y2 no es válido y no se podrá usar para evaluar la hipótesis. La rama y el import de prueba no forman parte de la reorganización integrada.
+**Control del medidor Y2:** en una rama descartable (`spike/control-y2-descartable`) se inyectará un import prohibido de prueba. El script debe contar una o más violaciones. Si no lo detecta, Y2 no es válido y no se podrá usar para evaluar la hipótesis.
+
+**Control del medidor Y4/Y5:** el script se ejecuta sobre el estado base y su salida debe listar cada una de las 7 clases con su paquete actual y su módulo objetivo; la lista se contrasta manualmente con `find app/src/main/java -name '*.java'`. Si alguna clase falta o está mal clasificada, Y4/Y5 no son válidas. La rama y el import de prueba no forman parte de la reorganización integrada.
 
 ## 4. Alcance
 
@@ -38,7 +46,7 @@ La especificación se limita a probar la reorganización estructural prevista po
 - Mantener `veterinarias/` como módulo declarado sin clases; no se crean clases para ese dominio ni se fuerza al repositorio a versionar una carpeta vacía.
 - Actualizar declaraciones de paquete e imports que sean necesarios por esos movimientos.
 - Crear en `experimentos/` el script de revisión de imports de Y2, fuera de `app/`, y validar su capacidad de detección con el control en rama descartable.
-- Medir antes y después Y1, Y2 y Y3 con el mismo criterio, registrando evidencias comparables.
+- Medir antes y después Y1–Y5 con el mismo criterio, registrando evidencias comparables.
 
 **Fuera del alcance / no tocar:**
 
@@ -60,11 +68,11 @@ La especificación se limita a probar la reorganización estructural prevista po
   - Imagen de compilación: `maven:3.9.9-eclipse-temurin-21`; imagen de ejecución: `eclipse-temurin:21-jre` (`app/Dockerfile`).
   - PostgreSQL: imagen `postgres:16` (`docker-compose.yml`), puerto host `5433`.
   - La etiqueta `postgres:16` y la versión de Docker no fijan un parche concreto; por eso, en cada ejecución se registra la salida de `docker version`, `docker compose version`, `docker exec patitas_urbanas_db psql -U admin -d patitas_urbanas -c "SELECT version();"` y `docker run --rm maven:3.9.9-eclipse-temurin-21 mvn -v`. Las mismas versiones deben usarse antes y después; si alguna difiere, se registra como desviación.
-- **Comparación:** medir Y1, Y2 y Y3 tanto antes como después, usando el mismo conjunto de tests, script y procedimiento de solicitud/comparación.
+- **Comparación:** medir Y1–Y5 tanto antes como después, usando el mismo conjunto de tests, script y procedimiento de solicitud/comparación.
 - **Repeticiones y protocolo exacto de medición:** las tres métricas son deterministas (resultado de tests, conteo estático de imports, código HTTP/estructura JSON), así que las repeticiones sirven para descartar resultados inestables, no para promediar:
   1. Antes de cada bloque de medición: `docker compose down -v` y `docker compose up -d postgres_db`, esperando a que el healthcheck reporte `healthy` (base de datos limpia; además `ddl-auto=create-drop` recrea el esquema).
   2. **Y1:** 3 ejecuciones de la suite completa antes y 3 después, con `mvn -B clean test` desde `app/`. Un test cuenta como "pasaba antes" solo si pasa en las 3 ejecuciones previas. Si un test da resultados distintos entre ejecuciones del mismo estado, se registra como inestable y se excluye de Y1 de forma explícita, sin cambiar el criterio.
-  3. **Y2:** 1 ejecución del script antes y 1 después (análisis estático determinista), más 1 ejecución en la rama descartable de control.
+  3. **Y2, Y4 e Y5:** 1 ejecución del script antes y 1 después (análisis estático determinista), más 1 ejecución en la rama descartable de control de Y2.
   4. **Y3:** con la aplicación levantada (`mvn spring-boot:run` desde `app/`, puerto 3000), cada solicitud se envía 3 veces antes y 3 después. Las 3 respuestas de un mismo estado deben coincidir entre sí; si no coinciden, se registra como desviación. No se medirán tiempos de respuesta ni rendimiento; por tanto, warm-up de carga no es una métrica del spike.
 - **Y1:** conservar la salida de la suite completa antes y después e identificar explícitamente qué tests pasaban antes; incluir `AdopcionControllerRollbackIntegrationTest`.
 - **Y2:** el agente debe crear y ejecutar primero el script sobre el estado base, usando el mapeo de clases de `dossier/15-diseno-modular-s7.md` para asignar módulos antes de la reorganización; después debe aplicar el mismo criterio a los paquetes reorganizados. Conservar el script, las salidas antes/después, la lista de imports contabilizados y la evidencia del control en rama descartable. Si el control falla, declarar inválida Y2.
@@ -80,11 +88,18 @@ La metodología histórica se consulta en [experimentos/01-metodologia-medicion.
 
 ## 6. Tarea delegada al agente
 
-**Momento de ejecución:** Semana 10, después de completar el commit base, las versiones exactas del entorno, el protocolo de repetición, las solicitudes equivalentes y el procedimiento de comparación. No ejecutar ni modificar código de `app/` como parte de la preparación de Semana 9.
+**Momento de ejecución:** Semana 10. El commit base, las versiones, el protocolo de repetición, las solicitudes equivalentes y el procedimiento de comparación quedaron fijados en §5 durante Semana 9. No ejecutar ni modificar código de `app/` como parte de la preparación de Semana 9.
+
+**Herramienta/agente delegado:** Claude Code (Anthropic). El modelo y la versión exactos se registran en los metadatos de la EDAV 2 ([05-auditoria-ia-s9.md](./05-auditoria-ia-s9.md)) al iniciar la delegación.
+
+**Ramas:**
+
+- Rama de ejecución del spike: `spike/fronteras-modulares-s10`, creada desde `887ccf1`. Se integra a `main` solo mediante PR, después de la auditoría humana.
+- Rama de control del medidor Y2: `spike/control-y2-descartable`, creada desde `887ccf1`. No se integra; se conserva solo como evidencia del control.
 
 **Prompt exacto para el agente:**
 
-> En una rama de trabajo basada en el commit indicado en esta especificación, implementa exclusivamente la reorganización estructural de las clases existentes bajo `com.patitasurbanas.api` en `adopciones/`, `mascotas/`, `shared/` y `config/`. Deja veterinarias declarada sin clases: no inventes clases ni fuerces a Git a versionar una carpeta vacía. Usa las reglas prohibidas de `adr/adr-02-modularidad.md`. No cambies lógica, endpoints, `pom.xml`, `application.properties`, persistencia, configuración, Docker Compose ni infraestructura. No agregues ArchUnit, Spring Security, JPMS, bibliotecas o microservicios. Crea el script de revisión de imports Y2 en `experimentos/`, no en `app/`; para el estado previo, clasifica clases según el mapeo a módulos de `dossier/15-diseno-modular-s7.md`; usa el mismo criterio después del movimiento. Ejecuta el script en el estado base antes de reorganizar. Valida el medidor en una rama descartable inyectando un import prohibido de prueba; debe detectar al menos una violación. La rama y el import de control no se integran. Mide antes y después Y1 (suite completa, incluido `AdopcionControllerRollbackIntegrationTest`, con identificación de los tests que pasaban antes), Y2 (conteo con el script validado) y Y3 (código HTTP y estructura JSON de `POST /api/adopciones` y `GET /api/mascotas/buscar`, ignorando `id` y fecha, mediante las solicitudes/procedimiento fijados por el equipo). Conserva comandos, salidas y evidencias. Reporta diferencias, desviaciones y aspectos no verificados. No ejecutes este trabajo durante Semana 9 ni redactes resultado o veredicto en los documentos de Semana 9.
+> En la rama `spike/fronteras-modulares-s10`, creada desde el commit `887ccf1`, implementa exclusivamente la reorganización estructural de las clases existentes bajo `com.patitasurbanas.api` en `adopciones/`, `mascotas/`, `shared/` y `config/`. Deja veterinarias declarada sin clases: no inventes clases ni fuerces a Git a versionar una carpeta vacía. Usa las reglas prohibidas de `adr/adr-02-modularidad.md`. No cambies lógica, endpoints, `pom.xml`, `application.properties`, persistencia, configuración, Docker Compose ni infraestructura. No agregues ArchUnit, Spring Security, JPMS, bibliotecas o microservicios. Crea el script de revisión de imports (Y2) y de ubicación de clases (Y4, Y5) en `experimentos/`, no en `app/`; para el estado previo, clasifica clases según el mapeo a módulos de `dossier/15-diseno-modular-s7.md`; usa el mismo criterio después del movimiento. Ejecuta el script en el estado base antes de reorganizar. Valida el medidor Y2 en la rama descartable `spike/control-y2-descartable` inyectando un import prohibido de prueba; debe detectar al menos una violación. La rama y el import de control no se integran. Mide antes y después Y1 (suite completa, incluido `AdopcionControllerRollbackIntegrationTest`, con identificación de los tests que pasaban antes), Y2 (conteo con el script validado) y Y3 (código HTTP y estructura JSON de `POST /api/adopciones` y `GET /api/mascotas/buscar`, ignorando `id` y fecha, mediante las solicitudes S1–S3 y el procedimiento de §5), Y4 (porcentaje de las 7 clases de producción del mapeo en su módulo objetivo) e Y5 (paquetes que mezclan clases de más de un dominio). Conserva comandos, salidas y evidencias. Reporta diferencias, desviaciones y aspectos no verificados. No ejecutes este trabajo durante Semana 9 ni redactes resultado o veredicto en los documentos de Semana 9.
 
 **Entradas al agente:**
 
@@ -95,7 +110,7 @@ La metodología histórica se consulta en [experimentos/01-metodologia-medicion.
 - Reglas prohibidas de [ADR-02](../adr/adr-02-modularidad.md).
 - Solicitudes equivalentes S1–S3 y procedimiento de comparación de respuestas definidos en §5 (Y3).
 
-**Salida esperada:** diff acotado a la reorganización y declaraciones/imports necesarios; script de imports guardado en `experimentos/`; evidencia del control del medidor; resultados antes/después de Y1, Y2 y Y3; lista de desviaciones y aspectos no verificados. La salida del agente no constituye aceptación automática: se someterá a la auditoría humana de la plantilla [05-auditoria-ia-s9.md](./05-auditoria-ia-s9.md).
+**Salida esperada:** diff acotado a la reorganización y declaraciones/imports necesarios; script de imports guardado en `experimentos/`; evidencia del control del medidor; resultados antes/después de Y1–Y5; lista de desviaciones y aspectos no verificados. La salida del agente no constituye aceptación automática: se someterá a la auditoría humana de la plantilla [05-auditoria-ia-s9.md](./05-auditoria-ia-s9.md).
 
 **Restricciones:** no inventar código, mediciones, conteos, hashes ni evidencia; no ampliar el alcance; no cambiar criterios después de ver resultados; no ejecutar durante Semana 9; no escribir resultado o veredicto en esta especificación.
 
