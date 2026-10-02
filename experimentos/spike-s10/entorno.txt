@@ -1,0 +1,8 @@
+Fecha: 2026-10-02T17:02:51Z
+Commit base: 887ccf1c634258f9a4a33d64e0a4de99d1c00f10
+SO: Ubuntu 24.04.4 LTS (contenedor Linux, no Windows/WSL2)
+Docker cliente 29.6.2 / servidor 29.6.2
+Docker Compose version v5.3.1
+openjdk version "21.0.11" 2026-04-21
+Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
