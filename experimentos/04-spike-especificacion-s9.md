@@ -118,7 +118,7 @@ La metodología histórica se consulta en [experimentos/01-metodologia-medicion.
 
 ## 7. Plan de auditoría (plantilla previa)
 
-Completar durante la auditoría humana en Semana 10. No hay hallazgos registrados en Semana 9.
+Completar durante la auditoría humana en Semana 10. No hay hallazgos registrados en Semana 9. La auditoría de Semana 10 se registra en [05-auditoria-ia-s9.md §4–§8](./05-auditoria-ia-s9.md).
 
 ### Hallazgos sustantivos
 
@@ -138,8 +138,8 @@ Completar durante la auditoría humana en Semana 10. No hay hallazgos registrado
 
 ## Resultado
 
-Pendiente — se completa en Semana 10
+Registrado en Semana 10 en [06-spike-resultado-s10.md](./06-spike-resultado-s10.md) (ejecución, evidencia, desviaciones y aspectos no verificados). Las secciones anteriores de esta especificación no se modificaron después de conocer el resultado.
 
 ## Veredicto
 
-Pendiente — se completa en Semana 10
+Ver [06-spike-resultado-s10.md §7](./06-spike-resultado-s10.md). La auditoría humana se registra en [05-auditoria-ia-s9.md](./05-auditoria-ia-s9.md).
