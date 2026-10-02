@@ -10,7 +10,7 @@
 |---|---|
 | Fecha de especificación | 2026-10-01 (versión inicial, `8a2a001`); completada 2026-10-02 (`99269dd`, `c16cd03`) |
 | Fecha de auditoría | 2026-10-02 |
-| Integrante(s) que redactan y firman este EDAV | Charry Ríos Daniel Estiven |
+| Integrante(s) que redactan y firman este EDAV | Charry Ríos Daniel Estiven Kevin Steven Torres Caro|
 | Herramienta/agente delegado | Claude Code (Anthropic) |
 | Modelo/versión, si aplica | Claude Code (Anthropic); el identificador concreto del modelo no se registra en el repositorio |
 | Rama de trabajo | `spike/fronteras-modulares-s10` (control de Y2: `spike/control-y2-descartable`, no se integra) |
@@ -118,7 +118,7 @@ Veredicto propuesto por el agente: hipótesis soportada en las condiciones regis
 | Cálculo de la métrica frente al umbral predefinido | Y4 y Y5 con el mismo script | Y4 0% → 100%; Y5 1 → 0 | Hecho |
 | Suite de pruebas existente | `mvn -B clean test` ×3 antes y ×3 después, BD limpia | `spike-s10/antes/y1-corrida-*.log`, `spike-s10/despues/y1-corrida-*.log`: 2/2 en todas | Hecho |
 | Comportamiento observable de endpoints | `experimentos/spike-s10/medir_y3.sh` (S1–S3 ×3) | `spike-s10/y3-comparacion.txt`: 9/9 iguales | Hecho |
-| Revisión humana del diff | `git diff -M -U0 887ccf1 1e522df -- app` filtrado a líneas que no son `package`/`import` | `spike-s10/alcance-diff.txt`: 8 archivos, ninguna línea fuera de `package`/`import`; aceptado por Charry Ríos Daniel Estiven sobre esta evidencia | Hecho |
+| Revisión humana del diff | `git diff -M -U0 887ccf1 1e522df -- app` filtrado a líneas que no son `package`/`import` | `spike-s10/alcance-diff.txt`: 8 archivos, ninguna línea fuera de `package`/`import`; aceptado por Charry Ríos Daniel Estiven y Kevin Steven Torres Caro sobre esta evidencia | Hecho |
 
 ## 7. Qué no se alcanzó a verificar
 
