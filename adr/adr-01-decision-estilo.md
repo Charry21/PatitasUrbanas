@@ -207,6 +207,8 @@ incorporar ArchUnit para refuerzo estructural automático.
 - `dossier/16-borrador-decision-estilo-s7.md`
 - `adr/adr-02-modularidad.md`
 - `docs/08-decision-estilo-arquitectonico.md`
+- `experimentos/04-spike-especificacion-s9.md` — especificación del spike que pone a prueba esta decisión (Semana 9; ejecución, resultado y veredicto en Semana 10).
+- `experimentos/05-auditoria-ia-s9.md` — EDAV 2 del trabajo delegado en el spike.
 
 ---
 
