@@ -5,10 +5,15 @@
 
 ## Estado
 
-**Propuesta** — pendiente de veredicto del mini-comité (Semana 8).
+**Ajustada** — veredicto del mini-comité de Semana 8 (2026-09-18).
+Evidencia: `dossier/evidencia-comite-semana8.md`.
 
-Veredicto del comité: _pendiente_ (confirmada / ajustada /
-reconsiderada)
+Condición registrada por el comité: definir y documentar cifrado en
+tránsito hacia el proveedor externo y un mecanismo explícito de
+autenticación entre el monolito y el microservicio de notificaciones,
+antes de integrar el proveedor en un ambiente con datos reales.
+
+Historial: Propuesta (Semana 7, 2026-09-13) → Ajustada (Semana 8).
 
 ---
 
@@ -207,6 +212,8 @@ incorporar ArchUnit para refuerzo estructural automático.
 - `dossier/16-borrador-decision-estilo-s7.md`
 - `adr/adr-02-modularidad.md`
 - `docs/08-decision-estilo-arquitectonico.md`
+- `experimentos/04-spike-especificacion-s9.md` — especificación del spike que pone a prueba esta decisión (Semana 9; ejecución, resultado y veredicto en Semana 10).
+- `experimentos/05-auditoria-ia-s9.md` — EDAV 2 del trabajo delegado en el spike.
 
 ---
 
