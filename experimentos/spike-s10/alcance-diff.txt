@@ -1,0 +1,13 @@
+== git diff --stat -M 887ccf1 1e522df -- app
+ .../api/{controller => adopciones}/AdopcionController.java        | 5 ++---
+ .../api/{service => adopciones}/AdopcionService.java              | 8 +++-----
+ .../api/{repository => adopciones}/EtapaAdopcionRepository.java   | 4 ++--
+ .../{repository => adopciones}/SolicitudAdopcionRepository.java   | 4 ++--
+ .../patitasurbanas/api/{ => adopciones}/model/EtapaAdopcion.java  | 2 +-
+ .../api/{ => adopciones}/model/SolicitudAdopcion.java             | 2 +-
+ .../api/{controller => mascotas}/MascotaController.java           | 2 +-
+ .../api/controller/AdopcionControllerRollbackIntegrationTest.java | 6 +++---
+ 8 files changed, 15 insertions(+), 18 deletions(-)
+
+== archivos fuera de alcance modificados (pom.xml, application*.properties, docker-compose.yml, Dockerfile):
+  (vacío = ninguno)
