@@ -10,7 +10,7 @@
 |---|---|
 | Fecha de especificación | 2026-10-01 (versión inicial, `8a2a001`); completada 2026-10-02 (`99269dd`, `c16cd03`) |
 | Fecha de auditoría | 2026-10-02 |
-| Integrante(s) que redactan y firman este EDAV | Charry Ríos Daniel Estiven Kevin Steven Torres Caro|
+| Integrante(s) que redactan y firman este EDAV | Charry Ríos Daniel Estiven | Kevin Steven Torres Caro|
 | Herramienta/agente delegado | Claude Code (Anthropic) |
 | Modelo/versión, si aplica | Claude Code (Anthropic); el identificador concreto del modelo no se registra en el repositorio |
 | Rama de trabajo | `spike/fronteras-modulares-s10` (control de Y2: `spike/control-y2-descartable`, no se integra) |
@@ -134,6 +134,6 @@ Se integra a `main` mediante el PR #49 todo el contenido de la rama `spike/front
 
 Declaro que revisé el resultado entregado por el agente y las decisiones de esta auditoría, y que estoy dispuesto a defender el resultado integrado.
 
-Nombre(s): Charry Ríos Daniel Estiven
+Nombre(s): Charry Ríos Daniel Estiven y Kevin Steven Torres Caro
 
 Fecha: 2026-10-02
