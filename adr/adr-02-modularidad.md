@@ -284,6 +284,8 @@ public class ReglasModularesTest {
 - `adr/adr-01-decision-estilo.md`
 - `dossier/14-comparacion-estilos-s7.md`
 - `dossier/15-diseno-modular-s7.md`
+- `experimentos/04-spike-especificacion-s9.md` — especificación del spike que pone a prueba esta decisión (Semana 9; ejecución, resultado y veredicto en Semana 10).
+- `experimentos/05-auditoria-ia-s9.md` — EDAV 2 del trabajo delegado en el spike.
 
 ---
 
