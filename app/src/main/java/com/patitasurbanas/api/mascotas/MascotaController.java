@@ -1,5 +1,8 @@
 package com.patitasurbanas.api.mascotas;
 
+// CONTROL Y2: import prohibido inyectado a propósito (mascotas -> repositorio interno de adopciones). No se integra.
+import com.patitasurbanas.api.repository.SolicitudAdopcionRepository;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
