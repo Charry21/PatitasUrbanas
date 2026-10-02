@@ -6,7 +6,7 @@
 
 **Decisión:** probar ADR-01 (monolito modular con fronteras por paquete) y las reglas de dependencia de ADR-02.
 
-La especificación se limita a probar la reorganización estructural prevista por ADR-01. Las reglas de dependencia se describen en [ADR-02](../adr/adr-02-modularidad.md), que permanece en propuesta; esta especificación no cambia el estado ni el veredicto de ningún ADR.
+La especificación se limita a probar la reorganización estructural prevista por ADR-01. Las reglas de dependencia se describen en [ADR-02](../adr/adr-02-modularidad.md), en estado Ajustada tras el mini-comité de Semana 8; esta especificación no cambia el estado ni el veredicto de ningún ADR.
 
 ## 2. Hipótesis numérica y falsable
 
