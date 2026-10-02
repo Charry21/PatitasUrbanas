@@ -1,4 +1,4 @@
-package com.patitasurbanas.api.model;
+package com.patitasurbanas.api.adopciones.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

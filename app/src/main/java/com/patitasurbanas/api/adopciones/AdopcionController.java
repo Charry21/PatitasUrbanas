@@ -1,7 +1,6 @@
-package com.patitasurbanas.api.controller;
+package com.patitasurbanas.api.adopciones;
 
-import com.patitasurbanas.api.model.SolicitudAdopcion;
-import com.patitasurbanas.api.service.AdopcionService;
+import com.patitasurbanas.api.adopciones.model.SolicitudAdopcion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;

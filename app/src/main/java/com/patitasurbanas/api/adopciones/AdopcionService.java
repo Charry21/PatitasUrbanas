@@ -1,9 +1,7 @@
-package com.patitasurbanas.api.service;
+package com.patitasurbanas.api.adopciones;
 
-import com.patitasurbanas.api.model.EtapaAdopcion;
-import com.patitasurbanas.api.model.SolicitudAdopcion;
-import com.patitasurbanas.api.repository.EtapaAdopcionRepository;
-import com.patitasurbanas.api.repository.SolicitudAdopcionRepository;
+import com.patitasurbanas.api.adopciones.model.EtapaAdopcion;
+import com.patitasurbanas.api.adopciones.model.SolicitudAdopcion;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
