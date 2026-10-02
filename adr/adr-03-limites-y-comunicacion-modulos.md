@@ -5,13 +5,24 @@
 
 ## Estado
 
-**Propuesta** — pendiente del resultado del spike de Semanas 9–10.
+**Aceptada** (Semana 10, 2026-10-02):
+
+- **Decisión 1 (límites de módulo)** y **Decisión 2 (API pública):**
+  aceptadas. El spike soporta la hipótesis con las cinco métricas
+  dentro del umbral predefinido (ver "Resultado del spike").
+- **Decisión 3 (comunicación síncrona en proceso):** aceptada como
+  vigente con condición de revisión. El spike no la evalúa porque no
+  existe comunicación entre módulos; la revisión de casos de uso y la
+  evaluación de CQRS y consistencia eventual
+  (`dossier/17-cqrs-consistencia-eventual-s10.md`) no encuentran
+  ninguna necesidad que justifique la comunicación asíncrona.
 
 Especificación del spike (committeada antes de ejecutar):
 `experimentos/04-spike-especificacion-s9.md`.
+Resultado y veredicto del spike: `experimentos/06-spike-resultado-s10.md`.
 
-Veredicto del spike: _pendiente — se registra en Semana 10_
-(confirmada / ajustada / reconsiderada).
+Veredicto del spike: **hipótesis soportada** (confirmada), sujeto a la
+auditoría humana de `experimentos/05-auditoria-ia-s9.md`.
 
 ---
 
@@ -161,6 +172,55 @@ registrar ese enlace y el veredicto.
 
 ---
 
+## Resultado del spike (Semana 10)
+
+Fuente: `experimentos/06-spike-resultado-s10.md` (evidencia original en
+`experimentos/spike-s10/`). Rama de ejecución
+`spike/fronteras-modulares-s10` desde `887ccf1`; reorganización en el
+commit `1e522df`.
+
+| Decisión | Métrica | Base | Después | Umbral | Resultado |
+|---|---|---|---|---|---|
+| 1 — Límites de módulo | Y4 | 0/7 (0%) | 7/7 (100%) | 100% | Cumple |
+| 1 — Límites de módulo | Y5 | 1 | 0 | 0 | Cumple |
+| 1 — Reglas de ADR-02 | Y2 | 0 | 0 | 0 | Cumple (medidor validado con un import inyectado: Y2 = 1) |
+| 2 — API pública | Y3 | — | 0 diferencias (9/9) | 0 | Cumple |
+| 2 — API pública | Y1 | 2/2 tests | 2/2 tests (3/3 corridas) | 100% | Cumple |
+
+**Contraste con las decisiones:**
+
+- **Decisión 1:** la estructura de paquetes refleja los límites
+  declarados (`adopciones/`, `adopciones/model/`, `mascotas/`) y ningún
+  paquete mezcla dominios. La parte de "datos propios" (cada tabla con
+  un único módulo dueño) no la mide el spike; se mantiene porque ninguna
+  clase fuera de `adopciones/` accede a las tablas de adopciones.
+- **Decisión 2:** los contratos HTTP de S1–S3 no cambian y ningún
+  módulo importa repositorios o modelos de otro. El spike no cubre
+  `POST /api/adopciones/test-fallo` fuera de su test ni entradas no
+  válidas.
+- **Decisión 3:** sin evidencia nueva del spike. Revisada contra los
+  casos de uso reales: las únicas operaciones son
+  `POST /api/adopciones` (atómica, TRX-02), `POST /api/adopciones/test-fallo`
+  y `GET /api/mascotas/buscar` (simulado). Ninguna invoca a otro módulo
+  ni tiene efectos secundarios, así que la Alternativa A sigue siendo
+  suficiente.
+
+**Alternativas tras el spike:**
+
+| Alternativa | Estado | Por qué |
+|---|---|---|
+| Decisión 3 — A: síncrona en proceso | Se mantiene | Sin llamadas entre módulos; preserva la atomicidad de TRX-02 |
+| Decisión 3 — B: eventos en proceso | Sigue aplazada | Candidata para notificaciones futuras (`dossier/17`, §4.2) |
+| Decisión 3 — C: broker externo | Sigue descartada | Viola DA-03; ningún driver la justifica |
+| ArchUnit para reforzar fronteras (ADR-02, Alternativa B) | Sigue sin adoptarse | Y2 = 0 sin él; el script del spike puede reutilizarse como verificación manual en PR |
+
+**Desviaciones y límites** (detalle en `06-spike-resultado-s10.md` §5–§6):
+ejecución en Linux con Maven local, no en Windows/WSL2; no se construyó
+la imagen Docker de la API; Y2 no analiza referencias dentro del mismo
+paquete. Ninguna afecta a los criterios de confirmación.
+
+---
+
 ## Consecuencias
 
 ### Positivas
@@ -170,6 +230,9 @@ registrar ese enlace y el veredicto.
 - Los contratos HTTP quedan declarados como estables y verificables.
 - No se agrega infraestructura (DA-03).
 - La integridad transaccional de TRX-02 se mantiene sin compensaciones.
+- **Verificado por el spike:** la reorganización se hizo cambiando solo
+  declaraciones `package`/`import` (8 archivos) y sin coste funcional
+  observable (Y1 = 100%, Y3 = 0).
 
 ### Negativas
 
@@ -181,6 +244,12 @@ registrar ese enlace y el veredicto.
   cumplimiento futuro.
 - `mascotas/` y `veterinarias/` tienen límites declarados pero casi
   sin código; sus APIs públicas se definirán cuando exista la lógica.
+- **Observado en el spike:** `shared/`, `config/` y `veterinarias/` no
+  existen como paquetes porque no tienen clases; se crearán con la
+  primera clase que les pertenezca.
+- **Observado en el spike:** el test de rollback quedó en el paquete de
+  test `api.controller`, que ya no existe en producción (hallazgo S1 de
+  la auditoría).
 
 ---
 
@@ -213,9 +282,10 @@ nada de este ADR.
 
 | Supuesto | Cómo se verifica |
 |---|---|
-| La reorganización por límites de módulo no cambia los contratos HTTP | Spike, métrica Y3 |
-| Los límites declarados se pueden materializar sin mezclar dominios en un paquete | Spike, métricas Y4 e Y5 |
-| Ningún flujo actual necesita comunicación asíncrona | Revisión de los casos de uso al agregar cada módulo nuevo |
+| La reorganización por límites de módulo no cambia los contratos HTTP | Spike, métrica Y3 — **verificado** (0 diferencias en S1–S3) |
+| Los límites declarados se pueden materializar sin mezclar dominios en un paquete | Spike, métricas Y4 e Y5 — **verificado** (100% y 0) |
+| Ningún flujo actual necesita comunicación asíncrona | Revisión de los casos de uso al agregar cada módulo nuevo — **revisado en Semana 10** (`dossier/17`) |
+| Ningún flujo actual necesita CQRS | `dossier/17-cqrs-consistencia-eventual-s10.md` §3 — **revisado en Semana 10** |
 
 **Condición de revisión:** si aparece un caso de uso entre módulos
 que no deba bloquear la operación principal (por ejemplo,
@@ -234,9 +304,21 @@ mini-comité de Semana 8.
 - `dossier/evidencia-comite-semana8.md`
 - `experimentos/04-spike-especificacion-s9.md` — especificación del spike que pone a prueba este ADR.
 - `experimentos/05-auditoria-ia-s9.md` — EDAV 2 del trabajo delegado en el spike.
+- `experimentos/06-spike-resultado-s10.md` — resultado, desviaciones y veredicto del spike.
+- `experimentos/spike-s10/` — scripts y salidas originales de las mediciones.
+- `dossier/17-cqrs-consistencia-eventual-s10.md` — evaluación de CQRS y consistencia eventual.
 
 ---
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Fecha: 2026-10-02*
-*Semana 9 · Módulo 5 · Arquitectura de Software*
+*Semanas 9–10 · Módulo 5 · Arquitectura de Software*
+
+---
+
+## Historial de cambios
+
+| Fecha | Semana | Commit | Cambio |
+|---|---|---|---|
+| 2026-10-02 | 9 | `403d7b5` | Creación en estado Propuesta, antes de ejecutar el spike |
+| 2026-10-02 | 10 | (este commit) | Resultado del spike; estado Aceptada; alternativas, consecuencias y supuestos actualizados; enlace a la evaluación de CQRS y consistencia eventual |
