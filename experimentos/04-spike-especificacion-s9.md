@@ -6,6 +6,8 @@
 
 **Decisión:** probar ADR-01 (monolito modular con fronteras por paquete) y las reglas de dependencia de ADR-02.
 
+**ADR del módulo que referencia este spike:** [ADR-03 — Límites de Módulo, API Pública y Comunicación entre Módulos](../adr/adr-03-limites-y-comunicacion-modulos.md) (Propuesta). El spike evalúa sus Decisiones 1 (límites de módulo) y 2 (API pública sin cambios); la tabla de correspondencia entre decisiones y métricas está en ese ADR. El resultado y el veredicto se enlazarán desde ADR-03 en Semana 10.
+
 La especificación se limita a probar la reorganización estructural prevista por ADR-01. Las reglas de dependencia se describen en [ADR-02](../adr/adr-02-modularidad.md), en estado Ajustada tras el mini-comité de Semana 8; esta especificación no cambia el estado ni el veredicto de ningún ADR.
 
 ## 2. Hipótesis numérica y falsable
