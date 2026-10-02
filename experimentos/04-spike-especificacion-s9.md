@@ -53,13 +53,27 @@ La especificación se limita a probar la reorganización estructural prevista po
 
 ## 5. Condiciones de medición
 
-- **Commit base:** [COMPLETAR]. Debe registrarse el hash real del commit usado al ejecutar el spike; no se fija un hash histórico como sustituto.
-- **Entorno conocido por la documentación:** Windows con Docker Desktop (WSL2); Java 21; Spring Boot 3.3.4; PostgreSQL 16; Docker Compose. La versión exacta de cada componente en la ejecución del spike: [COMPLETAR].
+- **Commit base:** `887ccf1` (rama `main`, merge del PR #45 que integra esta especificación). El último commit que modificó `app/` es `0a243b0` (2026-09-12); el código de `app/` en `887ccf1` es el estado base del spike. La rama de ejecución del spike se crea desde este commit. Si al ejecutar se parte de un commit posterior de `main`, se registra su hash y se demuestra con `git diff --stat 887ccf1 <hash> -- app` (salida vacía) que `app/` no cambió; si cambió, el spike no se ejecuta hasta actualizar esta especificación en un commit propio.
+- **Entorno conocido por la documentación:** Windows con Docker Desktop (WSL2); Java 21; Spring Boot 3.3.4; PostgreSQL 16; Docker Compose. Versiones fijadas en el repositorio en el commit base:
+  - Java: 21 (`<java.version>21</java.version>` en `app/pom.xml`).
+  - Spring Boot: 3.3.4 (`spring-boot-starter-parent` en `app/pom.xml`).
+  - Imagen de compilación: `maven:3.9.9-eclipse-temurin-21`; imagen de ejecución: `eclipse-temurin:21-jre` (`app/Dockerfile`).
+  - PostgreSQL: imagen `postgres:16` (`docker-compose.yml`), puerto host `5433`.
+  - La etiqueta `postgres:16` y la versión de Docker no fijan un parche concreto; por eso, en cada ejecución se registra la salida de `docker version`, `docker compose version`, `docker exec patitas_urbanas_db psql -U admin -d patitas_urbanas -c "SELECT version();"` y `docker run --rm maven:3.9.9-eclipse-temurin-21 mvn -v`. Las mismas versiones deben usarse antes y después; si alguna difiere, se registra como desviación.
 - **Comparación:** medir Y1, Y2 y Y3 tanto antes como después, usando el mismo conjunto de tests, script y procedimiento de solicitud/comparación.
-- **Repeticiones y protocolo exacto de medición:** [COMPLETAR antes de ejecutar]. No se fija un número no definido por el equipo. No se medirán tiempos de respuesta ni rendimiento; por tanto, warm-up de carga no es una métrica del spike.
+- **Repeticiones y protocolo exacto de medición:** las tres métricas son deterministas (resultado de tests, conteo estático de imports, código HTTP/estructura JSON), así que las repeticiones sirven para descartar resultados inestables, no para promediar:
+  1. Antes de cada bloque de medición: `docker compose down -v` y `docker compose up -d postgres_db`, esperando a que el healthcheck reporte `healthy` (base de datos limpia; además `ddl-auto=create-drop` recrea el esquema).
+  2. **Y1:** 3 ejecuciones de la suite completa antes y 3 después, con `mvn -B clean test` desde `app/`. Un test cuenta como "pasaba antes" solo si pasa en las 3 ejecuciones previas. Si un test da resultados distintos entre ejecuciones del mismo estado, se registra como inestable y se excluye de Y1 de forma explícita, sin cambiar el criterio.
+  3. **Y2:** 1 ejecución del script antes y 1 después (análisis estático determinista), más 1 ejecución en la rama descartable de control.
+  4. **Y3:** con la aplicación levantada (`mvn spring-boot:run` desde `app/`, puerto 3000), cada solicitud se envía 3 veces antes y 3 después. Las 3 respuestas de un mismo estado deben coincidir entre sí; si no coinciden, se registra como desviación. No se medirán tiempos de respuesta ni rendimiento; por tanto, warm-up de carga no es una métrica del spike.
 - **Y1:** conservar la salida de la suite completa antes y después e identificar explícitamente qué tests pasaban antes; incluir `AdopcionControllerRollbackIntegrationTest`.
 - **Y2:** el agente debe crear y ejecutar primero el script sobre el estado base, usando el mapeo de clases de `dossier/15-diseno-modular-s7.md` para asignar módulos antes de la reorganización; después debe aplicar el mismo criterio a los paquetes reorganizados. Conservar el script, las salidas antes/después, la lista de imports contabilizados y la evidencia del control en rama descartable. Si el control falla, declarar inválida Y2.
-- **Y3:** comparar código HTTP y estructura JSON de `POST /api/adopciones` y `GET /api/mascotas/buscar` antes y después, ignorando únicamente `id` y fecha. Usar solicitudes equivalentes y registrar entradas, procedimiento de comparación y evidencia: [COMPLETAR antes de ejecutar].
+- **Y3:** comparar código HTTP y estructura JSON de `POST /api/adopciones` y `GET /api/mascotas/buscar` antes y después, ignorando únicamente `id` y fecha. Solicitudes fijadas (las mismas antes y después):
+  - **S1:** `curl -s -i -X POST "http://localhost:3000/api/adopciones"` (sin parámetros; usa los valores por defecto `estado=PENDIENTE`, `nombreEtapa=SOLICITUD_RECIBIDA`). Respuesta esperada en el estado base: `201 Created` con las claves `idSolicitud`, `estado`, `etapaInicial`.
+  - **S2:** `curl -s -i -X POST "http://localhost:3000/api/adopciones?estado=PENDIENTE&nombreEtapa=SOLICITUD_RECIBIDA"` (parámetros explícitos).
+  - **S3:** `curl -s -i "http://localhost:3000/api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5"` (mismos parámetros que `experimentos/escenario-rendimiento.js`).
+
+  Procedimiento de comparación: guardar cada respuesta (código HTTP y cuerpo) en `experimentos/spike-s10/y3-antes/` y `experimentos/spike-s10/y3-despues/`; normalizar el cuerpo eliminando únicamente el campo de identificador (`idSolicitud`) y cualquier campo de fecha, si existiera; ordenar claves (por ejemplo, `jq -S 'del(.idSolicitud)'`) y comparar con `diff`. Se compara: código HTTP, conjunto de claves, tipo de cada valor y valores no excluidos. Y3 = número de solicitudes (S1–S3) con al menos una diferencia; resultado esperado: 0.
 - **Limitaciones reconocidas de antemano:** existen solo dos clases de prueba, por lo que la cobertura de verificación es baja; el endpoint de mascotas es simulado; las reglas aplicables a mascotas son hoy casi vacías porque no existe entidad `Mascota`; las fronteras de ADR-02 se revisan por convención, no por un mecanismo automático en el build. La comparación de respuestas y las pruebas cubren solo los casos ejecutados, no demuestran equivalencia universal.
 
 La metodología histórica se consulta en [experimentos/01-metodologia-medicion.md](./01-metodologia-medicion.md) y la línea base histórica en [experimentos/03-linea-base-semana6.md](./03-linea-base-semana6.md). Ninguna medición de esos documentos constituye el resultado de este spike.
@@ -74,12 +88,12 @@ La metodología histórica se consulta en [experimentos/01-metodologia-medicion.
 
 **Entradas al agente:**
 
-- Este documento y el hash base que se complete antes de la ejecución.
+- Este documento y el hash base `887ccf1` (§5).
 - [ADR-01](../adr/adr-01-decision-estilo.md), [ADR-02](../adr/adr-02-modularidad.md) y [dossier/15](../dossier/15-diseno-modular-s7.md).
 - Árbol de clases Java existente bajo `app/src/main/java/com/patitasurbanas/api/`.
 - Suite completa, incluido `AdopcionControllerRollbackIntegrationTest`.
 - Reglas prohibidas de [ADR-02](../adr/adr-02-modularidad.md).
-- Solicitudes equivalentes y procedimiento de comparación de respuestas: [COMPLETAR antes de ejecutar].
+- Solicitudes equivalentes S1–S3 y procedimiento de comparación de respuestas definidos en §5 (Y3).
 
 **Salida esperada:** diff acotado a la reorganización y declaraciones/imports necesarios; script de imports guardado en `experimentos/`; evidencia del control del medidor; resultados antes/después de Y1, Y2 y Y3; lista de desviaciones y aspectos no verificados. La salida del agente no constituye aceptación automática: se someterá a la auditoría humana de la plantilla [05-auditoria-ia-s9.md](./05-auditoria-ia-s9.md).
 
@@ -103,7 +117,7 @@ Completar durante la auditoría humana en Semana 10. No hay hallazgos registrado
 
 ### No verificado
 
-- [COMPLETAR]
+- Se completa durante la auditoría humana de Semana 10, tras recibir el resultado del agente. No se registran elementos en Semana 9 para no anticipar el resultado.
 
 ## Resultado
 
