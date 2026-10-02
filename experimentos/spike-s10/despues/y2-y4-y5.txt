@@ -1,0 +1,36 @@
+== Clases de producción (paquete actual -> módulo según mapeo)
+  PatitasUrbanasApplication      com.patitasurbanas                            -> - (fuera del mapeo)
+  AdopcionController             com.patitasurbanas.api.adopciones             -> adopciones (publico)
+  AdopcionService                com.patitasurbanas.api.adopciones             -> adopciones (publico)
+  EtapaAdopcionRepository        com.patitasurbanas.api.adopciones             -> adopciones (repositorio)
+  SolicitudAdopcionRepository    com.patitasurbanas.api.adopciones             -> adopciones (repositorio)
+  EtapaAdopcion                  com.patitasurbanas.api.adopciones.model       -> adopciones (modelo)
+  SolicitudAdopcion              com.patitasurbanas.api.adopciones.model       -> adopciones (modelo)
+  MascotaController              com.patitasurbanas.api.mascotas               -> mascotas (publico)
+
+== Y2: imports del proyecto evaluados
+  AdopcionController [adopciones] -> SolicitudAdopcion [adopciones/modelo]: permitido
+  AdopcionService [adopciones] -> EtapaAdopcion [adopciones/modelo]: permitido
+  AdopcionService [adopciones] -> SolicitudAdopcion [adopciones/modelo]: permitido
+  EtapaAdopcionRepository [adopciones] -> EtapaAdopcion [adopciones/modelo]: permitido
+  SolicitudAdopcionRepository [adopciones] -> SolicitudAdopcion [adopciones/modelo]: permitido
+
+Y2 = 0 import(s) prohibido(s)
+
+== Y4: clases del mapeo en su módulo objetivo
+  AdopcionController             com.patitasurbanas.api.adopciones             objetivo=adopciones  SI
+  AdopcionService                com.patitasurbanas.api.adopciones             objetivo=adopciones  SI
+  SolicitudAdopcionRepository    com.patitasurbanas.api.adopciones             objetivo=adopciones  SI
+  EtapaAdopcionRepository        com.patitasurbanas.api.adopciones             objetivo=adopciones  SI
+  SolicitudAdopcion              com.patitasurbanas.api.adopciones.model       objetivo=adopciones  SI
+  EtapaAdopcion                  com.patitasurbanas.api.adopciones.model       objetivo=adopciones  SI
+  MascotaController              com.patitasurbanas.api.mascotas               objetivo=mascotas    SI
+
+Y4 = 7/7 = 100.0%
+
+== Y5: dominios por paquete
+  com.patitasurbanas.api.adopciones             ['adopciones']
+  com.patitasurbanas.api.adopciones.model       ['adopciones']
+  com.patitasurbanas.api.mascotas               ['mascotas']
+
+Y5 = 0 paquete(s) que mezclan dominios
