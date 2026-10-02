@@ -1,0 +1,9 @@
+== listado de clases (control Y4/Y5)
+app/src/main/java/com/patitasurbanas/PatitasUrbanasApplication.java
+app/src/main/java/com/patitasurbanas/api/adopciones/AdopcionController.java
+app/src/main/java/com/patitasurbanas/api/adopciones/AdopcionService.java
+app/src/main/java/com/patitasurbanas/api/adopciones/EtapaAdopcionRepository.java
+app/src/main/java/com/patitasurbanas/api/adopciones/SolicitudAdopcionRepository.java
+app/src/main/java/com/patitasurbanas/api/adopciones/model/EtapaAdopcion.java
+app/src/main/java/com/patitasurbanas/api/adopciones/model/SolicitudAdopcion.java
+app/src/main/java/com/patitasurbanas/api/mascotas/MascotaController.java
