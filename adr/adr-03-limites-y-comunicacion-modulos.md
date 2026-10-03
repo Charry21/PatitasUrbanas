@@ -28,6 +28,13 @@ auditoría humana de `experimentos/05-auditoria-ia-s9.md`.
 
 ## Contexto
 
+**Modelo del dominio (Semana 10):** los límites de este ADR se formalizan
+como bounded contexts en `docs/dominio/subdominios.md`,
+`docs/dominio/responsabilidades-contextos.md` y el Context Map
+`docs/dominio/context-map.puml` (relaciones R1–R5). Adopciones es el
+contexto núcleo; Mascotas y Veterinarias son de soporte; Identidad y
+Notificaciones, genéricos.
+
 ADR-01 adopta el monolito modular y ADR-02 declara las reglas de
 dependencia entre módulos. Ambos quedaron en estado **Ajustada** tras
 el mini-comité de Semana 8. Ninguno de los dos decide:
@@ -295,8 +302,25 @@ mini-comité de Semana 8.
 
 ---
 
+## Cadena de evidencia de la decisión
+
+| Afirmación de este ADR | Artefacto que la respalda |
+|---|---|
+| Los límites de módulo corresponden a responsabilidades de negocio | `docs/dominio/responsabilidades-contextos.md` (qué posee y qué no posee cada contexto) |
+| Los límites se materializan sin coste funcional | Spike 1: Y1 = 100%, Y2 = 0, Y3 = 0, Y4 = 100%, Y5 = 0 (`experimentos/06-spike-resultado-s10.md`, commit `1e522df`) |
+| La API pública es estable y explícita | `docs/integracion/contrato-api.yaml`, respuestas verificadas en `experimentos/spike-s10/contrato/verificacion-endpoints.txt` |
+| Síncrono en proceso para R1–R3; asíncrono solo para R4 | `docs/integracion/sincrono-vs-asincrono.md` |
+| Los eventos se limitan a hechos con consumidor real | `docs/integracion/eventos-candidatos.md` |
+| CQRS y Event Sourcing no se justifican hoy | `docs/integracion/cqrs-event-sourcing.md`, `dossier/17-cqrs-consistencia-eventual-s10.md` |
+| **Supuesto no medido:** el costo de la llamada síncrona R1 es despreciable | Se medirá cuando exista `MascotaService` (condición de revisión) |
+
+---
+
 ## Referencias
 
+- `docs/dominio/subdominios.md`, `docs/dominio/responsabilidades-contextos.md`, `docs/dominio/context-map.puml` — modelo del dominio y Context Map.
+- `docs/integracion/contrato-api.yaml` — contrato de la API pública.
+- `docs/integracion/sincrono-vs-asincrono.md`, `docs/integracion/eventos-candidatos.md`, `docs/integracion/cqrs-event-sourcing.md` — decisiones de integración.
 - `adr/adr-01-decision-estilo.md`
 - `adr/adr-02-modularidad.md`
 - `dossier/14-comparacion-estilos-s7.md`
@@ -321,4 +345,5 @@ mini-comité de Semana 8.
 | Fecha | Semana | Commit | Cambio |
 |---|---|---|---|
 | 2026-10-02 | 9 | `403d7b5` | Creación en estado Propuesta, antes de ejecutar el spike |
-| 2026-10-02 | 10 | (este commit) | Resultado del spike; estado Aceptada; alternativas, consecuencias y supuestos actualizados; enlace a la evaluación de CQRS y consistencia eventual |
+| 2026-10-02 | 10 | `66a38ef` | Resultado del spike; estado Aceptada; alternativas, consecuencias y supuestos actualizados; enlace a la evaluación de CQRS y consistencia eventual |
+| 2026-10-03 | 10 | (este commit) | Contexto y referencias enlazan el modelo del dominio (Context Map), el contrato API y las decisiones de integración; se añade la cadena de evidencia. La decisión y el estado no cambian |
