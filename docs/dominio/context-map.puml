@@ -1,0 +1,32 @@
+@startuml context-map
+' Context Map de Patitas Urbanas — Módulo 5 (Semanas 9-10)
+' Justificación de cada frontera y relación: responsabilidades-contextos.md
+' U = upstream (proveedor), D = downstream (consumidor)
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam rectangle {
+  RoundCorner 15
+}
+left to right direction
+
+rectangle "Adopciones\n<<núcleo>>\n(implementado)\n--\nSolicitudAdopcion\nEtapaAdopcion\nTRX-02" as ADO #FFE9B3
+rectangle "Mascotas\n<<soporte>>\n(parcial)\n--\nMascota\nubicación\ndisponibilidad" as MAS #D6EAF8
+rectangle "Veterinarias\n<<soporte>>\n(planificado)\n--\nveterinaria, servicio, cita" as VET #E8F8F5
+rectangle "Identidad y consentimiento\n<<genérico>>\n(planificado)\n--\nusuario, entidad\nOpt-In Ley 1581" as IDE #F4ECF7
+rectangle "Notificaciones\n<<genérico>>\n(planificado)\n--\nenvío, reintento" as NOT #F2F3F4
+cloud "Servicio de Mapas\n(sistema externo)" as MAPS
+
+MAS --> ADO : R1 [U → D]\n¿mascota disponible?\nsíncrono en proceso (MascotaService)
+IDE --> ADO : R2 [U → D]\n¿adoptante habilitado\ny con Opt-In?\nsíncrono en proceso
+MAS --> VET : R3 [U → D]\ndatos de la mascota\nsíncrono en proceso
+ADO ..> NOT : R4 [publicador → suscriptor]\nSolicitudAdopcionAvanzoDeEtapa\nasíncrono, después del commit
+MAPS ..> MAS : R5\ncapa anticorrupción (ACL)\nen Mascotas
+
+legend right
+  Línea continua: relación síncrona en proceso
+  Línea discontinua: asíncrona o sistema externo
+  Solo Adopciones está implementado; Mascotas tiene
+  un endpoint simulado; el resto está planificado.
+endlegend
+@enduml

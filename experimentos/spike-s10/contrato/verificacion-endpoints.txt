@@ -1,0 +1,51 @@
+### POST /api/adopciones
+HTTP/1.1 201 
+Content-Type: application/json
+
+{"estado":"PENDIENTE","idSolicitud":1,"etapaInicial":"SOLICITUD_RECIBIDA"}
+
+### POST /api/adopciones?estado=APROBADA&nombreEtapa=ENTREVISTA
+HTTP/1.1 201 
+Content-Type: application/json
+
+{"estado":"APROBADA","idSolicitud":2,"etapaInicial":"ENTREVISTA"}
+
+### POST /api/adopciones/test-fallo
+HTTP/1.1 500 
+Content-Type: application/json
+
+{"error":"Fallo simulado: rollback esperado"}
+
+### GET /api/adopciones
+HTTP/1.1 405 
+Allow: POST
+Content-Type: application/json
+
+{"timestamp":"2026-10-03T00:52:22.830+00:00","status":405,"error":"Method Not Allowed","path":"/api/adopciones"}
+
+### GET /api/mascotas/buscar?lat=4.6&lng=-74.08&radio=5
+HTTP/1.1 200 
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 61
+
+{"status":"success", "mensaje":"Endpoint geoespacial activo"}
+
+### GET /api/mascotas/buscar?lat=4.6
+HTTP/1.1 400 
+Content-Type: application/json
+
+{"timestamp":"2026-10-03T00:52:22.881+00:00","status":400,"error":"Bad Request","path":"/api/mascotas/buscar"}
+
+### GET /api/mascotas/buscar?lat=abc&lng=1&radio=1
+HTTP/1.1 400 
+Content-Type: application/json
+
+{"timestamp":"2026-10-03T00:52:22.896+00:00","status":400,"error":"Bad Request","path":"/api/mascotas/buscar"}
+
+### POST /api/mascotas/buscar?lat=1&lng=1&radio=1
+HTTP/1.1 405 
+Allow: GET
+Content-Type: application/json
+
+{"timestamp":"2026-10-03T00:52:22.909+00:00","status":405,"error":"Method Not Allowed","path":"/api/mascotas/buscar"}
+
