@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Patitas Urbanas — API pública de los contextos Adopciones y Mascotas
+  version: "0.1.0"
+  description: |
+    Contrato de integración de la API HTTP tal como existe en `main`
+    (Módulo 5, Semana 10). Cada respuesta documentada se verificó contra la
+    aplicación en ejecución; evidencia en
+    `experimentos/spike-s10/contrato/verificacion-endpoints.txt`.
+
+    Proveedores y consumidores:
+    - Proveedor `Adopciones` → consumidores: clientes web/móvil de fundaciones (planificados).
+    - Proveedor `Mascotas` → consumidores: cliente móvil de adoptantes (planificado).
+
+    Versionado: las rutas actuales **no llevan versión** (`/api/...`). No hay
+    consumidores externos todavía, así que hoy no se rompe a nadie. Condición de
+    revisión: antes de publicar el primer cliente se introduce `/api/v1/...`
+    y se mantiene la ruta sin versión como alias durante una iteración.
+
+    Lo que este contrato NO permite (protege las responsabilidades del proveedor):
+    - Desde Mascotas: crear, modificar o consultar solicitudes de adopción.
+    - Desde Adopciones: modificar datos o disponibilidad de una mascota.
+    - A ningún consumidor: escribir directamente en `solicitud_adopcion` o
+      `etapas_adopcion`, ni crear una solicitud sin su etapa inicial (TRX-02).
+    - Consultar solicitudes existentes: no hay endpoint de lectura (GET → 405).
+servers:
+  - url: http://localhost:3000
+    description: Entorno local (docker compose + mvn spring-boot:run)
+tags:
+  - name: adopciones
+    description: Contexto núcleo. Proveedor de la operación TRX-02.
+  - name: mascotas
+    description: Contexto de soporte. Búsqueda geoespacial (respuesta simulada).
+paths:
+  /api/adopciones:
+    post:
+      tags: [adopciones]
+      operationId: crearSolicitudAdopcion
+      summary: Crea una solicitud de adopción y su etapa inicial en una sola transacción (TRX-02).
+      description: |
+        Garantía: se crean la solicitud y su etapa inicial, o ninguna de las dos
+        (rollback verificado por `AdopcionControllerRollbackIntegrationTest`).
+        Limitación conocida: `estado` y `nombreEtapa` son texto libre; el
+        proveedor no valida valores permitidos.
+      parameters:
+        - name: estado
+          in: query
+          required: false
+          schema: { type: string, default: PENDIENTE }
+        - name: nombreEtapa
+          in: query
+          required: false
+          schema: { type: string, default: SOLICITUD_RECIBIDA }
+      responses:
+        "201":
+          description: Solicitud y etapa inicial creadas.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SolicitudCreada" }
+              example: { idSolicitud: 1, estado: PENDIENTE, etapaInicial: SOLICITUD_RECIBIDA }
+        "405":
+          description: Método no soportado (por ejemplo, GET). No existe lectura de solicitudes.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorSpring" }
+        "500":
+          description: "Error interno; la transacción se revierte completa. No verificado en la corrida de contrato (no se puede provocar sin modificar el código); el cuerpo es el de error por defecto de Spring."
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorSpring" }
+  /api/adopciones/test-fallo:
+    post:
+      tags: [adopciones]
+      operationId: crearSolicitudConFalloSimulado
+      summary: "Solo pruebas: fuerza un fallo entre los dos inserts para verificar el rollback de TRX-02."
+      description: |
+        No forma parte del contrato para clientes; existe para la evidencia de
+        QA-02. Condición de revisión: retirar o proteger antes de exponer la API.
+      responses:
+        "500":
+          description: Fallo simulado; no queda ninguna fila nueva.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorFalloSimulado" }
+              example: { error: "Fallo simulado: rollback esperado" }
+  /api/mascotas/buscar:
+    get:
+      tags: [mascotas]
+      operationId: buscarMascotasCercanas
+      summary: Búsqueda de mascotas por cercanía (respuesta simulada).
+      description: |
+        Respuesta estática: no consulta la base de datos (no existe la entidad
+        `Mascota`). Desviación verificada: el cuerpo tiene forma JSON pero se
+        envía con `Content-Type: text/plain;charset=UTF-8`. Un consumidor que
+        exija `application/json` fallará; corregirlo es parte de implementar el
+        contexto Mascotas.
+      parameters:
+        - { name: lat, in: query, required: true, schema: { type: number, format: double } }
+        - { name: lng, in: query, required: true, schema: { type: number, format: double } }
+        - { name: radio, in: query, required: true, schema: { type: number, format: double } }
+      responses:
+        "200":
+          description: Respuesta simulada.
+          content:
+            text/plain:
+              schema: { $ref: "#/components/schemas/BusquedaSimulada" }
+              example: '{"status":"success", "mensaje":"Endpoint geoespacial activo"}'
+        "400":
+          description: Falta un parámetro obligatorio o no es numérico.
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorSpring" }
+        "405":
+          description: Método no soportado (solo GET).
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorSpring" }
+components:
+  schemas:
+    SolicitudCreada:
+      type: object
+      required: [idSolicitud, estado, etapaInicial]
+      properties:
+        idSolicitud: { type: integer, format: int64, description: Identificador generado por la base de datos }
+        estado: { type: string }
+        etapaInicial: { type: string }
+    BusquedaSimulada:
+      type: object
+      properties:
+        status: { type: string, example: success }
+        mensaje: { type: string }
+    ErrorFalloSimulado:
+      type: object
+      properties:
+        error: { type: string }
+    ErrorSpring:
+      description: Cuerpo de error por defecto de Spring Boot.
+      type: object
+      properties:
+        timestamp: { type: string, format: date-time }
+        status: { type: integer }
+        error: { type: string }
+        path: { type: string }
