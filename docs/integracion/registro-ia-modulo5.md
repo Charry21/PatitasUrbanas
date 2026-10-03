@@ -18,15 +18,15 @@ por qué. Una propuesta no forma parte del dossier hasta que el equipo decide.
 
 | # | Propuesta de la IA | Dónde | Decisión del equipo | Razón |
 |---|---|---|---|---|
-| IA-1 | Cinco contextos: Adopciones (núcleo), Mascotas y Veterinarias (soporte), Identidad y Notificaciones (genéricos) | `docs/dominio/subdominios.md` | [Equipo] | |
-| IA-2 | No crear contextos para "Etapas de adopción", "Búsqueda geoespacial" ni "Fundaciones" | `docs/dominio/subdominios.md` §3 | [Equipo] | |
-| IA-3 | Relaciones R1–R5 con Mascotas e Identidad como proveedores de Adopciones y ACL frente al Servicio de Mapas | `docs/dominio/responsabilidades-contextos.md` | [Equipo] | |
-| IA-4 | R1 (disponibilidad de mascota) síncrona en proceso, no por eventos | `docs/integracion/sincrono-vs-asincrono.md` | [Equipo] | |
-| IA-5 | Introducir `/api/v1` antes del primer cliente, no ahora | `docs/integracion/contrato-api.yaml` | [Equipo] | |
-| IA-6 | Eventos aceptados: `SolicitudAdopcionCreada`, `SolicitudAdopcionAvanzoDeEtapa`, `AdopcionConcretada`, `ConsentimientoRevocado` | `docs/integracion/eventos-candidatos.md` §1 | [Equipo] | |
-| IA-7 | Eventos rechazados: interacciones de interfaz, consultas, CRUD técnico y los que romperían QA-02 | `docs/integracion/eventos-candidatos.md` §2 | [Equipo] | |
-| IA-8 | No adoptar CQRS ni Event Sourcing | `docs/integracion/cqrs-event-sourcing.md` | [Equipo] | |
-| IA-9 | No introducir mensajería ni broker en ningún flujo actual | `docs/integracion/sincrono-vs-asincrono.md`, ADR-03 | [Equipo] | |
+| IA-1 | Cinco contextos: Adopciones (núcleo), Mascotas y Veterinarias (soporte), Identidad y Notificaciones (genéricos) | `docs/dominio/subdominios.md` | Aceptado | Cada contexto tiene responsabilidad y datos propios distintos; coincide con los módulos de dossier/15 y ADR-03 |
+| IA-2 | No crear contextos para "Etapas de adopción", "Búsqueda geoespacial" ni "Fundaciones" | `docs/dominio/subdominios.md` §3 | Aceptado | Separarlos rompería TRX-02 o no aportaría conceptos propios |
+| IA-3 | Relaciones R1–R5 con Mascotas e Identidad como proveedores de Adopciones y ACL frente al Servicio de Mapas | `docs/dominio/responsabilidades-contextos.md` | Aceptado | Refleja quién necesita qué dato y protege los datos personales en Identidad |
+| IA-4 | R1 (disponibilidad de mascota) síncrona en proceso, no por eventos | `docs/integracion/sincrono-vs-asincrono.md` | Aceptado | Una copia desactualizada permitiría asignar dos veces la misma mascota (QA-02) |
+| IA-5 | Introducir `/api/v1` antes del primer cliente, no ahora | `docs/integracion/contrato-api.yaml` | Aceptado | No hay consumidores externos todavía; versionar ahora no protege a nadie |
+| IA-6 | Eventos aceptados: `SolicitudAdopcionCreada`, `SolicitudAdopcionAvanzoDeEtapa`, `AdopcionConcretada`, `ConsentimientoRevocado` | `docs/integracion/eventos-candidatos.md` §1 | Aceptado | Son hechos del dominio con un consumidor concreto que puede enterarse después |
+| IA-7 | Eventos rechazados: interacciones de interfaz, consultas, CRUD técnico y los que romperían QA-02 | `docs/integracion/eventos-candidatos.md` §2 | Aceptado | No son hechos del dominio o romperían QA-02 |
+| IA-8 | No adoptar CQRS ni Event Sourcing | `docs/integracion/cqrs-event-sourcing.md` | Aceptado | Ninguno resuelve un problema medido y su costo es desproporcionado para el equipo (DA-03) |
+| IA-9 | No introducir mensajería ni broker en ningún flujo actual | `docs/integracion/sincrono-vs-asincrono.md`, ADR-03 | Aceptado | Ningún flujo actual lo necesita; agregaría infraestructura (DA-03) |
 
 ---
 
@@ -46,4 +46,4 @@ por qué. Una propuesta no forma parte del dossier hasta que el equipo decide.
 
 ---
 
-Revisado por: ______________________________ · Fecha: ____________
+Revisado por: Charry Ríos Daniel Estiven · Fecha: 2026-10-03
