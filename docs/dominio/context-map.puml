@@ -18,7 +18,7 @@ rectangle "Atención veterinaria\n<<soporte>>\n(planificado)\n--\nhistorial clí
 rectangle "Notificaciones\n(fuera del modelo:\nconsumidor futuro)" as NOT #FFFFFF;line.dashed
 cloud "Servicio de Mapas\n(sistema externo)" as MAPS
 
-MAS --> ADO : R1 [U → D]\nconsulta: ¿Disponible? · custodio · municipio\ncomando: marcarAdoptada (momento: P8)\nsíncrono en proceso
+MAS --> ADO : R1 [U → D]\nconsulta: ¿Disponible? · custodio · municipio\ncomando: retirarDeDisponibles al aprobar (D10)\nsíncrono en proceso
 IDE --> ADO : R2 [U → D]\nautorización de datos vigente\nrol del que aprueba · municipio\nsíncrono en proceso
 MAS --> VET : R3 [U → D]\nconsulta: datos de la mascota\ncomando: marcarEnTratamiento\nsíncrono en proceso
 IDE --> MAS : R6 [U → D]\ncustodio (participante)\nsíncrono en proceso

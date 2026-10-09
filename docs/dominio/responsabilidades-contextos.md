@@ -69,7 +69,7 @@ síncrona/asíncrona de cada una se justifica en
 
 | # | Relación | Patrón | Qué fluye y en qué dirección | Mecanismo | Estado |
 |---|---|---|---|---|---|
-| R1 | Mascotas → Adopciones | Cliente/Proveedor (Mascotas upstream) | Antes de crear la solicitud, Adopciones pregunta si la mascota está Disponible (D2, D6), quién es su custodio (D4) y en qué municipio está (D8). Cuando la adopción se aprueba o se concreta (el momento exacto está abierto, P8), Adopciones pide a Mascotas `marcarAdoptada(mascotaId)`; Mascotas cambia su propio estado (P5). Mascotas nunca lee solicitudes. | Síncrono en proceso: servicio público `MascotaService` (ADR-02, ADR-03 Decisión 3) | Planificada: hoy Adopciones no recibe `mascotaId` |
+| R1 | Mascotas → Adopciones | Cliente/Proveedor (Mascotas upstream) | Antes de crear la solicitud, Adopciones pregunta si la mascota está Disponible (D2, D6), quién es su custodio (D4) y en qué municipio está (D8). Al aprobar una solicitud, Adopciones pide a Mascotas `retirarDeDisponibles(mascotaId)`; Mascotas cambia su propio estado a Reservada o Adoptada (P8) y la mascota ya no se puede solicitar ni aprobar de nuevo (D10). Mascotas nunca lee solicitudes. | Síncrono en proceso: servicio público `MascotaService` (ADR-02, ADR-03 Decisión 3) | Planificada: hoy Adopciones no recibe `mascotaId` |
 | R2 | Identidad → Adopciones | Cliente/Proveedor (Identidad upstream) | Adopciones pregunta si el adoptante tiene autorización de datos vigente (QA-01, D5), en qué municipio vive (D8) y si quien aprueba tiene rol de custodio (D4). Solo guarda identificadores. | Síncrono en proceso | Planificada |
 | R3 | Mascotas → Atención veterinaria | Cliente/Proveedor (Mascotas upstream) | Atención veterinaria consulta la identidad y el estado de la mascota atendida. Si detecta una enfermedad, pide a Mascotas `marcarEnTratamiento(mascotaId)`; Mascotas cambia su propio estado y la mascota deja de poder solicitarse (D9). | Síncrono en proceso | Planificada |
 | R4 | Adopciones → Notificaciones | Publicador/Suscriptor (Adopciones upstream) | Adopciones publica hechos como `SolicitudAdopcionAvanzoDeEtapa`; un futuro consumidor decide a quién avisar. **Notificaciones está fuera del modelo** (`modelo-dominio.md` §6): la relación se conserva solo como diseño del evento. | Asíncrono: evento después del commit ([`eventos-candidatos.md`](../integracion/eventos-candidatos.md)) | Aplazada (ADR-03, Alternativa B) |
@@ -88,7 +88,7 @@ el consumidor pide un cambio que el proveedor decide y registra; en una
 | Relación | Operación (ofrecida por el proveedor) | Proveedor | Consumidor | Tipo | Qué viaja y hacia dónde |
 |---|---|---|---|---|---|
 | R1 | `consultarDisponibilidad(mascotaId)` | Mascotas | Adopciones | Consulta | Mascotas → Adopciones: estado, custodio, municipio |
-| R1 | `marcarAdoptada(mascotaId)` | Mascotas | Adopciones | Comando | Adopciones → Mascotas: la petición; Mascotas cambia su propio estado |
+| R1 | `retirarDeDisponibles(mascotaId)` | Mascotas | Adopciones | Comando | Adopciones → Mascotas: la petición al aprobar (D10); Mascotas cambia su propio estado |
 | R2 | consultar participante (autorización de datos, rol, municipio) | Identidad | Adopciones | Consulta | Identidad → Adopciones |
 | R3 | `consultarMascota(mascotaId)` | Mascotas | Atención veterinaria | Consulta | Mascotas → Atención veterinaria: identidad y estado de la mascota |
 | R3 | `marcarEnTratamiento(mascotaId)` | Mascotas | Atención veterinaria | Comando | Atención veterinaria → Mascotas: la petición; Mascotas cambia su propio estado (D9) |
@@ -105,7 +105,7 @@ sola flecha.
 | | Qué garantiza | Respaldo |
 |---|---|---|
 | **Demostrado hoy** | Solicitud y etapa inicial se escriben juntas o no se escribe ninguna (TRX-02). Es una garantía **interna de Adopciones** | HECHO: `@Transactional` en `AdopcionService` y `AdopcionControllerRollbackIntegrationTest` (RO3) |
-| **Propuesto, no implementado** | "En la misma transacción" (P5) significa **la misma transacción de base de datos**: `AdopcionService` abre la transacción y `MascotaService.marcarAdoptada` participa en ella (propagación por defecto de Spring). Si `marcarAdoptada` falla, también se revierte el cambio de la solicitud, así que no puede quedar una solicitud aprobada con la mascota Disponible | DECISIÓN técnica. Es posible porque ambos módulos comparten proceso y base de datos (ADR-01). Se verificaría con la métrica Y2 del spike de integración propuesto |
+| **Propuesto, no implementado** | "En la misma transacción" (P5) significa **la misma transacción de base de datos**: `AdopcionService` abre la transacción y `MascotaService.retirarDeDisponibles` participa en ella (propagación por defecto de Spring). Si `retirarDeDisponibles` falla, también se revierte la aprobación, así que no puede quedar una solicitud aprobada con la mascota Disponible | DECISIÓN técnica. Es posible porque ambos módulos comparten proceso y base de datos (ADR-01). Lo pone a prueba el spike de integración (`experimentos/08-spike-integracion-especificacion.md`, Y3) |
 
 Esta garantía depende de que Mascotas siga en el mismo proceso. Si se
 separa, deja de existir una transacción común y habría que usar otro
@@ -136,7 +136,7 @@ flowchart LR
   NOT["Notificaciones<br/>(fuera del modelo)"]
   MAPS[("Servicio de Mapas<br/>externo")]
 
-  MAS -- "R1 · U→D · consulta: ¿Disponible? / comando: marcarAdoptada<br/>síncrono en proceso" --> ADO
+  MAS -- "R1 · U→D · consulta: ¿Disponible? / comando: retirarDeDisponibles<br/>síncrono en proceso" --> ADO
   IDE -- "R2 · U→D · autorización de datos · rol · municipio<br/>síncrono en proceso" --> ADO
   MAS -- "R3 · U→D · consulta: datos / comando: marcarEnTratamiento<br/>síncrono en proceso" --> VET
   IDE -- "R6 · U→D · custodio<br/>síncrono en proceso" --> MAS
