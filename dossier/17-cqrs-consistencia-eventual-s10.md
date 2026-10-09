@@ -20,7 +20,7 @@ La evaluación no implementa ninguno de los dos. Se basa en el código de
 
 | Operación | Tipo | Qué hace | Datos |
 |---|---|---|---|
-| `POST /api/adopciones` | Escritura | `AdopcionService.crearSolicitudConEtapaInicial` crea una `SolicitudAdopcion` y su `EtapaAdopcion` inicial dentro de un único `@Transactional` | `solicitud_adopcion`, `etapas_adopcion` |
+| `POST /api/adopciones` | Escritura | `AdopcionService.crearSolicitudConEtapaInicial` crea una `SolicitudAdopcion` y su `EtapaAdopcion` inicial dentro de un único `@Transactional` | `solicitud_adopcion`, `etapa_adopcion` |
 | `POST /api/adopciones/test-fallo` | Escritura (prueba) | Igual que la anterior, pero lanza una excepción entre los dos `save` para comprobar el rollback (QA-02 / TRX-02) | Mismas tablas; no deja datos |
 | `GET /api/mascotas/buscar` | Lectura | Respuesta estática simulada; no consulta la base de datos | Ninguno |
 
@@ -81,7 +81,7 @@ módulo. Ninguna necesidad concreta del sistema actual lo justifica.
 2. Una medición muestra que las lecturas degradan las escrituras de
    TRX-02, con un criterio fijado antes de medir, como en Semana 6.
 3. Se exige un historial completo e inmutable de cambios de estado de
-   una adopción que no se pueda cubrir con la tabla `etapas_adopcion`.
+   una adopción que no se pueda cubrir con la tabla `etapa_adopcion`.
 
 ---
 
