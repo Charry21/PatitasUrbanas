@@ -26,7 +26,9 @@ aunque QA-01 lo exigía.
 
 **Nota de temporalidad:** este documento se reescribió el 2026-10-09,
 después del spike de Semana 10. No modifica ninguna hipótesis ni resultado
-del spike, que se preregistró sobre `dossier/15` y ADR-03.
+del spike, que se preregistró sobre `dossier/15` y ADR-03. El orden se
+verifica con los commits y las horas de fusión de los PR, no solo con esta
+fecha: [`experimentos/07-trazabilidad-temporal.md`](../../experimentos/07-trazabilidad-temporal.md).
 
 Cada contexto se marca como **implementado**, **parcial** o **planificado**
 según el código de `main`.
