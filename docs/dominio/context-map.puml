@@ -13,14 +13,14 @@ left to right direction
 
 rectangle "Identidad\n<<genérico>>\n(planificado)\n--\nparticipante, rol\nmunicipio del participante\nautorización de datos\n(Ley 1581)" as IDE #F4ECF7
 rectangle "Mascotas\n<<soporte>>\n(parcial)\n--\nMascota\nestado (Disponible, En tratamiento…)\ncustodio\nubicación" as MAS #D6EAF8
-rectangle "Adopciones\n<<núcleo>>\n(implementado parcialmente)\n--\nSolicitudAdopcion + estado\n(Pendiente → Activa → Aprobada/Rechazada)\nEtapaAdopcion (historial)\ncompromiso de adopción\nregla de mismo municipio\nTRX-02" as ADO #FFE9B3
+rectangle "Adopciones\n<<núcleo>>\n(implementado parcialmente)\n--\nimplementado: SolicitudAdopcion (estado = PENDIENTE),\nEtapaAdopcion inicial, TRX-02\ndefinido (D1-D8): Pendiente → Activa → Aprobada/Rechazada,\nhistorial de etapas, compromiso de adopción,\nregla territorial (municipio o área metropolitana)" as ADO #FFE9B3
 rectangle "Atención veterinaria\n<<soporte>>\n(planificado)\n--\nhistorial clínico, diagnóstico\ntratamiento\ncertificado de salud" as VET #E8F8F5
 rectangle "Notificaciones\n(fuera del modelo:\nconsumidor futuro)" as NOT #FFFFFF;line.dashed
 cloud "Servicio de Mapas\n(sistema externo)" as MAPS
 
-MAS --> ADO : R1 [U → D]\n¿Disponible? · custodio · municipio\nmarcarAdoptada al aprobar\nsíncrono en proceso
+MAS --> ADO : R1 [U → D]\nconsulta: ¿Disponible? · custodio · municipio\ncomando: marcarAdoptada (momento: P8)\nsíncrono en proceso
 IDE --> ADO : R2 [U → D]\nautorización de datos vigente\nrol del que aprueba · municipio\nsíncrono en proceso
-MAS --> VET : R3 [U → D]\ndatos de la mascota\nmarcarEnTratamiento\nsíncrono en proceso
+MAS --> VET : R3 [U → D]\nconsulta: datos de la mascota\ncomando: marcarEnTratamiento\nsíncrono en proceso
 IDE --> MAS : R6 [U → D]\ncustodio (participante)\nsíncrono en proceso
 IDE --> VET : R7 [U → D]\nrol veterinaria\nsíncrono en proceso
 ADO ..> NOT : R4 [publicador → suscriptor]\neventos después del commit\n(aplazado)
@@ -29,6 +29,8 @@ MAPS ..> MAS : R5\ncapa anticorrupción (ACL)\nen Mascotas
 legend right
   Línea continua: relación síncrona en proceso
   Línea discontinua: asíncrona, externa o fuera del modelo
+  Flecha: del proveedor de la API (U) al consumidor (D);
+  en los comandos, la petición viaja del consumidor al proveedor
   Solo Adopciones tiene código (solicitud, etapa, TRX-02);
   Mascotas tiene un endpoint simulado; el resto está planificado.
 endlegend

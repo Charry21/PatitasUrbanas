@@ -19,7 +19,7 @@ D1–D9 (decisiones del equipo) y P1–P7 (preguntas) están en
 | | |
 |---|---|
 | **Responsabilidad** | Gestionar la solicitud de adopción de una mascota concreta, desde que se recibe hasta que se aprueba, rechaza o cancela. |
-| **Posee** | `SolicitudAdopcion` y su estado (Pendiente, Activa, Aprobada, Rechazada, Cancelada; D1, D7); la regla de que adoptante y mascota estén en el mismo municipio o área metropolitana (D8); `EtapaAdopcion` como historial del proceso (D1); el compromiso de adopción (D5); la regla TRX-02; tablas `solicitud_adopcion` y `etapa_adopcion`. |
+| **Posee** | **Implementado:** `SolicitudAdopcion` con el campo `estado` y valor inicial `PENDIENTE` (RO1); `EtapaAdopcion` inicial (RO2); la regla TRX-02 que las escribe juntas (RO3); tablas `solicitud_adopcion` y `etapa_adopcion`. **Definido por el equipo, no implementado:** el ciclo de estados Pendiente → Activa → Aprobada / Rechazada, y Cancelada (D1, D7); el historial de etapas (D1); el compromiso de adopción (D5); la regla territorial: adoptante y mascota en el mismo municipio o la misma área metropolitana (D8). |
 | **No posee** | El estado y el ciclo de vida de la mascota (D3); la autorización de tratamiento de datos (D5); los datos personales del adoptante; el historial clínico. |
 | **Por qué esta frontera** | La solicitud avanza por etapas sin que la mascota cambie (D1), y TRX-02 exige que solicitud y etapa se escriban en una sola transacción (QA-02, verificado por `AdopcionControllerRollbackIntegrationTest`). Mientras ambas vivan en el mismo contexto, la atomicidad no necesita coordinación entre contextos. |
 | **Evidencia** | HECHO para solicitud, estado, etapa y TRX-02 (RO1–RO3). DECISIÓN para el historial de etapas, la referencia a la mascota y el compromiso (D1, D2, D5). |
@@ -69,13 +69,47 @@ síncrona/asíncrona de cada una se justifica en
 
 | # | Relación | Patrón | Qué fluye y en qué dirección | Mecanismo | Estado |
 |---|---|---|---|---|---|
-| R1 | Mascotas → Adopciones | Cliente/Proveedor (Mascotas upstream) | Antes de crear la solicitud, Adopciones pregunta si la mascota está Disponible (D2, D6), quién es su custodio (D4) y en qué municipio está (D8). Al aprobar la adopción, Adopciones pide a Mascotas `marcarAdoptada(mascotaId)`; Mascotas cambia su propio estado (P5). Mascotas nunca lee solicitudes. | Síncrono en proceso: servicio público `MascotaService` (ADR-02, ADR-03 Decisión 3) | Planificada: hoy Adopciones no recibe `mascotaId` |
+| R1 | Mascotas → Adopciones | Cliente/Proveedor (Mascotas upstream) | Antes de crear la solicitud, Adopciones pregunta si la mascota está Disponible (D2, D6), quién es su custodio (D4) y en qué municipio está (D8). Cuando la adopción se aprueba o se concreta (el momento exacto está abierto, P8), Adopciones pide a Mascotas `marcarAdoptada(mascotaId)`; Mascotas cambia su propio estado (P5). Mascotas nunca lee solicitudes. | Síncrono en proceso: servicio público `MascotaService` (ADR-02, ADR-03 Decisión 3) | Planificada: hoy Adopciones no recibe `mascotaId` |
 | R2 | Identidad → Adopciones | Cliente/Proveedor (Identidad upstream) | Adopciones pregunta si el adoptante tiene autorización de datos vigente (QA-01, D5), en qué municipio vive (D8) y si quien aprueba tiene rol de custodio (D4). Solo guarda identificadores. | Síncrono en proceso | Planificada |
 | R3 | Mascotas → Atención veterinaria | Cliente/Proveedor (Mascotas upstream) | Atención veterinaria consulta la identidad y el estado de la mascota atendida. Si detecta una enfermedad, pide a Mascotas `marcarEnTratamiento(mascotaId)`; Mascotas cambia su propio estado y la mascota deja de poder solicitarse (D9). | Síncrono en proceso | Planificada |
 | R4 | Adopciones → Notificaciones | Publicador/Suscriptor (Adopciones upstream) | Adopciones publica hechos como `SolicitudAdopcionAvanzoDeEtapa`; un futuro consumidor decide a quién avisar. **Notificaciones está fuera del modelo** (`modelo-dominio.md` §6): la relación se conserva solo como diseño del evento. | Asíncrono: evento después del commit ([`eventos-candidatos.md`](../integracion/eventos-candidatos.md)) | Aplazada (ADR-03, Alternativa B) |
-| R5 | Servicio de Mapas → Mascotas | Capa anticorrupción (ACL) en Mascotas | Mascotas traduce coordenadas y distancias del proveedor externo a su propio modelo. Solo sirve para buscar; la regla de mismo municipio (D8) se valida con el municipio registrado, no con el proveedor. | Llamada HTTP externa detrás de un adaptador | Planificada; hoy simulada |
+| R5 | Servicio de Mapas → Mascotas | Capa anticorrupción (ACL) en Mascotas | Mascotas traduce coordenadas y distancias del proveedor externo a su propio modelo. Solo sirve para buscar; la regla territorial (D8) se valida con el municipio registrado de la mascota y del adoptante, no con el proveedor. | Llamada HTTP externa detrás de un adaptador | Planificada; hoy simulada |
 | R6 | Identidad → Mascotas | Cliente/Proveedor (Identidad upstream) | Mascotas registra el custodio de cada animal como identificador de un participante con rol de custodio (D4). | Síncrono en proceso | Planificada |
 | R7 | Identidad → Atención veterinaria | Cliente/Proveedor (Identidad upstream) | Atención veterinaria verifica que quien registra el historial clínico o pide "En tratamiento" es un participante con rol de veterinaria (D4, D9). | Síncrono en proceso | Planificada |
+
+### Operaciones de cada relación
+
+La flecha del Context Map va del **proveedor** (upstream, el contexto que
+ofrece la operación en su API pública) al **consumidor** (downstream, el
+que la invoca). No indica hacia dónde viaja la petición: en un **comando**
+el consumidor pide un cambio que el proveedor decide y registra; en una
+**consulta** el proveedor solo entrega datos.
+
+| Relación | Operación (ofrecida por el proveedor) | Proveedor | Consumidor | Tipo | Qué viaja y hacia dónde |
+|---|---|---|---|---|---|
+| R1 | `consultarDisponibilidad(mascotaId)` | Mascotas | Adopciones | Consulta | Mascotas → Adopciones: estado, custodio, municipio |
+| R1 | `marcarAdoptada(mascotaId)` | Mascotas | Adopciones | Comando | Adopciones → Mascotas: la petición; Mascotas cambia su propio estado |
+| R2 | consultar participante (autorización de datos, rol, municipio) | Identidad | Adopciones | Consulta | Identidad → Adopciones |
+| R3 | `consultarMascota(mascotaId)` | Mascotas | Atención veterinaria | Consulta | Mascotas → Atención veterinaria: identidad y estado de la mascota |
+| R3 | `marcarEnTratamiento(mascotaId)` | Mascotas | Atención veterinaria | Comando | Atención veterinaria → Mascotas: la petición; Mascotas cambia su propio estado (D9) |
+| R6 | consultar participante con rol de custodio | Identidad | Mascotas | Consulta | Identidad → Mascotas |
+| R7 | consultar participante con rol de veterinaria | Identidad | Atención veterinaria | Consulta | Identidad → Atención veterinaria |
+
+R1 y R3 tienen una consulta y un comando cada una, pero el proveedor es el
+mismo (Mascotas): el estado de la mascota tiene un único dueño, y los demás
+contextos solo pueden pedir que cambie. Por eso cada relación conserva una
+sola flecha.
+
+### Alcance de la atomicidad entre contextos
+
+| | Qué garantiza | Respaldo |
+|---|---|---|
+| **Demostrado hoy** | Solicitud y etapa inicial se escriben juntas o no se escribe ninguna (TRX-02). Es una garantía **interna de Adopciones** | HECHO: `@Transactional` en `AdopcionService` y `AdopcionControllerRollbackIntegrationTest` (RO3) |
+| **Propuesto, no implementado** | "En la misma transacción" (P5) significa **la misma transacción de base de datos**: `AdopcionService` abre la transacción y `MascotaService.marcarAdoptada` participa en ella (propagación por defecto de Spring). Si `marcarAdoptada` falla, también se revierte el cambio de la solicitud, así que no puede quedar una solicitud aprobada con la mascota Disponible | DECISIÓN técnica. Es posible porque ambos módulos comparten proceso y base de datos (ADR-01). Se verificaría con la métrica Y2 del spike de integración propuesto |
+
+Esta garantía depende de que Mascotas siga en el mismo proceso. Si se
+separa, deja de existir una transacción común y habría que usar otro
+mecanismo (por ejemplo, una tabla outbox con compensación).
 
 **Reglas que hacen cumplir estas relaciones** (ADR-02): ningún contexto
 importa repositorios ni modelos de otro; solo servicios públicos o DTOs de
@@ -102,9 +136,9 @@ flowchart LR
   NOT["Notificaciones<br/>(fuera del modelo)"]
   MAPS[("Servicio de Mapas<br/>externo")]
 
-  MAS -- "R1 · U→D · ¿Disponible? · custodio · municipio / marcarAdoptada<br/>síncrono en proceso" --> ADO
+  MAS -- "R1 · U→D · consulta: ¿Disponible? / comando: marcarAdoptada<br/>síncrono en proceso" --> ADO
   IDE -- "R2 · U→D · autorización de datos · rol · municipio<br/>síncrono en proceso" --> ADO
-  MAS -- "R3 · U→D · datos de la mascota / marcarEnTratamiento<br/>síncrono en proceso" --> VET
+  MAS -- "R3 · U→D · consulta: datos / comando: marcarEnTratamiento<br/>síncrono en proceso" --> VET
   IDE -- "R6 · U→D · custodio<br/>síncrono en proceso" --> MAS
   IDE -- "R7 · U→D · rol veterinaria<br/>síncrono en proceso" --> VET
   ADO -. "R4 · eventos después del commit<br/>(consumidor futuro)" .-> NOT
@@ -115,7 +149,8 @@ flowchart LR
 
 Flecha continua = relación síncrona; discontinua = asíncrona, externa o
 fuera del modelo. La flecha va del proveedor (upstream) al consumidor
-(downstream).
+(downstream), aunque en los comandos la petición viaje en sentido contrario
+(ver *Operaciones de cada relación*).
 
 ---
 
