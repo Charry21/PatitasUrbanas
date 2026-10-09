@@ -68,7 +68,14 @@ preguntas de negocio para el equipo.
   partía de los módulos to-be y clasificaba subdominios sin evidencia. Se
   descartó y se reescribió con el método de IA-10.
 
-**Pendiente de decisión del equipo:** P1–P4 de `modelo-dominio.md` §7.
+**Respondido por el equipo (2026-10-09):** P1–P4, registradas como decisiones
+D6–D9 en `modelo-dominio.md` §5 (IA-13).
+
+| # | Propuesta de la IA | Dónde | Decisión del equipo | Razón |
+|---|---|---|---|---|
+| IA-13 | Registrar las respuestas del equipo a P1–P4 como D6–D9 y propagar sus consecuencias: estados Pendiente/Activa, solo "Disponible" se solicita, regla de mismo municipio en Adopciones, `marcarEnTratamiento` desde Atención veterinaria hacia Mascotas | `docs/dominio/`, `docs/integracion/sincrono-vs-asincrono.md` | Aceptado | Las reglas las definió el equipo; la IA solo las ubicó en el contexto dueño |
+
+**Pendiente de decisión del equipo:** P6 y P7 de `modelo-dominio.md` §7.
 
 ---
 
