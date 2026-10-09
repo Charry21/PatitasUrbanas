@@ -43,7 +43,7 @@ Por qué se elige A para ensayar:
   idempotencia y manejo de duplicados.
 
 **Qué haría reconsiderar B:** que el spike muestre que la llamada síncrona
-degrada la operación de forma medible (§4, Y4), o que Mascotas se despliegue
+degrada la operación de forma medible (spike 2, Y6), o que Mascotas se despliegue
 en un proceso separado.
 
 ### ¿Por qué A no es REST por HTTP?
@@ -106,7 +106,7 @@ adopción (ver `dossier/17-cqrs-consistencia-eventual-s10.md`, §4).
 | TRX-02 necesita atomicidad | QA-02, `AdopcionControllerRollbackIntegrationTest` (pasa 3/3 en el spike) |
 | Las fronteras entre módulos se respetan sin mecanismos nuevos | Spike 1: Y2 = 0, Y4 = 100%, Y5 = 0 (`experimentos/06-spike-resultado-s10.md`) |
 | Hoy no existe ninguna llamada entre contextos | Código de `main`: `adopciones/` y `mascotas/` no se importan entre sí |
-| Supuesto **no medido**: el costo de la llamada síncrona R1 es despreciable | No hay `MascotaService`; es lo que mide el spike de integración propuesto en §4 (Y4) |
+| Supuesto **no medido**: el costo de la llamada síncrona R1 es despreciable | No hay `MascotaService`; lo mide el spike 2 (`experimentos/08-spike-integracion-especificacion.md`, Y6) |
 
 ---
 
@@ -119,51 +119,25 @@ veredicto aclara que **no evalúa la decisión de integración** (Decisión 3
 de ADR-03), porque hoy no existe ninguna llamada entre contextos. Esta
 sección plantea qué mediría un spike que valide o refute la alternativa A.
 
-**Esto no es el preregistro.** La hipótesis, los umbrales y el protocolo
-definitivos se fijan y se commitean en una especificación propia **antes**
-de ejecutar, con el mismo formato de `experimentos/04-spike-especificacion-s9.md`.
+**Preregistro.** La hipótesis, las métricas, los umbrales y el protocolo
+están fijados en
+[`experimentos/08-spike-integracion-especificacion.md`](../../experimentos/08-spike-integracion-especificacion.md),
+integrado a `main` antes de escribir código o medir. Resumen:
 
-### Cambio acotado (modificación X)
+- **Regla que se pone a prueba:** D10. Una mascota puede tener varias
+  solicitudes abiertas; al aprobar una, la mascota deja de estar Disponible
+  y las demás se rechazan. Es el punto donde las alternativas A y B se
+  diferencian: con 10 aprobaciones simultáneas, ¿la consulta síncrona evita
+  que se apruebe más de una?
+- **Condiciones:** A0 (A tal como está especificada) y A1 (A con bloqueo
+  explícito de la fila de la mascota).
+- **Métricas Y1–Y7:** aprobaciones por ráfaga, estado final coherente,
+  atomicidad entre módulos, regla D6, fronteras (ADR-02), costo de la
+  llamada síncrona y carga BIZ-01. La numeración vigente es la de la
+  especificación.
 
-Implementar lo mínimo para que exista R1:
-
-- En `mascotas/`: entidad `Mascota` con estado y municipio,
-  `MascotaRepository` y `MascotaService.consultarDisponibilidad(mascotaId)`.
-- En `shared/dto/`: `DisponibilidadMascota`.
-- En `adopciones/`: `POST /api/adopciones` recibe `mascotaId` y
-  `AdopcionService` consulta la disponibilidad **dentro** de la transacción
-  de TRX-02, antes de los inserts.
-
-Fuera del alcance: el flujo de aprobación y `marcarAdoptada`, la regla de
-municipio (D8), la autenticación (R2) y cualquier infraestructura nueva.
-
-### Métricas candidatas
-
-| Métrica | Qué mide | Cómo | Resultado que soporta A |
-|---|---|---|---|
-| **Y1 — Regla de disponibilidad** | Que solo se creen solicitudes para mascotas Disponibles (D6) | Test de integración con mascotas en Disponible, En tratamiento, Adoptada e inexistente | 0 solicitudes creadas para mascotas no Disponibles |
-| **Y2 — Atomicidad (QA-02)** | Que un rechazo o un fallo de `MascotaService` no deje registros | Extender `AdopcionControllerRollbackIntegrationTest` | 0 solicitudes y 0 etapas huérfanas |
-| **Y3 — Fronteras (ADR-02)** | Que Adopciones use solo la API pública de Mascotas | Script del spike 1 (`experimentos/spike-s10/revisar_modulos.py`) | 0 imports prohibidos |
-| **Y4 — Costo del acoplamiento síncrono** | Cuánto agrega la llamada a la operación | Tiempo del controlador ya instrumentado (`MEDICION_S6_CONTROLADOR_MS`) antes y después, y escenario `experimentos/escenario-concurrencia-biz01.js` | Aumento dentro del umbral que fije el equipo; BIZ-01 se mantiene (p95 < 1000 ms, 0 errores de deadlock/timeout) |
-
-### Cómo se interpretaría
-
-- **Soporta A:** Y1, Y2 e Y3 en cero y Y4 dentro del umbral.
-- **Refuta A y reabre B:** Y4 supera el umbral por causa de la llamada
-  síncrona, o la consulta dentro de la transacción produce bloqueos que
-  degradan BIZ-01.
-- Si falla Y1, Y2 o Y3, el problema es de la implementación del spike, no
-  de la alternativa: se corrige y se vuelve a medir.
-- El spike no prueba B. B se ensayaría solo si A queda refutada, y aun así
-  tendría que resolver la copia desactualizada (Y1).
-
-### Por decidir antes del preregistro
-
-- Umbral concreto de Y4 (por ejemplo, aumento máximo del tiempo del
-  controlador en ms o en %).
-- Qué responde la API cuando la mascota no está Disponible (por ejemplo,
-  `409 Conflict`) y cómo se refleja en `contrato-api.yaml`.
-- Número de repeticiones y entorno, siguiendo `experimentos/01-metodologia-medicion.md`.
+El resultado se registrará en `experimentos/09-spike-integracion-resultado.md`
+y actualizará esta decisión.
 
 ---
 
