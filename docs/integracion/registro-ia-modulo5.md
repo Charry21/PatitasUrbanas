@@ -79,6 +79,17 @@ D6–D9 en `modelo-dominio.md` §5 (IA-13).
 
 ---
 
+## 5. Entregable 2 — encuadre de la decisión y spike de integración (2026-10-09)
+
+| # | Propuesta de la IA | Dónde | Decisión del equipo | Razón |
+|---|---|---|---|---|
+| IA-14 | Presentar la alternativa A como la que se **ensaya primero**, no como "la mejor", y explicar por qué en un monolito modular la alternativa síncrona es una llamada en proceso y no REST por HTTP | `docs/integracion/sincrono-vs-asincrono.md` §1 | Pendiente de revisión | Sigue el encuadre del curso: la decisión es una hipótesis que el spike valida o refuta |
+| IA-15 | Plantear un spike de integración porque el spike 1 no evaluó la decisión de integración; el equipo eligió la regla D10 (opción 2) y la especificación quedó preregistrada con métricas Y1–Y7 | `docs/integracion/sincrono-vs-asincrono.md` §4, `experimentos/08-spike-integracion-especificacion.md` | Pendiente de revisión | El veredicto del spike 1 declara que no evalúa la Decisión 3 de ADR-03 |
+
+---
+
 Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-03
 
 Sección 4 — Revisado por: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven · Fecha: 2026-10-09
+
+Sección 5 — revisión pendiente de firma del equipo.
