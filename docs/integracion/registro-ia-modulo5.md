@@ -79,6 +79,6 @@ D6–D9 en `modelo-dominio.md` §5 (IA-13).
 
 ---
 
-Revisado por: Charry Ríos Daniel Estiven · Fecha: 2026-10-03
+Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-03
 
-Sección 4 — revisión pendiente de firma del equipo (PR del 2026-10-09).
+Sección 4 — Revisado por: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven · Fecha: 2026-10-09
