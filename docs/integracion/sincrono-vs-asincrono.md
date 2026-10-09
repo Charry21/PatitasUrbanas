@@ -30,7 +30,8 @@ justo el tipo de inconsistencia que QA-02 prohíbe. El costo de A (acoplamiento
 temporal) casi desaparece en un monolito modular.
 
 **Contrato propuesto entre módulos** (no implementado: hoy no existe
-`Mascota`):
+`Mascota`). Qué estados cuentan como "disponible" sigue abierto
+(`docs/dominio/modelo-dominio.md`, P1):
 
 ```java
 // mascotas/MascotaService.java — API pública del contexto Mascotas
@@ -51,10 +52,12 @@ disponibilidad, lea la entidad `Mascota` o use `MascotaRepository`
 | # | Relación | ¿El consumidor necesita el dato en el momento? | ¿Qué pasa si falla la otra parte? | Decisión | Revisar si… |
 |---|---|---|---|---|---|
 | R1 | Mascotas → Adopciones | Sí: no se puede adoptar una mascota no disponible | No se crea la solicitud (correcto) | **Síncrona en proceso** | Mascotas se separa en otro proceso |
-| R2 | Identidad → Adopciones | Sí: sin Opt-In no se puede escribir (QA-01) | No se crea la solicitud (correcto: exigido por QA-01) | **Síncrona en proceso** | Se adopta un proveedor de identidad externo (token firmado validable sin llamada) |
-| R3 | Mascotas → Veterinarias | Sí: la cita es sobre una mascota concreta | No se agenda la cita | **Síncrona en proceso** | Veterinarias necesita datos históricos que Mascotas no conserva |
-| R4 | Adopciones → Notificaciones | **No**: el aviso puede llegar segundos después | La solicitud sigue siendo válida; el aviso se reintenta | **Asíncrona (evento después del commit)** — aplazada hasta que exista Notificaciones | — |
-| R5 | Servicio de Mapas → Mascotas | Sí para la búsqueda | La búsqueda devuelve error controlado; no afecta a Adopciones | **Síncrona (HTTP externo) detrás de una ACL** | El proveedor tiene límites de uso que obliguen a cachear |
+| R2 | Identidad → Adopciones | Sí: sin autorización de datos vigente no se puede escribir (QA-01, D5), y solo el custodio aprueba (D4) | No se crea la solicitud (correcto: exigido por QA-01) | **Síncrona en proceso** | Se adopta un proveedor de identidad externo (token firmado validable sin llamada) |
+| R3 | Mascotas → Atención veterinaria | Sí: el historial clínico es de una mascota concreta | No se registra la atención | **Síncrona en proceso** | Atención veterinaria necesita datos históricos que Mascotas no conserva |
+| R4 | Adopciones → Notificaciones (consumidor futuro, fuera del modelo) | **No**: el aviso puede llegar segundos después | La solicitud sigue siendo válida; el aviso se reintenta | **Asíncrona (evento después del commit)** — aplazada hasta que exista un consumidor | Se definen reglas de negocio propias de notificación |
+| R5 | Servicio de Mapas → Mascotas | Sí para la búsqueda | La búsqueda devuelve error controlado; no afecta a Adopciones | **Síncrona (HTTP externo) detrás de una ACL** | El proveedor tiene límites de uso que obliguen a cachear; P3 decide si la ubicación cambia reglas de negocio |
+| R6 | Identidad → Mascotas | Sí: el custodio debe ser un participante válido (D4) | No se registra o cambia la custodia | **Síncrona en proceso** | Se adopta un proveedor de identidad externo |
+| R7 | Identidad → Atención veterinaria | Sí: solo un participante con rol de veterinaria registra historial clínico (D4) | No se registra la atención | **Síncrona en proceso** | Se adopta un proveedor de identidad externo |
 
 R4 es la única relación donde lo asíncrono es mejor: avisar no es parte de
 la regla de negocio y un fallo del proveedor externo no debe deshacer una
