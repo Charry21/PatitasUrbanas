@@ -63,7 +63,8 @@ preguntas de negocio para el equipo.
 
 **Rechazado o corregido por el equipo en esta revisión:**
 
-- El primer borrador de `dossier/18-modelo-dominio.md` (2026-10-02) también
+- El primer borrador de `dossier/18-modelo-dominio.md` (2026-10-02; archivo
+  retirado el 2026-10-09, su contenido vigente está en `docs/dominio/modelo-dominio.md`) también
   partía de los módulos to-be y clasificaba subdominios sin evidencia. Se
   descartó y se reescribió con el método de IA-10.
 
