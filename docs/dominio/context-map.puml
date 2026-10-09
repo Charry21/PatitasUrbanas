@@ -1,5 +1,6 @@
 @startuml context-map
 ' Context Map de Patitas Urbanas — Módulo 5 (Semanas 9-10)
+' Base del modelo: modelo-dominio.md (evidencia RO1-RO6 y decisiones D1-D5)
 ' Justificación de cada frontera y relación: responsabilidades-contextos.md
 ' U = upstream (proveedor), D = downstream (consumidor)
 
@@ -10,23 +11,25 @@ skinparam rectangle {
 }
 left to right direction
 
-rectangle "Adopciones\n<<núcleo>>\n(implementado)\n--\nSolicitudAdopcion\nEtapaAdopcion\nTRX-02" as ADO #FFE9B3
-rectangle "Mascotas\n<<soporte>>\n(parcial)\n--\nMascota\nubicación\ndisponibilidad" as MAS #D6EAF8
-rectangle "Veterinarias\n<<soporte>>\n(planificado)\n--\nveterinaria, servicio, cita" as VET #E8F8F5
-rectangle "Identidad y consentimiento\n<<genérico>>\n(planificado)\n--\nusuario, entidad\nOpt-In Ley 1581" as IDE #F4ECF7
-rectangle "Notificaciones\n<<genérico>>\n(planificado)\n--\nenvío, reintento" as NOT #F2F3F4
+rectangle "Identidad\n<<genérico>>\n(planificado)\n--\nparticipante, rol\nautorización de datos\n(Ley 1581)" as IDE #F4ECF7
+rectangle "Mascotas\n<<soporte>>\n(parcial)\n--\nMascota\nestado de la mascota\ncustodio" as MAS #D6EAF8
+rectangle "Adopciones\n<<núcleo>>\n(implementado parcialmente)\n--\nSolicitudAdopcion + estado\nEtapaAdopcion (historial)\ncompromiso de adopción\nTRX-02" as ADO #FFE9B3
+rectangle "Atención veterinaria\n<<soporte>>\n(planificado)\n--\nhistorial clínico\ntratamiento\ncertificado de salud" as VET #E8F8F5
+rectangle "Notificaciones\n(fuera del modelo:\nconsumidor futuro)" as NOT #FFFFFF;line.dashed
 cloud "Servicio de Mapas\n(sistema externo)" as MAPS
 
-MAS --> ADO : R1 [U → D]\n¿mascota disponible?\nsíncrono en proceso (MascotaService)
-IDE --> ADO : R2 [U → D]\n¿adoptante habilitado\ny con Opt-In?\nsíncrono en proceso
+MAS --> ADO : R1 [U → D]\n¿se puede adoptar? · custodio\nmarcarAdoptada al aprobar\nsíncrono en proceso
+IDE --> ADO : R2 [U → D]\nautorización de datos vigente\nrol del que aprueba\nsíncrono en proceso
 MAS --> VET : R3 [U → D]\ndatos de la mascota\nsíncrono en proceso
-ADO ..> NOT : R4 [publicador → suscriptor]\nSolicitudAdopcionAvanzoDeEtapa\nasíncrono, después del commit
+IDE --> MAS : R6 [U → D]\ncustodio (participante)\nsíncrono en proceso
+IDE --> VET : R7 [U → D]\nrol veterinaria\nsíncrono en proceso
+ADO ..> NOT : R4 [publicador → suscriptor]\neventos después del commit\n(aplazado)
 MAPS ..> MAS : R5\ncapa anticorrupción (ACL)\nen Mascotas
 
 legend right
   Línea continua: relación síncrona en proceso
-  Línea discontinua: asíncrona o sistema externo
-  Solo Adopciones está implementado; Mascotas tiene
-  un endpoint simulado; el resto está planificado.
+  Línea discontinua: asíncrona, externa o fuera del modelo
+  Solo Adopciones tiene código (solicitud, etapa, TRX-02);
+  Mascotas tiene un endpoint simulado; el resto está planificado.
 endlegend
 @enduml
