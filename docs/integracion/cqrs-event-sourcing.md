@@ -33,7 +33,7 @@ Análisis completo, contrastado con las operaciones reales del código, en
 | **Riesgo específico** | Los eventos inmutables con datos personales chocan con el derecho de supresión de la Ley 1581: borrar datos de un usuario exigiría técnicas adicionales (por ejemplo, cifrado por usuario y destrucción de la clave). |
 | **Evidencia actual** | Ningún driver ni escenario de calidad pide reconstruir estados pasados más allá del historial de etapas. |
 | **Decisión** | **No se incorpora.** |
-| **Se reconsidera si** | Se exige auditoría completa e inmutable de cada cambio de estado de una adopción (por ejemplo, por un regulador) que la tabla `etapas_adopcion` no pueda cubrir; o aparecen disputas que requieran reconstruir el estado exacto en una fecha pasada. |
+| **Se reconsidera si** | Se exige auditoría completa e inmutable de cada cambio de estado de una adopción (por ejemplo, por un regulador) que la tabla `etapa_adopcion` no pueda cubrir; o aparecen disputas que requieran reconstruir el estado exacto en una fecha pasada. |
 
 ---
 
