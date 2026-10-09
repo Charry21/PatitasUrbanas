@@ -16,7 +16,7 @@ El orden del análisis es:
 
 1. Inventario de responsabilidades observables en el repositorio (§2).
 2. Términos ambiguos e inconsistencias encontradas (§3, §4).
-3. Decisiones de negocio del equipo (D1–D9) para resolver lo que el
+3. Decisiones de negocio del equipo (D1–D10) para resolver lo que el
    repositorio no demuestra (§5).
 4. Contextos resultantes (§6). El detalle de cada contexto, las relaciones
    y el Context Map están en
@@ -210,8 +210,22 @@ La veterinaria no aprueba adopciones (D4), pero sí puede pausarlas por
 salud.
 *Consecuencia:* el estado sigue siendo de Mascotas (un solo dueño). Atención
 veterinaria lo cambia llamando al servicio público de Mascotas, igual que
-Adopciones con `marcarAdoptada` (R3). Identidad confirma que quien lo pide
+Adopciones con `retirarDeDisponibles` (R3). Identidad confirma que quien lo pide
 tiene rol de veterinaria (R7).
+
+**D10 — Varias solicitudes por mascota; al aprobar una, se cierran las demás.**
+Una mascota Disponible puede tener varias solicitudes Pendientes o Activas
+al mismo tiempo. Cuando el custodio aprueba una, la mascota **deja de estar
+Disponible** y las demás solicitudes abiertas de esa mascota pasan a
+**Rechazada**. Como máximo puede haber una solicitud aprobada por mascota.
+*Consecuencia:* la competencia entre solicitudes ocurre **al aprobar**, no
+al crear. Aprobar es una operación de Adopciones que pide a Mascotas retirar
+a la mascota de Disponible (R1). El estado de destino, Reservada o Adoptada,
+depende de P8.
+*Brecha con el código:* no existen la operación de aprobar, la entidad
+`Mascota` ni la referencia de la solicitud a la mascota.
+*Verificación:* es la regla que pone a prueba el spike de integración
+(`experimentos/08-spike-integracion-especificacion.md`).
 
 ---
 
@@ -225,7 +239,7 @@ todavía no están implementados.
 
 | Contexto | Posee | No posee | Respaldo |
 |---|---|---|---|
-| **Adopciones** | Solicitud con campo `estado` y valor inicial `PENDIENTE` (RO1); etapa inicial y atomicidad con la solicitud (RO2, RO3); ciclo de estados Pendiente → Activa → Aprobada / Rechazada, y Cancelada (D1, D7); historial de etapas (D1); compromiso de adopción (D5); regla territorial: mismo municipio o área metropolitana (D8) | Ciclo de vida de la mascota, autorización de datos, identidad del adoptante | Código (RO1–RO3) + D1, D2, D5, D7, D8 |
+| **Adopciones** | Solicitud con campo `estado` y valor inicial `PENDIENTE` (RO1); etapa inicial y atomicidad con la solicitud (RO2, RO3); ciclo de estados Pendiente → Activa → Aprobada / Rechazada, y Cancelada (D1, D7); historial de etapas (D1); compromiso de adopción (D5); regla territorial: mismo municipio o área metropolitana (D8); una sola solicitud aprobada por mascota y rechazo de las demás (D10) | Ciclo de vida de la mascota, autorización de datos, identidad del adoptante | Código (RO1–RO3) + D1, D2, D5, D7, D8 |
 | **Mascotas** | Mascota, estado de la mascota (incluido Disponible), custodio, ubicación | Solicitudes y etapas, historial clínico | D3, D4, D6, D8 |
 | **Atención veterinaria** | Historial clínico, diagnóstico, tratamiento, certificado de salud | Aprobación de solicitudes; el estado de la mascota (puede pedir "En tratamiento", pero lo registra Mascotas) | D4, D9 |
 | **Identidad** | Participante (adoptante, custodio, veterinaria), rol, municipio del participante, autorización de tratamiento de datos | Compromiso de adopción, estado de mascotas | QA-01 (RO6) + D4, D5, D8 |
@@ -255,8 +269,8 @@ Justificación de cada frontera, relaciones y Context Map:
 | P2 | ¿`PENDIENTE` equivale a "Activa" o es otro estado? | **Resuelta** (D7) |
 | P3 | ¿La geolocalización cambia alguna regla de negocio o solo sirve para buscar? | **Resuelta** (D8) |
 | P4 | ¿Una veterinaria puede cambiar el estado de la mascota o solo lo informa? | **Resuelta** (D9) |
-| P5 | Cuando se aprueba una adopción, ¿qué le pasa al estado de la mascota y quién lo cambia? | **Resuelta en parte:** Mascotas cambia su propio estado cuando Adopciones llama de forma síncrona a `MascotaService.marcarAdoptada(mascotaId)`, dentro de la misma transacción de base de datos que actualiza la solicitud (alcance en [`responsabilidades-contextos.md`](./responsabilidades-contextos.md) §2, *Alcance de la atomicidad entre contextos*). **Falta definir en qué momento** (P8) |
-| P6 | ¿Quién pone a una mascota en "Reservada" y cuándo? ¿Puede haber varias solicitudes Pendientes o Activas para la misma mascota? | Abierta. Define si crear o activar una solicitud cambia el estado de la mascota |
+| P5 | Cuando se aprueba una adopción, ¿qué le pasa al estado de la mascota y quién lo cambia? | **Resuelta en parte:** al aprobar (D10), Adopciones llama de forma síncrona a `MascotaService.retirarDeDisponibles(mascotaId)` dentro de la misma transacción de base de datos que aprueba la solicitud, y Mascotas cambia su propio estado (alcance en [`responsabilidades-contextos.md`](./responsabilidades-contextos.md) §2, *Alcance de la atomicidad entre contextos*). **Falta definir** si el estado de destino es Reservada o Adoptada y qué pasa al concretar la adopción (P8) |
+| P6 | ¿Quién pone a una mascota en "Reservada" y cuándo? ¿Puede haber varias solicitudes Pendientes o Activas para la misma mascota? | **Resuelta** (D10): se permiten varias; al aprobar una, la mascota deja de estar Disponible y las demás se rechazan. El estado exacto (Reservada o Adoptada) sigue en P8 |
 | P7 | Si una mascota pasa a "En tratamiento" (D9) mientras tiene solicitudes Pendientes o Activas, ¿qué les pasa a esas solicitudes? | Abierta. Si se pausan, Adopciones necesita enterarse del cambio; es un candidato a evento (`MascotaPuestaEnTratamiento`) |
 | P8 | ¿Qué diferencia hay entre una solicitud **Aprobada** y una **adopción concretada**? ¿En qué orden ocurren la aprobación, la firma del compromiso (D5), la entrega y el seguimiento (D1)? ¿Cuándo cambia la mascota a "Adoptada" y qué estado tiene entre la aprobación y la entrega? | Abierta. Los documentos hoy mezclan los tres momentos (auditoría H2): R1 habla de "al aprobar" y `eventos-candidatos.md` de "al concretar" |
 | P9 | ¿"Veterinaria" es la persona profesional, la clínica o ambas? ¿El custodio es siempre una organización? ¿Los permisos se asignan a personas, a organizaciones o a ambas? | Abierta (auditoría H6) |
