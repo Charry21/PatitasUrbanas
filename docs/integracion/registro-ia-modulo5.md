@@ -84,7 +84,7 @@ D6–D9 en `modelo-dominio.md` §5 (IA-13).
 | # | Propuesta de la IA | Dónde | Decisión del equipo | Razón |
 |---|---|---|---|---|
 | IA-14 | Presentar la alternativa A como la que se **ensaya primero**, no como "la mejor", y explicar por qué en un monolito modular la alternativa síncrona es una llamada en proceso y no REST por HTTP | `docs/integracion/sincrono-vs-asincrono.md` §1 | Pendiente de revisión | Sigue el encuadre del curso: la decisión es una hipótesis que el spike valida o refuta |
-| IA-15 | Plantear un spike de integración (métricas Y1–Y4) porque el spike 1 no evaluó la decisión de integración | `docs/integracion/sincrono-vs-asincrono.md` §4 | Pendiente de revisión | El veredicto del spike 1 declara que no evalúa la Decisión 3 de ADR-03; umbrales por fijar antes del preregistro |
+| IA-15 | Plantear un spike de integración porque el spike 1 no evaluó la decisión de integración; el equipo eligió la regla D10 (opción 2) y la especificación quedó preregistrada con métricas Y1–Y7 | `docs/integracion/sincrono-vs-asincrono.md` §4, `experimentos/08-spike-integracion-especificacion.md` | Pendiente de revisión | El veredicto del spike 1 declara que no evalúa la Decisión 3 de ADR-03 |
 
 ---
 
