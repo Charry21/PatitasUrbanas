@@ -103,15 +103,15 @@ veterinarias o usuarios es hoy conceptual.
 
 | Término | Lo que muestra el repositorio | Definición adoptada |
 |---|---|---|
-| Estado de la solicitud | Campo `String`; valor por defecto `PENDIENTE` | Resultado global de la solicitud: Pendiente, Activa, Aprobada, Rechazada, Cancelada (D1, D7) |
+| Estado de la solicitud | Campo `String`; valor por defecto `PENDIENTE` (HECHO, RO1) | Resultado global de la solicitud: Pendiente, Activa, Aprobada, Rechazada, Cancelada (DECISIÓN D1, D7). Solo existen el campo y el valor inicial; los demás valores y sus transiciones no están en el código |
 | Etapa | `nombreEtapa` + `fechaCambio`; valor por defecto `SOLICITUD_RECIBIDA` | Paso del proceso; el conjunto de etapas es el historial (D1) |
 | Mascota | Solo endpoint simulado | Animal con ciclo de vida propio, independiente de las solicitudes (D3) |
-| Fundación / refugio | Se usan en distintos documentos | Mismo rol: custodio del animal (D4) |
-| Veterinaria | Actor y módulo futuro | Participante con rol de soporte médico, sin autoridad sobre la adopción (D4) |
+| Fundación / refugio | Se usan en distintos documentos | Mismo rol: custodio del animal (D4). **Por definir (P9):** si el custodio es siempre una organización y quién actúa en su nombre |
+| Veterinaria | Actor y módulo futuro | Participante con rol de soporte médico, sin autoridad sobre la adopción (D4). **Por definir (P9):** si es la persona profesional, la clínica o ambas, y quién recibe los permisos |
 | Consentimiento | Opt-In en QA-01 | Dos conceptos distintos: autorización de tratamiento de datos y compromiso de adopción (D5) |
 | Disponible | Aparece en QA-03 ("mascotas disponibles") | Único estado de la mascota que permite iniciar una solicitud (D6) |
 | Pendiente / Activa | `PENDIENTE` en el código; "Activa" en D1 | Dos estados distintos: Pendiente = nadie la ha revisado; Activa = un custodio la está revisando (D7) |
-| Ubicación | Parámetros `lat`, `lng`, `radio` del endpoint simulado | Sirve para buscar y además limita la adopción al mismo municipio o área metropolitana (D8) |
+| Ubicación | Parámetros `lat`, `lng`, `radio` del endpoint simulado | Sirve para buscar y además limita la adopción al mismo municipio o área metropolitana (D8). **Por definir (P10):** qué cuenta como área metropolitana y con qué dato se verifica |
 | Adoptante / ciudadano / usuario final | Usados como sinónimos | **FALTANTE**; se tratan como el mismo actor hasta que se decida lo contrario |
 
 ---
@@ -195,8 +195,11 @@ seguimiento después, y las fundaciones no tienen cómo hacerlas en otras
 regiones.
 *Consecuencia:* la ubicación de la mascota (municipio y coordenadas para
 buscar) pertenece a Mascotas; el municipio del adoptante, a Identidad; la
-regla "mismo municipio" es del proceso de adopción y pertenece a
-Adopciones, que la valida con datos de los otros dos (R1, R2). Las visitas
+regla territorial es del proceso de adopción y pertenece a
+Adopciones, que la valida con datos de los otros dos (R1, R2).
+*Formulación canónica:* "adoptante y mascota deben estar en el mismo
+municipio o en la misma área metropolitana". Todos los documentos usan esta
+frase; qué cuenta como área metropolitana queda abierto (P10). Las visitas
 de seguimiento son etapas posteriores a la entrega (D1).
 
 **D9 — La veterinaria puede poner a una mascota "En tratamiento".**
@@ -216,9 +219,13 @@ tiene rol de veterinaria (R7).
 
 De la evidencia (§2) y las decisiones (§5) emergen **cuatro** contextos:
 
+En la columna *Posee*, solo lo marcado con RO tiene código. Lo marcado con
+D son conceptos que el contexto poseerá según las decisiones del equipo;
+todavía no están implementados.
+
 | Contexto | Posee | No posee | Respaldo |
 |---|---|---|---|
-| **Adopciones** | Solicitud, estado (D7), etapa (historial), compromiso de adopción, regla de mismo municipio (D8) | Ciclo de vida de la mascota, autorización de datos, identidad del adoptante | Código (RO1–RO3) + D1, D2, D5, D7, D8 |
+| **Adopciones** | Solicitud con campo `estado` y valor inicial `PENDIENTE` (RO1); etapa inicial y atomicidad con la solicitud (RO2, RO3); ciclo de estados Pendiente → Activa → Aprobada / Rechazada, y Cancelada (D1, D7); historial de etapas (D1); compromiso de adopción (D5); regla territorial: mismo municipio o área metropolitana (D8) | Ciclo de vida de la mascota, autorización de datos, identidad del adoptante | Código (RO1–RO3) + D1, D2, D5, D7, D8 |
 | **Mascotas** | Mascota, estado de la mascota (incluido Disponible), custodio, ubicación | Solicitudes y etapas, historial clínico | D3, D4, D6, D8 |
 | **Atención veterinaria** | Historial clínico, diagnóstico, tratamiento, certificado de salud | Aprobación de solicitudes; el estado de la mascota (puede pedir "En tratamiento", pero lo registra Mascotas) | D4, D9 |
 | **Identidad** | Participante (adoptante, custodio, veterinaria), rol, municipio del participante, autorización de tratamiento de datos | Compromiso de adopción, estado de mascotas | QA-01 (RO6) + D4, D5, D8 |
@@ -248,9 +255,12 @@ Justificación de cada frontera, relaciones y Context Map:
 | P2 | ¿`PENDIENTE` equivale a "Activa" o es otro estado? | **Resuelta** (D7) |
 | P3 | ¿La geolocalización cambia alguna regla de negocio o solo sirve para buscar? | **Resuelta** (D8) |
 | P4 | ¿Una veterinaria puede cambiar el estado de la mascota o solo lo informa? | **Resuelta** (D9) |
-| P5 | Cuando se aprueba una adopción, ¿qué le pasa al estado de la mascota y quién lo cambia? | **Resuelta:** Adopciones llama de forma síncrona a `MascotaService.marcarAdoptada(mascotaId)` en la misma transacción; Mascotas cambia su propio estado ([`eventos-candidatos.md`](../integracion/eventos-candidatos.md) §2) |
+| P5 | Cuando se aprueba una adopción, ¿qué le pasa al estado de la mascota y quién lo cambia? | **Resuelta en parte:** Mascotas cambia su propio estado cuando Adopciones llama de forma síncrona a `MascotaService.marcarAdoptada(mascotaId)`, dentro de la misma transacción de base de datos que actualiza la solicitud (alcance en [`responsabilidades-contextos.md`](./responsabilidades-contextos.md) §2, *Alcance de la atomicidad entre contextos*). **Falta definir en qué momento** (P8) |
 | P6 | ¿Quién pone a una mascota en "Reservada" y cuándo? ¿Puede haber varias solicitudes Pendientes o Activas para la misma mascota? | Abierta. Define si crear o activar una solicitud cambia el estado de la mascota |
 | P7 | Si una mascota pasa a "En tratamiento" (D9) mientras tiene solicitudes Pendientes o Activas, ¿qué les pasa a esas solicitudes? | Abierta. Si se pausan, Adopciones necesita enterarse del cambio; es un candidato a evento (`MascotaPuestaEnTratamiento`) |
+| P8 | ¿Qué diferencia hay entre una solicitud **Aprobada** y una **adopción concretada**? ¿En qué orden ocurren la aprobación, la firma del compromiso (D5), la entrega y el seguimiento (D1)? ¿Cuándo cambia la mascota a "Adoptada" y qué estado tiene entre la aprobación y la entrega? | Abierta. Los documentos hoy mezclan los tres momentos (auditoría H2): R1 habla de "al aprobar" y `eventos-candidatos.md` de "al concretar" |
+| P9 | ¿"Veterinaria" es la persona profesional, la clínica o ambas? ¿El custodio es siempre una organización? ¿Los permisos se asignan a personas, a organizaciones o a ambas? | Abierta (auditoría H6) |
+| P10 | ¿Qué cuenta como "área metropolitana" en D8 y con qué dato se verifica? ¿Dos municipios distintos de la misma área cumplen la regla? | Abierta (auditoría H4) |
 
 ---
 
@@ -258,6 +268,7 @@ Justificación de cada frontera, relaciones y Context Map:
 
 - [`subdominios.md`](./subdominios.md) — clasificación de subdominios.
 - [`responsabilidades-contextos.md`](./responsabilidades-contextos.md) — Posee / No posee, relaciones y Context Map.
+- [`auditoria-consistencia.md`](./auditoria-consistencia.md) — seguimiento de los hallazgos H1–H7 de la auditoría del tutor.
 - `dossier/01-contexto-sistema.md`, `dossier/02-stakeholders-drivers.md`, `dossier/05`–`07` (C4 as-is)
 - `dossier/15-diseno-modular-s7.md` (to-be; usado solo para contrastar, no como punto de partida)
 - `adr/adr-02-modularidad.md`, `adr/adr-03-limites-y-comunicacion-modulos.md`
