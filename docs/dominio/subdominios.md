@@ -37,12 +37,17 @@ según el código de `main`.
 
 ## 2. Clasificación de subdominios
 
-| Subdominio | Tipo | Por qué ese tipo | Estado en el código |
+| Subdominio | Tipo | Razones de negocio (independientes del código) | Estado en el código (no influye en el tipo) |
 |---|---|---|---|
-| **Adopciones** | **Núcleo (core)** | Es el propósito del sistema (`dossier/01`: "transparentar los procesos de adopción"). Contiene la única regla crítica implementada (TRX-02, QA-02) y las reglas de proceso propias de Patitas Urbanas: etapas (D1), custodio que aprueba (D4) y compromiso de adopción (D5). | **Implementado** parcialmente: solicitud, etapa inicial y TRX-02; tablas `solicitud_adopcion` y `etapa_adopcion` |
-| **Mascotas** | Soporte | Necesario para adoptar (D2: toda solicitud es por una mascota; D6: solo si está Disponible), con ciclo de vida propio (D3), pero no es lo que diferencia al sistema. | **Parcial**: solo `MascotaController` con respuesta simulada; no hay entidad `Mascota` |
-| **Atención veterinaria** | Soporte | Complementa el cuidado de la mascota (D4: historial clínico, tratamientos, certificados) sin intervenir en la decisión de adopción. | **Planificado**: ninguna clase |
-| **Identidad** | Genérico | Participantes, roles y autorización de tratamiento de datos (QA-01, Ley 1581; D5). Es un problema resuelto en cualquier plataforma; no aporta diferenciación. | **Planificado**: no hay autenticación ni entidad de usuario |
+| **Adopciones** | **Núcleo (core)** | Es la razón de ser del producto (`dossier/01`: "optimizar y transparentar los procesos de adopción"). Concentra las reglas propias de Patitas Urbanas, que no se resuelven con una solución existente: etapas con visitas domiciliarias y seguimiento (D1), solo el custodio aprueba (D4), compromiso de adopción (D5), estados de revisión (D7) y regla territorial (D8). Fundaciones y refugios exigen que el registro de cada adopción sea íntegro (QA-02, `dossier/02` §1). | **Implementado** parcialmente: solicitud, etapa inicial y TRX-02; tablas `solicitud_adopcion` y `etapa_adopcion` |
+| **Mascotas** | Soporte | Sin mascotas registradas no hay adopción (D2, D6) y su ciclo de vida tiene reglas propias (D3, D9), pero llevar un registro de animales y su estado no es lo que distingue a Patitas Urbanas: el propósito del producto es el proceso de adopción, no el catálogo. | **Parcial**: solo `MascotaController` con respuesta simulada; no hay entidad `Mascota` |
+| **Atención veterinaria** | Soporte | El propósito declara "integrar servicios veterinarios" (`dossier/01`) para apoyar la adopción: certifica la salud que permite que una mascota esté Disponible y puede pausarla (D4, D6, D9). No decide la adopción ni es la razón de ser del producto. | **Planificado**: ninguna clase |
+| **Identidad** | Genérico | Registrar participantes, asignar roles y guardar la autorización de tratamiento de datos (QA-01, Ley 1581; D5) es una necesidad común a cualquier plataforma con usuarios; puede resolverse con una solución existente sin que el producto pierda lo que lo distingue. | **Planificado**: no hay autenticación ni entidad de usuario |
+
+La clasificación se sostiene por las razones de negocio de la tercera
+columna. El estado del código se muestra solo como información: que
+Adopciones sea el único contexto con código no es la razón de que sea el
+núcleo.
 
 **Fuera del dominio modelado:**
 
@@ -64,7 +69,7 @@ negocio propios, según el criterio de admisión de ADR-02.
 | "Etapas de adopción" como contexto propio | D1: la etapa es el historial de la solicitud, no un concepto independiente. Además, solicitud y etapa deben escribirse en la misma transacción (TRX-02); separarlas rompería QA-02. |
 | "Fundaciones" o "Refugios" como contexto propio | D4: fundación y refugio cumplen el mismo rol (custodio). Son participantes de Identidad y la custodia de cada animal la registra Mascotas. Se reconsidera si aparecen reglas propias de fundaciones (cupos, verificación). |
 | "Consentimiento" como contexto propio | D5: hay dos consentimientos con dueños distintos. La autorización de datos es de Identidad; el compromiso de adopción, de Adopciones. Un contexto aparte no tendría reglas propias. |
-| "Búsqueda geoespacial" como contexto propio | La búsqueda es una consulta sobre mascotas (R5). La única regla de ubicación —mismo municipio (D8)— es del proceso de adopción y vive en Adopciones; no queda nada propio para un contexto aparte. |
+| "Búsqueda geoespacial" como contexto propio | La búsqueda es una consulta sobre mascotas (R5). La única regla de ubicación —mismo municipio o misma área metropolitana (D8)— es del proceso de adopción y vive en Adopciones; no queda nada propio para un contexto aparte. |
 | "Notificaciones" como contexto | No tiene reglas de negocio: solo reaccionaría a hechos de otros contextos. Queda como consumidor futuro. |
 | Contexto por tabla de base de datos | Un contexto se define por responsabilidad y lenguaje, no por tabla. |
 
