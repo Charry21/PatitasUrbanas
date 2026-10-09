@@ -21,7 +21,7 @@ info:
     - Desde Mascotas: crear, modificar o consultar solicitudes de adopción.
     - Desde Adopciones: modificar datos o disponibilidad de una mascota.
     - A ningún consumidor: escribir directamente en `solicitud_adopcion` o
-      `etapas_adopcion`, ni crear una solicitud sin su etapa inicial (TRX-02).
+      `etapa_adopcion`, ni crear una solicitud sin su etapa inicial (TRX-02).
     - Consultar solicitudes existentes: no hay endpoint de lectura (GET → 405).
 servers:
   - url: http://localhost:3000

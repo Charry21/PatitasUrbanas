@@ -16,16 +16,22 @@ Solo si las tres respuestas son "sí" el candidato se acepta como evento.
 es de diseño; se implementa cuando exista el contexto consumidor
 (ADR-03, Decisión 3, Alternativa B aplazada).
 
+**Sobre Notificaciones:** el modelo del dominio
+(`docs/dominio/modelo-dominio.md` §6) deja Notificaciones **fuera del
+modelo**: no tiene reglas de negocio propias ni código. Aquí aparece solo
+como **consumidor futuro** de los eventos. Los eventos siguen siendo
+válidos porque los publican contextos del modelo (Adopciones, Identidad).
+
 ---
 
 ## 1. Candidatos aceptados
 
 | Evento | Contexto que lo publica | Cuándo ocurre | Quién lo consume y para qué | Datos mínimos |
 |---|---|---|---|---|
-| `SolicitudAdopcionCreada` | Adopciones | Después del commit de TRX-02 (solicitud + etapa inicial) | Notificaciones: avisar a la fundación que hay una nueva solicitud | `idSolicitud`, `mascotaId`, `adoptanteId`, fecha |
-| `SolicitudAdopcionAvanzoDeEtapa` | Adopciones | Después del commit que registra una nueva `EtapaAdopcion` | Notificaciones: avisar al adoptante del cambio | `idSolicitud`, etapa anterior, etapa nueva, fecha |
-| `AdopcionConcretada` | Adopciones | La solicitud llega a la etapa final aprobada | Notificaciones: confirmar a adoptante y fundación | `idSolicitud`, `mascotaId`, `adoptanteId`, fecha |
-| `ConsentimientoRevocado` | Identidad | El usuario retira su Opt-In (Ley 1581) | Notificaciones: dejar de enviarle mensajes. Adopciones: marcar sus solicitudes abiertas para revisión | `usuarioId`, fecha |
+| `SolicitudAdopcionCreada` | Adopciones | Después del commit de TRX-02 (solicitud + etapa inicial) | Notificaciones (futuro): avisar al custodio (fundación o refugio, D4) que hay una nueva solicitud | `idSolicitud`, `mascotaId`, `adoptanteId`, fecha |
+| `SolicitudAdopcionAvanzoDeEtapa` | Adopciones | Después del commit que registra una nueva `EtapaAdopcion` | Notificaciones (futuro): avisar al adoptante del cambio | `idSolicitud`, etapa anterior, etapa nueva, fecha |
+| `AdopcionConcretada` | Adopciones | La solicitud llega a la etapa final aprobada | Notificaciones (futuro): confirmar a adoptante y custodio | `idSolicitud`, `mascotaId`, `adoptanteId`, fecha |
+| `ConsentimientoRevocado` | Identidad | El participante retira su autorización de tratamiento de datos (Ley 1581, D5) | Notificaciones (futuro): dejar de enviarle mensajes. Adopciones: marcar sus solicitudes abiertas para revisión | `usuarioId`, fecha |
 
 Todos cumplen las tres preguntas: son hechos del dominio, tienen un
 consumidor concreto y el consumidor puede enterarse segundos después sin
