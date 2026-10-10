@@ -1,0 +1,2 @@
+app/src/test/java/com/patitasurbanas/PatitasUrbanasApplicationTests.java
+app/src/test/java/com/patitasurbanas/api/controller/AdopcionControllerRollbackIntegrationTest.java

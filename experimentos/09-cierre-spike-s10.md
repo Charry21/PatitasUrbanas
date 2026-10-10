@@ -68,6 +68,21 @@ Estas aclaraciones se registran aquí para no alterar en silencio documentos ya 
 | N1 | `06-spike-resultado-s10.md` §7 | "Las desviaciones D1–D4 no afectan a la comparación…" | Debe leerse "D1–D5". D5 (fusión errónea de la rama de control, PR #50) se añadió a §5 en `36e2e97`, después de redactar §7 en `e9bcd93`, y §7 no se actualizó. Según §5, D5 tampoco afecta a las mediciones, que se hicieron antes de la fusión. | Ninguno |
 | N2 | `05-auditoria-ia-s9.md` §2.1 | "Hipótesis y criterios no se modificaron después de conocer el resultado" | La frase es correcta respecto al resultado, pero incompleta: no registra que `c16cd03` (2026-10-02 16:10 UTC) cambió la hipótesis de no regresión (Y1–Y3) a una de mejora (Y4/Y5 más Y1–Y3) después de una revisión preliminar de imports del estado base que no quedó registrada (§4.1). El equipo puede añadir un anexo fechado a la EDAV que remita a esta nota, sin reescribir lo firmado. | Afecta a cómo se interpreta la preinscripción, no a los valores medidos |
 
+### 3.6 Estado actual de `main` (2026-10-10)
+
+Verificación hecha sobre `main` = `6465b1a`, cuyo árbol de `app/` es `cef1272…`, el mismo que en `1e522df` (`44ede36`). Evidencia en [`spike-s10/verificacion-main-2026-10-10/`](./spike-s10/verificacion-main-2026-10-10/).
+
+| Métrica | Resultado en `main` | Coincide con 06 §4 (después) |
+|---|---|---|
+| Y1 | 2 tests, 0 fallos, en 3/3 corridas con BD limpia | Sí |
+| Y2 | 0 | Sí |
+| Y3 | S1, S2: 201; S3: 200; 3/3 repeticiones coinciden; 0 diferencias frente a `spike-s10/despues/y3` | Sí |
+| Y4 | 7/7 (100%) | Sí |
+| Y5 | 0 | Sí |
+
+- Hallazgo S1 de la EDAV 2: **sigue abierto**. `AdopcionControllerRollbackIntegrationTest` continúa en el paquete de test `com.patitasurbanas.api.controller`, y ningún commit ha tocado `app/src/test` desde `1e522df`. Ver P5.
+- El entorno es el de la reproducción del 2026-10-09 (Ubuntu 24.04.5, OpenJDK 21.0.12.1, Docker 29.8.2, PostgreSQL 16.15), no el de la medición original.
+
 ## 4. Limitaciones que el cierre deja explícitas
 
 ### 4.1 Preinscripción y diseño de las métricas
@@ -95,15 +110,19 @@ El spike evalúa la reorganización de paquetes y las fronteras modulares (Decis
 
 Los pendientes técnicos siguen abiertos y **no** se presentan como pruebas superadas. Responsable y fecha los asigna el equipo.
 
-| # | Pendiente | Tipo | Estado | Responsable | Fecha |
-|---|---|---|---|---|---|
-| P1 | Construir la imagen con el `app/Dockerfile` original en un entorno sin intercepción TLS | Verificación técnica | No verificado (§3.4) | | |
-| P2 | Ejecutar `docker compose up --build` completo | Verificación técnica | No verificado | | |
-| P3 | Ejecutar en Windows/WSL2 (Y1 y Y3 como mínimo) | Validez externa | No verificado | | |
-| P4 | Probar `POST /api/adopciones/test-fallo` fuera del test de rollback, entradas no válidas y casos límite | Verificación técnica | No verificado | | |
-| P5 | Mover el test de rollback a `api.adopciones` (hallazgo S1) | Seguimiento del spike | Aceptado, sin hacer | | |
-| P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | Pendiente de decisión del equipo | | |
-| P8 | Ajustar `revisar_modulos.py` (Y2: comodines, nombres calificados; Y5: clases sin mapear) si se reutiliza en otro spike | Instrumento | Limitación conocida (§4.2) | | |
+| # | Pendiente o supuesto | Tipo | Estado | Condición de revisión | Responsable | Fecha |
+|---|---|---|---|---|---|---|
+| P1 | Construir la imagen con el `app/Dockerfile` original en un entorno sin intercepción TLS | Verificación técnica | No verificado (§3.4) | Antes de desplegar la API con Docker o de afirmar que el Dockerfile construye | | |
+| P2 | Ejecutar `docker compose up --build` completo | Verificación técnica | No verificado | Al resolver P1, o antes de usar Compose como entorno de ejecución de la API | | |
+| P3 | Ejecutar en Windows/WSL2 (Y1 y Y3 como mínimo) | Validez externa | No verificado | Antes de afirmar que el resultado vale en el entorno documentado del equipo (Windows con Docker Desktop) | | |
+| P4 | Probar `POST /api/adopciones/test-fallo` fuera del test de rollback, entradas no válidas y casos límite | Verificación técnica | No verificado | Cuando se cambie la lógica de adopciones o se amplíe la API | | |
+| P5 | Mover el test de rollback a `api.adopciones` (hallazgo S1) | Seguimiento del spike | Abierto: el test sigue en `api.controller` en `main` (`6465b1a`, §3.6) | En el siguiente cambio que toque `app/src/test`, y antes de añadir tests del módulo `adopciones` | | |
+| P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | Pendiente de decisión del equipo | Antes de citar la EDAV 2 como prueba de una preinscripción íntegra | | |
+| P8 | Ajustar `revisar_modulos.py` (Y2: comodines, nombres calificados; Y5: clases sin mapear) si se reutiliza en otro spike | Instrumento | Limitación conocida (§4.2) | Antes de reutilizar el script en otro spike o sobre código nuevo | | |
+| P9 | La evidencia funcional cubre solo los 2 tests existentes y las 3 solicitudes S1–S3 | Supuesto (cobertura) | Aceptado como límite; no demuestra equivalencia universal | Al añadir tests o endpoints, o si se observa una regresión fuera de S1–S3 | | |
+| P10 | Las fronteras entre módulos se mantienen solo por convención (ADR-02); no hay comprobación automática en el build | Supuesto (mantenimiento) | Aceptado como límite; el spike midió una sola reorganización | En cada cambio que añada clases o imports entre módulos, o si se decide automatizar la regla (por ejemplo, en CI) | | |
+
+Los límites de cobertura (P9), la imagen Docker (P1, P2), los casos límite (P4) y las fronteras por convención (P10) figuran aquí como pendientes o supuestos, no como garantías demostradas.
 
 ## 6. Veredicto del equipo
 

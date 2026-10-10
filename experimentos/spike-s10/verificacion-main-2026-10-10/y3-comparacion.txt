@@ -1,0 +1,4 @@
+# Comparación Y3: main (6465b1a) frente a la evidencia original de 1e522df (spike-s10/despues/y3)
+S1: status=201; repeticiones: 3/3 coinciden; diferencias frente a 1e522df: 0
+S2: status=201; repeticiones: 3/3 coinciden; diferencias frente a 1e522df: 0
+S3: status=200; repeticiones: 3/3 coinciden; diferencias frente a 1e522df: 0
