@@ -1,0 +1,37 @@
+# Comparación Y3 (reproducción 2026-10-09/10). Generado con diff sobre los archivos *.norm.json y *.status de medir_y3.sh
+## Consistencia interna (3 repeticiones por solicitud)
+antes S1: 3/3 coinciden (status=201)
+antes S2: 3/3 coinciden (status=201)
+antes S3: 3/3 coinciden (status=200)
+despues S1: 3/3 coinciden (status=201)
+despues S2: 3/3 coinciden (status=201)
+despues S3: 3/3 coinciden (status=200)
+
+## antes vs después (código HTTP, cuerpo normalizado, tipos de claves)
+S1: 0 diferencia(s)
+S2: 0 diferencia(s)
+S3: 0 diferencia(s)
+
+## Reproducción vs evidencia original (experimentos/spike-s10/{antes,despues}/y3)
+antes S1-1: igual
+antes S1-2: igual
+antes S1-3: igual
+antes S2-1: igual
+antes S2-2: igual
+antes S2-3: igual
+antes S3-1: igual
+antes S3-2: igual
+antes S3-3: igual
+despues S1-1: igual
+despues S1-2: igual
+despues S1-3: igual
+despues S2-1: igual
+despues S2-2: igual
+despues S2-3: igual
+despues S3-1: igual
+despues S3-2: igual
+despues S3-3: igual
+
+## idSolicitud (excluido de la comparación, solo informativo)
+antes: 1 2 3 4 5 6
+despues: 1 2 3 4 5 6
