@@ -1,0 +1,8 @@
+app/src/main/java/com/patitasurbanas/PatitasUrbanasApplication.java
+app/src/main/java/com/patitasurbanas/api/controller/AdopcionController.java
+app/src/main/java/com/patitasurbanas/api/controller/MascotaController.java
+app/src/main/java/com/patitasurbanas/api/model/EtapaAdopcion.java
+app/src/main/java/com/patitasurbanas/api/model/SolicitudAdopcion.java
+app/src/main/java/com/patitasurbanas/api/repository/EtapaAdopcionRepository.java
+app/src/main/java/com/patitasurbanas/api/repository/SolicitudAdopcionRepository.java
+app/src/main/java/com/patitasurbanas/api/service/AdopcionService.java
