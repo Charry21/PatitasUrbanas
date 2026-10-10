@@ -1,0 +1,1 @@
+docker build --no-cache --progress=plain --build-context ccr=/root/.ccr -f experimentos/spike-s10/build-imagen-api-2026-10-10/intento-2-ca-proxy/Dockerfile.ca-proxy -t patitas-urbanas-api:spike-s10 ./app
