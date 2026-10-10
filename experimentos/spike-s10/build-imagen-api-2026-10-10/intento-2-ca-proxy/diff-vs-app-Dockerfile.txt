@@ -1,0 +1,9 @@
+0a1,4
+> # Variante SOLO para este entorno de nube: identica a app/Dockerfile salvo el
+> # paso marcado DESVIACION, que importa la CA del proxy de salida TLS del
+> # contenedor en el truststore del JDK de la etapa de build (Maven fallo con
+> # PKIX en el intento 1). app/Dockerfile no se modifica.
+1a6,8
+> # DESVIACION: confiar en la CA del proxy de salida del entorno
+> COPY --from=ccr agent-proxy-ca.crt /tmp/agent-proxy-ca.crt
+> RUN keytool -importcert -noprompt -cacerts -storepass changeit -alias ccr-agent-proxy -file /tmp/agent-proxy-ca.crt

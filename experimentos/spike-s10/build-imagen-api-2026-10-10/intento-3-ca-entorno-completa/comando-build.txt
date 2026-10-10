@@ -1,0 +1,1 @@
+docker build --no-cache --progress=plain --build-context cas=<dir con /usr/local/share/ca-certificates/*.crt del host> -f experimentos/spike-s10/build-imagen-api-2026-10-10/intento-3-ca-entorno-completa/Dockerfile.ca-entorno -t patitas-urbanas-api:spike-s10 ./app

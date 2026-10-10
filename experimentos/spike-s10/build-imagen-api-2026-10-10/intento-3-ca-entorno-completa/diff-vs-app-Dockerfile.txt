@@ -1,0 +1,14 @@
+0a1,6
+> # Variante SOLO para este entorno de nube: identica a app/Dockerfile salvo el
+> # paso marcado DESVIACION. El intento 2 importo solo el primer certificado de
+> # la CA del proxy y Maven siguio fallando con PKIX; aqui se instalan en el
+> # almacen del sistema todas las CA de salida del entorno
+> # (/usr/local/share/ca-certificates/*.crt del host) y se regenera el cacerts
+> # del JDK. app/Dockerfile no se modifica.
+1a8,13
+> # DESVIACION: confiar en las CA de intercepcion TLS del entorno
+> COPY --from=cas *.crt /usr/local/share/ca-certificates/
+> RUN update-ca-certificates && for f in /usr/local/share/ca-certificates/*.crt; do \
+>       csplit -s -z -f /tmp/ca- "$f" '/-----BEGIN CERTIFICATE-----/' '{*}'; \
+>       for c in /tmp/ca-*; do keytool -importcert -noprompt -cacerts -storepass changeit -alias "$(basename $f)-$(basename $c)" -file "$c"; done; rm -f /tmp/ca-*; \
+>     done
