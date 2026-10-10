@@ -1,0 +1,3 @@
+REPOSITORY            TAG         DIGEST                                                                    IMAGE ID       CREATED              SIZE
+patitas-urbanas-api   spike-s10   sha256:9562b9299e449af34f8d0ab375af4d11fa442202388ac87ededb8a04351e0b16   9562b9299e44   About a minute ago   559MB
+postgres              16          sha256:ca0bd484cb98bf4b24eb1010e73fb3fcbd6714d240fbc1a10eea5b7dbecb641d   ca0bd484cb98   3 days ago           642MB
