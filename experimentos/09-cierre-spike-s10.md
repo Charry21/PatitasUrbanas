@@ -131,3 +131,84 @@ Para responderla, el equipo debería indicar:
 Nombre(s): 
 
 Fecha: 
+
+---
+
+## Anexo A. Equivalencia de hashes tras la reescritura de `main` (2026-10-10)
+
+### A.1 Por qué cambiaron los hashes
+
+El 2026-10-09 y el 2026-10-10, `main` se reescribió con force-push para corregir metadatos de autoría: se cambió el autor de varios commits y se eliminaron los trailers de coautoría. Un hash de Git depende del autor, del mensaje y de los padres del commit, así que cualquier cambio en uno de ellos cambia el hash de ese commit y el de todos sus descendientes. Por eso los últimos 64 commits de `main` tienen hashes nuevos.
+
+**El contenido no cambió.** En los 38 commits de la tabla, el árbol (el contenido completo del repositorio en ese commit) es idéntico en el hash antiguo y en el nuevo. Se conservan también la fecha de autor y el asunto. En particular, el árbol de `app/` sigue siendo `cef1272…` y `1e522df` equivale a `44ede36`.
+
+Los documentos anteriores (`04` a `08`, la EDAV 2 y los ADR) **no se reescriben**: siguen citando los hashes originales con los que se firmaron y verificaron. Esta tabla permite traducirlos.
+
+### A.2 Dónde siguen los commits originales
+
+Los hashes antiguos no están en `main`, pero siguen existiendo en GitHub:
+
+- En las ramas antiguas; por ejemplo, `spike/fronteras-modulares-s10` contiene `af02cce`, `1e522df`, `d97cbf3` y `e9bcd93`.
+- En las referencias de los PR, que GitHub no borra: `refs/pull/45/head` a `refs/pull/49/head` contienen `8a2a001`, `99269dd` y `c16cd03`.
+
+Para comprobar cualquier fila:
+
+```
+git fetch origin '+refs/pull/*/head:refs/remotes/pr/*'
+git log -1 --format='%T %at %s' <hash antiguo>
+git log -1 --format='%T %at %s' <hash nuevo>
+```
+
+Ambas salidas deben coincidir.
+
+### A.3 Tabla de equivalencias
+
+Método: para cada hash citado en `experimentos/*.md`, en `adr/` y en este registro, se buscó en `main` (`aed92f6`) el commit con la misma fecha de autor (en segundos) y el mismo asunto. Después se comparó el árbol. Todas las coincidencias fueron únicas. La fecha se muestra en la zona horaria del autor.
+
+| Hash citado (original) | Hash en `main` (`aed92f6`) | Fecha de autor | Asunto | Árbol |
+|---|---|---|---|---|
+| `8a2a001` | `e2318e1` | 2026-10-01 22:47 | docs(s9): especificación del spike (hipótesis, criterios y alcance) antes de ejecutar | igual |
+| `887ccf1` | `6ad651d` | 2026-10-01 22:48 | Merge pull request #45 from Charry21/feat/spike-especificacion-s9 | igual |
+| `99269dd` | `305d62e` | 2026-10-02 16:07 | docs(s9): completar condiciones de medición del spike antes de ejecutar | igual |
+| `c16cd03` | `77007ce` | 2026-10-02 16:10 | docs(s9): añadir métricas de mejora Y4/Y5, agente y ramas del spike; referenciar spike desde ADRs | igual |
+| `01f1c7b` | `5977204` | 2026-10-02 16:22 | docs(s9): registrar en ADR-01 y ADR-02 el veredicto Ajustada del mini-comité de Semana 8 | igual |
+| `403d7b5` | `c1c52da` | 2026-10-02 16:32 | docs(s9): ADR-03 de límites de módulo, API pública y comunicación síncrona/asíncrona (propuesta) | igual |
+| `3d458a2` | `dd451cf` | 2026-10-02 11:38 | Merge pull request #48 from Charry21/claude/determined-albattani-d1aliu | igual |
+| `af02cce` | `b52207e` | 2026-10-02 17:05 | exp(s10): scripts de medición y línea base Y1-Y5 en el commit base 887ccf1 | igual |
+| `4883f9c` | `6508379` | 2026-10-02 17:05 | control(y2): inyectar import prohibido para validar el medidor (rama descartable, no se integra) | igual |
+| `1e522df` | `44ede36` | 2026-10-02 17:05 | spike(s10): reorganizar clases en paquetes por dominio (adopciones/, mascotas/) | igual |
+| `d97cbf3` | `ac85955` | 2026-10-02 17:07 | exp(s10): mediciones después de la reorganización Y1-Y5 y comparación Y3 | igual |
+| `e9bcd93` | `7488569` | 2026-10-02 17:08 | exp(s10): registro de ejecución, desviaciones y veredicto del spike 1 | igual |
+| `66a38ef` | `bbfae67` | 2026-10-02 17:10 | docs(s10): ADR-03 actualizado con el resultado del spike (Aceptada) | igual |
+| `af92e3f` | `545395a` | 2026-10-02 12:11 | Merge pull request #50 from Charry21/spike/control-y2-descartable | igual |
+| `0206cfd` | `588fa8a` | 2026-10-02 17:12 | Merge main (incluye PR #50 fusionado por error) en la rama del spike | igual |
+| `36e2e97` | `5f78881` | 2026-10-02 17:13 | fix(s10): quitar el import de control de Y2 fusionado en main por error (PR #50) | igual |
+| `fe39133` | `6414186` | 2026-10-02 17:30 | docs(s10): auditoría EDAV 2 con las decisiones del equipo sobre S1-S5 y C1-C2 | igual |
+| `1a3e1ef` | `e5be2f0` | 2026-10-02 23:33 | docs(s10): cerrar campos pendientes de la EDAV 2 (agente y revisión del diff) | igual |
+| `7b1f022` | `4b6a0aa` | 2026-10-02 18:34 | Merge pull request #49 from Charry21/spike/fronteras-modulares-s10 | igual |
+| `6a553f2` | `d198723` | 2026-10-02 18:44 | Add Kevin Steven Torres Caro as author in EDAV | igual |
+| `42a8486` | `136c32c` | 2026-10-02 18:45 | Revise authorship details in EDAV document | igual |
+| `f0b2b43` | `0d5cf62` | 2026-10-02 23:50 | docs(s10): corregir formato de la fila de firmantes en la EDAV 2 | igual |
+| `7b8f408` | `8c0369f` | 2026-10-03 00:54 | docs(domain): modelar subdominios, bounded contexts y context map | igual |
+| `bc908e2` | `2837fd2` | 2026-10-03 00:55 | docs(integracion): contrato API verificado y decisión síncrono/asíncrono por relación | igual |
+| `ed5aba1` | `c811ca4` | 2026-10-02 19:58 | Merge pull request #52 from Charry21/docs/modulo5-dominio-integracion | igual |
+| `e4e0ece` | `85569b7` | 2026-10-02 20:36 | Merge pull request #53 from Charry21/docs/modelo-dominio | igual |
+| `91afab8` | `dd99d51` | 2026-10-09 09:48 | Unificar el modelo del dominio en docs/dominio con 4 contextos basados en evidencia | igual |
+| `8f80b21` | `f4be49c` | 2026-10-09 10:15 | Merge pull request #54 from Charry21/docs/unificar-modelo-dominio | igual |
+| `42c7c9c` | `3bf27cd` | 2026-10-09 11:23 | Registrar respuestas P1-P4 como decisiones D6-D9 del modelo del dominio | igual |
+| `9c84f21` | `561e106` | 2026-10-09 11:26 | Merge pull request #56 from Charry21/docs/respuestas-p1-p4 | igual |
+| `3e56742` | `8c2d244` | 2026-10-09 16:26 | Merge pull request #57 from Charry21/docs/entregable2-encuadre-spike | igual |
+| `a3e76c0` | `8c2d244` | 2026-10-09 16:26 | Merge pull request #57 from Charry21/docs/entregable2-encuadre-spike | igual |
+| `cd2dba1` | `3489d7f` | 2026-10-10 00:48 | docs(s10): registro de cierre del spike 1 (pendiente del veredicto del equipo) | igual |
+| `844d4b3` | `5b5700b` | 2026-10-09 19:54 | Merge pull request #61 from Charry21/claude/project-thread-4cy091 | igual |
+| `00e3ead` | `d8b88ab` | 2026-10-09 19:55 | Merge pull request #62 from Charry21/claude/project-thread-hlv246 | igual |
+| `b51b353` | `b88c50a` | 2026-10-10 00:55 | docs(s10): enlazar en el cierre la evidencia integrada de los PR #61 y #62 | igual |
+| `fed73ce` | `baa53c5` | 2026-10-10 00:55 | Merge remote-tracking branch 'origin/main' into claude/project-thread-66yxi6 | igual |
+| `16cffbd` | `aed92f6` | 2026-10-09 19:55 | Merge pull request #63 from Charry21/claude/project-thread-66yxi6 | igual |
+
+`3e56742` y `a3e76c0` son dos versiones anteriores del mismo merge del PR #57, ambas reescritas. Las dos corresponden a `8c2d244`.
+
+Quedan fuera de la tabla:
+
+- `0a243b0` (último cambio en `app/` antes del spike), que no cambió y sigue en `main`.
+- Los commits que cita `docs/EDAV-01.md` (`18ed28e`, `4d13ad3`, `6bd39c1`, `773d97a`, `e75b94d`), que no estaban en `main` antes de la reescritura y no se vieron afectados.
