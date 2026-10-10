@@ -1,0 +1,15 @@
+Fecha inicio (UTC): 2026-10-10T01:04:58Z
+Commit medido: main = 6465b1ae85189fd8a0e0790c6a40ea383a330386
+Árbol de app/: cef127273b526a70c3a0e65410127de132f2e81e  (1e522df:app = cef127273b526a70c3a0e65410127de132f2e81e; 44ede36:app = cef127273b526a70c3a0e65410127de132f2e81e)
+COMPOSE_PROJECT_NAME=patitasurbanas
+
+PRETTY_NAME="Ubuntu 24.04.5 LTS"
+openjdk version "21.0.12.1" 2026-08-18
+OpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-24.04.4-Ubuntu, mixed mode, sharing)
+Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+Docker cliente 29.8.2 / servidor 29.8.2
+Docker Compose version v5.6.0
+Python 3.13.16
+jq-1.7
+postgres:16 -> sha256:ca0bd484cb98bf4b24eb1010e73fb3fcbd6714d240fbc1a10eea5b7dbecb641d (descargada de mirror.gcr.io por límite 429 de Docker Hub; ver reproduccion-2026-10-09/entorno.txt)
