@@ -1,0 +1,5 @@
+# Comandos ejecutados (equivalentes a docker-compose.yml, sin 'build:' porque compose reconstruiria con app/Dockerfile)
+docker network create patitas_s10
+docker run -d --name patitas_urbanas_db --network patitas_s10 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=adminpassword -e POSTGRES_DB=patitas_urbanas postgres:16 postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all
+# esperar pg_isready
+docker run -d --name patitas_urbanas_api --network patitas_s10 -p 3000:3000 -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=adminpassword -e POSTGRES_DB=patitas_urbanas -e DB_HOST=postgres_db -e SPRING_DATASOURCE_URL=jdbc:postgresql://patitas_urbanas_db:5432/patitas_urbanas patitas-urbanas-api:spike-s10
