@@ -1,0 +1,48 @@
+=== GET /actuator/health (2026-10-10T00:11:34Z)
+HTTP/1.1 200 
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Transfer-Encoding: chunked
+Date: Sat, 10 Oct 2026 00:11:34 GMT
+
+{"status":"UP","components":{"db":{"status":"UP","details":{"database":"PostgreSQL","validationQuery":"isValid()"}},"diskSpace":{"status":"UP","details":{"total":270553174016,"free":29600133120,"threshold":10485760,"path":"/app/.","exists":true}},"ping":{"status":"UP"}}}
+=== GET /api/mascotas (2026-10-10T00:11:34Z)
+HTTP/1.1 404 
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 10 Oct 2026 00:11:34 GMT
+
+{"timestamp":"2026-10-10T00:11:34.080+00:00","status":404,"error":"Not Found","path":"/api/mascotas"}
+=== GET /api/adopciones (2026-10-10T00:11:34Z)
+HTTP/1.1 405 
+Allow: POST
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 10 Oct 2026 00:11:34 GMT
+
+{"timestamp":"2026-10-10T00:11:34.097+00:00","status":405,"error":"Method Not Allowed","path":"/api/adopciones"}
+=== GET /api/mascotas/buscar (2026-10-10T00:11:39Z)
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 10 Oct 2026 00:11:39 GMT
+Connection: close
+
+{"timestamp":"2026-10-10T00:11:39.107+00:00","status":400,"error":"Bad Request","path":"/api/mascotas/buscar"}
+=== GET /api/mascotas/buscar?lat=4.65&lng=-74.05&radioKm=5 (2026-10-10T00:11:44Z)
+HTTP/1.1 400 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 10 Oct 2026 00:11:44 GMT
+Connection: close
+
+{"timestamp":"2026-10-10T00:11:44.026+00:00","status":400,"error":"Bad Request","path":"/api/mascotas/buscar"}
+=== GET /api/mascotas/buscar?lat=4.65&lng=-74.05&radio=5 (2026-10-10T00:11:49Z)
+HTTP/1.1 200 
+Content-Type: text/plain;charset=UTF-8
+Content-Length: 61
+Date: Sat, 10 Oct 2026 00:11:49 GMT
+
+{"status":"success", "mensaje":"Endpoint geoespacial activo"}

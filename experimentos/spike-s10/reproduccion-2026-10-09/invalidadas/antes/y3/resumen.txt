@@ -1,0 +1,9 @@
+S1-1 status=201 cuerpo_normalizado={"estado":"PENDIENTE","etapaInicial":"SOLICITUD_RECIBIDA"} tipos={"estado":"string","idSolicitud":"number","etapaInicial":"string"}
+S1-2 status=201 cuerpo_normalizado={"estado":"PENDIENTE","etapaInicial":"SOLICITUD_RECIBIDA"} tipos={"estado":"string","idSolicitud":"number","etapaInicial":"string"}
+S1-3 status=201 cuerpo_normalizado={"estado":"PENDIENTE","etapaInicial":"SOLICITUD_RECIBIDA"} tipos={"estado":"string","idSolicitud":"number","etapaInicial":"string"}
+S2-1 status=201 cuerpo_normalizado={"estado":"PENDIENTE","etapaInicial":"SOLICITUD_RECIBIDA"} tipos={"estado":"string","idSolicitud":"number","etapaInicial":"string"}
+S2-2 status=201 cuerpo_normalizado={"estado":"PENDIENTE","etapaInicial":"SOLICITUD_RECIBIDA"} tipos={"estado":"string","idSolicitud":"number","etapaInicial":"string"}
+S2-3 status=201 cuerpo_normalizado={"estado":"PENDIENTE","etapaInicial":"SOLICITUD_RECIBIDA"} tipos={"estado":"string","idSolicitud":"number","etapaInicial":"string"}
+S3-1 status=200 cuerpo_normalizado={"mensaje":"Endpoint geoespacial activo","status":"success"} tipos={"status":"string","mensaje":"string"}
+S3-2 status=200 cuerpo_normalizado={"mensaje":"Endpoint geoespacial activo","status":"success"} tipos={"status":"string","mensaje":"string"}
+S3-3 status=200 cuerpo_normalizado={"mensaje":"Endpoint geoespacial activo","status":"success"} tipos={"status":"string","mensaje":"string"}

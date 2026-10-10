@@ -1,0 +1,343 @@
+# 2026-10-09T23:56:25Z commit=1e522df dir=/home/user/PatitasUrbanas-spike
+# docker compose down -v && docker compose up -d postgres_db
+ Network patitasurbanas-spike_default Removing 
+ Volume patitasurbanas-spike_pgdata_v16 Removing 
+ Volume patitasurbanas-spike_pgdata_v16 Removed 
+ Network patitasurbanas-spike_default Removed 
+ Volume patitasurbanas-spike_pgdata_v16 Creating 
+ Volume patitasurbanas-spike_pgdata_v16 Creating 
+ Network patitasurbanas-spike_default Creating 
+ Network patitasurbanas-spike_default Creating 
+ Volume patitasurbanas-spike_pgdata_v16 Created 
+ Volume patitasurbanas-spike_pgdata_v16 Created 
+ Network patitasurbanas-spike_default Created 
+ Network patitasurbanas-spike_default Created 
+ Container patitas_urbanas_db Creating 
+ service:postgres_db:1 Error response from daemon: Conflict. The container name "/patitas_urbanas_db" is already in use by container "afbd901512245eeeb2d3addc0848063591a81313b39e8f60a6eb1da2da89163e". You have to remove (or rename) that container to be able to reuse that name. 
+Error response from daemon: Conflict. The container name "/patitas_urbanas_db" is already in use by container "afbd901512245eeeb2d3addc0848063591a81313b39e8f60a6eb1da2da89163e". You have to remove (or rename) that container to be able to reuse that name.
+# healthy 2026-10-09T23:56:26Z; cd app && mvn -B clean test
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=36295 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------< com.patitasurbanas:patitas-urbanas-api >---------------
+[INFO] Building patitas-urbanas-api 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ patitas-urbanas-api ---
+[INFO] Deleting /home/user/PatitasUrbanas-spike/app/target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ patitas-urbanas-api ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ patitas-urbanas-api ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 8 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ patitas-urbanas-api ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ patitas-urbanas-api ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ patitas-urbanas-api ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=36295 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+[INFO] Running com.patitasurbanas.api.controller.AdopcionControllerRollbackIntegrationTest
+23:56:30.343 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.patitasurbanas.api.controller.AdopcionControllerRollbackIntegrationTest]: AdopcionControllerRollbackIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:56:30.439 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.patitasurbanas.PatitasUrbanasApplication for test class com.patitasurbanas.api.controller.AdopcionControllerRollbackIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2026-10-09T23:56:30.823Z  INFO 3649 --- [patitas-urbanas-api] [           main] dopcionControllerRollbackIntegrationTest : Starting AdopcionControllerRollbackIntegrationTest using Java 21.0.12.1 with PID 3649 (started by root in /home/user/PatitasUrbanas-spike/app)
+2026-10-09T23:56:30.825Z  INFO 3649 --- [patitas-urbanas-api] [           main] dopcionControllerRollbackIntegrationTest : The following 1 profile is active: "test"
+2026-10-09T23:56:31.748Z  INFO 3649 --- [patitas-urbanas-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-09T23:56:31.790Z  INFO 3649 --- [patitas-urbanas-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 2 JPA repository interfaces.
+2026-10-09T23:56:32.306Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-09T23:56:32.344Z  INFO 3649 --- [patitas-urbanas-api] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-10-09T23:56:32.372Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-10-09T23:56:32.604Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-09T23:56:32.625Z  INFO 3649 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-09T23:56:32.784Z  INFO 3649 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2f0cab82
+2026-10-09T23:56:32.785Z  INFO 3649 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-09T23:56:32.807Z  WARN 3649 --- [patitas-urbanas-api] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-09T23:56:33.479Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-09T23:56:33.497Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : alter table if exists etapa_adopcion drop constraint if exists FKwbmayu65k13nmlufu8pokaot
+2026-10-09T23:56:33.501Z  WARN 3649 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-10-09T23:56:33.501Z  WARN 3649 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "etapa_adopcion" does not exist, skipping
+2026-10-09T23:56:33.501Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : drop table if exists etapa_adopcion cascade
+2026-10-09T23:56:33.502Z  WARN 3649 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-10-09T23:56:33.502Z  WARN 3649 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "etapa_adopcion" does not exist, skipping
+2026-10-09T23:56:33.502Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : drop table if exists solicitud_adopcion cascade
+2026-10-09T23:56:33.502Z  WARN 3649 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-10-09T23:56:33.503Z  WARN 3649 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "solicitud_adopcion" does not exist, skipping
+2026-10-09T23:56:33.506Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : create table etapa_adopcion (fecha_cambio timestamp(6) not null, id bigint generated by default as identity, solicitud_adopcion_id bigint not null, nombre_etapa varchar(255) not null, primary key (id))
+2026-10-09T23:56:33.510Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : create table solicitud_adopcion (fecha_creacion timestamp(6) not null, id bigint generated by default as identity, estado varchar(255) not null, primary key (id))
+2026-10-09T23:56:33.513Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : alter table if exists etapa_adopcion add constraint FKwbmayu65k13nmlufu8pokaot foreign key (solicitud_adopcion_id) references solicitud_adopcion
+2026-10-09T23:56:33.517Z  INFO 3649 --- [patitas-urbanas-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-09T23:56:33.667Z DEBUG 3649 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsInitiator    : Statistics initialized [enabled=true]
+2026-10-09T23:56:33.674Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:33.675Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:33.743Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:33.800Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:33.807Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:34.052Z  WARN 3649 --- [patitas-urbanas-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-09T23:56:34.779Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-09T23:56:34.779Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-09T23:56:34.792Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-09T23:56:34.806Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 26 ms
+2026-10-09T23:56:34.862Z  INFO 3649 --- [patitas-urbanas-api] [           main] dopcionControllerRollbackIntegrationTest : Started AdopcionControllerRollbackIntegrationTest in 4.302 seconds (process running for 5.134)
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/root/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.19/byte-buddy-agent-1.14.19.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+2026-10-09T23:56:35.670Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : select count(*) from solicitud_adopcion sa1_0
+2026-10-09T23:56:35.682Z DEBUG 3649 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsImpl         : HHH000117: HQL: select count(*) from SolicitudAdopcion x, time: 18ms, rows: 1
+2026-10-09T23:56:35.690Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    752949 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    4998824 nanoseconds spent preparing 1 JDBC statements;
+    4447638 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    264834011526 nanoseconds spent executing 1 pre-partial-flushes;
+    10601 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:35.694Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : select count(*) from etapa_adopcion ea1_0
+2026-10-09T23:56:35.695Z DEBUG 3649 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsImpl         : HHH000117: HQL: select count(*) from EtapaAdopcion x, time: 1ms, rows: 1
+2026-10-09T23:56:35.696Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    28229 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    67317 nanoseconds spent preparing 1 JDBC statements;
+    777762 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    264894151257 nanoseconds spent executing 1 pre-partial-flushes;
+    3611 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:35.770Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:56:35.804Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    51399 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    360536 nanoseconds spent preparing 1 JDBC statements;
+    1499684 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:35.816Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : select count(*) from solicitud_adopcion sa1_0
+2026-10-09T23:56:35.818Z DEBUG 3649 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsImpl         : HHH000117: HQL: select count(*) from SolicitudAdopcion x, time: 1ms, rows: 1
+2026-10-09T23:56:35.822Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    40665 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    46276 nanoseconds spent preparing 1 JDBC statements;
+    934247 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    265016318747 nanoseconds spent executing 1 pre-partial-flushes;
+    6826 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:35.862Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : select count(*) from etapa_adopcion ea1_0
+2026-10-09T23:56:35.863Z DEBUG 3649 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsImpl         : HHH000117: HQL: select count(*) from EtapaAdopcion x, time: 1ms, rows: 1
+2026-10-09T23:56:35.864Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    41045 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    37351 nanoseconds spent preparing 1 JDBC statements;
+    950712 nanoseconds spent executing 1 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    265062547894 nanoseconds spent executing 1 pre-partial-flushes;
+    2596 nanoseconds spent executing 1 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.676 s -- in com.patitasurbanas.api.controller.AdopcionControllerRollbackIntegrationTest
+[INFO] Running com.patitasurbanas.PatitasUrbanasApplicationTests
+2026-10-09T23:56:35.882Z  INFO 3649 --- [patitas-urbanas-api] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.patitasurbanas.PatitasUrbanasApplicationTests]: PatitasUrbanasApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-09T23:56:35.886Z  INFO 3649 --- [patitas-urbanas-api] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.patitasurbanas.PatitasUrbanasApplication for test class com.patitasurbanas.PatitasUrbanasApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2026-10-09T23:56:35.904Z  INFO 3649 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplicationTests       : Starting PatitasUrbanasApplicationTests using Java 21.0.12.1 with PID 3649 (started by root in /home/user/PatitasUrbanas-spike/app)
+2026-10-09T23:56:35.904Z  INFO 3649 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplicationTests       : The following 1 profile is active: "test"
+2026-10-09T23:56:36.093Z  INFO 3649 --- [patitas-urbanas-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-09T23:56:36.099Z  INFO 3649 --- [patitas-urbanas-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 2 JPA repository interfaces.
+2026-10-09T23:56:36.182Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-09T23:56:36.184Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-10-09T23:56:36.189Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-09T23:56:36.190Z  INFO 3649 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-09T23:56:36.202Z  INFO 3649 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@2d95c3ef
+2026-10-09T23:56:36.202Z  INFO 3649 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-09T23:56:36.205Z  WARN 3649 --- [patitas-urbanas-api] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-10-09T23:56:36.241Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-09T23:56:36.242Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : alter table if exists etapa_adopcion drop constraint if exists FKwbmayu65k13nmlufu8pokaot
+2026-10-09T23:56:36.244Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : drop table if exists etapa_adopcion cascade
+2026-10-09T23:56:36.246Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : drop table if exists solicitud_adopcion cascade
+2026-10-09T23:56:36.249Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : create table etapa_adopcion (fecha_cambio timestamp(6) not null, id bigint generated by default as identity, solicitud_adopcion_id bigint not null, nombre_etapa varchar(255) not null, primary key (id))
+2026-10-09T23:56:36.253Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : create table solicitud_adopcion (fecha_creacion timestamp(6) not null, id bigint generated by default as identity, estado varchar(255) not null, primary key (id))
+2026-10-09T23:56:36.255Z DEBUG 3649 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : alter table if exists etapa_adopcion add constraint FKwbmayu65k13nmlufu8pokaot foreign key (solicitud_adopcion_id) references solicitud_adopcion
+2026-10-09T23:56:36.257Z  INFO 3649 --- [patitas-urbanas-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-09T23:56:36.312Z DEBUG 3649 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsInitiator    : Statistics initialized [enabled=true]
+2026-10-09T23:56:36.313Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:36.323Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:36.351Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:36.358Z  INFO 3649 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:56:36.452Z  WARN 3649 --- [patitas-urbanas-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-09T23:56:36.715Z  INFO 3649 --- [patitas-urbanas-api] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-09T23:56:36.739Z  INFO 3649 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplicationTests       : Started PatitasUrbanasApplicationTests in 0.85 seconds (process running for 7.011)
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.866 s -- in com.patitasurbanas.PatitasUrbanasApplicationTests
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.438 s
+[INFO] Finished at: 2026-10-09T23:56:36Z
+[INFO] ------------------------------------------------------------------------
+# exit=0 fin=2026-10-09T23:56:36Z

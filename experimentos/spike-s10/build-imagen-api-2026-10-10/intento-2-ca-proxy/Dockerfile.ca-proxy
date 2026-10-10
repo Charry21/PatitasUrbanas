@@ -1,0 +1,18 @@
+# Variante SOLO para este entorno de nube: identica a app/Dockerfile salvo el
+# paso marcado DESVIACION, que importa la CA del proxy de salida TLS del
+# contenedor en el truststore del JDK de la etapa de build (Maven fallo con
+# PKIX en el intento 1). app/Dockerfile no se modifica.
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+# DESVIACION: confiar en la CA del proxy de salida del entorno
+COPY --from=ccr agent-proxy-ca.crt /tmp/agent-proxy-ca.crt
+RUN keytool -importcert -noprompt -cacerts -storepass changeit -alias ccr-agent-proxy -file /tmp/agent-proxy-ca.crt
+WORKDIR /workspace
+COPY pom.xml .
+COPY src ./src
+RUN mvn -DskipTests package
+
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY --from=build /workspace/target/patitas-urbanas-api-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 3000
+ENTRYPOINT ["java", "-jar", "app.jar"]

@@ -1,0 +1,3 @@
+patitas_urbanas_api | Up 16 seconds | patitas-urbanas-api:spike-s10 | fd2207047400
+patitas_urbanas_db | Up 19 seconds | postgres:16 | 59de5c2ffdc5
+sha256:9562b9299e449af34f8d0ab375af4d11fa442202388ac87ededb8a04351e0b16

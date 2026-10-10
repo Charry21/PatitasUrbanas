@@ -1,0 +1,174 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 337B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-21
+#2 ...
+
+#3 [internal] load metadata for docker.io/library/eclipse-temurin:21-jre
+#3 DONE 1.9s
+
+#2 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-21
+#2 DONE 2.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 DONE 0.0s
+
+#6 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5
+#6 resolve docker.io/library/eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5 0.0s done
+#6 DONE 0.0s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 ...
+
+#5 [internal] load build context
+#5 transferring context: 17.15kB done
+#5 DONE 0.0s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e 0.0s done
+#7 sha256:ac08ec036c80487483481b8b4099c337b9f50c5a6fa61a916e0714fd6a25808b 0B / 153B 0.2s
+#7 sha256:ac08ec036c80487483481b8b4099c337b9f50c5a6fa61a916e0714fd6a25808b 153B / 153B 0.3s done
+#7 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 0B / 32B 0.2s
+#7 sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B 0.4s done
+#7 sha256:99f05f209f6fd19181ffd50612236193ad46991100ff9ffc79e5b5d7f15f0e06 0B / 2.28kB 0.2s
+#7 sha256:100a2f749ec88b1edeb1a262140d5ff15deb223ddb60db02b007fbd02e430c01 0B / 850B 0.2s
+#7 sha256:903243de14d5324cd69215ac4e249070a8a95725e01db0e0a8a7a91e819842a2 0B / 9.17MB 0.2s
+#7 sha256:99f05f209f6fd19181ffd50612236193ad46991100ff9ffc79e5b5d7f15f0e06 2.28kB / 2.28kB 0.6s done
+#7 sha256:100a2f749ec88b1edeb1a262140d5ff15deb223ddb60db02b007fbd02e430c01 850B / 850B 0.4s done
+#7 sha256:52fd01a09145cd9d4a6b5a5e02abea836a1e0b59167645cb4945260b39389858 0B / 22.54MB 0.2s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 0B / 157.65MB 0.2s
+#7 sha256:903243de14d5324cd69215ac4e249070a8a95725e01db0e0a8a7a91e819842a2 9.17MB / 9.17MB 0.8s done
+#7 sha256:14ea0157e6cfd88563f52f3de2252f96d1de76755323a4e666dc06bfdc169362 0B / 157B 0.2s
+#7 sha256:14ea0157e6cfd88563f52f3de2252f96d1de76755323a4e666dc06bfdc169362 157B / 157B 0.4s done
+#7 sha256:52fd01a09145cd9d4a6b5a5e02abea836a1e0b59167645cb4945260b39389858 8.39MB / 22.54MB 0.9s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 11.53MB / 157.65MB 0.9s
+#7 sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61 0B / 22.95MB 0.2s
+#7 sha256:52fd01a09145cd9d4a6b5a5e02abea836a1e0b59167645cb4945260b39389858 11.53MB / 22.54MB 1.1s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 25.17MB / 157.65MB 1.1s
+#7 sha256:52fd01a09145cd9d4a6b5a5e02abea836a1e0b59167645cb4945260b39389858 22.54MB / 22.54MB 1.2s done
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 48.23MB / 157.65MB 1.4s
+#7 sha256:d9d352c11bbd3880007953ed6eec1cbace76898828f3434984a0ca60672fdf5a 0B / 29.72MB 0.2s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 70.25MB / 157.65MB 1.5s
+#7 sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61 6.29MB / 22.95MB 0.8s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 90.18MB / 157.65MB 1.7s
+#7 sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61 8.39MB / 22.95MB 0.9s
+#7 sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61 15.73MB / 22.95MB 1.2s
+#7 sha256:d9d352c11bbd3880007953ed6eec1cbace76898828f3434984a0ca60672fdf5a 8.39MB / 29.72MB 0.8s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 106.95MB / 157.65MB 2.1s
+#7 sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61 22.95MB / 22.95MB 1.3s done
+#7 sha256:d9d352c11bbd3880007953ed6eec1cbace76898828f3434984a0ca60672fdf5a 14.68MB / 29.72MB 0.9s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 144.70MB / 157.65MB 2.4s
+#7 sha256:d9d352c11bbd3880007953ed6eec1cbace76898828f3434984a0ca60672fdf5a 29.72MB / 29.72MB 1.1s done
+#7 extracting sha256:d9d352c11bbd3880007953ed6eec1cbace76898828f3434984a0ca60672fdf5a
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 155.19MB / 157.65MB 2.6s
+#7 sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 157.65MB / 157.65MB 2.7s done
+#7 extracting sha256:d9d352c11bbd3880007953ed6eec1cbace76898828f3434984a0ca60672fdf5a 1.0s done
+#7 extracting sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61
+#7 extracting sha256:380ab39b4f9f66f5491f1e6c6e1b00af781c9e67017d5194267c1eb1b1ea9d61 0.7s done
+#7 extracting sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de
+#7 ...
+
+#6 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5
+#6 sha256:550bcd7b9380af835ebbbf439f5ddcaebfb2af951dc75d4bcbdc261cbe3917f0 2.46kB / 2.46kB 0.4s done
+#6 sha256:3b4157e3a962cdb99242cd5b145bcc2124d0db0c9849175dd981fe78640d0a72 158B / 158B 0.7s done
+#6 sha256:9d8d42fbc5604c4e895096a9217ddaef21c1eb762a43acedbc9c4554b58f65bb 53.10MB / 53.10MB 1.5s done
+#6 sha256:5d8dab7db2742f65eb651ddb9c472895877637821edd25947a57e6809ea99ecb 23.11MB / 23.11MB 6.6s done
+#6 sha256:06ad70e463aa4a17833d00d6d5d346c895ebb66fee637eefd67024dc6cdc2f1c 388B / 388B 0.5s done
+#6 sha256:4e07a0f12b2c009f98326fa391e869bd52fc63728c482400af6cb752bc16744b 41.84MB / 41.84MB 1.0s done
+#6 extracting sha256:4e07a0f12b2c009f98326fa391e869bd52fc63728c482400af6cb752bc16744b 1.5s done
+#6 extracting sha256:06ad70e463aa4a17833d00d6d5d346c895ebb66fee637eefd67024dc6cdc2f1c 0.0s done
+#6 extracting sha256:5d8dab7db2742f65eb651ddb9c472895877637821edd25947a57e6809ea99ecb 0.8s done
+#6 DONE 7.5s
+
+#6 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5
+#6 extracting sha256:9d8d42fbc5604c4e895096a9217ddaef21c1eb762a43acedbc9c4554b58f65bb
+#6 extracting sha256:9d8d42fbc5604c4e895096a9217ddaef21c1eb762a43acedbc9c4554b58f65bb 1.9s done
+#6 DONE 9.4s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 extracting sha256:fdf9441e6dddb8defe5d23ab009dd1a3d91ad4f953b4d53d9e904e1adcae03de 3.4s done
+#7 DONE 9.6s
+
+#6 [stage-1 1/3] FROM docker.io/library/eclipse-temurin:21-jre@sha256:cff19e6215689161eb6162c11b86b0c60ddf802164f2eaf48d570f8fb79a36c5
+#6 extracting sha256:3b4157e3a962cdb99242cd5b145bcc2124d0db0c9849175dd981fe78640d0a72 done
+#6 extracting sha256:550bcd7b9380af835ebbbf439f5ddcaebfb2af951dc75d4bcbdc261cbe3917f0 0.0s done
+#6 DONE 9.4s
+
+#8 [stage-1 2/3] WORKDIR /app
+#8 DONE 1.1s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 extracting sha256:14ea0157e6cfd88563f52f3de2252f96d1de76755323a4e666dc06bfdc169362 0.1s done
+#7 extracting sha256:99f05f209f6fd19181ffd50612236193ad46991100ff9ffc79e5b5d7f15f0e06
+#7 extracting sha256:99f05f209f6fd19181ffd50612236193ad46991100ff9ffc79e5b5d7f15f0e06 0.9s done
+#7 extracting sha256:52fd01a09145cd9d4a6b5a5e02abea836a1e0b59167645cb4945260b39389858
+#7 extracting sha256:52fd01a09145cd9d4a6b5a5e02abea836a1e0b59167645cb4945260b39389858 0.9s done
+#7 DONE 11.4s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 extracting sha256:903243de14d5324cd69215ac4e249070a8a95725e01db0e0a8a7a91e819842a2 0.1s done
+#7 DONE 11.5s
+
+#7 [build 1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#7 extracting sha256:100a2f749ec88b1edeb1a262140d5ff15deb223ddb60db02b007fbd02e430c01 done
+#7 extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 done
+#7 extracting sha256:ac08ec036c80487483481b8b4099c337b9f50c5a6fa61a916e0714fd6a25808b done
+#7 DONE 11.6s
+
+#9 [build 2/5] WORKDIR /workspace
+#9 DONE 0.1s
+
+#10 [build 3/5] COPY pom.xml .
+#10 DONE 0.0s
+
+#11 [build 4/5] COPY src ./src
+#11 DONE 0.0s
+
+#12 [build 5/5] RUN mvn -DskipTests package
+#12 1.837 [INFO] Scanning for projects...
+#12 2.058 Downloading from central: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-parent/3.3.4/spring-boot-starter-parent-3.3.4.pom
+#12 2.316 [ERROR] [ERROR] Some problems were encountered while processing the POMs:
+#12 2.316 [FATAL] Non-resolvable parent POM for com.patitasurbanas:patitas-urbanas-api:0.0.1-SNAPSHOT: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:3.3.4 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:3.3.4 from/to central (https://repo.maven.apache.org/maven2): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target and 'parent.relativePath' points at no local POM @ line 6, column 13
+#12 2.316  @ 
+#12 2.316 [ERROR] The build could not read 1 project -> [Help 1]
+#12 2.316 [ERROR]   
+#12 2.316 [ERROR]   The project com.patitasurbanas:patitas-urbanas-api:0.0.1-SNAPSHOT (/workspace/pom.xml) has 1 error
+#12 2.317 [ERROR]     Non-resolvable parent POM for com.patitasurbanas:patitas-urbanas-api:0.0.1-SNAPSHOT: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:3.3.4 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:3.3.4 from/to central (https://repo.maven.apache.org/maven2): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target and 'parent.relativePath' points at no local POM @ line 6, column 13 -> [Help 2]
+#12 2.317 [ERROR] 
+#12 2.318 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+#12 2.318 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+#12 2.318 [ERROR] 
+#12 2.321 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+#12 2.321 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+#12 2.321 [ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/UnresolvableModelException
+#12 ERROR: process "/bin/sh -c mvn -DskipTests package" did not complete successfully: exit code: 1
+------
+ > [build 5/5] RUN mvn -DskipTests package:
+2.316 [ERROR]   
+2.316 [ERROR]   The project com.patitasurbanas:patitas-urbanas-api:0.0.1-SNAPSHOT (/workspace/pom.xml) has 1 error
+2.317 [ERROR]     Non-resolvable parent POM for com.patitasurbanas:patitas-urbanas-api:0.0.1-SNAPSHOT: The following artifacts could not be resolved: org.springframework.boot:spring-boot-starter-parent:pom:3.3.4 (absent): Could not transfer artifact org.springframework.boot:spring-boot-starter-parent:pom:3.3.4 from/to central (https://repo.maven.apache.org/maven2): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target and 'parent.relativePath' points at no local POM @ line 6, column 13 -> [Help 2]
+2.317 [ERROR] 
+2.318 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2.318 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2.318 [ERROR] 
+2.321 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2.321 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/ProjectBuildingException
+2.321 [ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/UnresolvableModelException
+------
+Dockerfile:5
+--------------------
+   3 |     COPY pom.xml .
+   4 |     COPY src ./src
+   5 | >>> RUN mvn -DskipTests package
+   6 |     
+   7 |     FROM eclipse-temurin:21-jre
+--------------------
+ERROR: failed to build: failed to solve: process "/bin/sh -c mvn -DskipTests package" did not complete successfully: exit code: 1

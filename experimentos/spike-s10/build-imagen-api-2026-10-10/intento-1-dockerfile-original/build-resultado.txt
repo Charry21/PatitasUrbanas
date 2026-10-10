@@ -1,0 +1,4 @@
+Inicio: 2026-10-10T00:08:28Z
+Fin: 2026-10-10T00:08:44Z
+Duracion_s: 16
+Exit code: 1
