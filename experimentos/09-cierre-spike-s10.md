@@ -40,7 +40,7 @@
 | 8 archivos, 15 inserciones, 18 eliminaciones | `git diff --shortstat -M 887ccf1 1e522df -- app` y `alcance-diff.txt` | Sí |
 | Entorno | `entorno.txt` (Ubuntu 24.04.4, Docker 29.6.2, OpenJDK 21.0.11, Maven 3.9.11, PostgreSQL 16.15) | Sí |
 
-Además, Y1–Y5 se volvieron a medir el 2026-10-09 sobre `887ccf1`, `1e522df` y el control `4883f9c`, en un contenedor Linux con versiones cercanas a las originales, y los resultados coinciden con los registrados; las salidas de `revisar_modulos.py` se regeneran idénticas byte a byte (evidencia en el PR #61, pendiente de integrar).
+Además, Y1–Y5 se volvieron a medir el 2026-10-09 sobre `887ccf1`, `1e522df` y el control `4883f9c`, en un contenedor Linux con versiones cercanas a las originales, y los resultados coinciden con los registrados; las salidas de `revisar_modulos.py` se regeneran idénticas byte a byte (evidencia en [`spike-s10/reproduccion-2026-10-09/`](./spike-s10/reproduccion-2026-10-09/), integrada con el PR #61).
 
 Observaciones menores, sin efecto sobre los valores: 06 §7 menciona "D1–D4" aunque §5 ya incluye D5 (aclaración N1, §3.5); el log de Y1 "después" muestra el test de rollback aún en el paquete `api.controller` (es el hallazgo S1, ya aceptado).
 
@@ -53,7 +53,7 @@ Observaciones menores, sin efecto sobre los valores: 06 §7 menciona "D1–D4" a
 
 ### 3.4 Construcción de la imagen Docker de la API
 
-Verificación hecha el 2026-10-10 en un contenedor Linux con intercepción TLS (evidencia en el PR #62, pendiente de integrar):
+Verificación hecha el 2026-10-10 en un contenedor Linux con intercepción TLS (evidencia en [`spike-s10/build-imagen-api-2026-10-10/`](./spike-s10/build-imagen-api-2026-10-10/), integrada con el PR #62):
 
 - `app/Dockerfile` original: **falla** en `mvn -DskipTests package` por `PKIX path building failed` al descargar dependencias de Maven Central.
 - Variante que solo añade las CA del entorno en la etapa de build: construye (`BUILD SUCCESS`) y el contenedor arranca; `GET /actuator/health` → 200 con BD `UP`, `GET /api/mascotas/buscar` → 200.
@@ -103,7 +103,6 @@ Los pendientes técnicos siguen abiertos y **no** se presentan como pruebas supe
 | P4 | Probar `POST /api/adopciones/test-fallo` fuera del test de rollback, entradas no válidas y casos límite | Verificación técnica | No verificado | | |
 | P5 | Mover el test de rollback a `api.adopciones` (hallazgo S1) | Seguimiento del spike | Aceptado, sin hacer | | |
 | P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | Pendiente de decisión del equipo | | |
-| P7 | Decidir si se integran los PR #61 (reproducción Y1–Y5) y #62 (build de la imagen) | Evidencia | PR abiertos | | |
 | P8 | Ajustar `revisar_modulos.py` (Y2: comodines, nombres calificados; Y5: clases sin mapear) si se reutiliza en otro spike | Instrumento | Limitación conocida (§4.2) | | |
 
 ## 6. Veredicto del equipo
