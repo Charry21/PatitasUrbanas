@@ -1,0 +1,41 @@
+== Clases de producción (paquete actual -> módulo según mapeo)
+  PatitasUrbanasApplication      com.patitasurbanas                            -> - (fuera del mapeo)
+  AdopcionController             com.patitasurbanas.api.controller             -> adopciones (publico)
+  MascotaController              com.patitasurbanas.api.controller             -> mascotas (publico)
+  EtapaAdopcion                  com.patitasurbanas.api.model                  -> adopciones (modelo)
+  SolicitudAdopcion              com.patitasurbanas.api.model                  -> adopciones (modelo)
+  EtapaAdopcionRepository        com.patitasurbanas.api.repository             -> adopciones (repositorio)
+  SolicitudAdopcionRepository    com.patitasurbanas.api.repository             -> adopciones (repositorio)
+  AdopcionService                com.patitasurbanas.api.service                -> adopciones (publico)
+
+== Y2: imports del proyecto evaluados
+  AdopcionController [adopciones] -> SolicitudAdopcion [adopciones/modelo]: permitido
+  AdopcionController [adopciones] -> AdopcionService [adopciones/publico]: permitido
+  MascotaController [mascotas] -> SolicitudAdopcionRepository [adopciones/repositorio]: PROHIBIDO (repositorio interno de otro módulo)
+  EtapaAdopcionRepository [adopciones] -> EtapaAdopcion [adopciones/modelo]: permitido
+  SolicitudAdopcionRepository [adopciones] -> SolicitudAdopcion [adopciones/modelo]: permitido
+  AdopcionService [adopciones] -> EtapaAdopcion [adopciones/modelo]: permitido
+  AdopcionService [adopciones] -> SolicitudAdopcion [adopciones/modelo]: permitido
+  AdopcionService [adopciones] -> EtapaAdopcionRepository [adopciones/repositorio]: permitido
+  AdopcionService [adopciones] -> SolicitudAdopcionRepository [adopciones/repositorio]: permitido
+
+Y2 = 1 import(s) prohibido(s)
+
+== Y4: clases del mapeo en su módulo objetivo
+  AdopcionController             com.patitasurbanas.api.controller             objetivo=adopciones  NO
+  AdopcionService                com.patitasurbanas.api.service                objetivo=adopciones  NO
+  SolicitudAdopcionRepository    com.patitasurbanas.api.repository             objetivo=adopciones  NO
+  EtapaAdopcionRepository        com.patitasurbanas.api.repository             objetivo=adopciones  NO
+  SolicitudAdopcion              com.patitasurbanas.api.model                  objetivo=adopciones  NO
+  EtapaAdopcion                  com.patitasurbanas.api.model                  objetivo=adopciones  NO
+  MascotaController              com.patitasurbanas.api.controller             objetivo=mascotas    NO
+
+Y4 = 0/7 = 0.0%
+
+== Y5: dominios por paquete
+  com.patitasurbanas.api.controller             ['adopciones', 'mascotas']  <- MEZCLA
+  com.patitasurbanas.api.model                  ['adopciones']
+  com.patitasurbanas.api.repository             ['adopciones']
+  com.patitasurbanas.api.service                ['adopciones']
+
+Y5 = 1 paquete(s) que mezclan dominios

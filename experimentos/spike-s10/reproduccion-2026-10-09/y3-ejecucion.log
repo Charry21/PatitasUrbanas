@@ -1,0 +1,4 @@
+base start 2026-10-10T00:00:00Z commit=887ccf1 COMPOSE_PROJECT_NAME=patitasurbanas
+exit=0 fin=2026-10-10T00:00:20Z
+spike start 2026-10-10T00:00:20Z commit=1e522df COMPOSE_PROJECT_NAME=patitasurbanas
+exit=0 fin=2026-10-10T00:00:39Z
