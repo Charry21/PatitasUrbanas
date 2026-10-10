@@ -1,0 +1,269 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=36295 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=36295 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.3.4)
+
+2026-10-09T23:57:08.380Z  INFO 4277 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplication            : Starting PatitasUrbanasApplication using Java 21.0.12.1 with PID 4277 (/home/user/PatitasUrbanas-base/app/target/classes started by root in /home/user/PatitasUrbanas-base/app)
+2026-10-09T23:57:08.382Z  INFO 4277 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplication            : No active profile set, falling back to 1 default profile: "default"
+2026-10-09T23:57:09.023Z  INFO 4277 --- [patitas-urbanas-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-09T23:57:09.063Z  INFO 4277 --- [patitas-urbanas-api] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 2 JPA repository interfaces.
+2026-10-09T23:57:09.583Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 3000 (http)
+2026-10-09T23:57:09.594Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-09T23:57:09.595Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2026-10-09T23:57:09.631Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-10-09T23:57:09.632Z  INFO 4277 --- [patitas-urbanas-api] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1214 ms
+2026-10-09T23:57:09.913Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-10-09T23:57:09.953Z  INFO 4277 --- [patitas-urbanas-api] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-10-09T23:57:09.978Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-10-09T23:57:10.192Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-09T23:57:10.212Z  INFO 4277 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-09T23:57:10.330Z  INFO 4277 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@17df689e
+2026-10-09T23:57:10.331Z  INFO 4277 --- [patitas-urbanas-api] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-09T23:57:10.982Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-09T23:57:10.995Z DEBUG 4277 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : alter table if exists etapa_adopcion drop constraint if exists FKwbmayu65k13nmlufu8pokaot
+2026-10-09T23:57:10.998Z  WARN 4277 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-10-09T23:57:10.998Z  WARN 4277 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : relation "etapa_adopcion" does not exist, skipping
+2026-10-09T23:57:10.998Z DEBUG 4277 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : drop table if exists etapa_adopcion cascade
+2026-10-09T23:57:10.999Z  WARN 4277 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-10-09T23:57:10.999Z  WARN 4277 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "etapa_adopcion" does not exist, skipping
+2026-10-09T23:57:11.000Z DEBUG 4277 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : drop table if exists solicitud_adopcion cascade
+2026-10-09T23:57:11.000Z  WARN 4277 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Warning Code: 0, SQLState: 00000
+2026-10-09T23:57:11.000Z  WARN 4277 --- [patitas-urbanas-api] [           main] o.h.engine.jdbc.spi.SqlExceptionHelper   : table "solicitud_adopcion" does not exist, skipping
+2026-10-09T23:57:11.004Z DEBUG 4277 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : create table etapa_adopcion (fecha_cambio timestamp(6) not null, id bigint generated by default as identity, solicitud_adopcion_id bigint not null, nombre_etapa varchar(255) not null, primary key (id))
+2026-10-09T23:57:11.009Z DEBUG 4277 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : create table solicitud_adopcion (fecha_creacion timestamp(6) not null, id bigint generated by default as identity, estado varchar(255) not null, primary key (id))
+2026-10-09T23:57:11.012Z DEBUG 4277 --- [patitas-urbanas-api] [           main] org.hibernate.SQL                        : alter table if exists etapa_adopcion add constraint FKwbmayu65k13nmlufu8pokaot foreign key (solicitud_adopcion_id) references solicitud_adopcion
+2026-10-09T23:57:11.017Z  INFO 4277 --- [patitas-urbanas-api] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-09T23:57:11.151Z DEBUG 4277 --- [patitas-urbanas-api] [           main] o.h.stat.internal.StatisticsInitiator    : Statistics initialized [enabled=true]
+2026-10-09T23:57:11.156Z  INFO 4277 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:11.157Z  INFO 4277 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:11.207Z  INFO 4277 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:11.238Z  INFO 4277 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:11.242Z  INFO 4277 --- [patitas-urbanas-api] [           main] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:11.314Z  WARN 4277 --- [patitas-urbanas-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-09T23:57:11.812Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-09T23:57:11.878Z  INFO 4277 --- [patitas-urbanas-api] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 3000 (http) with context path '/'
+2026-10-09T23:57:11.888Z  INFO 4277 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplication            : Started PatitasUrbanasApplication in 3.837 seconds (process running for 4.101)
+2026-10-09T23:57:13.120Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-10-09T23:57:13.120Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-10-09T23:57:13.121Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2026-10-09T23:57:13.174Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.214Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-2] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:57:13.241Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-2] org.hibernate.SQL                        : insert into etapa_adopcion (fecha_cambio,nombre_etapa,solicitud_adopcion_id) values (?,?,?) returning id
+2026-10-09T23:57:13.251Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-2] c.p.api.controller.AdopcionController    : MEDICION_S6_CONTROLADOR_MS=62.862926
+2026-10-09T23:57:13.278Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-2] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    790562 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    3860766 nanoseconds spent preparing 2 JDBC statements;
+    3464466 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    4169843 nanoseconds spent executing 1 flushes (flushing a total of 2 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.291Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-4] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:57:13.293Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-4] org.hibernate.SQL                        : insert into etapa_adopcion (fecha_cambio,nombre_etapa,solicitud_adopcion_id) values (?,?,?) returning id
+2026-10-09T23:57:13.296Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-4] c.p.api.controller.AdopcionController    : MEDICION_S6_CONTROLADOR_MS=5.183968
+2026-10-09T23:57:13.297Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-4] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    46142 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    72370 nanoseconds spent preparing 2 JDBC statements;
+    1407464 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    198470 nanoseconds spent executing 1 flushes (flushing a total of 2 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.311Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-5] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:57:13.313Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-5] org.hibernate.SQL                        : insert into etapa_adopcion (fecha_cambio,nombre_etapa,solicitud_adopcion_id) values (?,?,?) returning id
+2026-10-09T23:57:13.315Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-5] c.p.api.controller.AdopcionController    : MEDICION_S6_CONTROLADOR_MS=4.990353
+2026-10-09T23:57:13.316Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-5] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    39573 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    57299 nanoseconds spent preparing 2 JDBC statements;
+    1256620 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    121526 nanoseconds spent executing 1 flushes (flushing a total of 2 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.329Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-7] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:57:13.331Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-7] org.hibernate.SQL                        : insert into etapa_adopcion (fecha_cambio,nombre_etapa,solicitud_adopcion_id) values (?,?,?) returning id
+2026-10-09T23:57:13.333Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-7] c.p.api.controller.AdopcionController    : MEDICION_S6_CONTROLADOR_MS=4.538737
+2026-10-09T23:57:13.334Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-7] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    60410 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    56689 nanoseconds spent preparing 2 JDBC statements;
+    1341766 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    114004 nanoseconds spent executing 1 flushes (flushing a total of 2 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.345Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-9] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:57:13.347Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-9] org.hibernate.SQL                        : insert into etapa_adopcion (fecha_cambio,nombre_etapa,solicitud_adopcion_id) values (?,?,?) returning id
+2026-10-09T23:57:13.349Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-9] c.p.api.controller.AdopcionController    : MEDICION_S6_CONTROLADOR_MS=4.516924
+2026-10-09T23:57:13.350Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-9] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    37433 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    44410 nanoseconds spent preparing 2 JDBC statements;
+    1600350 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    120242 nanoseconds spent executing 1 flushes (flushing a total of 2 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.362Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] org.hibernate.SQL                        : insert into solicitud_adopcion (estado,fecha_creacion) values (?,?) returning id
+2026-10-09T23:57:13.363Z DEBUG 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] org.hibernate.SQL                        : insert into etapa_adopcion (fecha_cambio,nombre_etapa,solicitud_adopcion_id) values (?,?,?) returning id
+2026-10-09T23:57:13.365Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] c.p.api.controller.AdopcionController    : MEDICION_S6_CONTROLADOR_MS=3.637578
+2026-10-09T23:57:13.366Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-1] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    32973 nanoseconds spent acquiring 1 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    42898 nanoseconds spent preparing 2 JDBC statements;
+    949971 nanoseconds spent executing 2 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    103394 nanoseconds spent executing 1 flushes (flushing a total of 2 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.378Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-3] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.389Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-4] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.400Z  INFO 4277 --- [patitas-urbanas-api] [nio-3000-exec-5] i.StatisticalLoggingSessionEventListener : Session Metrics {
+    0 nanoseconds spent acquiring 0 JDBC connections;
+    0 nanoseconds spent releasing 0 JDBC connections;
+    0 nanoseconds spent preparing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC statements;
+    0 nanoseconds spent executing 0 JDBC batches;
+    0 nanoseconds spent performing 0 L2C puts;
+    0 nanoseconds spent performing 0 L2C hits;
+    0 nanoseconds spent performing 0 L2C misses;
+    0 nanoseconds spent executing 0 flushes (flushing a total of 0 entities and 0 collections);
+    0 nanoseconds spent executing 0 pre-partial-flushes;
+    0 nanoseconds spent executing 0 partial-flushes (flushing a total of 0 entities and 0 collections)
+}
+2026-10-09T23:57:13.494Z  INFO 4277 --- [patitas-urbanas-api] [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-09T23:57:13.495Z DEBUG 4277 --- [patitas-urbanas-api] [ionShutdownHook] org.hibernate.SQL                        : alter table if exists etapa_adopcion drop constraint if exists FKwbmayu65k13nmlufu8pokaot
+2026-10-09T23:57:13.497Z DEBUG 4277 --- [patitas-urbanas-api] [ionShutdownHook] org.hibernate.SQL                        : drop table if exists etapa_adopcion cascade
+2026-10-09T23:57:13.500Z DEBUG 4277 --- [patitas-urbanas-api] [ionShutdownHook] org.hibernate.SQL                        : drop table if exists solicitud_adopcion cascade
+2026-10-09T23:57:13.503Z  INFO 4277 --- [patitas-urbanas-api] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-09T23:57:13.511Z  INFO 4277 --- [patitas-urbanas-api] [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
