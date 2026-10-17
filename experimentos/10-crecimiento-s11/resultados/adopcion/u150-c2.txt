@@ -1,0 +1,1 @@
+usuarios=150 operacion=adopcion reqs=6000 rps=146.87 p50=6.52ms p95=42.52ms p99=92.52ms max=166.70ms fallos=0.00%

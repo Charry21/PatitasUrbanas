@@ -116,7 +116,7 @@ def graficar(escalones):
     tinta, tinta2, grid, fondo = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
     paneles = [("p95_mediana_ms", "p95 (ms), mediana de 3 corridas"),
                ("rps_mediana", "Throughput (req/s), mediana"),
-               ("cpu_total_max_media", "CPU total de la máquina (%)")]
+               ("cpu_total_max_media", "CPU total de la máquina (%), peor corrida")]
     fig, ejes = plt.subplots(1, 3, figsize=(13, 4.2), facecolor=fondo)
     for ax, (campo, titulo) in zip(ejes, paneles):
         ax.set_facecolor(fondo)
@@ -126,8 +126,9 @@ def graficar(escalones):
                 continue
             xs, ys = [e["usuarios"] for e in es], [e[campo] for e in es]
             ax.plot(xs, ys, color=color[op], lw=2, marker="o", ms=7, mec=fondo, mew=2, label=nombre[op])
-            ax.annotate(f"{ys[-1]:g}", (xs[-1], ys[-1]), xytext=(6, 0), textcoords="offset points",
-                        va="center", fontsize=9, color=tinta)
+            if campo != "rps_mediana":  # en throughput las dos series se superponen
+                ax.annotate(f"{ys[-1]:g}", (xs[-1], ys[-1]), xytext=(6, 0), textcoords="offset points",
+                            va="center", fontsize=9, color=tinta)
         if campo == "rps_mediana":
             ax.plot(ESCALONES, ESCALONES, color=tinta2, lw=1, ls="--", label="≈ 1 req/s por usuario")
         if campo == "cpu_total_max_media":
