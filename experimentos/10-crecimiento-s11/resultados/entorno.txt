@@ -1,0 +1,14 @@
+Fecha UTC: 2026-10-17T00:08:16Z
+Commit del código medido: 964dd4a0c5e1858503dc688bd94b08e5503db704 (rama experimento/s11-crecimiento; app/ idéntico a fb26713)
+Diff app/ contra fb26713: 
+SO host: Ubuntu 24.04.5 LTS, kernel 6.18.44-fc-v139, x86_64
+CPU: 2 vCPU — Intel(R) Xeon(R) Processor @ 2.80GHz
+RAM: 7.8Gi
+Docker: 29.8.2
+k6: k6 v2.2.0 (commit/00a9a1b7f5, go1.26.5, linux/amd64)
+Java (contenedor API): openjdk version "21.0.12.1" 2026-08-18 LTS
+PostgreSQL: PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+Imagen API: patitas-urbanas-api:s11 sha256:8b9dca3431540b56f36dc62d2eff1db50f19c37e397f2744090c61f623c0acec
+Imagen BD: postgres:16 postgres@sha256:ca0bd484cb98bf4b24eb1010e73fb3fcbd6714d240fbc1a10eea5b7dbecb641d
+SHA-256 del jar: cf3c5a882074837551f54e9435edd126ba34bd37530ae646819265124ca5938b
+Generador, API y BD en la misma máquina: sí

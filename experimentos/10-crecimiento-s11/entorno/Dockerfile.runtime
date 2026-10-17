@@ -1,0 +1,9 @@
+# Variante SOLO para el entorno de nube del experimento S11.
+# Es la etapa final de app/Dockerfile sin cambios. La etapa de build (mvn package)
+# se hizo en el host con `mvn -B -DskipTests package`, porque dentro de los
+# contenedores de build no hay salida a Maven Central en este entorno.
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+COPY target/patitas-urbanas-api-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 3000
+ENTRYPOINT ["java", "-jar", "app.jar"]
