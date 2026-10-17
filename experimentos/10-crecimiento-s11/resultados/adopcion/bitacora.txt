@@ -1,0 +1,18 @@
+2026-10-17T00:22:58Z reinicio de la API
+2026-10-17T00:23:11Z API UP; filas BD (solicitud,etapa) = 0,0
+2026-10-17T00:23:11Z 2026-10-17T00:23:52Z u50-c1 exit=0 filas_bd=1962,1962 :: usuarios=50 operacion=adopcion reqs=1962 rps=47.90 p50=10.73ms p95=84.71ms p99=437.45ms max=516.06ms fallos=0.00%
+2026-10-17T00:24:03Z 2026-10-17T00:24:44Z u50-c2 exit=0 filas_bd=3962,3962 :: usuarios=50 operacion=adopcion reqs=2000 rps=49.08 p50=8.68ms p95=38.74ms p99=78.53ms max=116.95ms fallos=0.00%
+2026-10-17T00:24:55Z 2026-10-17T00:25:36Z u50-c3 exit=0 filas_bd=5962,5962 :: usuarios=50 operacion=adopcion reqs=2000 rps=49.15 p50=8.55ms p95=37.62ms p99=64.71ms max=92.54ms fallos=0.00%
+2026-10-17T00:25:47Z 2026-10-17T00:26:28Z u50-c4 exit=0 filas_bd=7962,7962 :: usuarios=50 operacion=adopcion reqs=2000 rps=49.31 p50=6.53ms p95=24.79ms p99=58.92ms max=76.01ms fallos=0.00%
+2026-10-17T00:26:39Z 2026-10-17T00:27:20Z u100-c1 exit=0 filas_bd=11962,11962 :: usuarios=100 operacion=adopcion reqs=4000 rps=97.95 p50=6.01ms p95=37.66ms p99=155.57ms max=258.40ms fallos=0.00%
+2026-10-17T00:27:31Z 2026-10-17T00:28:12Z u100-c2 exit=0 filas_bd=15962,15962 :: usuarios=100 operacion=adopcion reqs=4000 rps=98.07 p50=7.04ms p95=38.38ms p99=156.47ms max=210.27ms fallos=0.00%
+2026-10-17T00:28:23Z 2026-10-17T00:29:05Z u100-c3 exit=0 filas_bd=19962,19962 :: usuarios=100 operacion=adopcion reqs=4000 rps=98.18 p50=6.87ms p95=39.53ms p99=92.66ms max=132.30ms fallos=0.00%
+2026-10-17T00:29:15Z 2026-10-17T00:29:57Z u100-c4 exit=0 filas_bd=23962,23962 :: usuarios=100 operacion=adopcion reqs=4000 rps=98.12 p50=6.43ms p95=34.51ms p99=99.85ms max=179.34ms fallos=0.00%
+2026-10-17T00:30:08Z 2026-10-17T00:30:49Z u150-c1 exit=0 filas_bd=29962,29962 :: usuarios=150 operacion=adopcion reqs=6000 rps=146.58 p50=7.36ms p95=41.56ms p99=159.45ms max=266.32ms fallos=0.00%
+2026-10-17T00:31:00Z 2026-10-17T00:31:41Z u150-c2 exit=0 filas_bd=35962,35962 :: usuarios=150 operacion=adopcion reqs=6000 rps=146.87 p50=6.52ms p95=42.52ms p99=92.52ms max=166.70ms fallos=0.00%
+2026-10-17T00:31:52Z 2026-10-17T00:32:34Z u150-c3 exit=0 filas_bd=41962,41962 :: usuarios=150 operacion=adopcion reqs=6000 rps=146.75 p50=7.36ms p95=40.17ms p99=97.70ms max=174.12ms fallos=0.00%
+2026-10-17T00:32:44Z 2026-10-17T00:33:25Z u150-c4 exit=0 filas_bd=47962,47962 :: usuarios=150 operacion=adopcion reqs=6000 rps=146.72 p50=7.01ms p95=40.89ms p99=122.69ms max=225.18ms fallos=0.00%
+2026-10-17T00:33:36Z 2026-10-17T00:34:18Z u200-c1 exit=0 filas_bd=55932,55932 :: usuarios=200 operacion=adopcion reqs=7970 rps=194.34 p50=7.36ms p95=47.50ms p99=116.66ms max=215.41ms fallos=0.00%
+2026-10-17T00:34:29Z 2026-10-17T00:35:10Z u200-c2 exit=0 filas_bd=63898,63898 :: usuarios=200 operacion=adopcion reqs=7966 rps=194.11 p50=7.44ms p95=51.03ms p99=209.25ms max=433.97ms fallos=0.00%
+2026-10-17T00:35:21Z 2026-10-17T00:36:03Z u200-c3 exit=0 filas_bd=71855,71855 :: usuarios=200 operacion=adopcion reqs=7957 rps=194.04 p50=8.09ms p95=57.21ms p99=163.27ms max=289.88ms fallos=0.00%
+2026-10-17T00:36:13Z 2026-10-17T00:36:55Z u200-c4 exit=0 filas_bd=79810,79810 :: usuarios=200 operacion=adopcion reqs=7955 rps=194.01 p50=6.93ms p95=48.24ms p99=228.00ms max=359.00ms fallos=0.00%

@@ -1,0 +1,1 @@
+usuarios=50 operacion=buscar reqs=2000 rps=49.64 p50=2.56ms p95=13.70ms p99=31.29ms max=49.85ms fallos=0.00%
