@@ -1,0 +1,4 @@
+H1 (buscar, p95<800 ms y fallos<1 %): NO refutada
+H2 (buscar, rps >= 90 % del teórico): NO refutada
+H3 (adopcion, p95<800 ms y fallos<1 %): NO refutada
+H4 (instrumento no saturado): NO refutada

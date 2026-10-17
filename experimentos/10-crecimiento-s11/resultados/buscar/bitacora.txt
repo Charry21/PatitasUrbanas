@@ -1,0 +1,18 @@
+2026-10-17T00:08:39Z reinicio de la API
+2026-10-17T00:08:50Z API UP; filas BD (solicitud,etapa) = 0,0
+2026-10-17T00:08:51Z 2026-10-17T00:09:32Z u50-c1 exit=0 filas_bd=0,0 :: usuarios=50 operacion=buscar reqs=2000 rps=49.37 p50=3.32ms p95=27.50ms p99=117.30ms max=219.00ms fallos=0.00%
+2026-10-17T00:09:43Z 2026-10-17T00:10:23Z u50-c2 exit=0 filas_bd=0,0 :: usuarios=50 operacion=buscar reqs=2000 rps=49.64 p50=2.56ms p95=13.70ms p99=31.29ms max=49.85ms fallos=0.00%
+2026-10-17T00:10:34Z 2026-10-17T00:11:14Z u50-c3 exit=0 filas_bd=0,0 :: usuarios=50 operacion=buscar reqs=2000 rps=49.57 p50=2.53ms p95=20.43ms p99=35.04ms max=56.50ms fallos=0.00%
+2026-10-17T00:11:25Z 2026-10-17T00:12:05Z u50-c4 exit=0 filas_bd=0,0 :: usuarios=50 operacion=buscar reqs=2000 rps=49.70 p50=2.03ms p95=9.95ms p99=16.86ms max=35.49ms fallos=0.00%
+2026-10-17T00:12:16Z 2026-10-17T00:12:57Z u100-c1 exit=0 filas_bd=0,0 :: usuarios=100 operacion=buscar reqs=4000 rps=99.00 p50=2.50ms p95=19.91ms p99=39.96ms max=84.89ms fallos=0.00%
+2026-10-17T00:13:08Z 2026-10-17T00:13:48Z u100-c2 exit=0 filas_bd=0,0 :: usuarios=100 operacion=buscar reqs=4000 rps=99.29 p50=1.92ms p95=8.48ms p99=16.22ms max=112.45ms fallos=0.00%
+2026-10-17T00:13:59Z 2026-10-17T00:14:40Z u100-c3 exit=0 filas_bd=0,0 :: usuarios=100 operacion=buscar reqs=4000 rps=99.17 p50=2.06ms p95=15.50ms p99=40.79ms max=48.35ms fallos=0.00%
+2026-10-17T00:14:51Z 2026-10-17T00:15:32Z u100-c4 exit=0 filas_bd=0,0 :: usuarios=100 operacion=buscar reqs=4000 rps=99.22 p50=1.89ms p95=14.25ms p99=34.32ms max=54.37ms fallos=0.00%
+2026-10-17T00:15:43Z 2026-10-17T00:16:24Z u150-c1 exit=0 filas_bd=0,0 :: usuarios=150 operacion=buscar reqs=6000 rps=148.38 p50=1.97ms p95=15.64ms p99=45.43ms max=113.43ms fallos=0.00%
+2026-10-17T00:16:35Z 2026-10-17T00:17:16Z u150-c2 exit=0 filas_bd=0,0 :: usuarios=150 operacion=buscar reqs=6000 rps=148.56 p50=2.37ms p95=14.46ms p99=50.75ms max=93.94ms fallos=0.00%
+2026-10-17T00:17:27Z 2026-10-17T00:18:08Z u150-c3 exit=0 filas_bd=0,0 :: usuarios=150 operacion=buscar reqs=6000 rps=148.37 p50=2.11ms p95=20.24ms p99=51.87ms max=92.16ms fallos=0.00%
+2026-10-17T00:18:19Z 2026-10-17T00:19:00Z u150-c4 exit=0 filas_bd=0,0 :: usuarios=150 operacion=buscar reqs=6000 rps=148.58 p50=2.15ms p95=13.87ms p99=30.89ms max=85.27ms fallos=0.00%
+2026-10-17T00:19:11Z 2026-10-17T00:19:52Z u200-c1 exit=0 filas_bd=0,0 :: usuarios=200 operacion=buscar reqs=8000 rps=198.03 p50=2.14ms p95=15.89ms p99=47.66ms max=103.60ms fallos=0.00%
+2026-10-17T00:20:03Z 2026-10-17T00:20:44Z u200-c2 exit=0 filas_bd=0,0 :: usuarios=200 operacion=buscar reqs=8000 rps=197.53 p50=2.96ms p95=22.58ms p99=47.04ms max=97.97ms fallos=0.00%
+2026-10-17T00:20:55Z 2026-10-17T00:21:36Z u200-c3 exit=0 filas_bd=0,0 :: usuarios=200 operacion=buscar reqs=8000 rps=197.86 p50=2.17ms p95=13.80ms p99=38.94ms max=63.70ms fallos=0.00%
+2026-10-17T00:21:47Z 2026-10-17T00:22:28Z u200-c4 exit=0 filas_bd=0,0 :: usuarios=200 operacion=buscar reqs=8000 rps=197.99 p50=1.99ms p95=15.41ms p99=26.35ms max=45.49ms fallos=0.00%

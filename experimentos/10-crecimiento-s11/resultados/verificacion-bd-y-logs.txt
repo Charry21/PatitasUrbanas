@@ -1,0 +1,7 @@
+Verificación posterior a la serie de adopción (2026-10-17T00:39:21Z)
+Filas solicitud_adopcion: 79810
+Filas etapa_adopcion: 79810
+Solicitudes sin etapa (huérfanas): 0
+Suma de respuestas 2xx de las 16 corridas de adopción (bitácora k6): 79810
+Líneas WARN/ERROR/Exception del log de la API fuera del hilo de arranque (main): 0
+Las WARN del hilo main son del DROP de create-drop al arrancar (tablas que aún no existen).
