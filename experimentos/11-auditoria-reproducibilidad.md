@@ -166,4 +166,4 @@ La segunda revisión pide comprobar directamente seis controles. Todos se ejecut
 
 Auditoría preparada con Claude Code (Anthropic) para revisión del equipo.
 
-Revisado por: Charry Ríos Daniel Estiven · Fecha: 2026-10-24
+Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-24
