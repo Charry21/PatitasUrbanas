@@ -133,6 +133,23 @@ docker run --rm --network host -v "$PWD/experimentos:/scripts" grafana/k6 run /s
 | E4 | A5: hashes del spike | Conservar las ramas que contienen los originales, o crear etiquetas (por ejemplo, `evidencia/spike1-*`) que los fijen; y/o añadir a `07` una tabla de equivalencias original → copia (`hashes-citados.txt`). |
 | E5 | Política de historial | Decidir si `main` se vuelve a reescribir. Cada reescritura invalida los hashes citados y quita la firma de GitHub a los merges. |
 
+## 7. Respuesta a la segunda revisión del tutor (2026-10-24)
+
+La segunda revisión pide comprobar directamente seis controles. Todos se ejecutaron sobre los archivos originales y el historial; la evidencia nueva está en [`auditoria-reproducibilidad/correspondencia-salidas.txt`](./auditoria-reproducibilidad/correspondencia-salidas.txt).
+
+| # | Control de la lista del tutor | Estado | Evidencia |
+|---|---|---|---|
+| 1 | Hash de cada versión de código frente al historial | **Demostrado** para el spike y para la ronda 2 de S4/S5; **falta evidencia** para la ronda 1 de S4 | Spike: §3.1 y `hashes-citados.txt`. S4/S5: §2.1, hallazgos A2 y A4 |
+| 2 | Orden temporal entre preregistro, mediciones y resultado | **Demostrado** con horas de servidor de los PR | §2.1 (PR #3 → #7 → #35) y §3.1 (PR #45 → #48 → #50 → #49) |
+| 3 | Comandos declarados frente a salidas originales | **Demostrado** | Cada conjunto de salidas del spike se commiteó con un `app/` idéntico al estado que dice medir: `antes` (`b52207e`) = árbol de `887ccf1`; `control-y2` (`6508379`) = `4883f9c`, con el import inyectado; `despues` (`ac85955`) = `1e522df`. Las salidas Y2/Y4/Y5 nombran los paquetes de cada estado (`api.controller` antes, `api.adopciones` después). Además, `09` §3.2 y §3.6 las re-midieron con el mismo resultado. **Límite:** los logs de Y1 no registran el hash ni nombres de paquete; su vínculo con el estado se apoya en el commit que los añadió y en la re-medición. |
+| 4 | Códigos HTTP y cuerpos por solicitud | **Demostrado** | Las 9 solicitudes S1–S3: el mismo código antes y después (S1, S2: 201; S3: 200), el mismo cuerpo normalizado y los mismos tipos. Las 8 corridas k6: 100% `status es 200` (§2.1). |
+| 5 | Condiciones de ejecución antes y después | **Parcial** | `spike-s10/entorno.txt` se registró una vez, al inicio de la sesión (17:02 UTC). Antes y después se midieron en esa misma sesión, entre 17:02 y 17:08 UTC (horas de commit), sin reinstalar nada. **No verificable:** no hay un segundo registro de versiones tomado después del cambio. |
+| 6 | Desviaciones y límites de lo no verificado | **Demostrado** | D1–D5 de `06` §5 contrastadas con el historial: D5 en §3.1 (PR #50 = merge `af92e3f`, que contenía `af02cce` y `4883f9c`; corrección en `36e2e97`). Los límites que siguen abiertos están en `09` §4–§5 (Windows/WSL2, `Dockerfile` original, casos límite) y en esta auditoría (A1–A5). |
+
+**Aclaración sobre el Control D del tutor:** el commit de fusión del PR #50 es `af92e3f` (no `af92cce`). Ese PR integró dos commits de la rama descartable: `af02cce` (scripts y línea base, medidos antes de la fusión) y `4883f9c` (import de control). Las mediciones son de 17:05–17:07 UTC y la fusión del PR #50, de las 17:11:50 UTC (servidor).
+
+**Aclaración sobre rutas:** las respuestas de Y3 están en `spike-s10/antes/y3/` y `spike-s10/despues/y3/` (no en `y3-antes/` ni `y3-despues/`).
+
 ### 6.1 Decisiones del equipo (2026-10-24)
 
 | # | Decisión | Dónde queda |
