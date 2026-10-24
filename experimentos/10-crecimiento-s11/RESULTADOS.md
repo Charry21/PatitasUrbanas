@@ -142,3 +142,15 @@ Las tablas de este documento salen de [`analizar.py`](./analizar.py), que genera
 ## Anexo (2026-10-23) — Trazabilidad del análisis
 
 Añadido después de la auditoría de la Semana 11; las secciones 1 a 5 no cambian. La secuencia verificable (preregistro → PR #66 → primera corrida → análisis → resultados), la correspondencia entre cada regla del README §6 y `analizar.py`, tres diferencias entre el código y el §6 que no cambian ningún veredicto, el único cambio posterior a la medición en `analizar.py` (cosmético, en la gráfica) y la reproducción byte a byte del análisis con sus dos versiones están en [trazabilidad-analisis.md](./trazabilidad-analisis.md).
+
+### Desviación metodológica D-A1: cálculo de la CPU (forma parte de la interpretación oficial de este informe)
+
+Las columnas de CPU de §2 y el veredicto de H4 en §3 deben leerse con esta desviación:
+
+1. **Qué se calculó.** Los valores de CPU publicados en §2 y §3 (columnas "CPU k6" y "CPU máquina", y el máximo de H4) **excluyen** las muestras con `t_s < 2` (primer segundo, arranque de k6) y con `t_s > 41` (después de los 40 s del escalón). Se promediaron 38–39 de las 40–41 muestras de cada corrida (`analizar.py`, líneas 29–30).
+2. **Qué decía el preregistro.** El README §6 fijaba "media de las muestras de cada corrida; por escalón, el máximo de esas medias", **sin ese filtro**. El filtro no estaba preregistrado.
+3. **Comprobación de sensibilidad (2026-10-23, posterior a la medición).** Recalculado con todas las muestras, como dice el §6: k6 máx. 14,6 % de un núcleo y máquina máx. 37,9 %, frente a 15,3 % y 38,5 % publicados. El pico de un solo segundo es 20,9 % para k6 y 52,5 % para la máquina. Este cálculo se hizo después de ver los resultados y es solo una comprobación; no reemplaza el criterio original.
+4. **Qué se conserva como publicado y por qué.** Se conservan los valores de §2 y §3 sin cambios, para preservar el registro histórico tal como se publicó en `3c980e7`. El veredicto de H4 (**no refutada**) es el mismo con ambos cálculos: los dos quedan muy por debajo de los límites preregistrados (80 % de un núcleo para k6 y 90 % para la máquina), y el publicado es el más alto de los dos.
+5. **Estado.** La discrepancia se acepta como **desviación metodológica documentada**, no como una regla preregistrada. El criterio vigente para este experimento sigue siendo el del README §6, que no se modifica.
+
+Detalle, junto con las otras dos diferencias menores (D-A2 y D-A3, sin efecto en valores ni veredictos): [trazabilidad-analisis.md §3](./trazabilidad-analisis.md).
