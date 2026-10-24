@@ -1,0 +1,20 @@
+# Fitness functions de arquitectura. Contrato: docs/fitness/ff-01-fronteras-modulares.md
+name: fitness-functions
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  ff-01-fronteras-modulares:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: FF-01 sobre el código (debe cumplir)
+        run: python3 -I tools/fitness/fronteras_modulares.py app
+      - name: Prueba negativa de FF-01 (cada violación inyectada debe fallar)
+        run: bash tools/fitness/prueba_negativa.sh app

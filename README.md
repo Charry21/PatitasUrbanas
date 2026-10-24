@@ -76,3 +76,15 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 | Resultados, conclusiones y límites | [`experimentos/10-crecimiento-s11/RESULTADOS.md`](experimentos/10-crecimiento-s11/RESULTADOS.md) ([PR #67](https://github.com/Charry21/PatitasUrbanas/pull/67)) |
 | Datos crudos, bitácoras y análisis | [`resultados/`](experimentos/10-crecimiento-s11/resultados/), [`analizar.py`](experimentos/10-crecimiento-s11/analizar.py) |
 | Trazabilidad del análisis y orden temporal | [`trazabilidad-analisis.md`](experimentos/10-crecimiento-s11/trazabilidad-analisis.md) |
+
+## Módulo 6 — Resiliencia, distribución y fitness functions (Semanas 11–14)
+
+| Paso | Entregable | Dónde está |
+|---|---|---|
+| A1 | Experimento de crecimiento (50–200 usuarios) | [`experimentos/10-crecimiento-s11/`](experimentos/10-crecimiento-s11/) |
+| A2 | Matriz de fallos (observados / hipotéticos) | [`docs/resiliencia/matriz-fallos.md`](docs/resiliencia/matriz-fallos.md), evidencia de [`experimentos/12-inyeccion-fallos-s12/`](experimentos/12-inyeccion-fallos-s12/) |
+| A3 | Matriz de resiliencia | [`docs/resiliencia/matriz-resiliencia.md`](docs/resiliencia/matriz-resiliencia.md) |
+| A4 | Distribución y costos | [`docs/distribucion/comparacion-distribucion.md`](docs/distribucion/comparacion-distribucion.md) |
+| A5 | ADR 4 (veredicto del comité pendiente) | [`adr/adr-04-distribucion.md`](adr/adr-04-distribucion.md) |
+| A6 | Fitness function FF-01 en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
+| — | Registro crítico de IA | [`docs/registro-ia-modulo6.md`](docs/registro-ia-modulo6.md) |
