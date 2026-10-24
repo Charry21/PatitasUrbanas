@@ -43,7 +43,7 @@ Archivo revisado: `analizar.py` en `main` (`3c980e7`, SHA-256 `7986d9fa…e53d`)
 
 ## 3. Diferencias encontradas entre el código y el §6
 
-Estas diferencias no se declararon en `entorno/desviaciones.md` ni en RESULTADOS.md. Se registran ahora, **sin cambiar el criterio ni los resultados publicados**.
+Estas diferencias no se declararon en `entorno/desviaciones.md` ni en RESULTADOS.md. Se registran ahora, **sin cambiar el criterio ni los resultados publicados**. D-A1 quedó además declarada como desviación metodológica en el anexo de [RESULTADOS.md](./RESULTADOS.md), como parte de la interpretación oficial del informe.
 
 | Id | Diferencia | Efecto medido |
 |---|---|---|
