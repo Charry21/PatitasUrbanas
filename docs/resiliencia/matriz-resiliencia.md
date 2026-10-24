@@ -32,6 +32,10 @@ Relaciona cada fallo de la [matriz de fallos](./matriz-fallos.md) con una tácti
 
 ---
 
+## 1.1 Decisión del equipo sobre las propuestas (2026-10-24)
+
+M6-3 de `docs/registro-ia-modulo6.md`: R-07 a R-12 se aceptan como plan. Se implementan en este orden: R-10, R-09, R-08, R-11 y R-12. **R-07 se aplaza** hasta probar F-10 con carga. Su estado en la tabla sigue siendo **Propuesta** hasta que cada una se implemente y se pruebe.
+
 ## 2. Tácticas presentadas como probadas sin evidencia suficiente
 
 Ninguna fila figura como **Probada** sin una prueba o un experimento enlazado. Dos llevan reservas explícitas:

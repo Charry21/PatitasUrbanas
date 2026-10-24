@@ -51,9 +51,9 @@ Pasos del job en `main` (2026-10-24T01:39:23Z → 2026-10-24T01:39:30Z): Set up 
 
 Se reproduce con `gh api repos/Charry21/PatitasUrbanas/actions/runs --jq '.workflow_runs[] | "\(.id) \(.head_sha[0:7]) \(.event) \(.conclusion)"'`.
 
-## Información que falta
+## Decisión del equipo
 
-- Que el equipo confirme R3 como regla de ADR-01 o la retire (M6-6 del registro de IA).
+R3 se mantiene como regla de ADR-01 (M6-6 de `docs/registro-ia-modulo6.md`, 2026-10-24). Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro.
 
 ---
 
