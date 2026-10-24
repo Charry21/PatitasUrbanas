@@ -1,0 +1,39 @@
+Fecha: 2026-10-24T01:01:52Z · main f0c4ea5
+Copia en main = commit de main con el mismo asunto y el mismo árbol (contenido idéntico).
+
+| Hash citado | ¿Ancestro de main? | Copia en main | ¿Mismo árbol? |
+|---|---|---|---|
+| `8c7b9f5` | sí | — | — |
+| `789ed21` | sí | — | — |
+| `1ac4c37` | sí | — | — |
+| `887ccf1` | **no** | `6ad651d` | sí |
+| `8a2a001` | **no** | `e2318e1` | sí |
+| `99269dd` | **no** | `305d62e` | sí |
+| `c16cd03` | **no** | `77007ce` | sí |
+| `3d458a2` | **no** | `dd451cf` | sí |
+| `403d7b5` | **no** | `c1c52da` | sí |
+| `af02cce` | **no** | `b52207e` | sí |
+| `4883f9c` | **no** | `6508379` | sí |
+| `1e522df` | **no** | `44ede36` | sí |
+| `d97cbf3` | **no** | `ac85955` | sí |
+| `e9bcd93` | **no** | `7488569` | sí |
+| `7b1f022` | **no** | `4b6a0aa` | sí |
+| `36e2e97` | **no** | `5f78881` | sí |
+| `fe39133` | **no** | `6414186` | sí |
+| `1a3e1ef` | **no** | `e5be2f0` | sí |
+
+Ramas remotas que aún contienen los originales del spike (ej. 1e522df):
+- origin/chore/quitar-redireccion-dossier18
+- origin/claude/project-thread-hlv246
+- origin/docs/auditoria-consistencia
+- origin/docs/d10-preregistro-spike2
+- origin/docs/entregable2-encuadre-spike
+- origin/docs/modelo-dominio
+- origin/docs/modulo5-dominio-integracion
+- origin/docs/respuestas-p1-p4
+- origin/docs/trazabilidad-temporal
+- origin/docs/unificar-modelo-dominio
+- origin/fix/edav2-firmantes
+- origin/spike/fronteras-modulares-s10
+
+Firma de GitHub en el merge del PR #48: original 3d458a2 = E · copia dd451cf = N  (E = firma presente; N = sin firma)
