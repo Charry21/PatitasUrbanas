@@ -87,4 +87,5 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 | A4 | Distribución y costos | [`docs/distribucion/comparacion-distribucion.md`](docs/distribucion/comparacion-distribucion.md) |
 | A5 | ADR 4 (veredicto del comité pendiente) | [`adr/adr-04-distribucion.md`](adr/adr-04-distribucion.md) |
 | A6 | Fitness function FF-01 en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
+| — | Autoauditoría A1–A6 | [`docs/auditoria-modulo6.md`](docs/auditoria-modulo6.md) |
 | — | Registro crítico de IA | [`docs/registro-ia-modulo6.md`](docs/registro-ia-modulo6.md) |

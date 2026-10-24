@@ -33,13 +33,13 @@ Insumos:
 
 ## 2. Supuestos declarados
 
-| # | Supuesto | Usado en |
-|---|---|---|
-| S1 | La carga de referencia es la de S11: 200 usuarios concurrentes, ~194 escrituras/s | Todas las filas de CPU |
-| S2 | En D2 la carga se reparte por igual entre las 2 instancias, y cada instancia tiene el mismo consumo base que en D1 | CPU de D2 |
-| S3 | En D3 la carga de escritura de S11 la absorbe solo el servicio de Adopciones; Mascotas añade su propio proceso base | CPU de D3 |
-| S4 | Esfuerzo de operación de D1 = 0 horas adicionales (línea de comparación). Las cifras de D2 y D3 son **estimaciones iniciales** de tareas listadas en §4, pendientes de validar por el equipo | Esfuerzo |
-| S5 | La API no guarda estado de sesión: cada petición es independiente (verificado en el código: no hay sesiones ni cachés locales) | D2 |
+| # | Supuesto | Usado en | ¿Verificado? | Condición de revisión |
+|---|---|---|---|---|
+| S1 | La carga de referencia es la de S11: 200 usuarios concurrentes, ~194 escrituras/s | Todas las filas de CPU | **Sí**, como carga probada (S11). No se sabe si es la carga real | Si la carga esperada en el despliegue supera 200 usuarios, se preregistra una serie con más carga y se rehace la comparación |
+| S2 | En D2 la carga se reparte por igual entre las 2 instancias, y cada instancia tiene el mismo consumo base que en D1 | CPU de D2 | **No** | Si se ensaya D2, se mide la CPU de cada réplica y se reemplaza la estimación |
+| S3 | En D3 la carga de escritura de S11 la absorbe solo el servicio de Adopciones; Mascotas añade su propio proceso base | CPU de D3 | **No** | Si se ensaya D3 o Mascotas recibe carga propia, se mide |
+| S4 | Esfuerzo de operación de D1 = 0 horas adicionales (línea de comparación). Las cifras de D2 y D3 son **estimaciones iniciales** de las tareas listadas en la fila "Esfuerzo" de §3 | Esfuerzo | **No**; pendiente de validar por el equipo (M6-4 del registro de IA) | Si el equipo cambia las horas, se actualizan §3 y ADR-04 |
+| S5 | La API no guarda estado de sesión: cada petición es independiente | D2 | **Sí**: en el código no hay sesiones, cachés locales ni estado estático mutable (`grep` sobre `app/src/main`, 2026-10-24) | Si se añaden sesiones o cachés locales, D2 necesita sesiones compartidas y su costo cambia |
 
 ## 3. Comparación (mismas dimensiones para las tres)
 
@@ -61,9 +61,11 @@ Insumos:
 
 ## 4. Consecuencias por alternativa
 
-- **D1.** Mantiene la atomicidad y el costo mínimo. Su riesgo principal es F-12: un solo proceso sin reinicio automático (la táctica R-10 lo mitiga, pero es una propuesta). Con la carga medida tiene margen: p95 de 51,03 ms frente al umbral de 800 ms.
-- **D2.** Ataca F-12 sin tocar el código, porque la API no guarda estado (S5). No ayuda ante F-01: las dos réplicas comparten la BD. No hay medición que muestre que la carga actual la necesite.
-- **D3.** Separa los fallos por contexto, pero rompe la transacción local de la que depende la regla R1 y añade saltos de red. Ninguna medición muestra un cuello de botella que justifique el costo, y es la menos reversible.
+| | Positivas | Negativas |
+|---|---|---|
+| **D1** | Atomicidad local de TRX-02 y de la futura R1 **(M, S12 HF3)**. Costo operativo mínimo: 2 contenedores **(D)**. Margen amplio con la carga probada: p95 de escritura 51,03 ms frente a 800 ms **(M, S11)**. La evidencia de S11 y S12 vale para lo que se despliega | Punto único de fallo: F-12 sin reinicio automático (R-10 es solo una propuesta) **(D)**. La caída de la BD afecta a todas las escrituras **(M, S12)**. Solo puede crecer en vertical |
+| **D2** | Tolera la caída de una instancia (F-12) sin cambiar el código, porque la API no guarda estado **(E; S5 verificado)**. Reversible: volver a 1 réplica **(E)** | No ayuda ante F-01: las réplicas comparten la BD **(D)**. Añade un balanceador que operar y asegurar **(D)**. +1 salto de red por escritura **(D)**. Ninguna medición muestra que la carga actual la necesite **(M, S11)** |
+| **D3** | Aísla los fallos por contexto: la caída de una BD no afecta al otro contexto **(E)**. Permitiría escalar cada contexto por separado **(E)** | Rompe la transacción local de la que depende R1 **(D)**. Hasta 3 saltos de red por escritura cuando exista R1 **(D)**. Duplica despliegue y monitoreo para un equipo de 2 (DA-03) **(E)**. La menos reversible **(E)**. Ninguna medición muestra un cuello de botella que la justifique **(M, S11)** |
 
 ## 5. Lo que falta para cerrar la comparación
 
