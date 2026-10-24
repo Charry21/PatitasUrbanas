@@ -121,9 +121,9 @@ git diff --stat 887ccf1 3d458a2 -- app
 
 ## 7. Equivalencia de hashes tras la reescritura de `main` (2026-10-24)
 
-Después del 2026-10-10 se reescribió el historial de `main`. Los hashes citados en este documento y en 04, 05, 06 y 09 **ya no son ancestros de `main`**: `main` contiene copias con el mismo contenido (mismo árbol) y las mismas fechas, pero otros hashes. Los originales se conservan en las ramas remotas que los contienen (por ejemplo, `spike/fronteras-modulares-s10`) y en las referencias de los PR de GitHub. Las etiquetas `evidencia/spike1-*` que los fijan de forma permanente **están pendientes de publicar**: el entorno donde se preparó esta sección no permite escribir etiquetas en GitHub; se crean con `experimentos/auditoria-reproducibilidad/crear-etiquetas-evidencia.sh`. Detalle en [`11-auditoria-reproducibilidad.md`](./11-auditoria-reproducibilidad.md) §3.2.
+Después del 2026-10-10 se reescribió el historial de `main`. Los hashes citados en este documento y en 04, 05, 06 y 09 **ya no son ancestros de `main`**: `main` contiene copias con el mismo contenido (mismo árbol) y las mismas fechas, pero otros hashes. Los originales se conservan en las ramas remotas que los contienen (por ejemplo, `spike/fronteras-modulares-s10`) y en las referencias de los PR de GitHub. Están preservados de forma permanente en las referencias de los PR (`refs/pull/45/head` a `refs/pull/50/head`), que GitHub no borra; la tabla completa de equivalencias está también en `09-cierre-spike-s10.md`, Anexo A. Las etiquetas `evidencia/spike1-*` son un refuerzo **opcional**, pendiente de publicar con `experimentos/auditoria-reproducibilidad/crear-etiquetas-evidencia.sh` (el entorno donde se preparó esta sección no permite escribir etiquetas en GitHub). Para traer los originales a un clon: `git fetch origin '+refs/pull/*/head:refs/remotes/pr/*'`. Detalle en [`11-auditoria-reproducibilidad.md`](./11-auditoria-reproducibilidad.md) §3.2.
 
-| Paso | Hash citado (original) | Etiqueta (pendiente de publicar) | Copia en `main` |
+| Paso | Hash citado (original) | Etiqueta opcional (pendiente de publicar) | Copia en `main` |
 |---|---|---|---|
 | Base del código (PR #45) | `887ccf1` | `evidencia/spike1-00-base` | `6ad651d` |
 | Especificación completa (PR #48) | `3d458a2` | `evidencia/spike1-01-preregistro` | `dd451cf` |

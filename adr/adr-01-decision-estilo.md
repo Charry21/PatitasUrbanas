@@ -15,6 +15,8 @@ antes de integrar el proveedor en un ambiente con datos reales.
 
 Historial: Propuesta (Semana 7, 2026-09-13) → Ajustada (Semana 8).
 
+Resultado del spike 1 (Semana 10): la reorganización por dominio está implementada y verificada (código medido `1e522df`, copia en `main`: `44ede36`); veredicto del equipo: **se adopta con condiciones** (`experimentos/09-cierre-spike-s10.md` §6.2). El estado del comité no cambia.
+
 ---
 
 ## Contexto
