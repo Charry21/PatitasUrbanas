@@ -138,3 +138,7 @@ Las tablas de este documento salen de [`analizar.py`](./analizar.py), que genera
   - "agotamiento del pool de conexiones";
   - "caída de PostgreSQL bajo carga".
 - **Fitness function.** Este mismo script, con 200 usuarios y los umbrales `p(95)<800` y `rate<0.01` ya definidos en `escenario-crecimiento.js`, puede automatizarse para verificar la propiedad en CI.
+
+## Anexo (2026-10-23) — Trazabilidad del análisis
+
+Añadido después de la auditoría de la Semana 11; las secciones 1 a 5 no cambian. La secuencia verificable (preregistro → PR #66 → primera corrida → análisis → resultados), la correspondencia entre cada regla del README §6 y `analizar.py`, tres diferencias entre el código y el §6 que no cambian ningún veredicto, el único cambio posterior a la medición en `analizar.py` (cosmético, en la gráfica) y la reproducción byte a byte del análisis con sus dos versiones están en [trazabilidad-analisis.md](./trazabilidad-analisis.md).

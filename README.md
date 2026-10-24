@@ -64,3 +64,15 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 | 8. Ejecución, resultados y veredicto | [`experimentos/06-spike-resultado-s10.md`](experimentos/06-spike-resultado-s10.md), evidencia en [`experimentos/spike-s10/`](experimentos/spike-s10/); orden temporal verificado en [`experimentos/07-trazabilidad-temporal.md`](experimentos/07-trazabilidad-temporal.md) |
 | 9. ADR 3 | [`adr/adr-03-limites-y-comunicacion-modulos.md`](adr/adr-03-limites-y-comunicacion-modulos.md) |
 | 10. Registro crítico de IA | [`experimentos/05-auditoria-ia-s9.md`](experimentos/05-auditoria-ia-s9.md) (spike), [`docs/integracion/registro-ia-modulo5.md`](docs/integracion/registro-ia-modulo5.md) (dominio e integración) |
+
+## Semana 11 — Experimento de crecimiento
+
+| Entregable | Dónde está |
+|---|---|
+| Preregistro: escenario, vínculo con la línea base, hipótesis H1–H4 y reglas de análisis | [`experimentos/10-crecimiento-s11/README.md`](experimentos/10-crecimiento-s11/README.md) (commit `964dd4a`, [PR #66](https://github.com/Charry21/PatitasUrbanas/pull/66)) |
+| Script de carga (50, 100, 150 y 200 usuarios) y orquestador | [`escenario-crecimiento.js`](experimentos/10-crecimiento-s11/escenario-crecimiento.js), [`ejecutar.sh`](experimentos/10-crecimiento-s11/ejecutar.sh) |
+| Saturación del generador (CPU por segundo) | [`muestreo_cpu.py`](experimentos/10-crecimiento-s11/muestreo_cpu.py); resultado en H4 |
+| Desviaciones registradas antes de medir | [`entorno/desviaciones.md`](experimentos/10-crecimiento-s11/entorno/desviaciones.md) |
+| Resultados, conclusiones y límites | [`experimentos/10-crecimiento-s11/RESULTADOS.md`](experimentos/10-crecimiento-s11/RESULTADOS.md) ([PR #67](https://github.com/Charry21/PatitasUrbanas/pull/67)) |
+| Datos crudos, bitácoras y análisis | [`resultados/`](experimentos/10-crecimiento-s11/resultados/), [`analizar.py`](experimentos/10-crecimiento-s11/analizar.py) |
+| Trazabilidad del análisis y orden temporal | [`trazabilidad-analisis.md`](experimentos/10-crecimiento-s11/trazabilidad-analisis.md) |
