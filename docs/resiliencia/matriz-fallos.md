@@ -38,7 +38,7 @@ Una fila hipotética **no** es un fallo demostrado.
 | F-02 | Contenedor PostgreSQL → Pool Hikari | La BD vuelve a estar disponible | Sin reiniciar la API, el primer POST responde **201** en < 0.06 s | **Observado** | Ídem, HF2 |
 | F-03 | Health check (Actuator) | BD caída y consulta a `/actuator/health` | Responde **503 DOWN**, pero cada respuesta tarda **~30 s** | **Observado** | Ídem, HF1c; `resultados/log-api-extracto.txt` |
 | F-04 | Servicio de Adopciones (TRX-02) | Excepción entre el insert de la solicitud y el de la etapa | **500** y rollback completo: 0 filas nuevas | **Observado** | `AdopcionControllerRollbackIntegrationTest` (pasa en `experimentos/spike-s10/seguimiento-s1-2026-10-24/`); `POST /api/adopciones/test-fallo` → 500 en `experimentos/spike-s10/contrato/verificacion-endpoints.txt` |
-| F-05 | Servicio de Adopciones + PostgreSQL | 200 usuarios concurrentes escribiendo (operación B) | La cola de latencia crece: p99 de 64.71 ms (50 usuarios) a 209.25 ms (200 usuarios); 0 % de fallos. Causa no aislada | **Observado** | `experimentos/10-crecimiento-s11/RESULTADOS.md` §2 y §4 (hecho 3) |
+| F-05 | Servicio de Adopciones + PostgreSQL | 200 usuarios concurrentes escribiendo (operación B) | La cola de latencia crece: p99 de 64.71 ms (50 usuarios) a 209.25 ms (200 usuarios); 0 % de fallos. Causa no aislada | **Observado** | `experimentos/10-crecimiento-s11/RESULTADOS.md` §2 y §4 (hecho 3). El experimento 13 descarta como causa las filas acumuladas, hasta ~88 000 (`experimentos/13-semilla-memoria-s12/RESULTADOS.md` §5) |
 | F-06 | Controlador Geoespacial | Parámetro faltante o no numérico en `/api/mascotas/buscar` | **400** con el error por defecto de Spring | **Observado** | `experimentos/spike-s10/contrato/verificacion-endpoints.txt` |
 | F-07 | Controlador Geoespacial | Consumidor que exige `Content-Type: application/json` | La respuesta se envía como `text/plain` (observado); que un consumidor estricto falle **no se probó** | **Observado / consecuencia hipotética** | Ídem; `docs/integracion/contrato-api.yaml` |
 | F-08 | Contenedor API (`app/Dockerfile`) | Construir la imagen en un entorno con intercepción TLS | `mvn package` falla con `PKIX path building failed`; la imagen no se construye | **Observado** (en el entorno de laboratorio) | `experimentos/09-cierre-spike-s10.md` §3.4 |
@@ -54,7 +54,7 @@ Una fila hipotética **no** es un fallo demostrado.
 
 | # | Observación | Pregunta para el equipo |
 |---|---|---|
-| I-1 | F-05: la latencia creció a la vez que las filas acumuladas (0 → 79 810), así que los dos efectos están confundidos | ¿Se repite la serie B reiniciando la BD entre escalones para separar los dos efectos? |
+| I-1 | F-05: la latencia creció a la vez que las filas acumuladas (0 → 79 810), así que los dos efectos estaban confundidos | **Resuelta el 2026-10-24** con el experimento 13 (preregistrado, PR #79): con 79 810 filas iniciales el p95 no aumenta (−13,1 %). Las filas acumuladas no explican F-05 |
 | I-2 | F-03 y F-01 dependen del mismo `connectionTimeout` (30 s por defecto), que nadie eligió | ¿El equipo acepta 30 s como tiempo máximo de fallo, o lo fija explícitamente? |
 | I-3 | F-13: `create-drop` es una configuración de desarrollo | ¿Es aceptable en el entorno donde se va a desplegar? |
 | I-4 | F-12 y F-10 son hipotéticos y son los de mayor impacto | ¿Cuál se prueba primero, y con qué carga? |
