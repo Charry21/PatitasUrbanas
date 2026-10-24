@@ -133,8 +133,18 @@ docker run --rm --network host -v "$PWD/experimentos:/scripts" grafana/k6 run /s
 | E4 | A5: hashes del spike | Conservar las ramas que contienen los originales, o crear etiquetas (por ejemplo, `evidencia/spike1-*`) que los fijen; y/o añadir a `07` una tabla de equivalencias original → copia (`hashes-citados.txt`). |
 | E5 | Política de historial | Decidir si `main` se vuelve a reescribir. Cada reescritura invalida los hashes citados y quita la firma de GitHub a los merges. |
 
+### 6.1 Decisiones del equipo (2026-10-24)
+
+| # | Decisión | Dónde queda |
+|---|---|---|
+| E1 | Aclaración fechada en `01` sin reescribirlo; la ronda 2 pasa a ser la evidencia de línea base y la ronda 1 queda como registro histórico | `01-metodologia-medicion.md` §7 |
+| E2 | Operación de la ronda 1 declarada "no verificable por Git", con el indicio del tamaño de respuesta | `01-metodologia-medicion.md` §7 |
+| E3 | Se añade el hash `1ac4c37` de la ronda 2 | `01-metodologia-medicion.md` §7 |
+| E4 | Etiquetas `evidencia/spike1-*` sobre los commits originales y tabla de equivalencias | Etiquetas en GitHub; `07-trazabilidad-temporal.md` §7 |
+| E5 | `main` no se vuelve a reescribir; las correcciones se hacen con commits nuevos | `07-trazabilidad-temporal.md` §7 |
+
 ---
 
 Auditoría preparada con Claude Code (Anthropic) para revisión del equipo.
 
-Revisado por: ______________________________ · Fecha: ____________
+Revisado por: Charry Ríos Daniel Estiven · Fecha: 2026-10-24
