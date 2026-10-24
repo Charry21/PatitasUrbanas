@@ -5,7 +5,7 @@
 
 ## Estado
 
-**Propuesta** (Semana 12, 2026-10-24) — pendiente del mini-comité.
+**Propuesta, aceptada por el equipo** (Semana 12, 2026-10-24; M6-5 de `docs/registro-ia-modulo6.md`) — pendiente del veredicto del mini-comité.
 
 Veredicto del mini-comité: _pendiente — se registra en §Veredicto del comité después de celebrarse_ (confirmada / ajustada / reconsiderada).
 
@@ -24,6 +24,7 @@ ADR-01 adoptó el monolito modular y el spike 1 lo materializó sin coste funcio
 | Matriz de fallos (`docs/resiliencia/matriz-fallos.md`) | F-12 (caída del proceso de la API) es el fallo de mayor impacto, y es **hipotético** |
 | Matriz de resiliencia (`docs/resiliencia/matriz-resiliencia.md`) | 4 tácticas existentes probadas; R-10 (reinicio automático) propuesta |
 | Comparación (`docs/distribucion/comparacion-distribucion.md`) | D1, D2 y D3 en 13 dimensiones, con la clase de cada dato |
+| Experimento 13 (`experimentos/13-semilla-memoria-s12/RESULTADOS.md`) | Con 79 810 filas iniciales el p95 no aumenta; la API usa 0,22 GiB en reposo y hasta 0,31 GiB con 200 usuarios |
 
 **Drivers:**
 - DA-03: costo operativo proporcional a un equipo de 2 personas;
@@ -57,7 +58,7 @@ Resumen de `docs/distribucion/comparacion-distribucion.md` §3. La clase de cada
 | Esfuerzo adicional (6 meses, estimado) | 0 h | ~15–25 h | ~80–120 h |
 | Saltos de red en una escritura | 1 | 2 | 3 cuando exista R1 |
 | Atomicidad de TRX-02 + R1 | Local | Local | Se pierde para R1 |
-| Infraestructura en COP/mes | Pendiente de cotizar | Pendiente | Pendiente |
+| Infraestructura (referencia, USD/mes) | ≈ 12 (fuente secundaria) | ≈ 24 + balanceador | ≈ 24 + 2 BD |
 
 ---
 
@@ -134,6 +135,7 @@ _Se completa después del mini-comité. No se rellena antes._
 - `experimentos/10-crecimiento-s11/RESULTADOS.md`, `experimentos/12-inyeccion-fallos-s12/RESULTADOS.md`
 - `docs/resiliencia/matriz-fallos.md`, `docs/resiliencia/matriz-resiliencia.md`
 - `docs/distribucion/comparacion-distribucion.md`
+- `experimentos/13-semilla-memoria-s12/RESULTADOS.md`
 
 ---
 

@@ -81,7 +81,7 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 
 | Paso | Entregable | Dónde está |
 |---|---|---|
-| A1 | Experimento de crecimiento (50–200 usuarios) | [`experimentos/10-crecimiento-s11/`](experimentos/10-crecimiento-s11/) |
+| A1 | Experimento de crecimiento (50–200 usuarios) y semilla de datos y memoria | [`experimentos/10-crecimiento-s11/`](experimentos/10-crecimiento-s11/), [`experimentos/13-semilla-memoria-s12/`](experimentos/13-semilla-memoria-s12/) |
 | A2 | Matriz de fallos (observados / hipotéticos) | [`docs/resiliencia/matriz-fallos.md`](docs/resiliencia/matriz-fallos.md), evidencia de [`experimentos/12-inyeccion-fallos-s12/`](experimentos/12-inyeccion-fallos-s12/) |
 | A3 | Matriz de resiliencia | [`docs/resiliencia/matriz-resiliencia.md`](docs/resiliencia/matriz-resiliencia.md) |
 | A4 | Distribución y costos | [`docs/distribucion/comparacion-distribucion.md`](docs/distribucion/comparacion-distribucion.md) |
