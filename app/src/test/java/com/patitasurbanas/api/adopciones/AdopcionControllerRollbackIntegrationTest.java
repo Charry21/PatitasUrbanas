@@ -1,8 +1,6 @@
-package com.patitasurbanas.api.controller;
+package com.patitasurbanas.api.adopciones;
 
 import com.patitasurbanas.api.adopciones.model.SolicitudAdopcion;
-import com.patitasurbanas.api.adopciones.EtapaAdopcionRepository;
-import com.patitasurbanas.api.adopciones.SolicitudAdopcionRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
