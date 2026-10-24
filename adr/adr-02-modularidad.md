@@ -15,6 +15,8 @@ antes de integrar el proveedor en un ambiente con datos reales.
 
 Historial: Propuesta (Semana 7, 2026-09-13) → Ajustada (Semana 8).
 
+Resultado del spike 1 (Semana 10): Y2 = 0 con el medidor validado. Se mantiene la Alternativa A (convención + revisión de PR) y ArchUnit sigue sin adoptarse; se reevalúa si aparece una violación en un PR o al añadir el primer módulo con lógica propia (`experimentos/09-cierre-spike-s10.md` §6.2).
+
 ---
 
 ## Contexto

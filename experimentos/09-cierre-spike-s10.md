@@ -1,6 +1,6 @@
 # Registro de cierre — Spike 1 de fronteras modulares (Semana 10)
 
-> Borrador preparado el 2026-10-10 para revisión del equipo. Este registro **no modifica** la hipótesis, los criterios, los resultados ni la auditoría ya registrados. Enlaza la evidencia existente, añade las verificaciones hechas después del 2026-10-02 y deja el veredicto final para el equipo (§6).
+> Borrador preparado el 2026-10-10 para revisión del equipo. Este registro **no modifica** la hipótesis, los criterios, los resultados ni la auditoría ya registrados. Enlaza la evidencia existente, añade las verificaciones hechas después del 2026-10-02 y deja el veredicto final para el equipo (§6). **Actualización 2026-10-24:** veredicto del equipo registrado en §6.2; P5 y P6 cerrados.
 
 ## 1. Documentos que se cierran
 
@@ -116,8 +116,8 @@ Los pendientes técnicos siguen abiertos y **no** se presentan como pruebas supe
 | P2 | Ejecutar `docker compose up --build` completo | Verificación técnica | No verificado | Al resolver P1, o antes de usar Compose como entorno de ejecución de la API | | |
 | P3 | Ejecutar en Windows/WSL2 (Y1 y Y3 como mínimo) | Validez externa | No verificado | Antes de afirmar que el resultado vale en el entorno documentado del equipo (Windows con Docker Desktop) | | |
 | P4 | Probar `POST /api/adopciones/test-fallo` fuera del test de rollback, entradas no válidas y casos límite | Verificación técnica | No verificado | Cuando se cambie la lógica de adopciones o se amplíe la API | | |
-| P5 | Mover el test de rollback a `api.adopciones` (hallazgo S1) | Seguimiento del spike | Abierto: el test sigue en `api.controller` en `main` (`6465b1a`, §3.6) | En el siguiente cambio que toque `app/src/test`, y antes de añadir tests del módulo `adopciones` | | |
-| P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | Pendiente de decisión del equipo | Antes de citar la EDAV 2 como prueba de una preinscripción íntegra | | |
+| P5 | Mover el test de rollback a `api.adopciones` (hallazgo S1) | Seguimiento del spike | **Cerrado el 2026-10-24**: el test está en `api.adopciones`; solo cambian `package` e imports; suite 2/2 en 3/3 corridas con BD limpia; Y2 = 0, Y4 = 7/7, Y5 = 0 (evidencia en [`spike-s10/seguimiento-s1-2026-10-24/`](./spike-s10/seguimiento-s1-2026-10-24/)). `app/src/main` sigue idéntico al código medido. | — | Charry21 | 2026-10-24 |
+| P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | **Cerrado el 2026-10-24**: Anexo A de [`05-auditoria-ia-s9.md`](./05-auditoria-ia-s9.md), añadido después de la firma sin modificarla | — | Charry Ríos Daniel Estiven | 2026-10-24 |
 | P8 | Ajustar `revisar_modulos.py` (Y2: comodines, nombres calificados; Y5: clases sin mapear) si se reutiliza en otro spike | Instrumento | Limitación conocida (§4.2) | Antes de reutilizar el script en otro spike o sobre código nuevo | | |
 | P9 | La evidencia funcional cubre solo los 2 tests existentes y las 3 solicitudes S1–S3 | Supuesto (cobertura) | Aceptado como límite; no demuestra equivalencia universal | Al añadir tests o endpoints, o si se observa una regresión fuera de S1–S3 | | |
 | P10 | Las fronteras entre módulos se mantienen solo por convención (ADR-02); no hay comprobación automática en el build | Supuesto (mantenimiento) | Aceptado como límite; el spike midió una sola reorganización | En cada cambio que añada clases o imports entre módulos, o si se decide automatizar la regla (por ejemplo, en CI) | | |
@@ -141,15 +141,26 @@ Para responderla, el equipo debería indicar:
 
 ### 6.2 Respuesta del equipo
 
-- Veredicto (se adopta / se refuta / se adopta con condiciones): 
-- Respuesta a la pregunta de §6.1: 
-- Justificación, con referencia a §2–§4: 
-- Limitaciones y pendientes que acompañan al veredicto: 
-- Consecuencias para ADR-01, ADR-02 y ADR-03: 
+- **Veredicto:** **se adopta con condiciones** la reorganización de paquetes de ADR-01. La hipótesis registrada en `c16cd03` queda **soportada en las condiciones registradas**: se cumplen las cinco condiciones de confirmación (§2) y no se cumple ninguna de refutación.
+- **Respuesta a la pregunta de §6.1:**
+  1. *Métricas con capacidad real de refutar:* **Y1–Y3**. Podían fallar si la reorganización rompía la suite, introducía una dependencia prohibida o cambiaba una respuesta HTTP, y ninguna falló (Y1 2/2 en 3/3 corridas; Y2 = 0 con el medidor validado por el control; Y3 = 0 diferencias en 9/9 respuestas). **Y4 e Y5** solo constatan que el cambio se aplicó como se especificó: miden la ubicación de las clases, que es justamente lo que mueve el cambio (§4.1).
+  2. *Hipótesis original frente a la de `c16cd03`:* los umbrales de Y1–Y3 son idénticos en `99269dd` y en `c16cd03`, así que el veredicto sobre la hipótesis original de **no regresión** es el mismo: soportada. El veredicto sobre la **mejora** se formula de forma acotada: la reorganización **materializa** en la estructura de paquetes las fronteras declaradas (Y4 de 0% a 100%, Y5 de 1 a 0), pero el spike **no demuestra** que eso mejore la mantenibilidad; solo que se logra sin coste funcional observable.
+  3. *Pendientes que condicionan el veredicto:* P3 (Windows/WSL2) limita la **validez externa**: el resultado vale para el entorno Linux registrado. P9 (cobertura: 2 tests y S1–S3) y P10 (fronteras por convención) **acotan** lo que se afirma. P1, P2 y P4 (imagen Docker, `docker compose up --build`, casos límite) **no condicionan** el veredicto sobre la reorganización: afectan al despliegue y a la API, no a la estructura de paquetes. P5 y P6 quedaron cerrados el 2026-10-24.
+  4. *Decisión arquitectónica:* se adopta la reorganización por dominio de ADR-01 (ya integrada en `main`; código medido `1e522df` = `44ede36`), con las condiciones de abajo.
+- **Justificación:** §2 (las cinco condiciones de confirmación cumplidas); §3.1–§3.2 (el código integrado es el medido y el informe coincide con sus salidas originales); §3.6 (re-medición en `main` con los mismos resultados); §4.1 (Y4/Y5 casi se cumplen por construcción, por eso el veredicto de mejora es acotado); §4.2 (limitaciones del medidor Y2, comprobadas manualmente en el código medido).
+- **Condiciones del veredicto:**
+  - Las fronteras se siguen manteniendo por convención (ADR-02). Si aparece una violación en un PR, o al añadir el primer módulo con lógica propia (Mascotas o Atención veterinaria), se reevalúa automatizarlas (ArchUnit o un check en CI).
+  - Antes de reutilizar `revisar_modulos.py` se corrigen sus limitaciones (P8).
+  - El resultado no se afirma para Windows/WSL2 hasta cerrar P3.
+- **Limitaciones y pendientes que acompañan al veredicto:** P1–P4, P8, P9 y P10 de §5; la preinscripción se ajustó en `c16cd03` después de una revisión preliminar no registrada (N2, Anexo A de la EDAV 2); el spike no evalúa la comunicación entre módulos (Decisión 3 de ADR-03).
+- **Consecuencias:**
+  - **ADR-01:** la reorganización deja de ser solo una decisión: está implementada y verificada por el spike 1. El estado del comité (Ajustada) no cambia; se añade al historial el resultado del spike.
+  - **ADR-02:** se mantiene la Alternativa A (convención + revisión de PR). ArchUnit no se adopta: con el código actual Y2 = 0 sin él. Queda como condición de revisión (ver condiciones).
+  - **ADR-03:** sin cambios. Las Decisiones 1 y 2 ya figuran como aceptadas con la evidencia del spike; la Decisión 3 la evalúa el spike 2 (`08-spike-integracion-especificacion.md`).
 
-Nombre(s): 
+Nombre(s): Charry Ríos Daniel Estiven
 
-Fecha: 
+Fecha: 2026-10-24
 
 ---
 

@@ -137,3 +137,17 @@ Declaro que revisé el resultado entregado por el agente y las decisiones de est
 Nombre(s): Charry Ríos Daniel Estiven y Kevin Steven Torres Caro
 
 Fecha: 2026-10-02
+
+---
+
+## Anexo A (2026-10-24) — Aclaración sobre §2.1
+
+Este anexo se añade después de la firma de §8 y no modifica lo firmado.
+
+La §2.1 afirma que "hipótesis y criterios no se modificaron después de conocer el resultado". Es correcto respecto al **resultado**, pero incompleto: no registra que el commit `c16cd03` (2026-10-02 16:10 UTC, copia en `main`: `77007ce`) cambió la hipótesis de **no regresión** (Y1–Y3) a una de **mejora** (Y4/Y5 más Y1–Y3). Ese cambio se hizo después de una revisión preliminar de los imports del estado base, que no quedó registrada, y menos de una hora antes de medir.
+
+- Qué no cambia: los umbrales de Y1–Y3 son los mismos en la hipótesis original (`99269dd`) y en la de `c16cd03`, y los valores medidos son los registrados.
+- Qué sí cambia: cómo se interpreta la preinscripción. Y4/Y5 miden el mismo movimiento de clases que constituye el cambio, así que casi se cumplen por construcción; la capacidad de refutar recae en Y1–Y3.
+- Detalle: `09-cierre-spike-s10.md` §3.5 (nota N2) y §4.1.
+
+Revisado por: Charry Ríos Daniel Estiven · Fecha: 2026-10-24
