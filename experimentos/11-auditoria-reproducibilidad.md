@@ -140,7 +140,7 @@ docker run --rm --network host -v "$PWD/experimentos:/scripts" grafana/k6 run /s
 | E1 | Aclaración fechada en `01` sin reescribirlo; la ronda 2 pasa a ser la evidencia de línea base y la ronda 1 queda como registro histórico | `01-metodologia-medicion.md` §7 |
 | E2 | Operación de la ronda 1 declarada "no verificable por Git", con el indicio del tamaño de respuesta | `01-metodologia-medicion.md` §7 |
 | E3 | Se añade el hash `1ac4c37` de la ronda 2 | `01-metodologia-medicion.md` §7 |
-| E4 | Etiquetas `evidencia/spike1-*` sobre los commits originales y tabla de equivalencias | Etiquetas en GitHub; `07-trazabilidad-temporal.md` §7 |
+| E4 | Etiquetas `evidencia/spike1-*` sobre los commits originales y tabla de equivalencias | Tabla en `07-trazabilidad-temporal.md` §7. Etiquetas **pendientes de publicar**: se crean ejecutando `auditoria-reproducibilidad/crear-etiquetas-evidencia.sh` desde un computador del equipo |
 | E5 | `main` no se vuelve a reescribir; las correcciones se hacen con commits nuevos | `07-trazabilidad-temporal.md` §7 |
 
 ---
