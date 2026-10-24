@@ -1,0 +1,8 @@
+Fecha: 2026-10-24T00:57:51Z
+Commit del código y del script: 1ac4c3735e26ce6a5f3e819570e9851a597763d3
+API: mvn spring-boot:run (no imagen Docker; ver desviación)
+k6 v2.3.0 (commit/e088784614, go1.27.1, linux/amd64)
+SO: Ubuntu 24.04.4 LTS (contenedor Linux)
+openjdk version "21.0.11" 2026-04-21
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+CPUs: 4
