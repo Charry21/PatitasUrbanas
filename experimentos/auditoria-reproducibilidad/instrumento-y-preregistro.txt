@@ -1,0 +1,33 @@
+Fecha: 2026-10-24T01:20:49Z · main d74c460
+
+## 1. Versión del script del medidor
+af02cce: experimentos/spike-s10/revisar_modulos.py blob 4e659a8
+4883f9c: experimentos/spike-s10/revisar_modulos.py blob 4e659a8
+d97cbf3: experimentos/spike-s10/revisar_modulos.py blob 4e659a8
+main: experimentos/spike-s10/revisar_modulos.py blob 4e659a8
+(mismo blob = mismo contenido byte a byte)
+
+## 2. Re-ejecución del script de af02cce sobre el app/ de cada estado y comparación con la salida original
+antes    código 887ccf1 · original af02cce:experimentos/spike-s10/antes/y2-y4-y5.txt · IDÉNTICA byte a byte · Y2 = 0 import(s) prohibido(s)
+control  código 4883f9c · original 4883f9c:experimentos/spike-s10/control-y2/salida.txt · IDÉNTICA byte a byte · Y2 = 1 import(s) prohibido(s)
+despues  código 1e522df · original d97cbf3:experimentos/spike-s10/despues/y2-y4-y5.txt · IDÉNTICA byte a byte · Y2 = 0 import(s) prohibido(s)
+
+## 3. Contenido del preregistro en 3d458a2
+Y1 —                       1 coincidencia(s)
+Y2 —                       1 coincidencia(s)
+Y3 —                       1 coincidencia(s)
+Y4 —                       1 coincidencia(s)
+Y5 —                       1 coincidencia(s)
+Criterio de confirmación    1 coincidencia(s)
+Criterio de refutación      1 coincidencia(s)
+Control del medidor Y2       1 coincidencia(s)
+Fuera del alcance            1 coincidencia(s)
+Commit base:                 1 coincidencia(s)
+Repeticiones y protocolo     1 coincidencia(s)
+S1:                          1 coincidencia(s)
+S3:                          1 coincidencia(s)
+Marcadores [COMPLETAR] en 3d458a2: 0
+Resultado/Veredicto en 3d458a2: Pendiente — se completa en Semana 10
+
+## 4. Cambios en 04 desde 3d458a2 hasta main (solo líneas cambiadas)
+líneas cambiadas: 6
