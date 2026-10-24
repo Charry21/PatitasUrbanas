@@ -1,0 +1,45 @@
+Fecha: 2026-10-24T00:56:08Z · main f0c4ea5
+
+$ git log --format="%h %ci %s" -- experimentos/04-spike-especificacion-s9.md
+7488569 2026-10-02 17:08:31 +0000 exp(s10): registro de ejecución, desviaciones y veredicto del spike 1
+c1c52da 2026-10-02 16:32:06 +0000 docs(s9): ADR-03 de límites de módulo, API pública y comunicación síncrona/asíncrona (propuesta)
+5977204 2026-10-02 16:22:16 +0000 docs(s9): registrar en ADR-01 y ADR-02 el veredicto Ajustada del mini-comité de Semana 8
+77007ce 2026-10-02 16:10:04 +0000 docs(s9): añadir métricas de mejora Y4/Y5, agente y ramas del spike; referenciar spike desde ADRs
+305d62e 2026-10-02 16:07:49 +0000 docs(s9): completar condiciones de medición del spike antes de ejecutar
+e2318e1 2026-10-01 22:47:18 -0500 docs(s9): especificación del spike (hipótesis, criterios y alcance) antes de ejecutar
+
+$ git diff --stat 887ccf1 3d458a2 -- app
+(vacío = app/ sin cambios)
+
+$ git diff 3d458a2 main -- experimentos/04-spike-especificacion-s9.md (solo líneas cambiadas)
+-Completar durante la auditoría humana en Semana 10. No hay hallazgos registrados en Semana 9.
++Completar durante la auditoría humana en Semana 10. No hay hallazgos registrados en Semana 9. La auditoría de Semana 10 se registra en [0
+-Pendiente — se completa en Semana 10
++Registrado en Semana 10 en [06-spike-resultado-s10.md](./06-spike-resultado-s10.md) (ejecución, evidencia, desviaciones y aspectos no veri
+-Pendiente — se completa en Semana 10
++Ver [06-spike-resultado-s10.md §7](./06-spike-resultado-s10.md). La auditoría humana se registra en [05-auditoria-ia-s9.md](./05-auditori
+
+$ git diff --shortstat -M 887ccf1 1e522df -- app
+ 8 files changed, 15 insertions(+), 18 deletions(-)
+
+$ líneas cambiadas que no son package/import (887ccf1..1e522df)
+  ninguna
+
+$ git diff --stat 1e522df main -- app
+(vacío = app/ en main = código medido)
+
+$ commits que tocan app/ entre 1e522df y main
+5f78881 2026-10-02 17:13:19 +0000 fix(s10): quitar el import de control de Y2 fusionado en main por error (PR #50)
+588fa8a 2026-10-02 17:12:58 +0000 Merge main (incluye PR #50 fusionado por error) en la rama del spike
+44ede36 2026-10-02 17:05:49 +0000 spike(s10): reorganizar clases en paquetes por dominio (adopciones/, mascotas/)
+6508379 2026-10-02 17:05:16 +0000 control(y2): inyectar import prohibido para validar el medidor (rama descartable, no se integra)
+
+$ ramas remotas del spike
+4883f9cd8ac5de00debcfa812ffb9ba25ac56b2b	refs/heads/spike/control-y2-descartable
+1a3e1efcde8242e794447738b4a204681924f40d	refs/heads/spike/fronteras-modulares-s10
+
+$ import de control en main
+  0 coincidencias
+
+$ ¿salidas antes/despues sin cambios desde d97cbf3?
+(vacío = sin cambios)

@@ -1,0 +1,18 @@
+Fecha: 2026-10-24T01:01:59Z · main f0c4ea5
+$ python3 -I experimentos/auditoria-reproducibilidad/extraer_k6.py experimentos/resultado-linea-base.txt experimentos/resultado-corrida-{1..8}.txt
+| Archivo | Script | Escenario | Iteraciones | http_req_failed | checks_succeeded | p95 http_req_duration |
+|---|---|---|---:|---|---|---:|
+| `resultado-linea-base.txt` | `experimentos/escenario-rendimiento.js` | default: Up to 20 looping VUs for 50s over 3 stages (gracefu | 809 | 0.00% 0 out of 809 | 100.00% 809 out of 809 | 4.33ms |
+| `resultado-corrida-1.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 4000 | 0.00% 0 out of 4000 | 100.00% 4000 out of 4000 | 2.85ms |
+| `resultado-corrida-2.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 4000 | 0.00% 0 out of 4000 | 100.00% 4000 out of 4000 | 1.82ms |
+| `resultado-corrida-3.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 4001 | 0.00% 0 out of 4001 | 100.00% 4001 out of 4001 | 1.8ms |
+| `resultado-corrida-4.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 3999 | 0.00% 0 out of 3999 | 100.00% 3999 out of 3999 | 6.5ms |
+| `resultado-corrida-5.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 3999 | 0.00% 0 out of 3999 | 100.00% 3999 out of 3999 | 3.12ms |
+| `resultado-corrida-6.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 4001 | 0.00% 0 out of 4001 | 100.00% 4001 out of 4001 | 2.49ms |
+| `resultado-corrida-7.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 4001 | 0.00% 0 out of 4001 | 100.00% 4001 out of 4001 | 2.52ms |
+| `resultado-corrida-8.txt` | `experimentos/escenario-rendimiento.js` | carga_constante: 100.00 iterations/s for 40s (maxVUs: 20-100 | 4000 | 0.00% 0 out of 4000 | 100.00% 4000 out of 4000 | 2.08ms |
+
+Mediana p95 corridas 2-3: 1.81 ms
+Mediana p95 corridas 6-8: 2.49 ms
+
+Bytes recibidos por solicitud (data_received / http_reqs): ~175 B en las corridas 1-8 (ver tamano-respuestas.txt)
