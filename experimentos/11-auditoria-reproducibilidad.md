@@ -133,6 +133,18 @@ docker run --rm --network host -v "$PWD/experimentos:/scripts" grafana/k6 run /s
 | E4 | A5: hashes del spike | Conservar las ramas que contienen los originales, o crear etiquetas (por ejemplo, `evidencia/spike1-*`) que los fijen; y/o añadir a `07` una tabla de equivalencias original → copia (`hashes-citados.txt`). |
 | E5 | Política de historial | Decidir si `main` se vuelve a reescribir. Cada reescritura invalida los hashes citados y quita la firma de GitHub a los merges. |
 
+### 6.1 Decisiones del equipo (2026-10-24)
+
+| # | Decisión | Dónde queda |
+|---|---|---|
+| E1 | Aclaración fechada en `01` sin reescribirlo; la ronda 2 pasa a ser la evidencia de línea base y la ronda 1 queda como registro histórico | `01-metodologia-medicion.md` §7 |
+| E2 | Operación de la ronda 1 declarada "no verificable por Git", con el indicio del tamaño de respuesta | `01-metodologia-medicion.md` §7 |
+| E3 | Se añade el hash `1ac4c37` de la ronda 2 | `01-metodologia-medicion.md` §7 |
+| E4 | Etiquetas `evidencia/spike1-*` sobre los commits originales y tabla de equivalencias | Tabla en `07-trazabilidad-temporal.md` §7. Etiquetas **pendientes de publicar**: se crean ejecutando `auditoria-reproducibilidad/crear-etiquetas-evidencia.sh` desde un computador del equipo |
+| E5 | `main` no se vuelve a reescribir; las correcciones se hacen con commits nuevos | `07-trazabilidad-temporal.md` §7 |
+
+---
+
 ## 7. Respuesta a la segunda revisión del tutor (2026-10-24)
 
 La segunda revisión pide comprobar directamente seis controles. Todos se ejecutaron sobre los archivos originales y el historial; la evidencia nueva está en [`auditoria-reproducibilidad/correspondencia-salidas.txt`](./auditoria-reproducibilidad/correspondencia-salidas.txt).
@@ -149,16 +161,6 @@ La segunda revisión pide comprobar directamente seis controles. Todos se ejecut
 **Aclaración sobre el Control D del tutor:** el commit de fusión del PR #50 es `af92e3f` (no `af92cce`). Ese PR integró dos commits de la rama descartable: `af02cce` (scripts y línea base, medidos antes de la fusión) y `4883f9c` (import de control). Las mediciones son de 17:05–17:07 UTC y la fusión del PR #50, de las 17:11:50 UTC (servidor).
 
 **Aclaración sobre rutas:** las respuestas de Y3 están en `spike-s10/antes/y3/` y `spike-s10/despues/y3/` (no en `y3-antes/` ni `y3-despues/`).
-
-### 6.1 Decisiones del equipo (2026-10-24)
-
-| # | Decisión | Dónde queda |
-|---|---|---|
-| E1 | Aclaración fechada en `01` sin reescribirlo; la ronda 2 pasa a ser la evidencia de línea base y la ronda 1 queda como registro histórico | `01-metodologia-medicion.md` §7 |
-| E2 | Operación de la ronda 1 declarada "no verificable por Git", con el indicio del tamaño de respuesta | `01-metodologia-medicion.md` §7 |
-| E3 | Se añade el hash `1ac4c37` de la ronda 2 | `01-metodologia-medicion.md` §7 |
-| E4 | Etiquetas `evidencia/spike1-*` sobre los commits originales y tabla de equivalencias | Tabla en `07-trazabilidad-temporal.md` §7. Etiquetas **pendientes de publicar**: se crean ejecutando `auditoria-reproducibilidad/crear-etiquetas-evidencia.sh` desde un computador del equipo |
-| E5 | `main` no se vuelve a reescribir; las correcciones se hacen con commits nuevos | `07-trazabilidad-temporal.md` §7 |
 
 ---
 
