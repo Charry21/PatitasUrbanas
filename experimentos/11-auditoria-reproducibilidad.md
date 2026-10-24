@@ -74,7 +74,7 @@ Ninguno de estos hallazgos cambia los valores transcritos, que coinciden con los
 
 ### 3.2 Hallazgo A5 — los hashes citados ya no están en la historia de `main`
 
-`main` se reescribió después del 2026-10-10: `09-cierre-spike-s10.md` §3.1 cita como `main` el commit `3e56742`, que ya no es ancestro de `main`. El resultado (`hashes-citados.txt`):
+`main` se reescribió el 2026-10-09 y el 2026-10-10 para corregir la autoría. Esa reescritura **ya está documentada** en `09-cierre-spike-s10.md`, Anexo A, con su propia tabla de equivalencias; esta auditoría la confirma de forma independiente y añade lo que el Anexo A no recoge: **la pérdida de la firma de GitHub** en los merges recreados. El resultado (`hashes-citados.txt`):
 
 - Los 15 hashes del spike que citan los documentos 04, 05, 06, 07 y 09 (`887ccf1`, `3d458a2`, `af02cce`, `1e522df`, `d97cbf3`, `e9bcd93`…) **no son ancestros de `main`**. En `main` hay copias con **el mismo árbol**, es decir, el mismo contenido, y las mismas fechas, con otros hashes (`1e522df` → `44ede36`, `3d458a2` → `dd451cf`…).
 - Los originales siguen existiendo en 12 ramas remotas (entre ellas `spike/fronteras-modulares-s10`) y en los PR de GitHub: el `merge_commit_sha` de los PR #45, #48, #49 y #50 apunta a los originales.
@@ -140,7 +140,7 @@ docker run --rm --network host -v "$PWD/experimentos:/scripts" grafana/k6 run /s
 | E1 | Aclaración fechada en `01` sin reescribirlo; la ronda 2 pasa a ser la evidencia de línea base y la ronda 1 queda como registro histórico | `01-metodologia-medicion.md` §7 |
 | E2 | Operación de la ronda 1 declarada "no verificable por Git", con el indicio del tamaño de respuesta | `01-metodologia-medicion.md` §7 |
 | E3 | Se añade el hash `1ac4c37` de la ronda 2 | `01-metodologia-medicion.md` §7 |
-| E4 | Etiquetas `evidencia/spike1-*` sobre los commits originales y tabla de equivalencias | Tabla en `07-trazabilidad-temporal.md` §7. Etiquetas **pendientes de publicar**: se crean ejecutando `auditoria-reproducibilidad/crear-etiquetas-evidencia.sh` desde un computador del equipo |
+| E4 | Preservar los commits originales y la tabla de equivalencias | Tabla en `07-trazabilidad-temporal.md` §7 y en `09`, Anexo A. **Ya preservados:** los 10 originales del spike están en las referencias `refs/pull/45…50/head`, que GitHub no borra, y el merge `7b1f022` lo resuelve la API (comprobado el 2026-10-24). Las etiquetas `evidencia/spike1-*` son **opcionales**: refuerzo que se publica con `auditoria-reproducibilidad/crear-etiquetas-evidencia.sh` |
 | E5 | `main` no se vuelve a reescribir; las correcciones se hacen con commits nuevos | `07-trazabilidad-temporal.md` §7 |
 
 ---
