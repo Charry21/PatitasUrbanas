@@ -68,3 +68,18 @@ Esta ronda **no se combina** con las corridas 2 y 3 de la sección 4. Aquellas c
 **Mediana final de esta ronda:** 2.49 ms (corridas válidas 6, 7 y 8).
 
 La mediana final de 2.49 ms sigue muy por debajo del umbral de la hipótesis de S3 (p95 < 800 ms). La conclusión de la sección 5 se mantiene sin cambios: el sistema cumple el umbral para el endpoint simulado, no para una búsqueda geoespacial real.
+
+## 7. Aclaración de auditoría (2026-10-24)
+
+Esta sección se añade sin modificar las anteriores. Recoge los hallazgos A1–A4 de [`11-auditoria-reproducibilidad.md`](./11-auditoria-reproducibilidad.md) §2.
+
+| Afirmación de este documento | Aclaración verificada con Git | Efecto |
+|---|---|---|
+| §1 "Fecha de ejecución: 31 de agosto de 2026" (ronda 1, corridas 1–3) | Los archivos de las corridas 1–3 ya estaban en GitHub el **2026-08-28 a las 20:49:10 UTC** (PR #7). La ejecución fue anterior a esa hora; la fecha exacta no está registrada. | La fecha de §1 no es correcta. |
+| §1 "Versión del código: `8c7b9f58…`" (ronda 1) | `8c7b9f5` es posterior a los resultados (`789ed21`) y no contiene `/api/mascotas/buscar`. Ningún commit contiene ese endpoint antes de `22b0ac0` (2026-09-04). | El código que sirvió la ronda 1 **no está versionado**. |
+| §3 "Operación medida: `/api/mascotas/buscar`" (ronda 1) | En `789ed21` el script versionado llamaba a `/actuator/health`. Indicio a favor de `/api/mascotas/buscar`: ~175 B por respuesta, igual que en la ronda 2 y que la respuesta actual de ese endpoint (`/actuator/health`: 438 B). | Operación **no verificable por Git**; el indicio es compatible con lo declarado, pero no lo demuestra. |
+| §6 ronda 2 (corridas 4–8), sin hash | El código y el script de la ronda 2 están en `1ac4c37` (PR #35, fusionado el 2026-09-12 17:34:18 UTC). El procedimiento se reprodujo sobre ese commit (`auditoria-reproducibilidad/k6-ronda2-1ac4c37/`). | Ronda 2 **identificable y reproducible**. |
+
+**Decisión del equipo (2026-10-24):** la **ronda 2** (corridas 6–8, commit `1ac4c37`) es la evidencia de línea base que se cita en adelante. La ronda 1 se conserva como registro histórico, con los límites de esta tabla, y no se usa para sostener afirmaciones.
+
+Los valores transcritos en §4 y §6 coinciden con los archivos originales; esta aclaración no cambia ningún número.

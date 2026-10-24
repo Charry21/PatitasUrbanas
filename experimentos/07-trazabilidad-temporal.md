@@ -116,3 +116,31 @@ git diff --stat 887ccf1 3d458a2 -- app
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Módulo 5 · Arquitectura de Software*
+
+---
+
+## 7. Equivalencia de hashes tras la reescritura de `main` (2026-10-24)
+
+Después del 2026-10-10 se reescribió el historial de `main`. Los hashes citados en este documento y en 04, 05, 06 y 09 **ya no son ancestros de `main`**: `main` contiene copias con el mismo contenido (mismo árbol) y las mismas fechas, pero otros hashes. Los originales se conservan con etiquetas `evidencia/spike1-*` y en las referencias de los PR de GitHub. Detalle en [`11-auditoria-reproducibilidad.md`](./11-auditoria-reproducibilidad.md) §3.2.
+
+| Paso | Hash citado (original) | Etiqueta | Copia en `main` |
+|---|---|---|---|
+| Base del código (PR #45) | `887ccf1` | `evidencia/spike1-00-base` | `6ad651d` |
+| Especificación completa (PR #48) | `3d458a2` | `evidencia/spike1-01-preregistro` | `dd451cf` |
+| Línea base Y1–Y5 | `af02cce` | `evidencia/spike1-02-linea-base` | `b52207e` |
+| Control del medidor Y2 | `4883f9c` | `evidencia/spike1-03-control-y2` | `6508379` |
+| Reorganización (código medido) | `1e522df` | `evidencia/spike1-04-cambio` | `44ede36` |
+| Mediciones después | `d97cbf3` | `evidencia/spike1-05-mediciones` | `ac85955` |
+| Resultado y veredicto | `e9bcd93` | `evidencia/spike1-06-veredicto` | `7488569` |
+| Fusión del spike (PR #49) | `7b1f022` | `evidencia/spike1-07-integracion` | `4b6a0aa` |
+
+La hora fuerte sigue siendo la de la API de los PR (`merged_at`): los merges recreados en `main` conservan el nombre `GitHub` como committer, pero ya no tienen su firma.
+
+**Política del equipo (2026-10-24):** `main` **no se vuelve a reescribir**. Las correcciones se hacen con commits nuevos y aclaraciones fechadas.
+
+Verificación:
+
+```
+git tag -l 'evidencia/spike1-*' -n1
+git diff evidencia/spike1-04-cambio 44ede36   # vacío: mismo contenido
+```
