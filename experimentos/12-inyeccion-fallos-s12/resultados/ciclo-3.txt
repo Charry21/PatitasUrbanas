@@ -1,0 +1,24 @@
+== ciclo 3: línea base
+2026-10-24T01:30:28.147Z base POST /api/adopciones -> 201 0.011132 {"estado":"PENDIENTE","idSolicitud":9,"etapaInicial":"SOLICITUD_RECIBIDA"}
+2026-10-24T01:30:28.167Z base POST /api/adopciones -> 201 0.009615 {"estado":"PENDIENTE","idSolicitud":10,"etapaInicial":"SOLICITUD_RECIBIDA"}
+2026-10-24T01:30:28.187Z base POST /api/adopciones -> 201 0.009030 {"estado":"PENDIENTE","idSolicitud":11,"etapaInicial":"SOLICITUD_RECIBIDA"}
+2026-10-24T01:30:28.201Z base GET /api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5 -> 200 0.003324 {"status":"success", "mensaje":"Endpoint geoespacial activo"}
+2026-10-24T01:30:28.215Z base GET /api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5 -> 200 0.003227 {"status":"success", "mensaje":"Endpoint geoespacial activo"}
+2026-10-24T01:30:28.230Z base GET /api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5 -> 200 0.002784 {"status":"success", "mensaje":"Endpoint geoespacial activo"}
+2026-10-24T01:30:28.249Z base GET /actuator/health -> 200 0.009614 {"status":"UP","components":{"db":{"status":"UP","details":{"database":"PostgreSQL","validationQuery":"isValid()"}},"diskSpace":{"status":"UP","details":{"total
+== ciclo 3: F1 docker stop 2026-10-24T01:30:28.253Z
+2026-10-24T01:30:28.497Z F1 POST /api/adopciones -> 500 0.011787 {"timestamp":"2026-10-24T01:30:28.493+00:00","status":500,"error":"Internal Server Error","path":"/api/adopciones"}
+2026-10-24T01:30:58.516Z F1 POST /api/adopciones -> 500 30.007295 {"timestamp":"2026-10-24T01:30:58.511+00:00","status":500,"error":"Internal Server Error","path":"/api/adopciones"}
+2026-10-24T01:31:28.539Z F1 POST /api/adopciones -> 500 30.008917 {"timestamp":"2026-10-24T01:31:28.534+00:00","status":500,"error":"Internal Server Error","path":"/api/adopciones"}
+2026-10-24T01:31:28.555Z F1 GET /api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5 -> 200 0.003927 {"status":"success", "mensaje":"Endpoint geoespacial activo"}
+2026-10-24T01:31:28.569Z F1 GET /api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5 -> 200 0.003025 {"status":"success", "mensaje":"Endpoint geoespacial activo"}
+2026-10-24T01:31:28.581Z F1 GET /api/mascotas/buscar?lat=4.6097&lng=-74.0817&radio=5 -> 200 0.003239 {"status":"success", "mensaje":"Endpoint geoespacial activo"}
+2026-10-24T01:31:58.599Z F1 GET /actuator/health -> 503 30.007385 {"status":"DOWN","components":{"db":{"status":"DOWN","details":{"error":"org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connec
+2026-10-24T01:32:28.620Z F1 GET /actuator/health -> 503 30.008873 {"status":"DOWN","components":{"db":{"status":"DOWN","details":{"error":"org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connec
+2026-10-24T01:32:58.641Z F1 GET /actuator/health -> 503 30.006657 {"status":"DOWN","components":{"db":{"status":"DOWN","details":{"error":"org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connec
+== ciclo 3: F2 docker start 2026-10-24T01:32:58.652Z
+2026-10-24T01:33:09.168Z BD healthy
+2026-10-24T01:33:09.201Z F2 POST /api/adopciones -> 201 0.021287 {"estado":"PENDIENTE","idSolicitud":12,"etapaInicial":"SOLICITUD_RECIBIDA"}
+recuperado en .040076567 s desde healthy
+2026-10-24T01:33:09.220Z F2 GET /actuator/health -> 200 0.005012 {"status":"UP","components":{"db":{"status":"UP","details":{"database":"PostgreSQL","validationQuery":"isValid()"}},"diskSpace":{"status":"UP","details":{"total
+== ciclo 3: HF3 filas (solicitudes, etapas, sin_etapa): 12|12|0 · respuestas 201 acumuladas: 12

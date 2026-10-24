@@ -1,0 +1,21 @@
+Extracto del log de la API (líneas WARN/ERROR, sin trazas DEBUG). Total de líneas del log: 3160
+      1 2026-10-24T01:32:58.633Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-5] o.s.b.a.health.HealthEndpointSupport     : Health contributor org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator (db) took 3000
+      1 2026-10-24T01:32:58.631Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-5] o.s.b.a.jdbc.DataSourceHealthIndicator   : DataSource health check failed
+      1 2026-10-24T01:32:28.614Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-4] o.s.b.a.health.HealthEndpointSupport     : Health contributor org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator (db) took 3000
+      1 2026-10-24T01:32:28.612Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-4] o.s.b.a.jdbc.DataSourceHealthIndicator   : DataSource health check failed
+      1 2026-10-24T01:31:58.594Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-3] o.s.b.a.health.HealthEndpointSupport     : Health contributor org.springframework.boot.actuate.jdbc.DataSourceHealthIndicator (db) took 3000
+      1 2026-10-24T01:31:58.591Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-3] o.s.b.a.jdbc.DataSourceHealthIndicator   : DataSource health check failed
+      1 2026-10-24T01:31:28.532Z ERROR 9717 --- [patitas-urbanas-api] [nio-3000-exec-8] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Reques
+      1 2026-10-24T01:31:28.530Z ERROR 9717 --- [patitas-urbanas-api] [nio-3000-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms (total=0, active=0, i
+      1 2026-10-24T01:31:28.530Z ERROR 9717 --- [patitas-urbanas-api] [nio-3000-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : Connection to localhost:5433 refused. Check that the hostname and port are correct and that the p
+      1 2026-10-24T01:31:28.530Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-8] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+      1 2026-10-24T01:30:58.509Z ERROR 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Reques
+      1 2026-10-24T01:30:58.508Z ERROR 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : HikariPool-1 - Connection is not available, request timed out after 30000ms (total=0, active=0, i
+      1 2026-10-24T01:30:58.508Z ERROR 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : Connection to localhost:5433 refused. Check that the hostname and port are correct and that the p
+      1 2026-10-24T01:30:58.507Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 08001
+      1 2026-10-24T01:30:28.509Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@37d5c757 (This conn
+      1 2026-10-24T01:30:28.508Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@7249348 (This conne
+      1 2026-10-24T01:30:28.508Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@5e38cc5 (This conne
+      1 2026-10-24T01:30:28.508Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@436e65ee (This conn
+      1 2026-10-24T01:30:28.508Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@270ae8c9 (This conn
+      1 2026-10-24T01:30:28.508Z  WARN 9717 --- [patitas-urbanas-api] [nio-3000-exec-7] com.zaxxer.hikari.pool.PoolBase          : HikariPool-1 - Failed to validate connection org.postgresql.jdbc.PgConnection@1e38a1ee (This conn

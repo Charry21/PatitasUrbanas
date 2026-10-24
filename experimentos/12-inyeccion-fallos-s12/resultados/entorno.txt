@@ -1,0 +1,8 @@
+Fecha: 2026-10-24T01:25:04.975Z
+Commit: 14c1d556d4f68469a08952891d5f77e55ddd7839
+SO: Ubuntu 24.04.4 LTS
+openjdk version "21.0.11" 2026-04-21
+Apache Maven 3.9.11 (3e54c93a704957b63ee3494413a2b544fd3d825b)
+Docker 29.6.2
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+CPUs: 4
