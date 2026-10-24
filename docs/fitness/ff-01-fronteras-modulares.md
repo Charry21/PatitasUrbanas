@@ -40,10 +40,20 @@
 - Definición: Semana 12 (este documento).
 - Ejecución en CI: activa desde su integración en `main`; el curso exige que esté a más tardar en la Semana 14.
 
-## Información que falta para comprobarla completamente
+## Ejecuciones en CI (GitHub Actions)
 
-- Que el workflow se haya ejecutado en GitHub Actions y aparezca en verde en `main`. Se verifica en la pestaña **Actions** del repositorio después de fusionar.
-- Que el equipo confirme R3 como regla de ADR-01 o la retire.
+| Ejecución | Evento | Commit | Resultado |
+|---|---|---|---|
+| [`40050755388`](https://github.com/Charry21/PatitasUrbanas/actions/runs/40050755388) | `pull_request` (PR #77) | `ee2c98a` | success |
+| [`40050776080`](https://github.com/Charry21/PatitasUrbanas/actions/runs/40050776080) | `push` a `main` | `ac5151e` | success |
+
+Pasos del job en `main` (2026-10-24T01:39:23Z → 2026-10-24T01:39:30Z): Set up job=success; Run actions/checkout@v4=success; Run actions/setup-python@v5=success; FF-01 sobre el código (debe cumplir)=success; Prueba negativa de FF-01 (cada violación inyectada debe fallar)=success; Post Run actions/setup-python@v5=success; Post Run actions/checkout@v4=success; Complete job=success. El paso "Prueba negativa" es el que provoca los 5 fallos deliberados y exige que cada uno haga fallar la regla. Detalle: https://github.com/Charry21/PatitasUrbanas/actions/runs/40050776080/job/120742729346
+
+Se reproduce con `gh api repos/Charry21/PatitasUrbanas/actions/runs --jq '.workflow_runs[] | "\(.id) \(.head_sha[0:7]) \(.event) \(.conclusion)"'`.
+
+## Información que falta
+
+- Que el equipo confirme R3 como regla de ADR-01 o la retire (M6-6 del registro de IA).
 
 ---
 
