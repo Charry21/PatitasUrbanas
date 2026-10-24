@@ -1,0 +1,20 @@
+Reposo (30 s): RSS medio 227.4 MiB (mín 227.4, máx 227.4); CPU media 0.30 % de un núcleo
+
+== vacia
+corrida | estado | p50 | p95 | p99 | req/s | fallos % | RSS máx MiB | CPU media % núcleo
+1 | descartada | 4.88 | 18.39 | 489.56 | 194.56 | 0.00 | 309.0 | 43.1
+2 | válida | 6.34 | 31.95 | 121.49 | 196.70 | 0.00 | 310.8 | 36.8
+3 | válida | 5.93 | 20.21 | 79.82 | 197.23 | 0.00 | 311.7 | 36.2
+4 | válida | 6.74 | 33.35 | 107.57 | 196.86 | 0.00 | 312.8 | 36.2
+mediana válidas: p50=6.34, p95=31.95, p99=107.57, rps=196.86, fallos=0.00, reqs=8000.00, rss_max=311.70, cpu_media=36.18
+
+== sembrada
+corrida | estado | p50 | p95 | p99 | req/s | fallos % | RSS máx MiB | CPU media % núcleo
+1 | descartada | 6.64 | 25.79 | 91.52 | 197.11 | 0.00 | 313.0 | 35.7
+2 | válida | 6.60 | 27.76 | 73.05 | 196.99 | 0.00 | 313.2 | 35.9
+3 | válida | 5.88 | 24.25 | 110.43 | 197.09 | 0.00 | 313.2 | 36.6
+4 | válida | 6.60 | 28.13 | 69.42 | 197.05 | 0.00 | 313.2 | 35.2
+mediana válidas: p50=6.60, p95=27.76, p99=73.05, rps=197.05, fallos=0.00, reqs=8000.00, rss_max=313.20, cpu_media=35.87
+
+HS1: diferencia relativa p95 (sembrada vs vacía) = -13.1 % -> no refutada (umbral 20 %)
+HS2: mediana de fallos vacía=0.00 % sembrada=0.00 % -> no refutada (umbral 1 %)

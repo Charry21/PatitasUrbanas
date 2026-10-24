@@ -1,0 +1,8 @@
+Fecha: 2026-10-24T01:52:37Z
+Commit: 1a574510ecdabf87125bbcc5cbb51f497cf6a6c5
+SO: Ubuntu 24.04.4 LTS
+CPUs: 4 · RAM: 15 GiB
+openjdk version "21.0.11" 2026-04-21
+k6 v2.3.0 (commit/e088784614, go1.27.1, linux/amd64)
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+PID API: 1482
