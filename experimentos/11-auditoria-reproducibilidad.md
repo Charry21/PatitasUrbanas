@@ -162,6 +162,43 @@ La segunda revisión pide comprobar directamente seis controles. Todos se ejecut
 
 **Aclaración sobre rutas:** las respuestas de Y3 están en `spike-s10/antes/y3/` y `spike-s10/despues/y3/` (no en `y3-antes/` ni `y3-despues/`).
 
+## 8. Tabla de cierre — tercera revisión del tutor (2026-10-24)
+
+Auditoría posterior, fechada; no modifica el preregistro ni las salidas originales. Evidencia nueva: [`auditoria-reproducibilidad/instrumento-y-preregistro.txt`](./auditoria-reproducibilidad/instrumento-y-preregistro.txt).
+
+### 8.1 Medición de rendimiento (S4/S5)
+
+| Control | Estado | Archivo de evidencia | Commit | Referencia exacta |
+|---|---|---|---|---|
+| Escenario y operación | Demostrado (ronda 2) · No verificable (ronda 1) | `01` §3, §7 | `1ac4c37` | Ronda 1: hallazgo A3 (§2.2) |
+| Herramienta, carga y duración | Demostrado | `resultado-corrida-{1..8}.txt` | `789ed21`, `1ac4c37` | `transcripcion-k6.txt` |
+| Versión del código | **Ronda 1: falta evidencia** · Ronda 2: Demostrado | `01` §1 y §7; `hashes-citados.txt` | `8c7b9f5` (declarado, no contiene el endpoint); `1ac4c37` | Hallazgos A2 y A4 |
+| Semilla | Falta evidencia | historial completo | — | §2.1 (sin `.sql` ni semilla en ningún commit) |
+| Corridas, descarte y mediana, **por ronda y sin mezclar** | Demostrado | `01` §4 y §6 | `789ed21`, `1ac4c37` | Ronda 1: 3 corridas, descarta 1, mediana de 2 válidas (1.81 ms). Ronda 2: 5 corridas, descarta 2, mediana de 3 válidas (2.49 ms). Ambas medianas recalculadas (`transcripcion-k6.txt`); `01` §6 declara que no se combinan |
+| Códigos HTTP por corrida | Demostrado | cada `resultado-corrida-N.txt` | `789ed21`, `1ac4c37` | `status es 200` 100% y `http_req_failed` 0% en las 8 (`transcripcion-k6.txt`) |
+| Condiciones de la máquina | No verificable | `01` §1 | — | Las salidas k6 no registran el entorno |
+| Reproducción independiente | Parcial | `k6-ronda2-1ac4c37/` | `1ac4c37` | Procedimiento reproducido (5 corridas); ronda 1 no reproducible |
+
+### 8.2 Spike 1 (S9–S10)
+
+| Control | Estado | Archivo de evidencia | Commit | Referencia exacta |
+|---|---|---|---|---|
+| Contenido exacto del preregistro | Demostrado | `04` en `3d458a2` | `3d458a2` (PR #48, 16:38:15 UTC) | `instrumento-y-preregistro.txt` §3: Y1–Y5, criterios, control, exclusiones, base, protocolo y S1–S3 presentes; 0 `[COMPLETAR]`; resultado "Pendiente" |
+| Protocolo sin cambios después del resultado | Demostrado | `git-spike.txt` | `3d458a2` → `main` | 6 líneas cambiadas, todas enlaces (§3.1) |
+| Código de referencia | Demostrado | `git-spike.txt` | `887ccf1` = `3d458a2` en `app/` | §3.1 |
+| Salida ↔ commit ↔ estado | Demostrado | `correspondencia-salidas.txt` | `af02cce` / `4883f9c` / `d97cbf3` | §7, control 3 |
+| Versión del instrumento y su salida | Demostrado | `instrumento-y-preregistro.txt` §1–§2 | blob `4e659a8` en los 4 commits | Script de `af02cce` re-ejecutado sobre `887ccf1`, `4883f9c` y `1e522df`: las 3 salidas son idénticas byte a byte a las originales; el control da Y2 = 1 |
+| Códigos HTTP y cuerpos (Y3) | Demostrado | `spike-s10/antes/y3/`, `spike-s10/despues/y3/`, `y3-comparacion.txt` | `af02cce`, `d97cbf3` | 9/9 iguales (§7, control 4) |
+| Rama de control fuera del código evaluado | Demostrado | `git-spike.txt` | `4883f9c`, `af92e3f`, `36e2e97` | `app/src/main` de `main` = `1e522df`; 0 imports de control |
+| Resultados conocidos antes del preregistro | No verificable | `07` §5 | — | Git solo demuestra que no hay mediciones commiteadas antes |
+| Imagen Docker / Windows-WSL2 | No verificable aquí | `09` §3.4, §5 (P1–P3) | — | Requiere un computador del equipo |
+
+### 8.3 Correcciones a la tercera revisión
+
+- **Versión del código de la medición histórica:** la revisión la marca como "Demostrado documentalmente", pero el hash declarado (`8c7b9f5`) no contiene el endpoint medido. Estado correcto para la ronda 1: **falta evidencia** (A2; `01` §7).
+- **Rutas de Y3:** son `spike-s10/antes/y3/` y `spike-s10/despues/y3/`, no `y3-antes/` ni `y3-despues/`.
+- **Hashes citados:** los del spike ya no son ancestros de `main` por la reescritura documentada en `09`, Anexo A. Se resuelven con `git fetch origin '+refs/pull/*/head:refs/remotes/pr/*'` (§3.2).
+
 ---
 
 Auditoría preparada con Claude Code (Anthropic) para revisión del equipo.
