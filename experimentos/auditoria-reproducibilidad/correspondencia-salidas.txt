@@ -1,0 +1,29 @@
+Fecha: 2026-10-24T01:11:16Z · main 5c59f7d
+
+## Árbol de app/ en el commit que añadió cada conjunto de salidas
+b52207e (antes): app/ = 2f6b347 · 887ccf1: app/ = 2f6b347 · ¿igual? sí
+6508379 (control-y2): app/ = 12e5fe6 · 4883f9c: app/ = 12e5fe6 · ¿igual? sí
+ac85955 (despues): app/ = cef1272 · 1e522df: app/ = cef1272 · ¿igual? sí
+Paquete de MascotaController en ese árbol: antes=api/controller/MascotaController control=api/controller/MascotaController despues=api/mascotas/MascotaController
+Import de control en 6508379: 1
+
+## Y3: respuesta por solicitud (archivos originales)
+| Solicitud | Antes: código | Después: código | Cuerpo normalizado igual | Tipos iguales |
+|---|---|---|---|---|
+| S1-1 | 201 | 201 | sí | sí |
+| S1-2 | 201 | 201 | sí | sí |
+| S1-3 | 201 | 201 | sí | sí |
+| S2-1 | 201 | 201 | sí | sí |
+| S2-2 | 201 | 201 | sí | sí |
+| S2-3 | 201 | 201 | sí | sí |
+| S3-1 | 200 | 200 | sí | sí |
+| S3-2 | 200 | 200 | sí | sí |
+| S3-3 | 200 | 200 | sí | sí |
+
+## Y1: resultado por corrida (archivos originales)
+antes/y1-corrida-1.log: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 · BUILD SUCCESS
+antes/y1-corrida-2.log: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 · BUILD SUCCESS
+antes/y1-corrida-3.log: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 · BUILD SUCCESS
+despues/y1-corrida-1.log: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 · BUILD SUCCESS
+despues/y1-corrida-2.log: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 · BUILD SUCCESS
+despues/y1-corrida-3.log: Tests run: 2, Failures: 0, Errors: 0, Skipped: 0 · BUILD SUCCESS
