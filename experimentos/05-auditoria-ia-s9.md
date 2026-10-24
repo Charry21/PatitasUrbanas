@@ -150,4 +150,4 @@ La §2.1 afirma que "hipótesis y criterios no se modificaron después de conoce
 - Qué sí cambia: cómo se interpreta la preinscripción. Y4/Y5 miden el mismo movimiento de clases que constituye el cambio, así que casi se cumplen por construcción; la capacidad de refutar recae en Y1–Y3.
 - Detalle: `09-cierre-spike-s10.md` §3.5 (nota N2) y §4.1.
 
-Revisado por: Charry Ríos Daniel Estiven · Fecha: 2026-10-24
+Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-24

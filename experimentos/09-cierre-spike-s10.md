@@ -117,7 +117,7 @@ Los pendientes técnicos siguen abiertos y **no** se presentan como pruebas supe
 | P3 | Ejecutar en Windows/WSL2 (Y1 y Y3 como mínimo) | Validez externa | No verificado | Antes de afirmar que el resultado vale en el entorno documentado del equipo (Windows con Docker Desktop) | | |
 | P4 | Probar `POST /api/adopciones/test-fallo` fuera del test de rollback, entradas no válidas y casos límite | Verificación técnica | No verificado | Cuando se cambie la lógica de adopciones o se amplíe la API | | |
 | P5 | Mover el test de rollback a `api.adopciones` (hallazgo S1) | Seguimiento del spike | **Cerrado el 2026-10-24**: el test está en `api.adopciones`; solo cambian `package` e imports; suite 2/2 en 3/3 corridas con BD limpia; Y2 = 0, Y4 = 7/7, Y5 = 0 (evidencia en [`spike-s10/seguimiento-s1-2026-10-24/`](./spike-s10/seguimiento-s1-2026-10-24/)). `app/src/main` sigue idéntico al código medido. | — | Charry21 | 2026-10-24 |
-| P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | **Cerrado el 2026-10-24**: Anexo A de [`05-auditoria-ia-s9.md`](./05-auditoria-ia-s9.md), añadido después de la firma sin modificarla | — | Charry Ríos Daniel Estiven | 2026-10-24 |
+| P6 | Añadir a la EDAV 2 un anexo fechado que remita a la aclaración N2 | Trazabilidad | **Cerrado el 2026-10-24**: Anexo A de [`05-auditoria-ia-s9.md`](./05-auditoria-ia-s9.md), añadido después de la firma sin modificarla | — | Charry Ríos Daniel Estiven y Kevin Steven Torres Caro | 2026-10-24 |
 | P8 | Ajustar `revisar_modulos.py` (Y2: comodines, nombres calificados; Y5: clases sin mapear) si se reutiliza en otro spike | Instrumento | Limitación conocida (§4.2) | Antes de reutilizar el script en otro spike o sobre código nuevo | | |
 | P9 | La evidencia funcional cubre solo los 2 tests existentes y las 3 solicitudes S1–S3 | Supuesto (cobertura) | Aceptado como límite; no demuestra equivalencia universal | Al añadir tests o endpoints, o si se observa una regresión fuera de S1–S3 | | |
 | P10 | Las fronteras entre módulos se mantienen solo por convención (ADR-02); no hay comprobación automática en el build | Supuesto (mantenimiento) | Aceptado como límite; el spike midió una sola reorganización | En cada cambio que añada clases o imports entre módulos, o si se decide automatizar la regla (por ejemplo, en CI) | | |
@@ -158,7 +158,7 @@ Para responderla, el equipo debería indicar:
   - **ADR-02:** se mantiene la Alternativa A (convención + revisión de PR). ArchUnit no se adopta: con el código actual Y2 = 0 sin él. Queda como condición de revisión (ver condiciones).
   - **ADR-03:** sin cambios. Las Decisiones 1 y 2 ya figuran como aceptadas con la evidencia del spike; la Decisión 3 la evalúa el spike 2 (`08-spike-integracion-especificacion.md`).
 
-Nombre(s): Charry Ríos Daniel Estiven
+Nombre(s): Charry Ríos Daniel Estiven y Kevin Steven Torres Caro
 
 Fecha: 2026-10-24
 
