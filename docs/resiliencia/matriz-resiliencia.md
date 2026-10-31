@@ -36,6 +36,8 @@ Relaciona cada fallo de la [matriz de fallos](./matriz-fallos.md) con una tácti
 
 M6-3 de `docs/registro-ia-modulo6.md`: R-07 a R-12 se aceptan como plan. Se implementan en este orden: R-10, R-09, R-08, R-11 y R-12. **R-07 se aplaza** hasta probar F-10 con carga. Su estado en la tabla sigue siendo **Propuesta** hasta que cada una se implemente y se pruebe.
 
+**Mini-comité del ADR-04 (2026-10-31):** R-10 pasa a ser la condición del veredicto **Ajustada**. Hay que implementarla y probarla antes del cierre de la Semana 13 (`dossier/evidencia-comite-adr04.md`).
+
 ## 2. Tácticas presentadas como probadas sin evidencia suficiente
 
 Ninguna fila figura como **Probada** sin una prueba o un experimento enlazado. Dos llevan reservas explícitas:

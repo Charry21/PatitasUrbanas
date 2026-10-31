@@ -85,7 +85,7 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 | A2 | Matriz de fallos (observados / hipotéticos) | [`docs/resiliencia/matriz-fallos.md`](docs/resiliencia/matriz-fallos.md), evidencia de [`experimentos/12-inyeccion-fallos-s12/`](experimentos/12-inyeccion-fallos-s12/) |
 | A3 | Matriz de resiliencia | [`docs/resiliencia/matriz-resiliencia.md`](docs/resiliencia/matriz-resiliencia.md) |
 | A4 | Distribución y costos | [`docs/distribucion/comparacion-distribucion.md`](docs/distribucion/comparacion-distribucion.md) |
-| A5 | ADR 4 (veredicto del comité pendiente) | [`adr/adr-04-distribucion.md`](adr/adr-04-distribucion.md) |
+| A5 | ADR 4 (veredicto del comité: **Ajustada**, 2026-10-31) | [`adr/adr-04-distribucion.md`](adr/adr-04-distribucion.md) · acta: [`dossier/evidencia-comite-adr04.md`](dossier/evidencia-comite-adr04.md) |
 | A6 | Fitness function FF-01 en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
 | — | Autoauditoría A1–A6 | [`docs/auditoria-modulo6.md`](docs/auditoria-modulo6.md) |
 | — | Registro crítico de IA | [`docs/registro-ia-modulo6.md`](docs/registro-ia-modulo6.md) |
