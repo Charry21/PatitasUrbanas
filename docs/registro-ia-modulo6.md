@@ -8,14 +8,15 @@
 | M6-2 | Matriz de fallos con 13 filas sobre componentes existentes; excluir los componentes que no existen en el código | `docs/resiliencia/matriz-fallos.md` | Aceptado (2026-10-24) | Cada fila tiene componente del C4, estímulo, consecuencia y referencia; los componentes inexistentes no se modelan |
 | M6-3 | Tácticas propuestas R-07 (tiempos de espera explícitos), R-08 (medir Hikari), R-09 (log SQL a INFO), R-10 (reinicio automático), R-11 (`ddl-auto` fuera de desarrollo), R-12 (construir la imagen sin proxy TLS) | `docs/resiliencia/matriz-resiliencia.md` | Aceptado como plan (2026-10-24): se implementan en este orden R-10, R-09, R-08, R-11 y R-12; R-07 se aplaza hasta probar F-10 con carga. Ninguna cuenta como probada hasta que se implemente y se pruebe | Prioriza las de menor costo y mayor impacto (F-12, F-11); R-07 necesita un valor que solo se puede elegir con la prueba de F-10 |
 | M6-4 | Alternativas D1–D3, supuestos S1–S5 y estimaciones de esfuerzo (15–25 h para D2, 80–120 h para D3) | `docs/distribucion/comparacion-distribucion.md` | Aceptado (2026-10-24): alternativas, supuestos y horas validadas como estimación | Las horas siguen siendo una estimación, no una medición; se corrigen si cambia el alcance |
-| M6-5 | ADR-04: mantener D1 durante 6 meses; D2 aplazada y D3 descartada | `adr/adr-04-distribucion.md` | Aceptado por el equipo (2026-10-24); pendiente del veredicto del mini-comité | Coincide con la evidencia de S11, S12 y del experimento 13 |
+| M6-5 | ADR-04: mantener D1 durante 6 meses; D2 aplazada y D3 descartada | `adr/adr-04-distribucion.md` | Aceptado por el equipo (2026-10-24). Veredicto del mini-comité (2026-10-31): **Ajustada**, con la condición de implementar y probar R-10 | Coincide con la evidencia de S11, S12 y del experimento 13 |
 | M6-6 | FF-01 sobre ADR-02 con las reglas R1–R3, ejecutada en CI con prueba negativa | `docs/fitness/ff-01-fronteras-modulares.md`, `tools/fitness/`, `.github/workflows/fitness-functions.yml` | Aceptado (2026-10-24): R3 se mantiene como regla de ADR-01 | Impide volver a la organización por capas técnicas que el spike 1 eliminó |
+| M6-7 | Borrador de preguntas y respuestas para el mini-comité del ADR-04, a partir de sus puntos débiles (F-12, carga probada, espera de 30 s, D2, precio) | `dossier/evidencia-comite-adr04.md` | Aceptado sin cambios en la sesión del comité (2026-10-31). Fecha, roles, veredicto y condición los decidió el equipo; la IA corrigió su recomendación inicial ("Confirmada con condición") porque en el formato del curso una condición corresponde a "Ajustada" | El veredicto y su condición son decisión del equipo, no de la IA |
 
 ## Rechazado por la propia IA al redactar (para que conste)
 
 - Poner precios en COP sin cotización: se dejaron como pendientes en A4.
 - Marcar como probadas las tácticas R-04 y R-05 sin reservas: quedaron como **parciales**.
-- Rellenar el veredicto del mini-comité del ADR-04 antes de celebrarlo.
+- Rellenar el veredicto del mini-comité del ADR-04 antes de celebrarlo, o con una fecha distinta de la de la sesión: se registró con la fecha real, 2026-10-31.
 - Una fitness function de rendimiento (k6 a 200 usuarios) en CI: los ejecutores compartidos de GitHub no dan condiciones de medición estables. Queda fuera de FF-01.
 
-Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-24
+Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-24 (M6-7 y veredicto de M6-5: 2026-10-31)

@@ -1,4 +1,4 @@
-# Autoauditoría del Módulo 6 (A1–A6) — 2026-10-24 (actualizada tras el experimento 13)
+# Autoauditoría del Módulo 6 (A1–A6) — 2026-10-24 (actualizada tras el experimento 13 y el mini-comité del ADR-04, 2026-10-31)
 
 Contrastada con los criterios de la auditoría del tutor del Módulo 6 y con la ficha de entregables. Estados: **Cumple**, **Cumple parcialmente** y **No cumple**. Cada fila cita el archivo y la evidencia concreta.
 
@@ -18,18 +18,20 @@ Contrastada con los criterios de la auditoría del tutor del Módulo 6 y con la 
 | | Costos | **Cumple** | CPU y memoria **medidas** (S11, exp. 13); esfuerzo estimado y validado por el equipo (M6-4); precio de referencia de 12 USD/mes por servidor con **fuente secundaria citada** (§3, nota †). Pendiente declarado: confirmar el precio en el proveedor elegido y convertirlo a COP |
 | | Consecuencias positivas y negativas | **Cumple** | Ídem §4 |
 | | Supuestos no verificados y condiciones de revisión | **Cumple** | Ídem §2: S1–S5, indicando si se verificó y su condición de revisión |
-| **A5** ADR 4 | Título, estado, contexto con evidencia, fuentes, alternativas, costos, decisión, consecuencias, supuestos | **Cumple** | `adr/adr-04-distribucion.md` (Propuesta), con fuentes S11, S12, A2, A3 y A4 |
-| | Veredicto **real** del comité | **No cumple todavía** | La sección "Veredicto del comité" está vacía a propósito: se completa solo después de celebrar el mini-comité |
+| **A5** ADR 4 | Título, estado, contexto con evidencia, fuentes, alternativas, costos, decisión, consecuencias, supuestos | **Cumple** | `adr/adr-04-distribucion.md` (estado **Ajustada**), con fuentes S11, S12, A2, A3 y A4 |
+| | Veredicto **real** del comité | **Cumple** | Mini-comité del 2026-10-31: acta en `dossier/evidencia-comite-adr04.md` (roles, 5 preguntas con respuesta, veredicto **Ajustada**, condición R-10 con responsables y fecha límite); resumen en la sección "Veredicto del comité" del ADR-04 |
 | **A6** Fitness function | Regla ejecutable y decisión que protege | **Cumple** | `docs/fitness/ff-01-fronteras-modulares.md`: ADR-02 y R1–R3; `tools/fitness/fronteras_modulares.py` |
 | | Se ejecuta automáticamente en CI | **Cumple** | `.github/workflows/fitness-functions.yml`; ejecuciones `40050755388` (PR #77) y `40050776080` (`main`), ambas *success* |
 | | Prueba de violación deliberada que haga fallar la validación | **Cumple** | `tools/fitness/prueba_negativa.sh`: 5 violaciones inyectadas, las 5 fallan; se ejecuta en el mismo job de CI. Además falla sobre `887ccf1` (9 violaciones) |
 
 ## Pendientes que dependen del equipo
 
-1. **Celebrar el mini-comité del ADR-04 y registrar su veredicto real** (único criterio que no se cumple todavía).
+1. **Cumplir la condición del comité del ADR-04:** implementar y probar R-10 antes del cierre de la Semana 13 (responsables: ambos).
 2. Confirmar el precio en el proveedor elegido y convertirlo a COP (A4 §5).
-3. Implementar y probar las tácticas aceptadas como plan (R-10, R-09, R-08, R-11, R-12; M6-3).
+3. Implementar y probar el resto de las tácticas aceptadas como plan (R-09, R-08, R-11, R-12; M6-3).
 
 Resuelto el 2026-10-24: decisiones M6-1 a M6-6 firmadas; semilla de datos (A1) y memoria y consumo base de la API (A4) medidos en el experimento 13.
 
-Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-24
+Resuelto el 2026-10-31: mini-comité del ADR-04 celebrado y registrado (veredicto **Ajustada**). Con esto, los 19 puntos de A1–A6 quedan en **Cumple**.
+
+Revisado por: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro · Fecha: 2026-10-24 (actualizada el 2026-10-31)
