@@ -5,9 +5,12 @@
 
 ## Estado
 
-**Propuesta, aceptada por el equipo** (Semana 12, 2026-10-24; M6-5 de `docs/registro-ia-modulo6.md`) — pendiente del veredicto del mini-comité.
+**Ajustada** — veredicto del mini-comité de Semana 13 (2026-10-31).
+Evidencia: `dossier/evidencia-comite-adr04.md`.
 
-Veredicto del mini-comité: _pendiente — se registra en §Veredicto del comité después de celebrarse_ (confirmada / ajustada / reconsiderada).
+Condición registrada por el comité: implementar R-10 (reinicio automático del contenedor de la API) y probarlo, midiendo el tiempo hasta la primera respuesta 200 tras detener el proceso, antes del cierre de la Semana 13.
+
+Historial: Propuesta, aceptada por el equipo (Semana 12, 2026-10-24; M6-5 de `docs/registro-ia-modulo6.md`) → Ajustada (Semana 13, 2026-10-31).
 
 ---
 
@@ -119,12 +122,18 @@ D1 no abre canales de red nuevos (perímetro de ADR-01). D2 añadiría un balanc
 
 ## Veredicto del comité
 
-_Se completa después del mini-comité. No se rellena antes._
+Acta completa: `dossier/evidencia-comite-adr04.md`.
 
-- Fecha:
-- Rol(es) del comité:
-- Preguntas realizadas y respuestas del equipo:
-- Veredicto (confirmada / ajustada / reconsiderada) y condición:
+- **Fecha:** 2026-10-31 (Semana 13).
+- **Roles:** Charry Ríos Daniel Estiven, defensor de la decisión; Kevin Steven Torres Caro, comité (arquitecto revisor). Comité interno del equipo.
+- **Preguntas realizadas y respuestas del equipo:**
+  1. *F-12 (punto único de fallo sin reinicio automático), ¿es aceptable?* Sí, en este horizonte: no hay despliegue real ni un objetivo de disponibilidad definido. Se mitiga con R-10, la primera táctica del plan M6-3.
+  2. *¿Y si la carga real supera los 200 usuarios probados?* Se preregistra una serie con más carga antes de cambiar la distribución (condición de revisión de este ADR).
+  3. *¿Se aceptan 30 s de espera por escritura con la BD caída?* Sí, de forma provisional. R-07 se aplaza hasta probar F-10 con carga; si se agotan los hilos, se adopta.
+  4. *¿Por qué no D2, si es reversible?* Su beneficio principal es tolerar F-12, que es hipotético, y no ayuda ante F-01. R-10 cubre buena parte de F-12 por mucho menos que las ~15–25 h de D2.
+  5. *¿Cambia la decisión el precio no oficial y sin COP?* No: D1 es la más barata con cualquier precio, porque D2 y D3 necesitan al menos el doble de servidores.
+- **Veredicto:** **Ajustada.** D1 se mantiene con esta condición: implementar R-10 y probarlo (detener el proceso de la API y medir el tiempo hasta la primera respuesta 200). Responsables: Charry Ríos Daniel Estiven y Kevin Steven Torres Caro. Fecha límite: cierre de la Semana 13.
+- **Preparación:** las preguntas y respuestas parten de un borrador de la IA que el equipo revisó en la sesión y aceptó sin cambios (M6-7 de `docs/registro-ia-modulo6.md`).
 
 ---
 
@@ -136,6 +145,7 @@ _Se completa después del mini-comité. No se rellena antes._
 - `docs/resiliencia/matriz-fallos.md`, `docs/resiliencia/matriz-resiliencia.md`
 - `docs/distribucion/comparacion-distribucion.md`
 - `experimentos/13-semilla-memoria-s12/RESULTADOS.md`
+- `dossier/evidencia-comite-adr04.md` (acta del mini-comité)
 
 ---
 
