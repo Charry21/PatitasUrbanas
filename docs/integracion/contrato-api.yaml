@@ -22,7 +22,11 @@ info:
     - Desde Adopciones: modificar datos o disponibilidad de una mascota.
     - A ningún consumidor: escribir directamente en `solicitud_adopcion` o
       `etapa_adopcion`, ni crear una solicitud sin su etapa inicial (TRX-02).
-    - Consultar solicitudes existentes: no hay endpoint de lectura (GET → 405).
+    - Consultar solicitudes existentes: no hay endpoint de lectura.
+
+    Seguridad (rama `feat/s13-capa-seguridad`, propuesta de ADR-05): toda ruta no
+    declarada aquí se deniega. Sin token responde 401; con token sin el permiso
+    necesario responde 403. Por eso `GET /api/adopciones` ya no responde 405.
 servers:
   - url: http://localhost:3000
     description: Entorno local (docker compose + mvn spring-boot:run)
@@ -37,11 +41,14 @@ paths:
       tags: [adopciones]
       operationId: crearSolicitudAdopcion
       summary: Crea una solicitud de adopción y su etapa inicial en una sola transacción (TRX-02).
+      security:
+        - bearerJwt: []
       description: |
         Garantía: se crean la solicitud y su etapa inicial, o ninguna de las dos
         (rollback verificado por `AdopcionControllerRollbackIntegrationTest`).
-        Limitación conocida: `estado` y `nombreEtapa` son texto libre; el
-        proveedor no valida valores permitidos.
+        Requiere un JWT RS256 con el permiso `adopciones:escribir`.
+        Limitación conocida: `estado` y `nombreEtapa` son texto libre de hasta
+        255 caracteres; el proveedor no valida valores permitidos.
       parameters:
         - name: estado
           in: query
@@ -58,11 +65,15 @@ paths:
             application/json:
               schema: { $ref: "#/components/schemas/SolicitudCreada" }
               example: { idSolicitud: 1, estado: PENDIENTE, etapaInicial: SOLICITUD_RECIBIDA }
-        "405":
-          description: Método no soportado (por ejemplo, GET). No existe lectura de solicitudes.
+        "400":
+          description: "`estado` o `nombreEtapa` supera 255 caracteres."
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ErrorSpring" }
+        "401":
+          description: Sin token, o token inválido, caducado o de otro emisor o audiencia. Se registra en el log de auditoría.
+        "403":
+          description: Token válido sin el permiso `adopciones:escribir`. Se registra en el log de auditoría.
         "500":
           description: "Error interno; la transacción se revierte completa. No verificado en la corrida de contrato (no se puede provocar sin modificar el código); el cuerpo es el de error por defecto de Spring."
           content:
@@ -75,8 +86,14 @@ paths:
       summary: "Solo pruebas: fuerza un fallo entre los dos inserts para verificar el rollback de TRX-02."
       description: |
         No forma parte del contrato para clientes; existe para la evidencia de
-        QA-02. Condición de revisión: retirar o proteger antes de exponer la API.
+        QA-02. Requiere el permiso `adopciones:pruebas`, que no se emite a clientes.
+      security:
+        - bearerJwt: []
       responses:
+        "401":
+          description: Sin token o token inválido.
+        "403":
+          description: Token sin el permiso `adopciones:pruebas`.
         "500":
           description: Fallo simulado; no queda ninguna fila nueva.
           content:
@@ -87,7 +104,8 @@ paths:
     get:
       tags: [mascotas]
       operationId: buscarMascotasCercanas
-      summary: Búsqueda de mascotas por cercanía (respuesta simulada).
+      summary: Búsqueda de mascotas por cercanía (respuesta simulada). Pública.
+      security: []
       description: |
         Respuesta estática: no consulta la base de datos (no existe la entidad
         `Mascota`). Desviación verificada: el cuerpo tiene forma JSON pero se
@@ -110,12 +128,12 @@ paths:
           content:
             application/json:
               schema: { $ref: "#/components/schemas/ErrorSpring" }
-        "405":
-          description: Método no soportado (solo GET).
-          content:
-            application/json:
-              schema: { $ref: "#/components/schemas/ErrorSpring" }
 components:
+  securitySchemes:
+    bearerJwt:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     SolicitudCreada:
       type: object
