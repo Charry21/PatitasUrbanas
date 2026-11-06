@@ -59,7 +59,7 @@ Una fila hipotética **no** es un fallo demostrado.
 | I-2 | F-03 y F-01 dependen del mismo `connectionTimeout` (30 s por defecto), que nadie eligió | ¿El equipo acepta 30 s como tiempo máximo de fallo, o lo fija explícitamente? |
 | I-3 | F-13: `create-drop` es una configuración de desarrollo | ¿Es aceptable en el entorno donde se va a desplegar? |
 | I-4 | F-12 y F-10 son hipotéticos y son los de mayor impacto | **F-12 observado el 2026-11-05** (experimento 16). F-10 sigue hipotético: ¿con qué carga se prueba? |
-| I-5 | F-08 solo se observó detrás de un proxy TLS | ¿Construye el `Dockerfile` original en el computador del equipo? (P1 de `09-cierre-spike-s10.md`) |
+| I-5 | F-08 solo se observó detrás de un proxy TLS | **Respondida en parte el 2026-11-06:** construye en una máquina Linux limpia, sin proxy (`docs/verificacion/arranque-limpio-2026-11-06/`). Falta el computador del equipo, con Windows |
 
 | I-6 | F-14: una entrada larga da 500, y R-06 declaraba "nunca 500" | **Detectada el 2026-11-05** por la prueba de fuga. La corrección está en `feat/s13-capa-seguridad`, sin fusionar |
 
@@ -67,4 +67,4 @@ Una fila hipotética **no** es un fallo demostrado.
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Semana 12 · Módulo 6 · Arquitectura de Software*
-*Actualizada el 2026-11-05 por la IA (F-12, F-13, F-14, I-4, I-6), pendiente de revisión del equipo*
+*Actualizada el 2026-11-05 por la IA (F-12, F-13, F-14, I-4, I-5, I-6), pendiente de revisión del equipo*

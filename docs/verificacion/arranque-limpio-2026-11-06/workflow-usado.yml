@@ -1,0 +1,22 @@
+# Temporal: verificación del paso 2 en una máquina limpia. Vive solo en esta rama de prueba.
+name: verificacion-temporal
+on:
+  push:
+    branches: [prueba/s14-verificacion-arranque]
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyjwt cryptography
+      - run: bash docs/verificacion/arranque-limpio-2026-11-06/verificar.sh
