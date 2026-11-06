@@ -1,6 +1,6 @@
 # Riesgos y compromisos — Semanas 13 y 14
 
-> **Estado: borrador de la IA, pendiente de revisión del equipo.** La columna "Tratamiento" es una propuesta. Aceptar un riesgo es una decisión del equipo.
+> **Estado: revisado por el equipo el 2026-11-06.** Los tratamientos son decisiones del equipo (ADR-05). Probabilidad e impacto siguen siendo juicio de la IA, con revisión manual pendiente (S6 de la EDAV 3). El equipo registra las aceptaciones como **deuda técnica** que se revisa antes de desplegar.
 
 Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad están en [`10-seguridad.md`](./10-seguridad.md) §4; aquí solo se resumen los que condicionan una decisión.
 
@@ -27,7 +27,7 @@ Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad 
 | RO-11 | Las pruebas de la API no corren en CI: el test de rollback (QA-02) y los de seguridad dependen de ejecutarlos a mano | Nuevo | Alta | Medio | **Documentado:** `.github/workflows` solo ejecuta fitness functions | **Mitigar:** job con PostgreSQL de servicio. **No implementado** | CI | — |
 | RO-12 | La evidencia de rendimiento no incluye una búsqueda real: `/buscar` es simulado | Escenario 1 | Alta | Alto | **Documentado:** `MascotaController` devuelve texto fijo | **Aceptar** hasta implementar Mascotas. Repetir S11 entonces | — | El margen de ADR-04 no vale para la búsqueda real |
 | RO-13 | Conocimiento en 2 personas, sin guardia | Nuevo | Media | Medio | **Documentado:** DA-03 | **Aceptar** | — | Una alerta nocturna puede no atenderse |
-| RO-14 | Sin emisor de tokens no se puede operar con clientes reales | RS-14 | Alta | Alto | **Documentado:** Identidad no existe | **Decisión pendiente** en ADR-05 | — | La capa solo funciona con tokens de prueba |
+| RO-14 | Sin emisor de tokens no se puede operar con clientes reales | RS-14 | Alta | Alto | **Documentado:** Identidad no existe | **Aplazado** en ADR-05: solución de identidad de terceros | — | La capa solo funciona con tokens de prueba |
 
 ---
 
@@ -70,4 +70,19 @@ Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad 
 
 ---
 
-*Borrador de la IA · Semana 14 · Módulo 7 · Arquitectura de Software · Pendiente de revisión del equipo*
+## 5. Prioridades del equipo antes de desplegar
+
+Fuente: conclusión del equipo en la EDAV 3, §8 (2026-11-06).
+
+| Prioridad | Qué | Riesgos que cierra |
+|---|---|---|
+| 1 | Revisar a mano probabilidades, impactos y umbrales | S6 de la EDAV 3 |
+| 2 | Integrar un emisor de tokens de terceros | RS-14, RO-14 |
+| 3 | Reforzar las pruebas de integración: servidor real y job de CI con PostgreSQL | RO-11 y el punto ciego de MockMvc (S8) |
+| 4 | Control de acceso en la búsqueda antes de usar datos reales | TO-10 |
+| 5 | Revisar los riesgos aceptados y definir la retención de IP | RS-08, RS-09, RS-12, RS-13, RS-15, RS-16, RS-17 |
+| 6 | Copias, alertas, R-09 y R-08 | RO-02, RO-03, RO-06, RO-09 |
+
+---
+
+*Borrador de la IA, revisado por el equipo (Kevin Torres · Daniel Charry, 2026-11-06) · Semana 14 · Módulo 7 · Arquitectura de Software*

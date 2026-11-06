@@ -1,6 +1,6 @@
 # Seguridad arquitectónica — Semana 13
 
-> **Estado: borrador de la IA, pendiente de revisión del equipo.** Las amenazas y las pruebas son verificables. Los tratamientos de §4 son **propuestas**: mitigar o aceptar un riesgo lo decide el equipo en [ADR-05](../adr/adr-05-seguridad-y-operacion.md).
+> **Estado: revisado por el equipo el 2026-11-06.** ADR-05 está aceptada. Los tratamientos de §4 son decisiones del equipo, con RS-14 y RS-16 aplazados. **Probabilidad e impacto siguen siendo juicio de la IA:** el equipo dejó su revisión manual como condición antes de desplegar (S6 de la EDAV 3).
 
 Fecha: 2026-11-05. Código analizado: `main` en `3f4b124`.
 
@@ -105,7 +105,7 @@ Sin fuga en una sonda solo significa que esa sonda no obtuvo nada. **El sistema 
 
 **Estado del control:** **En PR** = implementado y probado en `feat/s13-capa-seguridad`, sin fusionar. **Sin implementar** = solo propuesto. **Existente** = ya está en `main`.
 
-| Id | Riesgo | Amenazas | Elemento | Prob. | Impacto | Controles evaluados | Propuesta | Justificación | Estado del control | Riesgo residual |
+| Id | Riesgo | Amenazas | Elemento | Prob. | Impacto | Controles evaluados | Decisión del equipo (2026-11-06) | Justificación | Estado del control | Riesgo residual |
 |---|---|---|---|---|---|---|---|---|---|---|
 | RS-01 | Escritura sin autenticación | T-01 | `POST /api/adopciones` | Alta | Alto | JWT en la API; clave compartida; auth en el proxy; sesiones | **Mitigar:** JWT RS256 | Cumple el escenario 2 y no añade estado | En PR | RS-14 |
 | RS-02 | Accesos sin registro | T-04 | API | Alta | Medio | Línea de auditoría en el log; tabla en BD | **Mitigar:** línea en el log | Sin componentes nuevos | En PR, solo denegaciones | Los accesos permitidos no se registran |
@@ -120,9 +120,9 @@ Sin fuga en una sonda solo significa que esa sonda no obtuvo nada. **El sistema 
 | RS-11 | Entrada sin validar | T-02 | `AdopcionController` | Media | Medio | Límite de largo; lista de estados | **Mitigar en parte:** largo máximo 255 | La lista de estados es regla de negocio | En PR, solo el largo | `estado` sigue siendo texto libre |
 | RS-12 | Cadena de suministro | T-15 | Dependencias, imágenes, CI | Media | Alto | Fijar resúmenes; Dependabot; análisis de imágenes | **Aceptar por ahora** | Costo de mantenimiento para 2 personas | Sin implementar | Abierto |
 | RS-13 | Tráfico interno sin cifrar | T-10 | Proxy → API, API → BD | Baja | Medio | TLS interno | **Aceptar** | Misma máquina y red privada de Docker | Sin implementar | Se revisa si se separan |
-| RS-14 | Sin emisor de tokens ni custodia de la clave | T-17 | Identidad | Alta | Alto | Solución existente; desarrollo propio | **Decisión pendiente** | Identidad es genérico: conviene una solución existente | Sin implementar | **Bloquea el uso real** |
+| RS-14 | Sin emisor de tokens ni custodia de la clave | T-17 | Identidad | Alta | Alto | Solución existente; desarrollo propio | **Aplazar:** solución de identidad de terceros | Identidad es genérico: conviene una solución existente | Sin implementar | **Bloquea el uso real** |
 | RS-15 | Datos personales futuros sin controles | — | Identidad | Media | Alto | Cifrado en reposo; consentimiento; retención | **Aceptar hasta que existan** | Hoy no se guardan | Sin implementar | Condición de revisión en ADR-05 |
-| RS-16 | IP en el log de auditoría | T-18 | Logs | Media | Bajo | Retención limitada; anonimizar | **Mitigar:** definir retención | Es consecuencia del control RS-02 | Sin implementar | Abierto |
+| RS-16 | IP en el log de auditoría | T-18 | Logs | Media | Bajo | Retención limitada; anonimizar | **Aplazar:** definir la retención antes del despliegue público | Es consecuencia del control RS-02 | Sin implementar | Abierto |
 | RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Bajo | Reescribir historial; cambiar la contraseña | **Aceptar** | Basta con no reutilizarla. Reescribir invalidaría hashes citados en el dossier | En PR: deja de ser la contraseña obligatoria | Solo es válida si alguien la reutiliza |
 
 **Inyección SQL (T-03):** no necesita control nuevo. El control existente, parámetros de JPA, resistió P05.
@@ -172,12 +172,12 @@ Fuente del texto: [Ley 1581 de 2012, compilación de Colpensiones](https://norma
 
 ## 7. Qué queda pendiente
 
-Para el equipo:
+El equipo decidió ADR-05 el 2026-11-06. Queda pendiente antes de desplegar:
 
-1. Decidir ADR-05 y fusionar o rechazar `feat/s13-capa-seguridad`.
-2. Elegir el emisor de tokens (RS-14).
-3. Decidir si `/api/mascotas/buscar` debe ser pública (TO-10).
-4. Revisar las aceptaciones: RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17.
+1. Revisar a mano las probabilidades y los impactos de §4 (S6 de la EDAV 3).
+2. Integrar un emisor de tokens de terceros (RS-14).
+3. Poner control de acceso a `/api/mascotas/buscar` antes de usar datos reales (TO-10).
+4. Revisar RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17, y definir la retención de RS-16.
 
 Lo que estas pruebas **no** cubren:
 
@@ -188,4 +188,4 @@ Lo que estas pruebas **no** cubren:
 
 ---
 
-*Borrador de la IA · Semana 13 · Módulo 7 · Arquitectura de Software · Pendiente de revisión del equipo*
+*Borrador de la IA, revisado por el equipo (Kevin Torres · Daniel Charry, 2026-11-06) · Semana 13 · Módulo 7 · Arquitectura de Software*
