@@ -28,6 +28,7 @@ Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad 
 | RO-12 | La evidencia de rendimiento no incluye una búsqueda real: `/buscar` es simulado | Escenario 1 | Alta | Alto | **Documentado:** `MascotaController` devuelve texto fijo | **Aceptar** hasta implementar Mascotas. Repetir S11 entonces | — | El margen de ADR-04 no vale para la búsqueda real |
 | RO-13 | Conocimiento en 2 personas, sin guardia | Nuevo | Media | Medio | **Documentado:** DA-03 | **Aceptar** | — | Una alerta nocturna puede no atenderse |
 | RO-14 | Sin emisor de tokens no se puede operar con clientes reales | RS-14 | Alta | Alto | **Documentado:** Identidad no existe | **Aplazado** en ADR-05: solución de identidad de terceros | — | La capa solo funciona con tokens de prueba |
+| RO-15 | El margen de rendimiento solo está medido en el entorno de S11; en el computador del equipo, la API no sostuvo 100 req/s en S8 | Escenario 1 | Media | Alto | **Registro histórico, sin condiciones:** corrida 1 bloqueada a los 4 s (20,92 % de fallos) y corrida 2 con un p95 de 2,98 s (`experimentos/defensa-s8-historico/`) | **Mitigar:** repetir `escenario-defensa.js` con token y con el código actual, en el computador del equipo | AL-4 | Mientras no se repita, el margen de ADR-04 vale solo para el entorno de S11 |
 
 ---
 
