@@ -59,3 +59,5 @@ Para cumplir con la política de uso de IA, a continuación se detalla el tratam
 
 - **Descripción:** Ejecución simultánea de peticiones POST para la creación de solicitudes de adopción bajo carga concurrente, evaluando consistencia del negocio y ausencia de errores derivados de condiciones de carrera o deadlocks.
 - **Evidencia pendiente:** Carga concurrente con k6 y análisis de errores HTTP, timeouts y percentil p95 para confirmar que el flujo de negocio no degrada ni queda incoherente.
+
+**Nota (2026-11-06, I-11):** QA-02 figura como "no medido", pero ya tiene evidencia: la prueba de rollback de TRX-02 (`AdopcionControllerRollbackIntegrationTest`) y HF3 del experimento 12. Sobre QA-03 y BIZ-01, ver la nota de `02-stakeholders-drivers.md`.

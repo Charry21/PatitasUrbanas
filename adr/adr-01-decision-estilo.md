@@ -222,3 +222,5 @@ incorporar ArchUnit para refuerzo estructural automático.
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Fecha: 2026-09-13*
 *Semana 7 · Módulo 4 · Arquitectura de Software*
+
+*Nota (2026-11-06, I-06): el texto menciona "un único punto de autenticación", que no existía en el código. Se crea con la decisión A de ADR-05 (PR #83).*

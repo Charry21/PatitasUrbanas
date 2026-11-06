@@ -54,3 +54,5 @@ flowchart LR
 Antes el diagrama mostraba un contenedor web, móvil, caché NoSQL y un servicio de mapas como parte del sistema actual. Se corrigió a la realidad del repositorio: el backend es Spring Boot y la base de datos es PostgreSQL 16 sin PostGIS, evidenciado por `docker-compose.yml` y los artefactos de la app. Los elementos no implementados se mantienen como futuros con estilo punteado, sin mezclarlos con el as-is. Esta corrección evita presentar requisitos planeados como si ya estuvieran desplegados.
 
 **Evidencia utilizada:** `docker-compose.yml`, `app/pom.xml`, `app/src/main/resources/application.properties`.
+
+**Nota (2026-11-06, I-05):** las relaciones dicen `JSON/HTTPS`, pero hoy la API responde HTTP en claro por el puerto 3000. HTTPS llega con el proxy de `docker-compose.produccion.yml` (ADR-05, PR #83).

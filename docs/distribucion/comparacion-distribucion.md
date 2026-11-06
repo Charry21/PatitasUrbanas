@@ -83,3 +83,5 @@ Insumos:
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Semana 12 · Módulo 6 · Arquitectura de Software*
+
+*Nota (2026-11-06, I-09): el margen frente al escenario 1 usa el p95 de escritura porque `/buscar` es simulado. No hay evidencia de una búsqueda real (RO-12 de `docs/13-riesgos-tradeoffs.md`).*
