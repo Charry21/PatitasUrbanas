@@ -1,0 +1,34 @@
+flowchart TB
+    cliente["Clientes<br/>planificados: web y móvil<br/>hoy: pruebas"]
+    monitor["Monitor externo<br/>propuesto"]
+    emisor["Emisor de tokens<br/>contexto Identidad<br/>NO existe"]
+    copias[("Copias de la BD<br/>fuera del servidor<br/>NO existen")]
+
+    subgraph vps["Servidor único, 1 vCPU y 2 GiB (V1). Proveedor sin elegir"]
+        subgraph docker["Docker Compose: red interna, sin puertos publicados salvo el proxy"]
+            proxy["patitas_urbanas_proxy<br/>Caddy 2<br/>TLS, HSTS<br/>restart: unless-stopped"]
+            api["patitas_urbanas_api<br/>Spring Boot 3.3.4, Java 21<br/>valida JWT RS256<br/>usuario sin privilegios<br/>restart: unless-stopped"]
+            db[("patitas_urbanas_db<br/>PostgreSQL 16<br/>restart: unless-stopped")]
+            pgdata[/"volumen pgdata_v16"/]
+            caddydata[/"volumen caddy_data"/]
+        end
+        env["Archivo .env y clave pública<br/>no se versionan"]
+    end
+
+    cliente -- "HTTPS 443<br/>JWT para escribir" --> proxy
+    monitor -- "HTTPS GET /actuator/health" --> proxy
+    cliente -. "obtiene el token (pendiente)" .-> emisor
+    emisor -. "publica la clave (pendiente)" .-> env
+    proxy -- "HTTP 3000, red interna" --> api
+    api -- "JDBC 5432, red interna" --> db
+    db --- pgdata
+    proxy --- caddydata
+    env -. "variables y clave" .-> api
+    db -. "pg_dump diario (propuesto)" .-> copias
+
+    classDef propuesto fill:#fdf3e1,stroke:#b5791f,color:#232420
+    classDef existente fill:#dde8f0,stroke:#2c5f8a,color:#232420
+    classDef ausente fill:#f5f5f0,stroke:#999999,color:#666666,stroke-dasharray: 4 3
+    class api,db,pgdata existente
+    class proxy,caddydata,env,monitor propuesto
+    class emisor,copias,cliente ausente
