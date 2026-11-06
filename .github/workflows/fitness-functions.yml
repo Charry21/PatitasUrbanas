@@ -1,4 +1,4 @@
-# Fitness functions de arquitectura. Contrato: docs/fitness/ff-01-fronteras-modulares.md
+# Fitness functions de arquitectura. Contratos: docs/fitness/ff-01-fronteras-modulares.md y ff-02-configuracion-segura.md
 name: fitness-functions
 
 on:
@@ -18,3 +18,15 @@ jobs:
         run: python3 -I tools/fitness/fronteras_modulares.py app
       - name: Prueba negativa de FF-01 (cada violación inyectada debe fallar)
         run: bash tools/fitness/prueba_negativa.sh app
+
+  ff-02-configuracion-segura:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: FF-02 sobre la configuración (debe cumplir)
+        run: python3 -I tools/fitness/configuracion_segura.py .
+      - name: Prueba negativa de FF-02 (cada control roto debe fallar)
+        run: bash tools/fitness/prueba_negativa_ff02.sh .
