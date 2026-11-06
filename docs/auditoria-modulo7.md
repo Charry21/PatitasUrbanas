@@ -47,7 +47,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | I-02 | **Alta** | El plan M6-3 pone R-10 primero y R-11 cuarta, pero R-10 sola borra los datos en cada caída | `docs/registro-ia-modulo6.md`, exp. 16 HR2 | Decidido por el equipo el 2026-11-06: R-11 entra con R-10 | Equipo: cambiar el orden |
 | I-03 | **Alta** | El escenario 2 y QA-01 son prioridad alta y nunca se implementaron | `dossier/04-escenarios-calidad.md`, `dossier/02` | Capa candidata en el PR | Equipo, en ADR-05 |
 | I-04 | **Alta** | `dossier/02` pide la BD en red privada (R-05), y `docker-compose.yml` la publica con una contraseña versionada. ADR-04 afirma que D1 no abre canales nuevos | P07 | Corregido en el PR | Equipo |
-| I-05 | Media | El C4 dice `JSON/HTTPS`, pero la API es HTTP en claro | `dossier/06-c4-contenedores.md`, P11 | Nota con fecha en el C4 (2026-11-06) | Equipo |
+| I-05 | Media | El C4 dice `JSON/HTTPS`, pero la API es HTTP en claro | `dossier/06-c4-contenedores.md`, P11 | Diagrama corregido: muestra el proxy TLS de producción y HTTP solo en la red interna (2026-11-06) | Equipo |
 | I-06 | Media | ADR-01 habla de "un único punto de autenticación", que no existe | `adr/adr-01-decision-estilo.md` | Nota con fecha en ADR-01 | Equipo |
 | I-07 | Media | `R-xx` significa cosas distintas: tácticas (`docs/resiliencia`), riesgos (`dossier/02` y `dossier/04-riesgos.md`, con listas diferentes), relaciones R1–R5 y reglas de FF-01 | Varios | Glosario de identificadores en el README | Equipo |
 | I-08 | Media | R-06 figuraba como **Probada** ("nunca 500") y una entrada de 300 caracteres da 500 | `docs/resiliencia/matriz-resiliencia.md` | Pasada a **Parcial**; añadido F-14; corregida en el PR | Equipo: validar el cambio |
@@ -63,10 +63,12 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 
 ## 4. Pendientes que dependen del equipo
 
-1. Daniel Charry revisa y fusiona #82, #83 y #84, en ese orden.
-2. Contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16 (2026-11-06).
+Actualizado el 2026-11-06, después de fusionar los PR #82 a #88.
+
+1. Confirmar con el profesor la categoría del catálogo y contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16.
+2. Elegir proveedor y convertir el costo a COP (punto 7).
 3. Antes de desplegar: las prioridades de `docs/13-riesgos-tradeoffs.md` §5.
-4. ~~Probar el README en un computador con Windows.~~ Hecho por Kevin Torres el 2026-11-06 (`docs/verificacion/windows-2026-11-06/`).
-5. Borrar en GitHub la rama temporal `prueba/s14-verificacion-arranque`.
+
+Cerrados: credencial histórica (RS-17: según el equipo no se usó fuera de sus computadores; se da por comprometida, no se reutiliza y no se purga el historial, 2026-11-06); fusión de los PR #82 a #88; prueba en Windows (`docs/verificacion/windows-2026-11-06/`); revisión manual S6 (`docs/verificacion/revision-manual-s6-2026-11-06/`); rama temporal de verificación borrada.
 
 Revisado por: Kevin Torres · Daniel Charry · Fecha: 2026-11-06

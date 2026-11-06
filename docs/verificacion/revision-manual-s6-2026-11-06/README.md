@@ -50,6 +50,8 @@ La matriz final difiere de la inicial de la IA en **14 filas: 13 suben y 1 baja*
 | RO-14 | Alta / Alto | Alta / Alto | **Alta / Alto** (9) | Alta / Alto (9) | Coincidieron por separado |
 | RO-15 | Alta / Medio | Media / Alto | **Alta / Medio** (6) | Media / Alto (6) | Las pruebas S11 se limitaron a un entorno local aislado (Alta probabilidad de sesgo de red). Dado que la latencia dependerá del proveedor final, el margen de rendimiento exigido en el Escenario 1 podría no cumplirse en producción (Impacto Medio). |
 
+Nota sobre RS-17: el mismo día, tras la segunda pasada de la preauditoría, el equipo quitó la condición de purgar el historial, porque el repositorio ya es público y la purga no borraría la contraseña de GitHub. La calificación (Alta / Medio) no cambia. Ver `docs/10-seguridad.md` §4.
+
 Nota sobre RO-15: "entorno local" se refiere a que S11 corrió con el generador de carga y la API en la misma máquina, el contenedor en la nube de la IA, sin latencia de red.
 
 ## Umbrales
