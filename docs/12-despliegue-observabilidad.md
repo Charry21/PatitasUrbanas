@@ -1,6 +1,6 @@
 # Despliegue, observabilidad y operación — Semana 14
 
-> **Estado: revisado por el equipo el 2026-11-06.** ADR-05 está aceptada: V1 con el proveedor por definir, observabilidad N1 y RPO de 24 h. **Los umbrales de alerta siguen siendo propuesta de la IA** y se revisarán a mano antes de desplegar (S6 de la EDAV 3).
+> **Estado: revisado por el equipo el 2026-11-06.** ADR-05 está aceptada: V1 con el proveedor por definir, observabilidad N1 y RPO de 24 h. **Los umbrales de alerta los confirmó el equipo** en la revisión manual S6 (2026-11-06).
 
 Insumos: ADR-04, C4 (`dossier/06`, `dossier/07`), matrices de fallos y resiliencia (`docs/resiliencia/`), comparación de distribución (`docs/distribucion/comparacion-distribucion.md`) y experimentos 11 a 16.
 
@@ -109,7 +109,7 @@ Con 2 personas (DA-03), un stack completo sería más trabajo que el sistema que
 
 ### 3.4 Monitoreo y alertas
 
-Los umbrales salen de lo medido y son una propuesta. Ninguna alerta está implementada.
+Umbrales confirmados por el equipo en la revisión manual S6 (2026-11-06, `docs/verificacion/revision-manual-s6-2026-11-06/`): se compararon la propuesta independiente de Kevin Torres y estos valores, y se eligieron estos para no saturar de alertas. AL-6 sigue siendo provisional hasta tener tráfico real. **Ninguna alerta está implementada.**
 
 | Id | Condición | Ventana | Severidad | Fundamento | Acción |
 |---|---|---|---|---|---|

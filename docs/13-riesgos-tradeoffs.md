@@ -1,12 +1,12 @@
 # Riesgos y compromisos — Semanas 13 y 14
 
-> **Estado: revisado por el equipo el 2026-11-06.** Los tratamientos son decisiones del equipo (ADR-05). Probabilidad e impacto siguen siendo juicio de la IA, con revisión manual pendiente (S6 de la EDAV 3). El equipo registra las aceptaciones como **deuda técnica** que se revisa antes de desplegar.
+> **Estado: revisado por el equipo el 2026-11-06.** Los tratamientos son decisiones del equipo (ADR-05). Probabilidad e impacto los calificó el equipo (revisión manual S6, `docs/verificacion/revision-manual-s6-2026-11-06/`). El equipo registra las aceptaciones como **deuda técnica** que se revisa antes de desplegar.
 
 Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad están en [`10-seguridad.md`](./10-seguridad.md) §4; aquí solo se resumen los que condicionan una decisión.
 
 **Identificadores:** `RS` riesgo de seguridad, `RO` riesgo operativo, `TO` compromiso. Se usan prefijos propios porque `R-01`… ya significa dos cosas en el repositorio (ver [`auditoria-modulo7.md`](./auditoria-modulo7.md), I-07).
 
-**Escala:** probabilidad e impacto en Alta, Media y Baja, y **son juicio**, no medición. La probabilidad supone que el sistema se despliega con acceso público, porque hoy no lo está.
+**Escala:** la misma de `docs/10-seguridad.md` §4, acordada en la revisión manual S6 (2026-11-06). Se califica el riesgo sin su control y suponiendo un despliegue público.
 
 ---
 
@@ -14,21 +14,21 @@ Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad 
 
 | Id | Riesgo | Fallo | Prob. | Impacto | Evidencia | Tratamiento propuesto | Señal | Riesgo residual |
 |---|---|---|---|---|---|---|---|---|
-| RO-01 | Pérdida total de datos al reiniciar la API | F-13 | Alta sin R-11 | Alto | **Observado:** 5/5 ciclos, de 5 filas a 0 (exp. 16, HR2) | **Mitigar:** R-10 y R-11 juntas. `update` en Compose | Conteo de filas | `update` no gestiona cambios incompatibles (RO-08) |
-| RO-02 | Sin copias de la BD: un error o la pérdida del servidor es irrecuperable | Nuevo | Media | Alto | **Documentado:** no hay ningún mecanismo | **Mitigar:** `pg_dump` diario y simulacro. **No implementado** | AL-7 | RPO de 24 h, sin probar |
+| RO-01 | Pérdida total de datos al reiniciar la API | F-13 | Alta | Alto | **Observado:** 5/5 ciclos, de 5 filas a 0 (exp. 16, HR2) | **Mitigar:** R-10 y R-11 juntas. `update` en Compose | Conteo de filas | `update` no gestiona cambios incompatibles (RO-08) |
+| RO-02 | Sin copias de la BD: un error o la pérdida del servidor es irrecuperable | Nuevo | Alta | Alto | **Documentado:** no hay ningún mecanismo | **Mitigar:** `pg_dump` diario y simulacro. **No implementado** | AL-7 | RPO de 24 h, sin probar |
 | RO-03 | Una caída de la API no la ve nadie: R-10 la oculta | F-12 | Alta | Medio | **Observado:** vuelve en < 10 s sin aviso (exp. 16) | **Mitigar:** AL-2 sobre `RestartCount`. **No implementado** | AL-2 | — |
 | RO-04 | Punto único de fallo: servidor, Docker o BD | F-01, F-12 | Media | Alto | **Decidido:** ADR-04 | **Aceptar** en el horizonte de 6 meses | AL-1 | Indisponibilidad hasta intervenir |
-| RO-05 | API viva pero colgada: Docker no la reinicia | Nuevo | Baja | Alto | **Hipotético** | **Aceptar** por ahora. Revisar si se añade un `healthcheck` al contenedor | AL-1 | Requiere reinicio manual |
-| RO-06 | Disco lleno por logs: no hay rotación y SQL está en DEBUG | F-11 | Media | Alto | **Observado:** 176 MB en S11. Disco lleno, **hipotético** | **Mitigar:** R-09 y rotación. **No implementado** | AL-5 | — |
+| RO-05 | API viva pero colgada: Docker no la reinicia | Nuevo | Media | Alto | **Hipotético** | **Aceptar** por ahora. Revisar si se añade un `healthcheck` al contenedor | AL-1 | Requiere reinicio manual |
+| RO-06 | Disco lleno por logs: no hay rotación y SQL está en DEBUG | F-11 | Alta | Alto | **Observado:** 176 MB en S11. Disco lleno, **hipotético** | **Mitigar:** R-09 y rotación. **No implementado** | AL-5 | — |
 | RO-07 | Con la BD caída y carga, se agotan los hilos y también cae `/buscar` | F-10 | Media | Medio | **Hipotético:** S12 fue de una en una | **Aceptar** hasta probarlo con carga. Decisión de M6-3 y del comité del ADR-04 | Hilos ocupados | — |
 | RO-08 | Cambio de esquema incompatible con `ddl-auto=update` | Nuevo | Media | Alto | **Documentado:** `update` no elimina ni transforma | **Aceptar** ahora que hay 2 tablas. Migraciones con Flyway cuando exista el contexto de Identidad | Error al arrancar | Rollback de esquema manual |
 | RO-09 | Causa de F-05 sin aislar: la cola de latencia crece a 200 usuarios | F-05 | Media | Medio | **Observado:** p99 de 64,71 a 209,25 ms (S11). No son las filas (exp. 13) | **Mitigar:** R-08. **No implementado** | AL-4 | — |
 | RO-10 | La imagen original no construye detrás de un proxy TLS | F-08 | Baja | Bajo | **Observado** detrás de proxy TLS. **Construye en una máquina limpia y en Windows** (`docs/verificacion/arranque-limpio-2026-11-06/` y `docs/verificacion/windows-2026-11-06/`) | **Mitigado:** construye en Linux limpio y en Windows | Build fallido | Las mediciones usan `Dockerfile.runtime` |
 | RO-11 | Las pruebas de la API no corren en CI: el test de rollback (QA-02) y los de seguridad dependen de ejecutarlos a mano | Nuevo | Alta | Medio | **Documentado:** `.github/workflows` solo ejecuta fitness functions | **Mitigar:** job con PostgreSQL de servicio. **No implementado** | CI | — |
-| RO-12 | La evidencia de rendimiento no incluye una búsqueda real: `/buscar` es simulado | Escenario 1 | Alta | Alto | **Documentado:** `MascotaController` devuelve texto fijo | **Aceptar** hasta implementar Mascotas. Repetir S11 entonces | — | El margen de ADR-04 no vale para la búsqueda real |
-| RO-13 | Conocimiento en 2 personas, sin guardia | Nuevo | Media | Medio | **Documentado:** DA-03 | **Aceptar** | — | Una alerta nocturna puede no atenderse |
+| RO-12 | La evidencia de rendimiento no incluye una búsqueda real: `/buscar` es simulado | Escenario 1 | Alta | Medio | **Documentado:** `MascotaController` devuelve texto fijo | **Aceptar** hasta implementar Mascotas. Repetir S11 entonces | — | El margen de ADR-04 no vale para la búsqueda real |
+| RO-13 | Conocimiento en 2 personas, sin guardia | Nuevo | Media | Alto | **Documentado:** DA-03 | **Aceptar** | — | Una alerta nocturna puede no atenderse |
 | RO-14 | Sin emisor de tokens no se puede operar con clientes reales | RS-14 | Alta | Alto | **Documentado:** Identidad no existe | **Aplazado** en ADR-05: solución de identidad de terceros | — | La capa solo funciona con tokens de prueba |
-| RO-15 | El margen de rendimiento solo está medido en el entorno de S11; en el computador del equipo, la API no sostuvo 100 req/s en S8 | Escenario 1 | Media | Alto | **Registro histórico, sin condiciones:** corrida 1 bloqueada a los 4 s (20,92 % de fallos) y corrida 2 con un p95 de 2,98 s (`experimentos/defensa-s8-historico/`) | **Mitigar:** repetir `escenario-defensa.js` con token y con el código actual, en el computador del equipo | AL-4 | Mientras no se repita, el margen de ADR-04 vale solo para el entorno de S11 |
+| RO-15 | El margen de rendimiento solo está medido en el entorno de S11; en el computador del equipo, la API no sostuvo 100 req/s en S8 | Escenario 1 | Alta | Medio | **Registro histórico, sin condiciones:** corrida 1 bloqueada a los 4 s (20,92 % de fallos) y corrida 2 con un p95 de 2,98 s (`experimentos/defensa-s8-historico/`) | **Mitigar:** repetir `escenario-defensa.js` con token y con el código actual, en el computador del equipo | AL-4 | Mientras no se repita, el margen de ADR-04 vale solo para el entorno de S11 |
 
 ---
 
@@ -77,7 +77,7 @@ Fuente: conclusión del equipo en la EDAV 3, §8 (2026-11-06).
 
 | Prioridad | Qué | Riesgos que cierra |
 |---|---|---|
-| 1 | Revisar a mano probabilidades, impactos y umbrales | S6 de la EDAV 3 |
+| 1 | ~~Revisar a mano probabilidades, impactos y umbrales~~ Hecho el 2026-11-06 | S6 de la EDAV 3 |
 | 2 | Integrar un emisor de tokens de terceros | RS-14, RO-14 |
 | 3 | Reforzar las pruebas de integración: servidor real y job de CI con PostgreSQL | RO-11 y el punto ciego de MockMvc (S8) |
 | 4 | Control de acceso en la búsqueda antes de usar datos reales | TO-10 |
