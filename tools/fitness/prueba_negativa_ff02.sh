@@ -5,6 +5,8 @@ FF="$(cd "$(dirname "$0")" && pwd)/configuracion_segura.py"
 RAIZ="$(cd "${1:-.}" && pwd)"
 T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
 P=app/src/main/resources/application.properties
+# Sin este control, una base que ya falla haría pasar todos los casos.
+python3 -I "$FF" "$RAIZ" > /dev/null || { echo "La configuración de partida no cumple FF-02: la prueba negativa no sería válida"; exit 1; }
 fallos=0
 caso() { # nombre, comando que modifica la copia
   rm -rf "$T/r"; mkdir -p "$T/r/app/src/main/resources" "$T/r/app/src/main/java/com/patitasurbanas/api/config"
