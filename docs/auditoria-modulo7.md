@@ -11,7 +11,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | # | Punto | Estado | Evidencia | Qué falta |
 |---|---|---|---|---|
 | 1 | Modelado de amenazas documentado | **Cumple** | `docs/10-seguridad.md` §1–§2: 18 amenazas, con activo, impacto y evidencia | Revisión del equipo |
-| 2 | Matriz de riesgos de seguridad y controles | **Parcial** | `docs/10-seguridad.md` §4: 17 riesgos | Revisar a mano probabilidad e impacto (S6 de la EDAV 3). Los tratamientos ya están decididos |
+| 2 | Matriz de riesgos de seguridad y controles | **Cumple** | `docs/10-seguridad.md` §4: 17 riesgos, calificados por el equipo (`docs/verificacion/revision-manual-s6-2026-11-06/`) | — |
 | 3 | Prueba de fuga reproducible y con resultados | **Cumple** | `experimentos/14-fuga-datos-s13/`: 13 sondas, 3 repeticiones, antes y después | — |
 | 4 | Costo de seguridad sobre el p95, con condiciones | **Cumple** | `experimentos/15-costo-seguridad-s13/` | — |
 | 5 | Evidencia del ciclo EDAV 3 formativo | **Cumple** | `docs/EDAV-03.md` | Auditada y firmada el 2026-11-06 |

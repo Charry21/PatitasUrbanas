@@ -1,6 +1,6 @@
 # Seguridad arquitectónica — Semana 13
 
-> **Estado: revisado por el equipo el 2026-11-06.** ADR-05 está aceptada. Los tratamientos de §4 son decisiones del equipo, con RS-14 y RS-16 aplazados. **Probabilidad e impacto siguen siendo juicio de la IA:** el equipo dejó su revisión manual como condición antes de desplegar (S6 de la EDAV 3).
+> **Estado: revisado por el equipo el 2026-11-06.** ADR-05 está aceptada. Los tratamientos de §4 son decisiones del equipo, con RS-14 y RS-16 aplazados. **Probabilidad e impacto los calificó el equipo** con una escala acordada (revisión manual S6, 2026-11-06).
 
 Fecha: 2026-11-05. Código analizado: `main` en `3f4b124`.
 
@@ -101,7 +101,12 @@ Sin fuga en una sonda solo significa que esa sonda no obtuvo nada. **El sistema 
 
 ## 4. Matriz de riesgos y controles
 
-**Escala:** probabilidad e impacto en Alta, Media y Baja. Son juicio, no medición, y la probabilidad supone un despliegue público.
+**Escala:** acordada por el equipo en la revisión manual S6 (2026-11-06). Se califica el riesgo sin su control y suponiendo un despliegue público.
+
+- Probabilidad Alta: una prueba ya lo provocó, o cualquiera lo explota sin credenciales. Media: requiere una condición extra. Baja: requiere acceso privilegiado o una coincidencia rara.
+- Impacto Alto: pérdida o exposición de datos o credenciales, o más de 120 s sin servicio. Medio: degradación, información interna expuesta o recuperación manual. Bajo: molestia, sin perder datos ni servicio.
+
+Kevin Torres y Daniel Charry calificaron por separado y acordaron las diferencias. Las hojas y la comparación con los valores iniciales de la IA están en `docs/verificacion/revision-manual-s6-2026-11-06/`.
 
 **Estado del control:** **En PR** = implementado y probado en `feat/s13-capa-seguridad`, sin fusionar. **Sin implementar** = solo propuesto. **Existente** = ya está en `main`.
 
@@ -109,21 +114,21 @@ Sin fuga en una sonda solo significa que esa sonda no obtuvo nada. **El sistema 
 |---|---|---|---|---|---|---|---|---|---|---|
 | RS-01 | Escritura sin autenticación | T-01 | `POST /api/adopciones` | Alta | Alto | JWT en la API; clave compartida; auth en el proxy; sesiones | **Mitigar:** JWT RS256 | Cumple el escenario 2 y no añade estado | En PR | RS-14 |
 | RS-02 | Accesos sin registro | T-04 | API | Alta | Medio | Línea de auditoría en el log; tabla en BD | **Mitigar:** línea en el log | Sin componentes nuevos | En PR, solo denegaciones | Los accesos permitidos no se registran |
-| RS-03 | Detalle de `health` expuesto | T-05 | Actuator | Alta | Bajo | `show-details=never`; `when-authorized` | **Mitigar:** `never` | Una línea | En PR | — |
-| RS-04 | Endpoint de prueba abierto | T-07 | `test-fallo` | Alta | Bajo | Eliminarlo; exigir permiso | **Mitigar:** permiso `adopciones:pruebas` | El test de rollback lo usa | En PR | — |
+| RS-03 | Detalle de `health` expuesto | T-05 | Actuator | Alta | Medio | `show-details=never`; `when-authorized` | **Mitigar:** `never` | Una línea | En PR | — |
+| RS-04 | Endpoint de prueba abierto | T-07 | `test-fallo` | Alta | Medio | Eliminarlo; exigir permiso | **Mitigar:** permiso `adopciones:pruebas` | El test de rollback lo usa | En PR | — |
 | RS-05 | BD accesible desde fuera | T-08 | Puerto 5433 | Alta | Alto | No publicar; `127.0.0.1`; firewall | **Mitigar:** `127.0.0.1` en local y sin publicar en producción | Es el hallazgo más grave | En PR | — |
 | RS-06 | Secretos versionados | T-09 | Repositorio, jar | Alta | Alto | `.env`; Docker Secrets; gestor | **Mitigar:** `.env` sin versionar | Sin herramientas nuevas | En PR | RS-17 y TO-09 |
 | RS-07 | Tráfico en claro | T-10 | Cliente ↔ API | Alta | Alto | Caddy; TLS en Tomcat; proveedor | **Mitigar:** Caddy | Certificados automáticos | En PR, solo con `docker-compose.produccion.yml` | Probado con certificado local |
-| RS-08 | Sin límite de peticiones | T-11, T-12 | API | Media | Medio | Límite en el proxy; en la API | **Aceptar por ahora** | No hay despliegue público. Revisar antes de abrirlo | Sin implementar | Abierto |
-| RS-09 | Identificadores secuenciales | T-06 | Respuesta de la API | Media | Bajo | UUID; dejarlo | **Aceptar** | Solo revela volumen, y ahora exige token | Sin implementar | Quien tenga token ve el volumen |
-| RS-10 | Proceso como root | T-14 | Imagen | Media | Medio | `USER` sin privilegios | **Mitigar** | Una línea | En PR | — |
-| RS-11 | Entrada sin validar | T-02 | `AdopcionController` | Media | Medio | Límite de largo; lista de estados | **Mitigar en parte:** largo máximo 255 | La lista de estados es regla de negocio | En PR, solo el largo | `estado` sigue siendo texto libre |
+| RS-08 | Sin límite de peticiones | T-11, T-12 | API | Alta | Medio | Límite en el proxy; en la API | **Aceptar por ahora** | No hay despliegue público. Revisar antes de abrirlo | Sin implementar | Abierto |
+| RS-09 | Identificadores secuenciales | T-06 | Respuesta de la API | Alta | Bajo | UUID; dejarlo | **Aceptar** | Solo revela volumen, y ahora exige token | Sin implementar | Quien tenga token ve el volumen |
+| RS-10 | Proceso como root | T-14 | Imagen | Media | Alto | `USER` sin privilegios | **Mitigar** | Una línea | En PR | — |
+| RS-11 | Entrada sin validar | T-02 | `AdopcionController` | Alta | Medio | Límite de largo; lista de estados | **Mitigar en parte:** largo máximo 255 | La lista de estados es regla de negocio | En PR, solo el largo | `estado` sigue siendo texto libre |
 | RS-12 | Cadena de suministro | T-15 | Dependencias, imágenes, CI | Media | Alto | Fijar resúmenes; Dependabot; análisis de imágenes | **Aceptar por ahora** | Costo de mantenimiento para 2 personas | Sin implementar | Abierto |
 | RS-13 | Tráfico interno sin cifrar | T-10 | Proxy → API, API → BD | Baja | Medio | TLS interno | **Aceptar** | Misma máquina y red privada de Docker | Sin implementar | Se revisa si se separan |
 | RS-14 | Sin emisor de tokens ni custodia de la clave | T-17 | Identidad | Alta | Alto | Solución existente; desarrollo propio | **Aplazar:** solución de identidad de terceros | Identidad es genérico: conviene una solución existente | Sin implementar | **Bloquea el uso real** |
 | RS-15 | Datos personales futuros sin controles | — | Identidad | Media | Alto | Cifrado en reposo; consentimiento; retención | **Aceptar hasta que existan** | Hoy no se guardan | Sin implementar | Condición de revisión en ADR-05 |
-| RS-16 | IP en el log de auditoría | T-18 | Logs | Media | Bajo | Retención limitada; anonimizar | **Aplazar:** definir la retención antes del despliegue público | Es consecuencia del control RS-02 | Sin implementar | Abierto |
-| RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Bajo | Reescribir historial; cambiar la contraseña | **Aceptar** | Basta con no reutilizarla. Reescribir invalidaría hashes citados en el dossier | En PR: deja de ser la contraseña obligatoria | Solo es válida si alguien la reutiliza |
+| RS-16 | IP en el log de auditoría | T-18 | Logs | Alta | Bajo | Retención limitada; anonimizar | **Aplazar:** definir la retención antes del despliegue público | Es consecuencia del control RS-02 | Sin implementar | Abierto |
+| RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Medio | Reescribir historial; cambiar la contraseña | **Aceptar temporalmente en desarrollo**, con purga obligatoria del historial (`git filter-repo`) antes de hacer público el repositorio | Los secretos en el historial son vectores de ataque pasivos, aunque la contraseña ya no sea la activa | En PR: deja de ser la contraseña obligatoria | Solo es válida si alguien la reutiliza |
 
 **Inyección SQL (T-03):** no necesita control nuevo. El control existente, parámetros de JPA, resistió P05.
 
@@ -174,10 +179,10 @@ Fuente del texto: [Ley 1581 de 2012, compilación de Colpensiones](https://norma
 
 El equipo decidió ADR-05 el 2026-11-06. Queda pendiente antes de desplegar:
 
-1. Revisar a mano las probabilidades y los impactos de §4 (S6 de la EDAV 3).
+1. ~~Revisar a mano las probabilidades y los impactos de §4 (S6 de la EDAV 3).~~ Hecho el 2026-11-06.
 2. Integrar un emisor de tokens de terceros (RS-14).
 3. Poner control de acceso a `/api/mascotas/buscar` antes de usar datos reales (TO-10).
-4. Revisar RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17, y definir la retención de RS-16.
+4. Revisar RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17, y definir la retención de RS-16. Para RS-17: purgar el historial con `git filter-repo` antes de hacer público el repositorio.
 
 Lo que estas pruebas **no** cubren:
 
