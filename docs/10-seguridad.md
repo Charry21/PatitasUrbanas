@@ -70,7 +70,7 @@ flowchart LR
 | T-13 | `ddl-auto=create-drop` | Denegación de servicio | Provocar un reinicio borra todos los datos | A1 | Pérdida total | **Observada** en el efecto | HR2 del experimento 16: 5/5 |
 | T-14 | Contenedor de la API | Elevación | El proceso corre como root | A3 | Más daño si se compromete la API | **Observada** la condición; consecuencia **hipotética** | P12 |
 | T-15 | Dependencias, imágenes y acciones de CI | Manipulación | Etiquetas sin fijar por resumen y sin análisis de vulnerabilidades | A1–A3 | Código malicioso en la cadena | **Hipotética** | `app/Dockerfile`, `docker-compose.yml`, workflow |
-| T-16 | Validación de tokens | Suplantación | Tokens forjados: `alg=none`, confusión HS256, otra firma | A1 | Saltarse la capa | **Con el control**, ⟦T16⟧ | P13 en `despues` |
+| T-16 | Validación de tokens | Suplantación | Tokens forjados: `alg=none`, confusión HS256, otra firma | A1 | Saltarse la capa | **Con el control**, observada sin éxito | P13 en `despues` |
 | T-17 | Emisor de tokens | Suplantación | Quien tenga la clave de firma emite cualquier permiso | A6 | Compromiso de toda la autorización | **Con el control**, hipotética | El emisor no existe |
 | T-18 | Log de auditoría | Revelación | Las direcciones IP pueden ser dato personal | A5 | Retención sin base | **Con el control**, hipotética | `SeguridadConfig.registrarDenegacion` |
 
@@ -80,7 +80,22 @@ flowchart LR
 
 Experimento: [`experimentos/14-fuga-datos-s13/`](../experimentos/14-fuga-datos-s13/). Preregistrado antes de ejecutar, 13 sondas y 3 repeticiones. Resultados: [`RESULTADOS.md`](../experimentos/14-fuga-datos-s13/RESULTADOS.md).
 
-⟦FUGA⟧
+| | `main` (`antes`) | Con los controles (`despues`) |
+|---|---|---|
+| Sondas con fuga | 7: P03, P04, P06, P07, P08, P11 y P13 | 1 parcial: P08 |
+| Hallazgos | P12: proceso como root | Ninguno |
+| Sin fuga | P01, P02, P05, P09 y P10 | Las demás |
+| Predicciones refutadas | 0 de 13 | 0 de 13 |
+
+**Qué se puede repetir:** el procedimiento y los comandos están en el [`README`](../experimentos/14-fuga-datos-s13/README.md) del experimento, y la evidencia cruda de cada sonda en `resultados/`.
+
+**Lo más grave:** desde otra red, la sonda P07 leyó la BD con la contraseña del repositorio. **Lo que resistió:** la inyección SQL (P05).
+
+**Lo que no se esperaba:**
+- un `estado` de 300 caracteres da 500, y R-06 decía "nunca 500" (F-14);
+- la primera versión de la capa convertía los 400 en 401 o 403, y las pruebas con MockMvc no lo vieron.
+
+Sin fuga en una sonda solo significa que esa sonda no obtuvo nada. **El sistema no guarda datos personales, así que la prueba demuestra caminos, no datos expuestos.**
 
 ---
 
@@ -118,7 +133,24 @@ Experimento: [`experimentos/14-fuga-datos-s13/`](../experimentos/14-fuga-datos-s
 
 Experimento: [`experimentos/15-costo-seguridad-s13/`](../experimentos/15-costo-seguridad-s13/). Resultados: [`RESULTADOS.md`](../experimentos/15-costo-seguridad-s13/RESULTADOS.md).
 
-⟦P95⟧
+Se comparó `main` sin capa (S), la capa JWT (C) y la capa con TLS (T), a 200 usuarios, con 6 corridas válidas por celda.
+
+| Operación | S: p95 (ms) | C: p95 (ms) | T: p95 (ms) | Δ(C − S) | Δ(T − C) |
+|---|---:|---:|---:|---:|---:|
+| `buscar` | 16,11 | 21,34 | 26,66 | +5,23 | +5,32, **no concluyente** |
+| `adopcion` | 44,20 | 53,92 | 55,02 | +9,72 | +1,10, **no concluyente** |
+
+**Condiciones:** 2 vCPU y 7.8 GiB compartidas por k6, API, BD y proxy; 40 s por corrida; orden `S C T T C S`; k6 v2.3.0. Fecha: 2026-11-06 UTC.
+
+**Cómo leerlo:**
+- El p95 sigue lejos de 800 ms, con 0 % de fallos.
+- Δ(C − S) pasa la regla preregistrada, pero **es una evidencia débil**: los rangos por corrida se solapan mucho.
+- El costo de TLS **no se distingue del ruido**.
+- El p99 de `adopcion` sube de 112,61 a 227,09 ms con TLS: es una observación por confirmar.
+- El costo más claro es la CPU máxima de la API en escritura: de 19,9 % a 33,9 % de un núcleo.
+- **Estos números no predicen producción**: `/buscar` es simulado, y todo corre en una máquina.
+
+**Escenario 2:** 64 000 peticiones sin token, 64 000 respuestas 401 y 64 000 líneas de auditoría, con p95 de 17,44 ms frente al límite de 500 ms.
 
 ---
 
