@@ -1,0 +1,42 @@
+Evidencia de las fitness functions en GitHub Actions. Consultada el 2026-11-06T02:56:48Z con la API de GitHub.
+
+== Últimas ejecuciones del workflow fitness-functions
+42153385257 9bd5b71 pull_request experimento/s13-s14-seguridad-operacion completed success 2026-11-06T02:55:47Z
+42153384163 94f2acf pull_request feat/s13-capa-seguridad completed success 2026-11-06T02:55:46Z
+42152813227 b9f135f pull_request experimento/s13-s14-seguridad-operacion completed success 2026-11-06T02:50:07Z
+42147303973 15b6708 pull_request experimento/s13-s14-seguridad-operacion completed success 2026-11-06T01:58:30Z
+42146725793 c00438b pull_request experimento/s13-s14-seguridad-operacion completed success 2026-11-06T01:52:56Z
+41150415795 3f4b124 push main completed success 2026-10-31T00:29:13Z
+41150380536 eccdc0b pull_request modulo6/comite-adr04 completed success 2026-10-31T00:28:48Z
+40052550569 81764ae push main completed success 2026-10-24T02:03:20Z
+
+== Trabajos y pasos de la ejecución 41150415795
+ff-01-fronteras-modulares: success
+  Set up job = success
+  Run actions/checkout@v4 = success
+  Run actions/setup-python@v5 = success
+  FF-01 sobre el código (debe cumplir) = success
+  Prueba negativa de FF-01 (cada violación inyectada debe fallar) = success
+  Post Run actions/setup-python@v5 = success
+  Post Run actions/checkout@v4 = success
+  Complete job = success
+
+== Trabajos y pasos de la ejecución 42153384163
+ff-01-fronteras-modulares: success
+  Set up job = success
+  Run actions/checkout@v4 = success
+  Run actions/setup-python@v5 = success
+  FF-01 sobre el código (debe cumplir) = success
+  Prueba negativa de FF-01 (cada violación inyectada debe fallar) = success
+  Post Run actions/setup-python@v5 = success
+  Post Run actions/checkout@v4 = success
+  Complete job = success
+ff-02-configuracion-segura: success
+  Set up job = success
+  Run actions/checkout@v4 = success
+  Run actions/setup-python@v5 = success
+  FF-02 sobre la configuración (debe cumplir) = success
+  Prueba negativa de FF-02 (cada control roto debe fallar) = success
+  Post Run actions/setup-python@v5 = success
+  Post Run actions/checkout@v4 = success
+  Complete job = success

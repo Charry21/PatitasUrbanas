@@ -46,8 +46,12 @@
 |---|---|---|---|
 | [`40050755388`](https://github.com/Charry21/PatitasUrbanas/actions/runs/40050755388) | `pull_request` (PR #77) | `ee2c98a` | success |
 | [`40050776080`](https://github.com/Charry21/PatitasUrbanas/actions/runs/40050776080) | `push` a `main` | `ac5151e` | success |
+| [`41150415795`](https://github.com/Charry21/PatitasUrbanas/actions/runs/41150415795) | `push` a `main` | `3f4b124` | success |
+| [`42153384163`](https://github.com/Charry21/PatitasUrbanas/actions/runs/42153384163) | `pull_request` (PR #83) | `94f2acf` | success |
 
 Pasos del job en `main` (2026-10-24T01:39:23Z → 2026-10-24T01:39:30Z): Set up job=success; Run actions/checkout@v4=success; Run actions/setup-python@v5=success; FF-01 sobre el código (debe cumplir)=success; Prueba negativa de FF-01 (cada violación inyectada debe fallar)=success; Post Run actions/setup-python@v5=success; Post Run actions/checkout@v4=success; Complete job=success. El paso "Prueba negativa" es el que provoca los 5 fallos deliberados y exige que cada uno haga fallar la regla. Detalle: https://github.com/Charry21/PatitasUrbanas/actions/runs/40050776080/job/120742729346
+
+Pasos de las dos últimas ejecuciones, consultados el 2026-11-05: [`evidencias/ejecuciones-ci-2026-11-05.txt`](./evidencias/ejecuciones-ci-2026-11-05.txt). Con esto, el requisito del curso de tener una fitness function en CI a más tardar en la Semana 14 se cumple desde la Semana 12.
 
 Se reproduce con `gh api repos/Charry21/PatitasUrbanas/actions/runs --jq '.workflow_runs[] | "\(.id) \(.head_sha[0:7]) \(.event) \(.conclusion)"'`.
 

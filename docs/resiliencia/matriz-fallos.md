@@ -45,8 +45,9 @@ Una fila hipotética **no** es un fallo demostrado.
 | F-09 | Pool Hikari (10 conexiones por defecto) | Más escrituras concurrentes que conexiones, sin caída de la BD | Peticiones esperando conexión hasta 30 s y luego 500 | **Hipotético** | Inferencia de `10-crecimiento-s11/RESULTADOS.md` §4; no se midió la espera de Hikari |
 | F-10 | Contenedor API (hilos de Tomcat) | BD caída **bajo carga concurrente** | Cada escritura ocupa un hilo hasta 30 s (F-01); con suficientes peticiones se agotarían los 200 hilos y también fallaría `/buscar` | **Hipotético** | Inferencia de `12-inyeccion-fallos-s12/RESULTADOS.md` §4; solo se probó con peticiones de una en una |
 | F-11 | Contenedor API (log) | Carga sostenida con el log SQL en DEBUG | En S11 el log SQL en DEBUG generó unos 176 MB durante el experimento (observado). Que se llene el disco **no se probó** | **Observado / consecuencia hipotética** | `10-crecimiento-s11/RESULTADOS.md` §4 (inferencias) |
-| F-12 | Contenedor API (proceso) | El proceso de la API se detiene | Indisponibilidad total: hay una sola instancia y ningún reinicio automático configurado en `docker-compose.yml` | **Hipotético** | `docker-compose.yml` (sin `restart:`); no se provocó |
-| F-13 | Contenedor PostgreSQL (datos) | Reinicio de la API con `ddl-auto=create-drop` | Se borran y recrean las tablas: se pierden todos los datos | **Observado** (comportamiento de la configuración) | `app/src/main/resources/application.properties`; `10-crecimiento-s11/RESULTADOS.md` §1 ("las tablas empiezan vacías tras cada reinicio (`create-drop`)") |
+| F-12 | Contenedor API (proceso) | El proceso de la API se detiene | Sin `restart:`, sigue detenido a los 30 s (control). Con R-10, vuelve solo: primer 200 en 7,41–9,00 s, en reposo. Durante ese tiempo no hay servicio | **Observado** (2026-11-05) | `experimentos/16-reinicio-automatico-s14/RESULTADOS.md` (HR1, HR5) |
+| F-13 | Contenedor PostgreSQL (datos) | Reinicio de la API con `ddl-auto=create-drop` | Se borran y recrean las tablas: se pierden todos los datos | **Observado** (comportamiento de la configuración) | `app/src/main/resources/application.properties`; `10-crecimiento-s11/RESULTADOS.md` §1 ("las tablas empiezan vacías tras cada reinicio (`create-drop`)"); provocado en 5/5 ciclos con reinicio automático en `experimentos/16-reinicio-automatico-s14/RESULTADOS.md` (HR2) |
+| F-14 | Controlador de Adopciones | `estado` o `nombreEtapa` de más de 255 caracteres | **500**: PostgreSQL rechaza el valor (`value too long`). El cuerpo no revela detalles, pero el log registra la traza. No se crea ninguna fila | **Observado** (2026-11-05) | `experimentos/14-fuga-datos-s13/resultados/antes/` (P04, caso `largo`) |
 
 ---
 
@@ -57,10 +58,13 @@ Una fila hipotética **no** es un fallo demostrado.
 | I-1 | F-05: la latencia creció a la vez que las filas acumuladas (0 → 79 810), así que los dos efectos estaban confundidos | **Resuelta el 2026-10-24** con el experimento 13 (preregistrado, PR #79): con 79 810 filas iniciales el p95 no aumenta (−13,1 %). Las filas acumuladas no explican F-05 |
 | I-2 | F-03 y F-01 dependen del mismo `connectionTimeout` (30 s por defecto), que nadie eligió | ¿El equipo acepta 30 s como tiempo máximo de fallo, o lo fija explícitamente? |
 | I-3 | F-13: `create-drop` es una configuración de desarrollo | ¿Es aceptable en el entorno donde se va a desplegar? |
-| I-4 | F-12 y F-10 son hipotéticos y son los de mayor impacto | ¿Cuál se prueba primero, y con qué carga? |
-| I-5 | F-08 solo se observó detrás de un proxy TLS | ¿Construye el `Dockerfile` original en el computador del equipo? (P1 de `09-cierre-spike-s10.md`) |
+| I-4 | F-12 y F-10 son hipotéticos y son los de mayor impacto | **F-12 observado el 2026-11-05** (experimento 16). F-10 sigue hipotético: ¿con qué carga se prueba? |
+| I-5 | F-08 solo se observó detrás de un proxy TLS | **Respondida en parte el 2026-11-06:** construye en una máquina Linux limpia, sin proxy (`docs/verificacion/arranque-limpio-2026-11-06/`). Falta el computador del equipo, con Windows |
+
+| I-6 | F-14: una entrada larga da 500, y R-06 declaraba "nunca 500" | **Detectada el 2026-11-05** por la prueba de fuga. La corrección está en `feat/s13-capa-seguridad`, sin fusionar |
 
 ---
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Semana 12 · Módulo 6 · Arquitectura de Software*
+*Actualizada el 2026-11-05 por la IA (F-12, F-13, F-14, I-4, I-5, I-6), pendiente de revisión del equipo*

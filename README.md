@@ -109,6 +109,8 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 
 ## Módulo 6 — Resiliencia, distribución y fitness functions (Semanas 11–14)
 
+> Nota (2026-11-06, I-14): según la guía del tutor, las semanas 13 y 14 corresponden al Módulo 7. El mini-comité del ADR-04 (Semana 13) queda en esta sección porque cierra ese ADR.
+
 | Paso | Entregable | Dónde está |
 |---|---|---|
 | A1 | Experimento de crecimiento (50–200 usuarios) y semilla de datos y memoria | [`experimentos/10-crecimiento-s11/`](experimentos/10-crecimiento-s11/), [`experimentos/13-semilla-memoria-s12/`](experimentos/13-semilla-memoria-s12/) |
@@ -119,3 +121,41 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 | A6 | Fitness function FF-01 en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
 | — | Autoauditoría A1–A6 | [`docs/auditoria-modulo6.md`](docs/auditoria-modulo6.md) |
 | — | Registro crítico de IA | [`docs/registro-ia-modulo6.md`](docs/registro-ia-modulo6.md) |
+
+## Módulo 7 — Seguridad, despliegue, observabilidad y operación (Semanas 13–14)
+
+Borradores de la IA revisados por el equipo el 2026-11-06. ADR-05 está **aceptada**, con el emisor de tokens aplazado.
+
+| Semana | Entregable | Dónde está |
+|---|---|---|
+| 13 | Modelado de amenazas y matriz de riesgos y controles | [`docs/10-seguridad.md`](docs/10-seguridad.md) |
+| 13 | Prueba de fuga de datos | [`experimentos/14-fuga-datos-s13/`](experimentos/14-fuga-datos-s13/) ([resultados](experimentos/14-fuga-datos-s13/RESULTADOS.md)) |
+| 13 | Costo de seguridad sobre el p95 | [`experimentos/15-costo-seguridad-s13/`](experimentos/15-costo-seguridad-s13/) ([resultados](experimentos/15-costo-seguridad-s13/RESULTADOS.md)) |
+| 13 | Ciclo EDAV 3 (formativo) | [`docs/EDAV-03.md`](docs/EDAV-03.md): auditada y firmada el 2026-11-06 |
+| 14 | Diagrama de despliegue, alternativas, observabilidad y plan de operación | [`docs/12-despliegue-observabilidad.md`](docs/12-despliegue-observabilidad.md) |
+| 14 | Riesgos operativos y compromisos | [`docs/13-riesgos-tradeoffs.md`](docs/13-riesgos-tradeoffs.md) |
+| 14 | R-10 y R-11 (condición del ADR-04) | [`experimentos/16-reinicio-automatico-s14/`](experimentos/16-reinicio-automatico-s14/) ([resultados](experimentos/16-reinicio-automatico-s14/RESULTADOS.md)) |
+| 14 | ADR 5 | [`adr/adr-05-seguridad-y-operacion.md`](adr/adr-05-seguridad-y-operacion.md) |
+| 14 | Fitness functions en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`docs/fitness/ff-02-configuracion-segura.md`](docs/fitness/ff-02-configuracion-segura.md) (llega con el [PR #83](https://github.com/Charry21/PatitasUrbanas/pull/83)), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
+| — | Autoauditoría e inconsistencias | [`docs/auditoria-modulo7.md`](docs/auditoria-modulo7.md) |
+| — | Registro crítico de IA | [`docs/registro-ia-modulo7.md`](docs/registro-ia-modulo7.md) |
+
+La capa de seguridad, el Compose de producción, R-10 y R-11 están en el [PR #83](https://github.com/Charry21/PatitasUrbanas/pull/83), sin fusionar: `main` sigue sin esos controles.
+
+## Glosario de identificadores (I-07)
+
+Varios prefijos se repiten con significados distintos. Al citarlos, conviene indicar el archivo.
+
+| Identificador | Qué es | Dónde |
+|---|---|---|
+| R-01 a R-12 | Tácticas de resiliencia | `docs/resiliencia/matriz-resiliencia.md` |
+| R-01 a R-05 | Riesgos iniciales del dominio | `dossier/02-stakeholders-drivers.md` |
+| R01 a R04 | Riesgos de otra lista, con otro contenido | `dossier/04-riesgos.md` |
+| R1 a R5 | Relaciones del mapa de contextos | `docs/dominio/context-map.puml` |
+| R1 a R3 | Reglas de FF-01 | `docs/fitness/ff-01-fronteras-modulares.md` |
+| F-01 a F-14 | Escenarios de fallo | `docs/resiliencia/matriz-fallos.md` |
+| T-01 a T-18 | Amenazas STRIDE | `docs/10-seguridad.md` |
+| RS-01 a RS-17 | Riesgos de seguridad | `docs/10-seguridad.md` |
+| RO-01 a RO-14 · TO-01 a TO-10 | Riesgos operativos y compromisos | `docs/13-riesgos-tradeoffs.md` |
+| P01 a P13 | Sondas de la prueba de fuga | `experimentos/14-fuga-datos-s13/` |
+| QA-03 y BIZ-01 | Significan cosas distintas según el archivo | `dossier/02` y `dossier/04` (ver sus notas) |

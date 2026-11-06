@@ -16,6 +16,8 @@
 
 **Nota de auditoría:** este escenario está diseñado en la arquitectura del sistema, pero en el repositorio actual no existe dependencia de Spring Security en el [app/pom.xml](../app/pom.xml) ni código de autenticación implementado todavía. Por tanto, no hay evidencia real de medición de acceso ni de validación JWT; esta sección representa la estructura de diseño prevista y no un resultado verificado en ejecución.
 
+**Actualización (2026-11-05):** `main` sigue igual. La capa candidata de `feat/s13-capa-seguridad` y su verificación están en `experimentos/14-fuga-datos-s13/` y `experimentos/15-costo-seguridad-s13/`; se adopta o no en ADR-05.
+
 ## Reformulación de Escenarios Propuestos por la IA
 
 ### Escenario Reformulado 1: Rendimiento en Consultas Espaciales (Riesgo R01)
@@ -57,3 +59,5 @@ Para cumplir con la política de uso de IA, a continuación se detalla el tratam
 
 - **Descripción:** Ejecución simultánea de peticiones POST para la creación de solicitudes de adopción bajo carga concurrente, evaluando consistencia del negocio y ausencia de errores derivados de condiciones de carrera o deadlocks.
 - **Evidencia pendiente:** Carga concurrente con k6 y análisis de errores HTTP, timeouts y percentil p95 para confirmar que el flujo de negocio no degrada ni queda incoherente.
+
+**Nota (2026-11-06, I-11):** QA-02 figura como "no medido", pero ya tiene evidencia: la prueba de rollback de TRX-02 (`AdopcionControllerRollbackIntegrationTest`) y HF3 del experimento 12. Sobre QA-03 y BIZ-01, ver la nota de `02-stakeholders-drivers.md`.
