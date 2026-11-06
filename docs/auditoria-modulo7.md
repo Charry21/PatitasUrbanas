@@ -20,7 +20,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | 8 | Plan de observabilidad: logs, métricas y trazas | **Cumple** | `docs/12-despliegue-observabilidad.md` §3 | Es un plan: las señales nuevas no están implementadas |
 | 9 | Plan de monitoreo, alertas y recuperación | **Cumple** | Ídem §3.4 y §4 | Solo P-1 y P-2 están probados |
 | 10 | Matriz de riesgos operativos | **Cumple** | `docs/13-riesgos-tradeoffs.md` §1: 14 riesgos | Revisión del equipo |
-| 11 | ADR 5 documentado | **Cumple** | `adr/adr-05-seguridad-y-operacion.md`, aceptada por el equipo el 2026-11-06, con el emisor aplazado | Confirmar con el tutor si necesita mini-comité |
+| 11 | ADR 5 documentado | **Cumple** | `adr/adr-05-seguridad-y-operacion.md`, aceptada por el equipo el 2026-11-06, con el emisor aplazado | Ninguno: el sílabo no asigna mini-comité a ADR-05 (tutor, 2026-11-06) |
 | 12 | Fitness function ejecutándose en CI | **Cumple** | FF-01 en `main` desde la Semana 12: `docs/fitness/ff-01-fronteras-modulares.md`, con ejecuciones actualizadas | FF-02 corre en su PR; pasa a `main` si se fusiona |
 | 13 | Archivos organizados y enlazados desde el README | **Cumple** | README, sección "Módulo 7" | Se ve en `main` al fusionar |
 | 14 | Evidencias técnicas guardadas en el repositorio | **Cumple** | `resultados/` de los experimentos 14, 15 y 16 | — |
@@ -54,7 +54,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | I-09 | Media | ADR-04 y A4 miden el margen del escenario 1 (búsqueda) con el p95 de **escritura**, porque `/buscar` es simulado. No hay evidencia de una búsqueda real | `adr/adr-04-distribucion.md`, `docs/distribucion/` | Nota con fecha en ADR-04 y en A4; RO-12 | Equipo |
 | I-10 | Media | El README decía que los datos se conservan en el volumen, pero `create-drop` los borra al reiniciar la API | `README.md`, F-13 | Corregido en el PR | Equipo |
 | I-11 | Media | `QA-03` y `BIZ-01` significan cosas distintas en `dossier/02` y en `dossier/04`, y QA-02 sigue como "no medido" aunque hay evidencia | `dossier/02`, `dossier/04` | Nota con fecha en `dossier/02` y `dossier/04` | Equipo |
-| I-12 | Media | El sílabo y el arco del proyecto no están en el repositorio, y la guía del tutor los cita | — | Solo se revisó contra la guía | Equipo: contrastar con la rúbrica |
+| I-12 | Media | El sílabo y el arco del proyecto no están en el repositorio, y la guía del tutor los cita | — | El tutor confirmó con el sílabo el cronograma de los comités (2026-11-06). Falta contrastar con la rúbrica | Equipo: contrastar con la rúbrica |
 | I-13 | Media | CI no ejecuta las pruebas: el test de rollback (QA-02) solo corre a mano | `.github/workflows/` | Registrado como RO-11 | Equipo |
 | I-14 | Baja | Calendario: la guía pone las semanas 13–14 en el Módulo 7, y el README titula "Módulo 6 (Semanas 11–14)" | `README.md` | Nota en el README | Equipo |
 | I-15 | Baja | Del 2026-10-24 al 2026-10-31 no hay commits de la cuenta de Kevin en `main`, aunque esos documentos llevan los dos nombres | `git log` | Se anota; no es un error, pero el tutor pide contribuciones identificables | Equipo |
@@ -63,7 +63,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 ## 4. Pendientes que dependen del equipo
 
 1. Daniel Charry revisa y fusiona #82, #83 y #84, en ese orden.
-2. Consultar al tutor si ADR-05 necesita mini-comité, y contrastar con la rúbrica (I-12, I-16).
+2. Contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16 (2026-11-06).
 3. Antes de desplegar: las prioridades de `docs/13-riesgos-tradeoffs.md` §5.
 4. Probar el README en un computador con Windows.
 5. Borrar en GitHub la rama temporal `prueba/s14-verificacion-arranque`.

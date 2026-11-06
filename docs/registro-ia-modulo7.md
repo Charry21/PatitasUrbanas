@@ -17,7 +17,7 @@
 | M7-9 | Observabilidad por niveles N1–N3, alertas AL-1 a AL-7 | `docs/12-despliegue-observabilidad.md` §3 | Aceptado con reserva: falta revisar a mano los umbrales (S6) | Los umbrales son propuestos y nada está implementado |
 | M7-10 | RPO de 24 h y planes P-1 a P-9 | `docs/12-despliegue-observabilidad.md` §4 | Aceptado (RPO de 24 h) | Nadie ha definido ese objetivo. La mayoría de los planes no se ha probado |
 | M7-11 | 14 riesgos operativos y 10 compromisos | `docs/13-riesgos-tradeoffs.md` | Aceptado con reserva: misma revisión que M7-1 | Mismo criterio que M7-1 |
-| M7-12 | ADR-05 | `adr/adr-05-seguridad-y-operacion.md` | Aceptada, con el emisor aplazado; comité por confirmar con el tutor | Tiene que quedar con decisiones reales del equipo |
+| M7-12 | ADR-05 | `adr/adr-05-seguridad-y-operacion.md` | Aceptada, con el emisor aplazado. Sin mini-comité según el sílabo (tutor, 2026-11-06) | Tiene que quedar con decisiones reales del equipo |
 | M7-13 | FF-02 en CI | `docs/fitness/ff-02-configuracion-segura.md` | Aceptado | Si se rechaza una decisión de ADR-05, hay que ajustar sus reglas |
 | M7-14 | Reclasificar R-06 de **Probada** a **Parcial**, y añadir F-14 | `docs/resiliencia/` | Aceptado | Corrige un documento que el equipo ya había revisado |
 | M7-15 | Pasar F-12 a **Observado**, R-10 y R-11 a **Probada** | `docs/resiliencia/` | Aceptado | Probadas, pero no fusionadas en `main` |

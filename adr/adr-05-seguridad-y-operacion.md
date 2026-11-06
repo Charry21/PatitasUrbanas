@@ -5,7 +5,7 @@
 
 ## Estado
 
-**Aceptada por el equipo** (2026-11-06), con el emisor de tokens **aplazado**. Veredicto de comité: pendiente de confirmar con el tutor si hace falta.
+**Aceptada por el equipo** (2026-11-06), con el emisor de tokens **aplazado**. No requiere mini-comité según el sílabo, como confirmó el tutor el 2026-11-06. Se presenta en el comité técnico final (semanas 15–16).
 
 Decidieron Kevin Torres · Daniel Charry, sobre la propuesta de la IA. El código está en el PR #83: las decisiones llegan a `main` cuando se fusione.
 
@@ -194,7 +194,7 @@ Este ADR es la decisión de seguridad del sistema. ADR-01 daba por hecho "un ún
 
 ## Veredicto del comité
 
-Pendiente: el equipo consultará al tutor si ADR-05 necesita mini-comité, como ADR-04.
+**No aplica.** Según el sílabo, consultado por el tutor el 2026-11-06, solo ADR-01/02 (Semana 8) y ADR-04 (Semana 12) tienen mini-comité. ADR-05 es una entrega evaluable de la Semana 14 y se defenderá en el comité técnico final (semanas 15–16). Si el profesor anuncia un mini-comité adicional, se registrará aquí.
 
 ---
 
