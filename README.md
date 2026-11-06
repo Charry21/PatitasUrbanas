@@ -89,3 +89,23 @@ Las pruebas de validación confirman de manera consistente que el *healthcheck* 
 | A6 | Fitness function FF-01 en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
 | — | Autoauditoría A1–A6 | [`docs/auditoria-modulo6.md`](docs/auditoria-modulo6.md) |
 | — | Registro crítico de IA | [`docs/registro-ia-modulo6.md`](docs/registro-ia-modulo6.md) |
+
+## Módulo 7 — Seguridad, despliegue, observabilidad y operación (Semanas 13–14)
+
+Borradores de la IA, pendientes de revisión del equipo. ADR-05 está en estado **Propuesta**.
+
+| Semana | Entregable | Dónde está |
+|---|---|---|
+| 13 | Modelado de amenazas y matriz de riesgos y controles | [`docs/10-seguridad.md`](docs/10-seguridad.md) |
+| 13 | Prueba de fuga de datos | [`experimentos/14-fuga-datos-s13/`](experimentos/14-fuga-datos-s13/) ([resultados](experimentos/14-fuga-datos-s13/RESULTADOS.md)) |
+| 13 | Costo de seguridad sobre el p95 | [`experimentos/15-costo-seguridad-s13/`](experimentos/15-costo-seguridad-s13/) ([resultados](experimentos/15-costo-seguridad-s13/RESULTADOS.md)) |
+| 13 | Ciclo EDAV 3 (formativo) | [`docs/EDAV-03.md`](docs/EDAV-03.md): falta la auditoría humana y la firma |
+| 14 | Diagrama de despliegue, alternativas, observabilidad y plan de operación | [`docs/12-despliegue-observabilidad.md`](docs/12-despliegue-observabilidad.md) |
+| 14 | Riesgos operativos y compromisos | [`docs/13-riesgos-tradeoffs.md`](docs/13-riesgos-tradeoffs.md) |
+| 14 | R-10 y R-11 (condición del ADR-04) | [`experimentos/16-reinicio-automatico-s14/`](experimentos/16-reinicio-automatico-s14/) ([resultados](experimentos/16-reinicio-automatico-s14/RESULTADOS.md)) |
+| 14 | ADR 5 | [`adr/adr-05-seguridad-y-operacion.md`](adr/adr-05-seguridad-y-operacion.md) |
+| 14 | Fitness functions en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`docs/fitness/ff-02-configuracion-segura.md`](docs/fitness/ff-02-configuracion-segura.md) (llega con ⟦PR-FEAT⟧), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
+| — | Autoauditoría e inconsistencias | [`docs/auditoria-modulo7.md`](docs/auditoria-modulo7.md) |
+| — | Registro crítico de IA | [`docs/registro-ia-modulo7.md`](docs/registro-ia-modulo7.md) |
+
+La capa de seguridad, el Compose de producción, R-10 y R-11 están en ⟦PR-FEAT⟧, sin fusionar: `main` sigue sin esos controles.
