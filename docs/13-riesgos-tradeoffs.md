@@ -46,8 +46,8 @@ Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad 
 
 | Id | Decisión propuesta | Qué se gana | Qué se paga | Evidencia del costo | Condición de revisión |
 |---|---|---|---|---|---|
-| TO-01 | Validar JWT en la API | Sin estado: mantiene S5 y deja abierta D2. Cumple el escenario 2 | Más dependencias, y claves que gestionar | ⟦TO01⟧ | Si el p95 con datos reales se acerca a 800 ms |
-| TO-02 | TLS con un proxy | Tráfico cifrado sin tocar la API; certificados automáticos | +1 contenedor frente a los 2 de ADR-04, y otro punto de fallo | ⟦TO02⟧ | Si se elige V2, el proveedor pone el TLS y este contenedor sobra |
+| TO-01 | Validar JWT en la API | Sin estado: mantiene S5 y deja abierta D2. Cumple el escenario 2 | Más dependencias, y claves que gestionar | +5,23 ms en `buscar` y +9,72 ms en `adopcion`; CPU máx. de 19,9 % a 33,9 % (exp. 15) | Si el p95 con datos reales se acerca a 800 ms |
+| TO-02 | TLS con un proxy | Tráfico cifrado sin tocar la API; certificados automáticos | +1 contenedor frente a los 2 de ADR-04, y otro punto de fallo | Δ del p95 no concluyente; el p99 de escritura sube de 134 a 227 ms, sin confirmar (exp. 15) | Si se elige V2, el proveedor pone el TLS y este contenedor sobra |
 | TO-03 | D1 en un solo servidor | Costo relativo mínimo y evidencia válida | Punto único de fallo (RO-04) | ADR-04 | Objetivo de disponibilidad que una instancia no cumpla |
 | TO-04 | V1 frente a V2 | Conserva las mediciones y es portable | El equipo responde por el sistema operativo y las copias | §2 de `12-despliegue-observabilidad.md`: costo relativo 1,0 frente a ≈ 1,1 | Si el mantenimiento supera lo que el equipo puede atender |
 | TO-05 | `update` en lugar de migraciones | Una línea de configuración; R-10 deja de borrar datos | Sin historial del esquema ni rollback (RO-08) | HR3, exp. 16 | Al crear el contexto de Identidad o la tercera tabla |
