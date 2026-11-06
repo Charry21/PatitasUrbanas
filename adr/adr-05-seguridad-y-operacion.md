@@ -23,7 +23,7 @@ ADR-04 mantiene una sola instancia (D1). Su veredicto **Ajustada** exige impleme
 |---|---|
 | Modelado de amenazas ([`docs/10-seguridad.md`](../docs/10-seguridad.md)) | 18 amenazas STRIDE sobre lo que existe en el código |
 | Experimento 14, fuga de datos, `main` | 8 sondas con fuga o hallazgo. Cualquiera crea solicitudes (P06, P13), y desde otra red se lee PostgreSQL con la contraseña del repositorio (P07) |
-| Experimento 15, costo sobre el p95 | ⟦EVID15⟧ |
+| Experimento 15, costo sobre el p95 | A 200 usuarios, la capa suma +5,23 ms en `buscar` y +9,72 ms en `adopcion`, con evidencia débil. TLS no se distingue del ruido. 64 000 de 64 000 peticiones sin token: 401 con línea de auditoría |
 | Experimento 16, reinicio | R-10 recupera la API en < 10 s (10/10 ciclos). Con `create-drop`, cada reinicio borra los datos (5/5). Con `update`, se conservan (5/5) |
 | ADR-04 y A4 | D1 durante 6 meses; la API no guarda estado (S5) |
 | Matriz de fallos | F-12 y F-13 |
@@ -103,7 +103,11 @@ Alternativas descartadas por ahora: Docker Secrets y un gestor de secretos, porq
 
 | | Sin capa (S) | Capa JWT (C) | Capa + TLS (T) |
 |---|---:|---:|---:|
-⟦TABLA15⟧
+| p95 de `buscar` (ms) | 16,11 | 21,34 | 26,66 |
+| p95 de `adopcion` (ms) | 44,20 | 53,92 | 55,02 |
+| p99 de `adopcion` (ms) | 112,61 | 134,37 | 227,09 |
+| CPU máx. de la API en `adopcion` (% de un núcleo) | 19,9 | 33,9 | 32,7 |
+| Fallos | 0 % | 0 % | 0 % |
 
 Condiciones: 200 usuarios, 2 vCPU compartidas por todo, 6 corridas válidas por celda. Los números **solo comparan condiciones** y no predicen producción. Resultado completo: [`experimentos/15-costo-seguridad-s13/RESULTADOS.md`](../experimentos/15-costo-seguridad-s13/RESULTADOS.md).
 
@@ -118,7 +122,7 @@ Condiciones: 200 usuarios, 2 vCPU compartidas por todo, 6 corridas válidas por 
 ## Consecuencias
 
 ### Positivas
-- El escenario 2 pasa de "no implementado" a verificado: ⟦POS2⟧.
+- El escenario 2 pasa de "no implementado" a verificado: 100 % de los intentos sin token bloqueados con 401 en una carga de 64 000 peticiones, p95 de 17,44 ms, y 64 000 líneas de auditoría.
 - Se cierra la lectura directa de la BD desde otra red (P07) y el HTTP en claro hacia fuera (P11).
 - R-10 deja de ser peligrosa y se cumple la condición de ADR-04, si el equipo fusiona el cambio.
 - Se conserva S5: D2 sigue disponible.
@@ -139,7 +143,7 @@ RS-08 (sin límite de peticiones), RS-13 (tráfico interno sin cifrar), RS-15 (d
 
 ## Implicaciones de seguridad
 
-Este ADR es la decisión de seguridad del sistema. Cumple la condición que dejó ADR-01: una sola superficie autenticada. No cubre el cifrado en reposo ni el consentimiento de la Ley 1581, porque hoy no hay datos personales. Eso se revisa con el contexto de Identidad.
+Este ADR es la decisión de seguridad del sistema. ADR-01 daba por hecho "un único punto de autenticación", que nunca existió; la decisión A lo crearía. No cubre el cifrado en reposo ni el consentimiento de la Ley 1581, porque hoy no hay datos personales. Eso se revisa con el contexto de Identidad.
 
 ---
 
