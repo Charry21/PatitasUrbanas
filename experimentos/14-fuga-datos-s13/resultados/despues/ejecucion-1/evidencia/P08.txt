@@ -1,0 +1,7 @@
+--- archivos versionados
+
+--- jar
+spring.datasource.password=${POSTGRES_PASSWORD}
+--- variables del contenedor (valor oculto)
+POSTGRES_PASSWORD=<presente>
+--- en el historial de Git: si
