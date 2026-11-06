@@ -1,0 +1,11 @@
+GET /actuator -> 401
+
+GET /actuator/env -> 401
+GET /actuator/configprops -> 401
+GET /actuator/heapdump -> 401
+GET /actuator/threaddump -> 401
+GET /actuator/beans -> 401
+GET /actuator/mappings -> 401
+GET /actuator/metrics -> 401
+GET /actuator/loggers -> 401
+GET /actuator/prometheus -> 401
