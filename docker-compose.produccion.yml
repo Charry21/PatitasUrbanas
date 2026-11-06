@@ -1,0 +1,27 @@
+# Despliegue propuesto en ADR-05. Se usa junto con docker-compose.yml:
+#   docker compose -f docker-compose.yml -f docker-compose.produccion.yml up -d
+services:
+  postgres_db:
+    restart: unless-stopped
+    ports: !reset []
+
+  api_app:
+    ports: !reset []
+
+  proxy_tls:
+    image: caddy:2-alpine
+    container_name: patitas_urbanas_proxy
+    restart: unless-stopped
+    depends_on:
+      - api_app
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMINIO=${DOMINIO:?Define DOMINIO en .env}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+
+volumes:
+  caddy_data:
