@@ -1,92 +1,92 @@
 # Equivalencia de hashes tras la reescritura de main del 2026-11-06
-# main antes: 32a6aaeef5df355357e65b998c4c4a86683bd774 -> main después: 9edd39e963bab9bff9dcc58edd0ecb569393c0cc
-# Mismo contenido: cada commit nuevo tiene el mismo árbol, la misma fecha y el mismo asunto que el original (comprobado commit a commit).
-# Formato: hash_original hash_nuevo fecha asunto
-32a6aaeef5df355357e65b998c4c4a86683bd774 9edd39e963bab9bff9dcc58edd0ecb569393c0cc 2026-11-06 Merge pull request #84 from Charry21/modulo7/documentacion-s13-s14
-62c0fa03aaf56977db7db11cfc6ae058224cb572 2e9a5d1e77886e5eee1b5086b1c6df8888d57f0b 2026-11-06 docs(s14): registrar que ADR-05 no tiene mini-comité según el sílabo (respuesta del tutor)
-d9f89e6627688a912b75ab5b3ddfe2fbf54bda8b 7b2a25471d29bc72c20be30e956f4efd9a559875 2026-11-06 docs(s13): EDAV 3 con la versión corregida del análisis y la conclusión del equipo
-772864428465b1c88f8093edd11a4e813d9ebf31 b04a48d3f481c35a4d7c424833e493965ffa8c3d 2026-11-06 docs: notas con fecha para I-05, I-06, I-07, I-09, I-11 e I-14, y seguimiento de la condición del ADR-04
-95282bb26b5b98aa8f63346219a8055b19909860 8818809bc62aac28b2db34ba3e0ca76d202200d2 2026-11-06 docs(m7): decisiones del equipo en el registro de IA y autoauditoría firmada
-078e40471f48921c493f6db4fd41f21864bb8bba 57c2b598fe0ed40df6a779ad83d9f51857b18051 2026-11-06 docs(s13): EDAV 3 auditada y firmada por Kevin Torres y Daniel Charry
-3024c322b38a134fc8988020757c84e82e7cfc33 1aa48b11215b53591c457837f019207dcb0bccaf 2026-11-06 docs(m7): marcar seguridad, despliegue y riesgos como revisados, con la revisión manual S6 pendiente
-aac1e404315a20c50847bda75719c4c971b441d7 081aff4be986b330abcb8f67ae163acf16a8c612 2026-11-06 docs(s14): ADR-05 aceptada por el equipo con el emisor de tokens aplazado y sus condiciones
-17017dee34e046cc97653a9957c0db62561917b9 661dac2c087f247e5a913f167737f1da31a3fac9 2026-11-06 docs(s14): corregir la nota sobre la rama temporal de verificación
-7a13bd89db32d610ed007368a623adf5b861adaf b89828c30ccca0f07a3297ae3f86028c572aa1a0 2026-11-06 docs(s14): registrar la verificación del arranque limpio con app/Dockerfile (R-12 probada en CI)
-615849ed41b0000b580c4bf9cc18786895fe8e36 5fb18e16dfd8a4bf9670618af4a3d1f6f2e11ad0 2026-11-05 docs(m7): completar EDAV 3, autoauditoría e índice con los hashes y PR finales
-7fee33735f1a2e1d2d0668e492337b482139b975 475afe2201f1bf1c21a6ea41a9569cc5f325168f 2026-11-05 docs(s14): evidencia de ejecución de la fitness function en CI
-85b6448ad4436974da4082f801d3f0be21a2f781 f4ac08285766c8211120286f010c8f38f1af054e 2026-11-05 docs(s14): diagrama de despliegue en imagen
-7e229ecde4c3a42d04842b33d18b80152f22a75c 51ecc4e188bf8536195bd85f1edbc349b4e1a032 2026-11-05 docs(s14): completar compromisos y ADR-05 con las cifras medidas
-07c37c9549d081d024ae0e4a9d6b28af5cde2a14 078051cd91e9c83a401cb8cc1c9d4ad2abfae351 2026-11-05 docs(s13): completar seguridad con los resultados de fuga y de costo sobre el p95
-e40d8cedff87a487fc0935951765964c4a715033 0151c61f5a17164a879e640557c18fd9f8453518 2026-11-05 Merge branch 'experimento/s13-s14-seguridad-operacion' into modulo7/documentacion-s13-s14
-6548070fcf3713842d84ffdee354e7eed1d43c77 b1e4ed83734a1dc6267f123a89d0c86f7da4937c 2026-11-05 docs(m7): borradores de EDAV 3, registro de IA, autoauditoría e índice del README
-3cead92313005805605ec200625189587d7f017b 61194a4f601af5cb3def41b266393313e939716a 2026-11-05 docs(s14): borrador de riesgos operativos, compromisos y ADR-05 en estado Propuesta (faltan cifras)
-f38fd552e3e63e771bb63aaa0a455600fd6a8892 95aeb356b90dc8638f989bc4e6ca4b3da6e37b70 2026-11-05 docs(s14): borrador de despliegue, observabilidad y plan de operación
-3b96cbf4aaecf7b019520f4d164ac285b3dd4d84 edf77619bbe33c24e139c1cab31725ba4728382a 2026-11-05 docs(s13): borrador del modelado de amenazas y la matriz de riesgos y controles (faltan cifras del exp. 15)
-2b93ddcdb1f82be7da7d80f8fbc5a7c5491fa67c 6929bf2dbfb4ffee0068632aec085949b732e44d 2026-11-05 docs(m7): actualizar matrices con F-12, F-14, R-06, R-10 y R-11
-3a92c594088682bd4d0bde7866b6b367175f6fc0 9501057db97f21f2af9f54daa35593aeadb5f993 2026-11-06 Merge pull request #83 from Charry21/feat/s13-capa-seguridad
-df2d56265f873edd286c1a1b127207ba40eec902 0094915606313cd4734b79f643f0a1356cfb99a0 2026-11-06 docs: avisar del volumen con la contraseña anterior y permitir pruebas con la contraseña de .env
-94f2acf9bbec96029ae313b61ef5ddb228303ded b4b6ae2f0bba8ca1dec75687e081e56aab69e293 2026-11-05 fix(seguridad): no denegar el reenvío a /error, para que la entrada inválida responda 400
-68f01c109fd7538becda59c72184f2b61ebeefaa 18768001bb9d9cb3766649ae77e233b41e9c73cc 2026-11-05 ci: corregir el falso positivo de FF-02 y exigir una base válida en su prueba negativa
-6f4ce9be224fff67fb20d681b1c8899244a401ec f62ce05401d5fedd091c2885c71fe2711dc6e4a4 2026-11-05 docs: actualizar el contrato de la API y el arranque con .env y token
-4e5015ef0700968841739beebb087965d04b1eee 3c20317160f0f64da21d239229502c637df6fa6f 2026-11-05 ci: fitness function FF-02 de configuración segura con prueba negativa (borrador sin ejecutar)
-d06beacb7bc2f2ae705ccb89ff43954b90e77f2a d86826940ca0a80eb6ed9f2f0c10d419c908fc4d 2026-11-05 ops: R-10 con R-11, BD solo en loopback, secretos en .env y proxy TLS para producción (borrador sin probar)
-d53082168a6ac9cd1b40f8b33e3cfca661cde662 27bb893e64c262a788219085a8786d65d4fc33c3 2026-11-05 fix(seguridad): health sin detalles, contraseña por entorno, imagen sin root y entrada larga con 400 (borrador sin compilar)
-07c8cacd310917b9f45924520306e9477b766323 3a5c10c7864bee0922cdec306fb9de6b4007f61d 2026-11-05 feat(seguridad): capa candidata de JWT RS256 con denegación por defecto y registro de auditoría
-45afbdb0ad1d9583f9e52b7f2ac419764bb3d7e0 4e2f12946cc61b9bc89aee17d9dd9ef79465de94 2026-11-06 Merge pull request #82 from Charry21/experimento/s13-s14-seguridad-operacion
-9bd5b7119ba2b8690975f90654b78e82c055382c 269c23708a84e947840b07bec468c9aadce11f24 2026-11-05 experiment(s14): verificación de R-10 y R-11 con la pila final
-54bc0ab64d727df1f4030ebd439ed50e7bbdc8b6 55fe1e8a51ffeff6a96cd8865eca8cac90f7703e 2026-11-05 experiment(s13): resultados del costo de seguridad (HC1-HC5 no refutadas; TLS no concluyente)
-2d53ee44bb8b96f32c0fd8617d2562ef01897973 846c3463ea513365e4fba484584e30ecf7db3799 2026-11-05 experiment(s13): resultados de la fuga después de los controles y comparación antes/después
-7953fc04b11e9252a008faf4b3a9e7e6a61fece0 345476b83da0a22a0ff4c2d5cfe2a1fd86ab5380 2026-11-05 experiment(s13): corregir la detección del historial en P08 (pipefail con grep -q)
-b9f135f106a0e24c20be33d0b1977a37d5bb4248 01427d98b9d0ef47a3153375a6d66b16e2022740 2026-11-05 experiment(s13): datos crudos y análisis del costo de la capa de seguridad (56 corridas)
-15b6708b28ae1d4c879633d20683cebbe5854992 3ea903461b5c291331284957e90a70382d1cd218 2026-11-05 experiment(s14): resultados de R-10 y R-11 (recuperación < 10 s; con create-drop se pierden los datos)
-c99a20ccab45dd612d09ac01934c3a5892738b2d 4093a56bb1a57e984bf15fed72dfba7c7f5aa69a 2026-11-05 experiment(s13): resultados de la fuga de datos sobre main (13 predicciones no refutadas)
-03e4c7435ff304c96e6a6b1dee76774cc5edb7e4 712f2175abecfbff4004663de9a817948bdfca66 2026-11-05 experiment(s13): corregir dos errores de Bash del script de fuga, sin cambiar sondas ni predicciones
-c00438b8a6a74c378b7234f7dcaa0f50f258b82c 00b72a3b74661d0027630d4507627faeb612201c 2026-11-05 experiment(s14): preregistrar el reinicio automático R-10 y la conservación de datos R-11
-0e9c1095d69612c41b5a43b25de1be819c1bc013 a2abc98ef951a77c3c168bde90ae01b5e99138f4 2026-11-05 experiment(s13): preregistrar el costo de la capa de seguridad sobre el p95
-3c2b010eed94baecd7a6e9530fe6f4bd90d61f58 4df5808934e793c9bc16d04bc7cf88406b6a1f01 2026-11-05 experiment(s13): preregistrar la prueba de fuga de datos (P01-P13)
-3f4b12450d02657c42652ff3a8d59472edae5877 ecb842b4d0c963d69d181a4289b33d4004e6e1cd 2026-10-30 Merge pull request #81 from Charry21/modulo6/comite-adr04
-eccdc0b6060bfc8015b12ce818500a467802ea9f 31ed139993f61c9caeba3a955ef8e901196a5e80 2026-10-31 docs(m6): veredicto del mini-comité del ADR-04 (Ajustada, condición R-10)
-81764aee687bb00c7fc9fdefff4db499030f3e80 81fbca68e1fe871f48163dfb58aac84c1d2e2f19 2026-10-23 Merge pull request #80 from Charry21/modulo6/cierre-decisiones
-f6cdeb1528a7902786025070b84ca7c2bcde48db 84848c38d8ec502645f498117b8efe33a65d08f1 2026-10-24 docs(m6): decisiones M6-1..M6-6 firmadas y A1/A4 completados con el experimento 13
-b816d7ebe200293ae8afd15da2892212ccaa7199 bc5de0ae92fcd86de52bf6acfd1de8480b2faf41 2026-10-24 experiment(s12): resultados de semilla y memoria (HS1 y HS2 no refutadas)
-1a574510ecdabf87125bbcc5cbb51f497cf6a6c5 830e28ea0238367316c1c5a58b2c7e7fe322ae8c 2026-10-23 Merge pull request #79 from Charry21/experimento/s12-semilla-memoria
-d926b0f0783bdc8ef3c9b9f581265406ade78d7c c6bc94f513f55bc3a5b6e215c2b6cb4f3e2e0249 2026-10-24 experiment(s12): preregistrar semilla de datos y memoria de la API
-bd62686d3e67b259a510d905427a2226bb442417 dcad83e636ab055d10c4d8c075eade43c1282328 2026-10-23 Merge pull request #78 from Charry21/modulo6/cierre-auditoria
-40131a2282e437796b0321f2cf08f9ccace54f88 aa1355df142882216770ba6cb0a0d04e9a8993ed 2026-10-24 docs: enlazar la autoauditoría del módulo 6 en el README
-65b125012cab4a9f0c87003b34b512594b15d7ab 1faa592d9eb7802a2d36b27e1f08d1407910c128 2026-10-24 docs(m6): consecuencias +/- y condiciones de revisión en A4, ejecuciones de CI en A6 y autoauditoría A1-A6
-ac5151ea790a800ddc66dce8ba1b0d3c6f12eece ab0acb4678875f779c09afbda30c43ba8f267cb2 2026-10-23 Merge pull request #77 from Charry21/modulo6/entregables-s12
-ee2c98ae497db4cda46e3cf8d8f0338f1afe6991 0f7c471eea35a8d2074205c62bc7b178592971c6 2026-10-24 docs(m6): registro crítico de IA del módulo 6 e índice A1-A6 en el README
-8d14cadb7cc50619e83da5901a387e1bf2531372 b224a85f75fc363a7e9f847e20735a0f3702c5c6 2026-10-24 ci(m6): fitness function FF-01 de fronteras modulares (A6) con prueba negativa
-ea29906a339ac9ae7120360392beecbfa8a7bce4 e4c96f9f3f922d16806fa6a3aa5deca955eec581 2026-10-24 adr: ADR-04 distribución del despliegue (Propuesta, pendiente del mini-comité)
-1e2a312dbd750ca19a73dbb0a295f3b1566b0717 2e94df98e3be12f1ecccad85fe5dcd7447aeb152 2026-10-24 docs(m6): comparación de alternativas de distribución y costos (A4)
-cc6d59fe758bff626eaacdf71556355ecacdc730 a3e6d484490f32716bf7aa48e14f0407bc56b1e0 2026-10-24 docs(m6): matriz de fallos (A2) y matriz de resiliencia (A3)
-6173a0381326504a250454df0793fbace82ad175 69ee7827f1b897ceeb0b6ab584d8d59d9222df2a 2026-10-24 experiment(s12): resultados de la inyección de fallos (3 ciclos, HF1a-HF3 no refutadas)
-14c1d556d4f68469a08952891d5f77e55ddd7839 bcbe51721d2b97b631cc3bf8e53db5233991d189 2026-10-23 Merge pull request #76 from Charry21/experimento/s12-inyeccion-fallos
-a1c555ccbfccd2052f4bbe69140e08d6ecf058d2 2ad249608dd3feb9498d1c0ac1cfbfea0f5728ec 2026-10-24 experiment(s12): preregistrar inyección de fallos (caída y recuperación de PostgreSQL)
-cd0ef95f4712cde3e605a3958a23dbc17d374c33 008ecfa5660c8e21104a98feb94eadf2410570ac 2026-10-23 Merge pull request #75 from Charry21/auditoria/cierre-tercera-revision
-880c548b6f94802ad2eb6181d426f6b7eb8aab0a 9a296c0d1026a72bb8603671c514339f54fee593 2026-10-24 audit: tabla de cierre de la tercera revisión; versión del instrumento y contenido del preregistro
-d74c460194183b9281b4dfcfb1e413d55fa7f92f ebba0793c9d3bf38b7e69fda0ba4d63dde0453f6 2026-10-23 Merge pull request #74 from Charry21/docs/registro-ia-seccion5
-521eb5736726f592c9fe566ec736360189848ab0 43de664bb82de1cbd728ce404141b53808ace620 2026-10-24 docs(m5): aceptar IA-14 e IA-15 y firmar la sección 5 del registro crítico de IA
-0400c276a52a45f7d7fa5cf263da46467ca7df5f 20a3375e7e533b2d1082d6892b96b1bac99b4e61 2026-10-23 Merge pull request #73 from Charry21/cierre/firmas-s10
-531c1e712cc14e2ca665427c59fe7e47bfb411cd d1a11a310bc41ec235c2b0e38b7aac7d5cda7bf4 2026-10-24 docs(s10): firmas de Charry Ríos Daniel Estiven y Kevin Steven Torres Caro en veredicto, anexo EDAV 2 y auditoría 11
-a7445f5ad03314528e8ffd54ac7a45fa785066fc 450618938805600a3e8030e3b6aa85ccab270e05 2026-10-23 Merge pull request #72 from Charry21/cierre/pendientes-s10
-26069f377fb2a627bbcaacb87d885faff00647f9 ed750ea850acde4d8b0006d16e83d5abef9520ac 2026-10-24 docs(s10): veredicto del equipo, anexo de la EDAV 2 y cierre de P5/P6
-6fa0072f911a1faf8005e20823fb5369904eea83 fde5eb513add86ced256ee40b890767e82c51926 2026-10-24 test(s10): mover el test de rollback a api.adopciones (seguimiento del hallazgo S1, P5)
-b8eb0026d60138bfff79a2030e405c947306686b cc235404072ef2316579223539c4627a938ced8a 2026-10-23 Merge pull request #71 from Charry21/auditoria/correspondencia-salidas
-814cd87431cdfea92330e54568781789bb3d38a0 967a85a58fe2ae8331bfcd6d76f9aece276b0dd4 2026-10-24 audit: colocar la §7 después de las decisiones del equipo
-ca8a62a17c51797df344a19013527d4b2a9aa8d4 f7f4ac0a35082bc0d71ec5eeaf712211f5359539 2026-10-24 audit: correspondencia salida-commit-estado y códigos HTTP por solicitud (segunda revisión del tutor)
-5c59f7d3f75f1bcae927a5e10ef98056ecc9e2fa 7feb11842fea2d48bf9d63fe1575fd8a76fc6829 2026-10-23 Merge pull request #69 from Charry21/auditoria/reproducibilidad-s4-s10
-cb47e8d8836e45520ce5c62f7876eefb2e82e07b 14d258e3996569f0b359aff557cad72d3179cc70 2026-10-24 audit: script para publicar las etiquetas evidencia/spike1-* y marcarlas como pendientes
-84d7d2e3c83dc3670e2e2ad9c06c3b7248390d5e 24f6008982e8f0ec6b4fe05335691f6cf75a8edb 2026-10-24 docs: decisiones E1-E5 de la auditoría de reproducibilidad
-7b3b00abe2c1458ac0f1c07b3508a4aee4d288d7 444c6beada33f295ba4095a2494ce83a97ad5c20 2026-10-24 audit: informe de reproducibilidad (Demostrado / Parcial / Faltante / No verificable)
-fc3c8f411d3975c9fbdc8938ca9d3e462085f2ee d5f35c347d0ac8fa34f2fab80ffb9b0e60435e53 2026-10-24 audit: evidencia reproducida de la línea base S4/S5 y del spike 1
-4a00dc2a50f0ee53a5b73d8e0dea747917e72a15 9740fb6bc4bcf90efecf577a6bae13fe63aa78d4 2026-10-23 Merge pull request #70 from Charry21/docs/s11-desviacion-cpu
-c1cdb2e6c2dba1a7fbfdde8df650dc46e766b76f 252da394c981ee92bf2be8b5a4146c3817b5775f 2026-10-23 S11: declarar en RESULTADOS la desviación metodológica D-A1 (cálculo de CPU)
-0247579e5cee3ec38999505b3d28abdc6ebc9957 da25f5288d7ef7cb9504fc47ed4b18c37631837a 2026-10-23 Merge pull request #68 from Charry21/docs/s11-cierre-auditoria
-539c1dad28992438f1ee7bad6334b7bccc9704e2 455f1fe24244599c23a885c367020783651a5483 2026-10-23 S11: trazabilidad del análisis e índice de la Semana 11 en el README
-f0c4ea5b2fd2e427dccbb897b537c6fd10ab2020 3fe585173c500770c46a2aa7f2d400207216c1ed 2026-10-16 Merge pull request #67 from Charry21/experimento/s11-crecimiento
-3c980e7aecb9a3786708ea4c1cda34b13a9d3846 5853a29c4e3d68d29cbd66d777280b33700b2b2b 2026-10-16 S11: resultados del experimento de crecimiento (32 corridas, H1-H4 no refutadas)
-be20d1610293c28bdd6fa2639773130f5c737624 e1acf988b8e858273577b8cc8f8bad303a9d518f 2026-10-16 S11: script de análisis (medianas por escalón, verificación H1-H4, gráfica)
-c5ed512cab98cfdda43f16faf821e2eeb4954e38 17a620290c72b2562c4a8c3f818d0080184155d2 2026-10-16 S11: registrar entorno y desviaciones de construcción antes de medir
-ab53f256607b2954ec02490bee839f1c0fe59f35 93ae1a0dc214973462def35ed2d6951c02cd43db 2026-10-16 Merge pull request #66 from Charry21/experimento/s11-crecimiento
-964dd4a0c5e1858503dc688bd94b08e5503db704 3320958db4abb001eb5668f06301c57830022017 2026-10-16 Preregistrar experimento de crecimiento S11 (escenario, hipótesis H1-H4 y procedimiento)
+# main antes: 32a6aaeef5df355357e65b998c4c4a86683bd774. Mismo contenido: cada commit nuevo tiene el mismo árbol, la misma fecha y el mismo asunto que el original (comprobado commit a commit).
+# Se quitaron las líneas Co-Authored-By/Claude-Session de 44 commits. Autor final: Kevin (kevinsteven1007@gmail.com) en los 38 de noviembre; Charry21 en los 6 de octubre (S11).
+# Formato: hash_original hash_actual autor_actual fecha asunto
+32a6aaeef5df355357e65b998c4c4a86683bd774 b5772107c6590e46f1837acf911490f6df68f23c Daniel Charry 2026-11-06 Merge pull request #84 from Charry21/modulo7/documentacion-s13-s14
+62c0fa03aaf56977db7db11cfc6ae058224cb572 8bc20a2a22a0ff495700eb7d2ebc957a17123787 kevin 2026-11-06 docs(s14): registrar que ADR-05 no tiene mini-comité según el sílabo (respuesta del tutor)
+d9f89e6627688a912b75ab5b3ddfe2fbf54bda8b 0779f81f73b5eb66236b0a4514cc9ab297833c2e kevin 2026-11-06 docs(s13): EDAV 3 con la versión corregida del análisis y la conclusión del equipo
+772864428465b1c88f8093edd11a4e813d9ebf31 691182ab0aba7c041c85132df2bc50ba64569a64 kevin 2026-11-06 docs: notas con fecha para I-05, I-06, I-07, I-09, I-11 e I-14, y seguimiento de la condición del ADR-04
+95282bb26b5b98aa8f63346219a8055b19909860 35768c11565b613edf37aa1c7bed35712a496a58 kevin 2026-11-06 docs(m7): decisiones del equipo en el registro de IA y autoauditoría firmada
+078e40471f48921c493f6db4fd41f21864bb8bba 9cf983deed38cdd244f4e60b120afa7ed5377f54 kevin 2026-11-06 docs(s13): EDAV 3 auditada y firmada por Kevin Torres y Daniel Charry
+3024c322b38a134fc8988020757c84e82e7cfc33 bc23b6a4596116a1eda6d74a5b03ea7aee3fcec9 kevin 2026-11-06 docs(m7): marcar seguridad, despliegue y riesgos como revisados, con la revisión manual S6 pendiente
+aac1e404315a20c50847bda75719c4c971b441d7 cf2ac14950a5795f97856c6bdc8e055040c41d07 kevin 2026-11-06 docs(s14): ADR-05 aceptada por el equipo con el emisor de tokens aplazado y sus condiciones
+17017dee34e046cc97653a9957c0db62561917b9 12a2944e5e640fa1638ae78193fbe3a7a3990fc6 kevin 2026-11-06 docs(s14): corregir la nota sobre la rama temporal de verificación
+7a13bd89db32d610ed007368a623adf5b861adaf 3a4554f72de23c56562ff0ba626e06a2a7827348 kevin 2026-11-06 docs(s14): registrar la verificación del arranque limpio con app/Dockerfile (R-12 probada en CI)
+615849ed41b0000b580c4bf9cc18786895fe8e36 9a5a096766be47e365d2319756c0c6f6ec5f28d1 kevin 2026-11-05 docs(m7): completar EDAV 3, autoauditoría e índice con los hashes y PR finales
+7fee33735f1a2e1d2d0668e492337b482139b975 4618a19fcb8e937ec18874bd1fcbf48e1107786e kevin 2026-11-05 docs(s14): evidencia de ejecución de la fitness function en CI
+85b6448ad4436974da4082f801d3f0be21a2f781 9d8a97d876cee2858c83f023cff3a1c4cdc007cd kevin 2026-11-05 docs(s14): diagrama de despliegue en imagen
+7e229ecde4c3a42d04842b33d18b80152f22a75c 67ce26af892ea87a62557625cd1b7d068f4b284a kevin 2026-11-05 docs(s14): completar compromisos y ADR-05 con las cifras medidas
+07c37c9549d081d024ae0e4a9d6b28af5cde2a14 7ab0b2710768f4563e0814018a225179411f898e kevin 2026-11-05 docs(s13): completar seguridad con los resultados de fuga y de costo sobre el p95
+e40d8cedff87a487fc0935951765964c4a715033 6de4cafa78b0fda28b40a2caa3619e02a579422f kevin 2026-11-05 Merge branch 'experimento/s13-s14-seguridad-operacion' into modulo7/documentacion-s13-s14
+6548070fcf3713842d84ffdee354e7eed1d43c77 9b1b25b9c8651e03bc105e751ada07e109d28bdc kevin 2026-11-05 docs(m7): borradores de EDAV 3, registro de IA, autoauditoría e índice del README
+3cead92313005805605ec200625189587d7f017b 5b5acd0c5e7f23cf40da4edb3dbd7514961a9666 kevin 2026-11-05 docs(s14): borrador de riesgos operativos, compromisos y ADR-05 en estado Propuesta (faltan cifras)
+f38fd552e3e63e771bb63aaa0a455600fd6a8892 20ada197107dca82407b1863debe8adf21dc0dbf kevin 2026-11-05 docs(s14): borrador de despliegue, observabilidad y plan de operación
+3b96cbf4aaecf7b019520f4d164ac285b3dd4d84 41e21743c80be0f446ece5a0c52329a3b3d1d012 kevin 2026-11-05 docs(s13): borrador del modelado de amenazas y la matriz de riesgos y controles (faltan cifras del exp. 15)
+2b93ddcdb1f82be7da7d80f8fbc5a7c5491fa67c 091a95ac80513dc11b1f5aa152c9f495637a74c7 kevin 2026-11-05 docs(m7): actualizar matrices con F-12, F-14, R-06, R-10 y R-11
+3a92c594088682bd4d0bde7866b6b367175f6fc0 75e03f77ad15532f6a01b8dd49b78cbe6777d108 kevin 2026-11-06 Merge pull request #83 from Charry21/feat/s13-capa-seguridad
+df2d56265f873edd286c1a1b127207ba40eec902 947bfb2c3a1e4539d30127e48b864e22e5985e70 kevin 2026-11-06 docs: avisar del volumen con la contraseña anterior y permitir pruebas con la contraseña de .env
+94f2acf9bbec96029ae313b61ef5ddb228303ded 712ccd9730833d0d995d638158f9467148f92cef kevin 2026-11-05 fix(seguridad): no denegar el reenvío a /error, para que la entrada inválida responda 400
+68f01c109fd7538becda59c72184f2b61ebeefaa 8ad7d1b105af3f6ab05501058c8f26f404e1dd59 kevin 2026-11-05 ci: corregir el falso positivo de FF-02 y exigir una base válida en su prueba negativa
+6f4ce9be224fff67fb20d681b1c8899244a401ec 41049855c804b6ff4c77c19a574412606b7ebf83 kevin 2026-11-05 docs: actualizar el contrato de la API y el arranque con .env y token
+4e5015ef0700968841739beebb087965d04b1eee 95585eb5b26f988a9246322254f23bc04009f529 kevin 2026-11-05 ci: fitness function FF-02 de configuración segura con prueba negativa (borrador sin ejecutar)
+d06beacb7bc2f2ae705ccb89ff43954b90e77f2a 3a6f5a956b9460207eadb512d6639ddf3417db07 kevin 2026-11-05 ops: R-10 con R-11, BD solo en loopback, secretos en .env y proxy TLS para producción (borrador sin probar)
+d53082168a6ac9cd1b40f8b33e3cfca661cde662 3fc0d81aa8f76f8c4646bd6901b73e920efeee8b kevin 2026-11-05 fix(seguridad): health sin detalles, contraseña por entorno, imagen sin root y entrada larga con 400 (borrador sin compilar)
+07c8cacd310917b9f45924520306e9477b766323 7966088f2d1d4d8a8dfada016ad907496a5093ca kevin 2026-11-05 feat(seguridad): capa candidata de JWT RS256 con denegación por defecto y registro de auditoría
+45afbdb0ad1d9583f9e52b7f2ac419764bb3d7e0 af08dcd89138707c0e8a110228241d4610c3e1f4 kevin 2026-11-06 Merge pull request #82 from Charry21/experimento/s13-s14-seguridad-operacion
+9bd5b7119ba2b8690975f90654b78e82c055382c 103ee212897afccb345694423e456177debf6113 kevin 2026-11-05 experiment(s14): verificación de R-10 y R-11 con la pila final
+54bc0ab64d727df1f4030ebd439ed50e7bbdc8b6 2627458fb95f419afb58eaf4e12a275c644031d4 kevin 2026-11-05 experiment(s13): resultados del costo de seguridad (HC1-HC5 no refutadas; TLS no concluyente)
+2d53ee44bb8b96f32c0fd8617d2562ef01897973 80c3421c835411a76535221f26a64711d31a1d7f kevin 2026-11-05 experiment(s13): resultados de la fuga después de los controles y comparación antes/después
+7953fc04b11e9252a008faf4b3a9e7e6a61fece0 abcc90932aa71296447f5110418b5259b7e5a9f8 kevin 2026-11-05 experiment(s13): corregir la detección del historial en P08 (pipefail con grep -q)
+b9f135f106a0e24c20be33d0b1977a37d5bb4248 23d74d1dc9656136f56a65c55da1438a315d62c8 kevin 2026-11-05 experiment(s13): datos crudos y análisis del costo de la capa de seguridad (56 corridas)
+15b6708b28ae1d4c879633d20683cebbe5854992 d6d72abb6a8e38abdaf1d604880df75ca9d27393 kevin 2026-11-05 experiment(s14): resultados de R-10 y R-11 (recuperación < 10 s; con create-drop se pierden los datos)
+c99a20ccab45dd612d09ac01934c3a5892738b2d 4e4d127ab6266109ec87dd02ba586400ea3e664d kevin 2026-11-05 experiment(s13): resultados de la fuga de datos sobre main (13 predicciones no refutadas)
+03e4c7435ff304c96e6a6b1dee76774cc5edb7e4 67a152fb27d73181476645aba2a72598ded1f1f3 kevin 2026-11-05 experiment(s13): corregir dos errores de Bash del script de fuga, sin cambiar sondas ni predicciones
+c00438b8a6a74c378b7234f7dcaa0f50f258b82c f0be7e82ba341f749c46fb7b2acfeb19040343db kevin 2026-11-05 experiment(s14): preregistrar el reinicio automático R-10 y la conservación de datos R-11
+0e9c1095d69612c41b5a43b25de1be819c1bc013 96e720aae3eb2fecf89e2530055685d20efab516 kevin 2026-11-05 experiment(s13): preregistrar el costo de la capa de seguridad sobre el p95
+3c2b010eed94baecd7a6e9530fe6f4bd90d61f58 25dd746e85d5553c14ef9310694890e41d0fda88 kevin 2026-11-05 experiment(s13): preregistrar la prueba de fuga de datos (P01-P13)
+3f4b12450d02657c42652ff3a8d59472edae5877 ecb842b4d0c963d69d181a4289b33d4004e6e1cd Daniel Charry 2026-10-30 Merge pull request #81 from Charry21/modulo6/comite-adr04
+eccdc0b6060bfc8015b12ce818500a467802ea9f 31ed139993f61c9caeba3a955ef8e901196a5e80 Charry21 2026-10-31 docs(m6): veredicto del mini-comité del ADR-04 (Ajustada, condición R-10)
+81764aee687bb00c7fc9fdefff4db499030f3e80 81fbca68e1fe871f48163dfb58aac84c1d2e2f19 Daniel Charry 2026-10-23 Merge pull request #80 from Charry21/modulo6/cierre-decisiones
+f6cdeb1528a7902786025070b84ca7c2bcde48db 84848c38d8ec502645f498117b8efe33a65d08f1 Charry21 2026-10-24 docs(m6): decisiones M6-1..M6-6 firmadas y A1/A4 completados con el experimento 13
+b816d7ebe200293ae8afd15da2892212ccaa7199 bc5de0ae92fcd86de52bf6acfd1de8480b2faf41 Charry21 2026-10-24 experiment(s12): resultados de semilla y memoria (HS1 y HS2 no refutadas)
+1a574510ecdabf87125bbcc5cbb51f497cf6a6c5 830e28ea0238367316c1c5a58b2c7e7fe322ae8c Daniel Charry 2026-10-23 Merge pull request #79 from Charry21/experimento/s12-semilla-memoria
+d926b0f0783bdc8ef3c9b9f581265406ade78d7c c6bc94f513f55bc3a5b6e215c2b6cb4f3e2e0249 Charry21 2026-10-24 experiment(s12): preregistrar semilla de datos y memoria de la API
+bd62686d3e67b259a510d905427a2226bb442417 dcad83e636ab055d10c4d8c075eade43c1282328 Daniel Charry 2026-10-23 Merge pull request #78 from Charry21/modulo6/cierre-auditoria
+40131a2282e437796b0321f2cf08f9ccace54f88 aa1355df142882216770ba6cb0a0d04e9a8993ed Charry21 2026-10-24 docs: enlazar la autoauditoría del módulo 6 en el README
+65b125012cab4a9f0c87003b34b512594b15d7ab 1faa592d9eb7802a2d36b27e1f08d1407910c128 Charry21 2026-10-24 docs(m6): consecuencias +/- y condiciones de revisión en A4, ejecuciones de CI en A6 y autoauditoría A1-A6
+ac5151ea790a800ddc66dce8ba1b0d3c6f12eece ab0acb4678875f779c09afbda30c43ba8f267cb2 Daniel Charry 2026-10-23 Merge pull request #77 from Charry21/modulo6/entregables-s12
+ee2c98ae497db4cda46e3cf8d8f0338f1afe6991 0f7c471eea35a8d2074205c62bc7b178592971c6 Charry21 2026-10-24 docs(m6): registro crítico de IA del módulo 6 e índice A1-A6 en el README
+8d14cadb7cc50619e83da5901a387e1bf2531372 b224a85f75fc363a7e9f847e20735a0f3702c5c6 Charry21 2026-10-24 ci(m6): fitness function FF-01 de fronteras modulares (A6) con prueba negativa
+ea29906a339ac9ae7120360392beecbfa8a7bce4 e4c96f9f3f922d16806fa6a3aa5deca955eec581 Charry21 2026-10-24 adr: ADR-04 distribución del despliegue (Propuesta, pendiente del mini-comité)
+1e2a312dbd750ca19a73dbb0a295f3b1566b0717 2e94df98e3be12f1ecccad85fe5dcd7447aeb152 Charry21 2026-10-24 docs(m6): comparación de alternativas de distribución y costos (A4)
+cc6d59fe758bff626eaacdf71556355ecacdc730 a3e6d484490f32716bf7aa48e14f0407bc56b1e0 Charry21 2026-10-24 docs(m6): matriz de fallos (A2) y matriz de resiliencia (A3)
+6173a0381326504a250454df0793fbace82ad175 69ee7827f1b897ceeb0b6ab584d8d59d9222df2a Charry21 2026-10-24 experiment(s12): resultados de la inyección de fallos (3 ciclos, HF1a-HF3 no refutadas)
+14c1d556d4f68469a08952891d5f77e55ddd7839 bcbe51721d2b97b631cc3bf8e53db5233991d189 Daniel Charry 2026-10-23 Merge pull request #76 from Charry21/experimento/s12-inyeccion-fallos
+a1c555ccbfccd2052f4bbe69140e08d6ecf058d2 2ad249608dd3feb9498d1c0ac1cfbfea0f5728ec Charry21 2026-10-24 experiment(s12): preregistrar inyección de fallos (caída y recuperación de PostgreSQL)
+cd0ef95f4712cde3e605a3958a23dbc17d374c33 008ecfa5660c8e21104a98feb94eadf2410570ac Daniel Charry 2026-10-23 Merge pull request #75 from Charry21/auditoria/cierre-tercera-revision
+880c548b6f94802ad2eb6181d426f6b7eb8aab0a 9a296c0d1026a72bb8603671c514339f54fee593 Charry21 2026-10-24 audit: tabla de cierre de la tercera revisión; versión del instrumento y contenido del preregistro
+d74c460194183b9281b4dfcfb1e413d55fa7f92f ebba0793c9d3bf38b7e69fda0ba4d63dde0453f6 Daniel Charry 2026-10-23 Merge pull request #74 from Charry21/docs/registro-ia-seccion5
+521eb5736726f592c9fe566ec736360189848ab0 43de664bb82de1cbd728ce404141b53808ace620 Charry21 2026-10-24 docs(m5): aceptar IA-14 e IA-15 y firmar la sección 5 del registro crítico de IA
+0400c276a52a45f7d7fa5cf263da46467ca7df5f 20a3375e7e533b2d1082d6892b96b1bac99b4e61 Daniel Charry 2026-10-23 Merge pull request #73 from Charry21/cierre/firmas-s10
+531c1e712cc14e2ca665427c59fe7e47bfb411cd d1a11a310bc41ec235c2b0e38b7aac7d5cda7bf4 Charry21 2026-10-24 docs(s10): firmas de Charry Ríos Daniel Estiven y Kevin Steven Torres Caro en veredicto, anexo EDAV 2 y auditoría 11
+a7445f5ad03314528e8ffd54ac7a45fa785066fc 450618938805600a3e8030e3b6aa85ccab270e05 Daniel Charry 2026-10-23 Merge pull request #72 from Charry21/cierre/pendientes-s10
+26069f377fb2a627bbcaacb87d885faff00647f9 ed750ea850acde4d8b0006d16e83d5abef9520ac Charry21 2026-10-24 docs(s10): veredicto del equipo, anexo de la EDAV 2 y cierre de P5/P6
+6fa0072f911a1faf8005e20823fb5369904eea83 fde5eb513add86ced256ee40b890767e82c51926 Charry21 2026-10-24 test(s10): mover el test de rollback a api.adopciones (seguimiento del hallazgo S1, P5)
+b8eb0026d60138bfff79a2030e405c947306686b cc235404072ef2316579223539c4627a938ced8a Daniel Charry 2026-10-23 Merge pull request #71 from Charry21/auditoria/correspondencia-salidas
+814cd87431cdfea92330e54568781789bb3d38a0 967a85a58fe2ae8331bfcd6d76f9aece276b0dd4 Charry21 2026-10-24 audit: colocar la §7 después de las decisiones del equipo
+ca8a62a17c51797df344a19013527d4b2a9aa8d4 f7f4ac0a35082bc0d71ec5eeaf712211f5359539 Charry21 2026-10-24 audit: correspondencia salida-commit-estado y códigos HTTP por solicitud (segunda revisión del tutor)
+5c59f7d3f75f1bcae927a5e10ef98056ecc9e2fa 7feb11842fea2d48bf9d63fe1575fd8a76fc6829 Daniel Charry 2026-10-23 Merge pull request #69 from Charry21/auditoria/reproducibilidad-s4-s10
+cb47e8d8836e45520ce5c62f7876eefb2e82e07b 14d258e3996569f0b359aff557cad72d3179cc70 Charry21 2026-10-24 audit: script para publicar las etiquetas evidencia/spike1-* y marcarlas como pendientes
+84d7d2e3c83dc3670e2e2ad9c06c3b7248390d5e 24f6008982e8f0ec6b4fe05335691f6cf75a8edb Charry21 2026-10-24 docs: decisiones E1-E5 de la auditoría de reproducibilidad
+7b3b00abe2c1458ac0f1c07b3508a4aee4d288d7 444c6beada33f295ba4095a2494ce83a97ad5c20 Charry21 2026-10-24 audit: informe de reproducibilidad (Demostrado / Parcial / Faltante / No verificable)
+fc3c8f411d3975c9fbdc8938ca9d3e462085f2ee d5f35c347d0ac8fa34f2fab80ffb9b0e60435e53 Charry21 2026-10-24 audit: evidencia reproducida de la línea base S4/S5 y del spike 1
+4a00dc2a50f0ee53a5b73d8e0dea747917e72a15 9740fb6bc4bcf90efecf577a6bae13fe63aa78d4 kevin 2026-10-23 Merge pull request #70 from Charry21/docs/s11-desviacion-cpu
+c1cdb2e6c2dba1a7fbfdde8df650dc46e766b76f 252da394c981ee92bf2be8b5a4146c3817b5775f Charry21 2026-10-23 S11: declarar en RESULTADOS la desviación metodológica D-A1 (cálculo de CPU)
+0247579e5cee3ec38999505b3d28abdc6ebc9957 da25f5288d7ef7cb9504fc47ed4b18c37631837a kevin 2026-10-23 Merge pull request #68 from Charry21/docs/s11-cierre-auditoria
+539c1dad28992438f1ee7bad6334b7bccc9704e2 455f1fe24244599c23a885c367020783651a5483 Charry21 2026-10-23 S11: trazabilidad del análisis e índice de la Semana 11 en el README
+f0c4ea5b2fd2e427dccbb897b537c6fd10ab2020 3fe585173c500770c46a2aa7f2d400207216c1ed kevin 2026-10-16 Merge pull request #67 from Charry21/experimento/s11-crecimiento
+3c980e7aecb9a3786708ea4c1cda34b13a9d3846 5853a29c4e3d68d29cbd66d777280b33700b2b2b Charry21 2026-10-16 S11: resultados del experimento de crecimiento (32 corridas, H1-H4 no refutadas)
+be20d1610293c28bdd6fa2639773130f5c737624 e1acf988b8e858273577b8cc8f8bad303a9d518f Charry21 2026-10-16 S11: script de análisis (medianas por escalón, verificación H1-H4, gráfica)
+c5ed512cab98cfdda43f16faf821e2eeb4954e38 17a620290c72b2562c4a8c3f818d0080184155d2 Charry21 2026-10-16 S11: registrar entorno y desviaciones de construcción antes de medir
+ab53f256607b2954ec02490bee839f1c0fe59f35 93ae1a0dc214973462def35ed2d6951c02cd43db kevin 2026-10-16 Merge pull request #66 from Charry21/experimento/s11-crecimiento
+964dd4a0c5e1858503dc688bd94b08e5503db704 3320958db4abb001eb5668f06301c57830022017 Charry21 2026-10-16 Preregistrar experimento de crecimiento S11 (escenario, hipótesis H1-H4 y procedimiento)
