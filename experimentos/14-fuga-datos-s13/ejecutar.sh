@@ -35,7 +35,7 @@ http() { # archivo_salida, argumentos de curl...; imprime el código HTTP
   curl -sk -m 20 -o "$salida" -w '%{http_code}' "$@"
 }
 filas() {
-  docker exec "$BD" sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -tAc "select (select count(*) from solicitud_adopcion) || \",\" || (select count(*) from etapa_adopcion)"' 2>&1
+  docker exec "$BD" sh -c "psql -U \"\$POSTGRES_USER\" -d \"\$POSTGRES_DB\" -tAc \"select (select count(*) from solicitud_adopcion) || ',' || (select count(*) from etapa_adopcion)\"" 2>&1
 }
 
 { echo "Fecha: $(ts)"; echo "Etiqueta: $ETIQUETA"; echo "Commit de esta rama: $(git rev-parse HEAD)"
@@ -46,8 +46,8 @@ filas() {
 } > /tmp/entorno.$$
 
 sondas() {
-  local R="$1" E="$R/evidencia"; mkdir -p "$E"
-  local T="$R/sondas.tsv"; printf 'sonda\tclasificacion\tdetalle\n' > "$T"
+  local R="$1"; local E="$R/evidencia"; mkdir -p "$E"
+  local T="$R/sondas.tsv"; export T; printf 'sonda\tclasificacion\tdetalle\n' > "$T"
   anotar() { printf '%s\t%s\t%s\n' "$1" "$2" "$3" >> "$T"; }
 
   # Marcador

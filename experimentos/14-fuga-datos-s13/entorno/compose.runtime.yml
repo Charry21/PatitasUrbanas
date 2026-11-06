@@ -1,0 +1,6 @@
+# Solo para este entorno: usa la imagen construida con Dockerfile.runtime en vez de `build: ./app`,
+# porque app/Dockerfile no construye detrás del proxy TLS (F-08). El resto de docker-compose.yml no cambia.
+services:
+  api_app:
+    image: ${IMAGEN_API:-patitas-urbanas-api:s13-sin}
+    build: !reset null
