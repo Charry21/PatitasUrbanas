@@ -10,6 +10,8 @@ Fecha: 2026-11-05. Código analizado: `main` en `3f4b124`.
 
 ## 1. Sistema y límites
 
+> **Línea base histórica:** esta sección y la §2 describen `main` en `3f4b124`, antes del PR #83, que es lo que se modeló y se probó. El despliegue actual, con proxy TLS, BD sin publicar y autenticación, está en `docs/12-despliegue-observabilidad.md` §1 y en la columna "Estado del control" de §4.
+
 Solo se modela lo que existe en el código, con el mismo criterio de la matriz de fallos. Notificaciones, Servicio de Mapas, Identidad y los clientes web y móvil no existen.
 
 ```mermaid
@@ -50,6 +52,8 @@ flowchart LR
 ---
 
 ## 2. Modelado de amenazas (STRIDE)
+
+> Línea base: `main` en `3f4b124`, antes del PR #83. El estado de cada control después de esa fusión está en §4.
 
 **Estado:** **Observada** = una prueba la provocó. **Observada, sin éxito** = se intentó y no funcionó. **Hipotética** = plausible por el diseño, sin provocar. **Con el control** = aparece por la capa propuesta.
 
