@@ -96,7 +96,7 @@ Las hipótesis y los criterios se versionaron antes de cualquier ejecución. Dos
 | S3 | Se propone cambiar el orden aceptado en M6-3: R-11 con R-10 | HR2 del experimento 16 | Sustantivo (decisión previa) | Aceptado: R-11 entra con R-10 (ADR-05, decisión D) | |
 | S4 | Las mediciones de p95 usaron `Dockerfile.runtime`, no `app/Dockerfile`. La construcción real se verificó aparte, sin medir | `experimentos/10-crecimiento-s11/entorno/Dockerfile.runtime` | Sustantivo (validez externa) | Aceptado como limitación: métricas de un entorno aislado | |
 | S5 | `despues` usa certificado local; no hay prueba con un dominio real | `experimentos/14-fuga-datos-s13/RESULTADOS.md` | Sustantivo (validez externa) | Aceptado como limitación | |
-| S6 | Probabilidades, impactos y umbrales de alerta son juicio de la IA | `docs/10-seguridad.md` §4 | Sustantivo (criterio) | **Pendiente de corregir:** el equipo lo considera crítico y exige revisar a mano probabilidades, impactos y umbrales antes de desplegar. Hasta entonces siguen siendo juicio de la IA | |
+| S6 | Probabilidades, impactos y umbrales de alerta son juicio de la IA | `docs/10-seguridad.md` §4 | Sustantivo (criterio) | **Corregido el 2026-11-06:** Kevin Torres y Daniel Charry calificaron por separado las 32 filas con una escala acordada y consensuaron las diferencias; también confirmaron los 7 umbrales. Evidencia: `docs/verificacion/revision-manual-s6-2026-11-06/` | Este PR |
 | S7 | Los tokens los generó el mismo experimento: no se probó un emisor real | `generar_tokens.py` | Sustantivo (validez externa) | Aceptado como limitación; emisor aplazado (solución de terceros) | |
 | S8 | La primera versión de la capa rompía los errores 400 y las pruebas con MockMvc no lo vieron. Lo destapó la lectura de los códigos de P04 | `experimentos/14-fuga-datos-s13/RESULTADOS.md` §4, H2 | Sustantivo (calidad de las pruebas) | Corregido. El equipo pide además reforzar las pruebas de integración | `94f2acf` |
 | S9 | FF-02 tenía un falso positivo, y su prueba negativa daba verde igual porque la base ya fallaba | Commit `68f01c1` | Sustantivo (instrumento) | Corregido | `68f01c1` |
@@ -125,7 +125,7 @@ Ninguno.
 
 - S8: corregido en `94f2acf`. El equipo pide reforzar las pruebas de integración con servidor real y en CI.
 - S9: corregido en `68f01c1`.
-- S6: **corrección pendiente**. Antes de desplegar, el equipo revisará a mano las probabilidades, los impactos y los umbrales.
+- S6: **corregido el 2026-11-06**. Revisión manual en `docs/verificacion/revision-manual-s6-2026-11-06/`: coincidieron por separado en 17 de 32 filas y acordaron las demás; la matriz final difiere de la inicial de la IA en 14 filas (13 suben, 1 baja). Los umbrales quedan como estaban: el equipo los comparó con la propuesta independiente de Kevin y los eligió. Los umbrales de la hoja de Daniel coinciden con el documento porque las instrucciones de la hoja remitían a esa sección (error de la IA).
 
 ## 6. Verificación del cambio
 
