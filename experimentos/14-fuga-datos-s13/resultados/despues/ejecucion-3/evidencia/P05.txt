@@ -1,0 +1,13 @@
+estado=' OR '1'='1 -> 201
+{"estado":"' OR '1'='1","idSolicitud":42,"etapaInicial":"SOLICITUD_RECIBIDA"}
+nombreEtapa=' OR '1'='1 -> 201
+{"estado":"PENDIENTE","idSolicitud":43,"etapaInicial":"' OR '1'='1"}
+estado='; DROP TABLE etapa_adopcion; -- -> 201
+{"estado":"'; DROP TABLE etapa_adopcion; --","idSolicitud":44,"etapaInicial":"SOLICITUD_RECIBIDA"}
+nombreEtapa='; DROP TABLE etapa_adopcion; -- -> 201
+{"estado":"PENDIENTE","idSolicitud":45,"etapaInicial":"'; DROP TABLE etapa_adopcion; --"}
+estado=x' UNION SELECT version(), null -- -> 201
+{"estado":"x' UNION SELECT version(), null --","idSolicitud":46,"etapaInicial":"SOLICITUD_RECIBIDA"}
+nombreEtapa=x' UNION SELECT version(), null -- -> 201
+{"estado":"PENDIENTE","idSolicitud":47,"etapaInicial":"x' UNION SELECT version(), null --"}
+filas antes=41,41 después=47,47 aceptadas=6

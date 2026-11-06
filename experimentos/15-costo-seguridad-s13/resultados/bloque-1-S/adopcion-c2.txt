@@ -1,0 +1,1 @@
+operacion=adopcion reqs=8000 rps=196.03 p50=4.74ms p95=46.71ms p99=140.54ms max=233.45ms fallos=0.00%

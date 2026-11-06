@@ -1,0 +1,14 @@
+sonda	clasificacion	detalle
+P01	SIN_FUGA	/api/adopciones=401 /api/adopciones/1=401 /api/solicitudes=401 
+P02	SIN_FUGA	actuator=401 env=401 configprops=401 heapdump=401 threaddump=401 beans=401 mappings=401 metrics=401 loggers=401 prometheus=401 
+P03	SIN_FUGA	HTTP 200: {"status":"UP"}
+P04	SIN_FUGA	tipo=400 largo=400 test_fallo=403 ruta=401 
+P05	SIN_FUGA	filas 25,25 -> 31,31; aceptadas=6
+P06	SIN_FUGA	sin token: 401 401
+P07	SIN_FUGA	psql: error: connection to server at "172.19.0.1", port 5433 failed: Connection refused 	Is the server running on that host and accepting TC
+P08	FUGA_PARCIAL	versionados=0 jar=no entorno=1 historial=si
+P09	SIN_FUGA	marcador=0 token=0
+P10	SIN_FUGA	TRACE=400 preflight_aco=0 cabeceras: 
+P11	SIN_FUGA	HTTP en claro por 192.0.2.2:3000 -> 000
+P12	SIN_FUGA	uid=10001
+P13	SIN_FUGA	sin_token=401 firma_incorrecta=401 caducado=401 alg_none=401 confusion_hs256=401 emisor_incorrecto=401 audiencia_incorrecta=401 sin_permiso=403 valido=201
