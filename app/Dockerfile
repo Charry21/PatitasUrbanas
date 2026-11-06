@@ -8,4 +8,5 @@ FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /workspace/target/patitas-urbanas-api-0.0.1-SNAPSHOT.jar app.jar
 EXPOSE 3000
+USER 10001
 ENTRYPOINT ["java", "-jar", "app.jar"]

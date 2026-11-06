@@ -135,4 +135,11 @@ class SeguridadIntegrationTest {
     void cualquierOtraRutaSeDeniega() throws Exception {
         mockMvc.perform(get("/actuator/env")).andExpect(status().isUnauthorized());
     }
+
+    @Test
+    void entradaDemasiadoLargaResponde400() throws Exception {
+        mockMvc.perform(post("/api/adopciones").param("estado", "x".repeat(300))
+                        .header("Authorization", "Bearer " + valido("adopciones:escribir")))
+                .andExpect(status().isBadRequest());
+    }
 }
