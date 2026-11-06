@@ -4,7 +4,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 
 **Alcance de la revisión:** el sílabo y el arco del proyecto no están en el repositorio (I-12). Solo se revisó contra la guía del tutor.
 
-**Estado (actualizado el 2026-11-06):** los PR #82 a #86 están fusionados en `main`, así que "Cumple" significa que el entregable está en `main`. La revisión manual S6 llega con el PR #87.
+**Estado (actualizado el 2026-11-06):** todos los PR del módulo están fusionados en `main` (inventario en §5), así que "Cumple" significa que el entregable está en `main`.
 
 ## 1. Lista de verificación del tutor
 
@@ -24,8 +24,8 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | 12 | Fitness function ejecutándose en CI | **Cumple** | FF-01 en `main` desde la Semana 12 y FF-02 desde el PR #83 (2026-11-06), las dos en el workflow `fitness-functions` con su prueba negativa | — |
 | 13 | Archivos organizados y enlazados desde el README | **Cumple** | README, sección "Módulo 7" | — |
 | 14 | Evidencias técnicas guardadas en el repositorio | **Cumple** | `resultados/` de los experimentos 14, 15 y 16 | — |
-| 15 | Cambios subidos mediante commits y pull requests | **Cumple** | PR #82 a #87, revisados y fusionados por el equipo; uno por actividad | — |
-| 16 | Cada integrante tiene contribuciones identificables | **Parcial** | Commits de las dos cuentas; Daniel Charry fusionó el PR #84 y Kevin Torres los PR #82 y #83. La reescritura de `main` del 2026-11-06 está documentada en `experimentos/07-trazabilidad-temporal.md` | I-15: cada uno debe poder explicar lo que revisó y decidió |
+| 15 | Cambios subidos mediante commits y pull requests | **Cumple** | Un PR por actividad, revisados y fusionados por el equipo (inventario en §5) | — |
+| 16 | Cada integrante tiene contribuciones identificables | **Parcial** | Commits de las dos cuentas; Daniel Charry fusionó el PR #84 y Kevin Torres los demás (inventario en §5). La reescritura de `main` del 2026-11-06 está documentada en `experimentos/07-trazabilidad-temporal.md` | I-15: cada uno debe poder explicar lo que revisó y decidió |
 | 17 | Decisiones y mediciones con fechas y referencias | **Cumple** | Cada experimento registra fecha, commit, entorno y corridas | — |
 
 ## 2. Revisión cruzada del tutor
@@ -43,7 +43,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 
 | # | Severidad | Inconsistencia | Dónde | Qué se hizo | Quién decide |
 |---|---|---|---|---|---|
-| I-01 | **Alta** | La condición del ADR-04 (R-10) vencía al cierre de la Semana 13 y `main` sigue sin `restart:` | `dossier/evidencia-comite-adr04.md`, `docker-compose.yml` | Implementada y probada en el PR #83; se cumple al fusionarlo. Seguimiento en ADR-04 | Equipo: fusionar y dar por cumplida la condición |
+| I-01 | **Alta** | La condición del ADR-04 (R-10) vencía al cierre de la Semana 13 y `main` sigue sin `restart:` | `dossier/evidencia-comite-adr04.md`, `docker-compose.yml` | Implementada y probada; cumplida el 2026-11-06 al fusionarse el PR #83. Seguimiento en ADR-04 | Equipo: fusionar y dar por cumplida la condición |
 | I-02 | **Alta** | El plan M6-3 pone R-10 primero y R-11 cuarta, pero R-10 sola borra los datos en cada caída | `docs/registro-ia-modulo6.md`, exp. 16 HR2 | Decidido por el equipo el 2026-11-06: R-11 entra con R-10 | Equipo: cambiar el orden |
 | I-03 | **Alta** | El escenario 2 y QA-01 son prioridad alta y nunca se implementaron | `dossier/04-escenarios-calidad.md`, `dossier/02` | Capa candidata en el PR | Equipo, en ADR-05 |
 | I-04 | **Alta** | `dossier/02` pide la BD en red privada (R-05), y `docker-compose.yml` la publica con una contraseña versionada. ADR-04 afirma que D1 no abre canales nuevos | P07 | Corregido en el PR | Equipo |
@@ -63,12 +63,31 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 
 ## 4. Pendientes que dependen del equipo
 
-Actualizado el 2026-11-06, después de fusionar los PR #82 a #88.
+Actualizado el 2026-11-06.
 
 1. Confirmar con el profesor la categoría del catálogo y contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16.
 2. Elegir proveedor y convertir el costo a COP (punto 7).
 3. Antes de desplegar: las prioridades de `docs/13-riesgos-tradeoffs.md` §5.
 
-Cerrados: credencial histórica (RS-17: según el equipo no se usó fuera de sus computadores; se da por comprometida, no se reutiliza y no se purga el historial, 2026-11-06); fusión de los PR #82 a #88; prueba en Windows (`docs/verificacion/windows-2026-11-06/`); revisión manual S6 (`docs/verificacion/revision-manual-s6-2026-11-06/`); rama temporal de verificación borrada.
+Cerrados: fusión de todos los PR del módulo (§5); prueba en Windows (`docs/verificacion/windows-2026-11-06/`); revisión manual S6 (`docs/verificacion/revision-manual-s6-2026-11-06/`); rama temporal de verificación borrada.
+
+Riesgo aceptado, no eliminado: la credencial histórica (RS-17). El tratamiento está decidido y documentado: según el equipo no se usó fuera de sus computadores, se da por comprometida, no se reutiliza y no se purga el historial (2026-11-06). La exposición en el historial de Git sigue existiendo como riesgo residual, aceptado en ADR-05.
+
+## 5. Inventario de pull requests del módulo 7
+
+Fusionados en `main`, uno por actividad, en este orden:
+
+| PR | Qué entregó | Fusionó | Fecha |
+|---|---|---|---|
+| #82 | Experimentos 14, 15 y 16: fuga de datos, costo de seguridad y reinicio automático | Kevin Torres | 2026-11-06 |
+| #83 | Capa JWT, R-10 + R-11, proxy TLS y FF-02 | Kevin Torres | 2026-11-06 |
+| #84 | Documentación del módulo: seguridad, despliegue, riesgos, ADR-05 y EDAV 3 | Daniel Charry | 2026-11-06 |
+| #85 | Verificación del README en Windows | Kevin Torres | 2026-11-06 |
+| #86 | Registro histórico de las pruebas de carga de la defensa de S8 | Kevin Torres | 2026-11-06 |
+| #87 | Revisión manual de riesgos y umbrales (S6) | Kevin Torres | 2026-11-06 |
+| #88 | Estados tras las fusiones (preauditoría, primera pasada) | Kevin Torres | 2026-11-06 |
+| #89 | C4, línea base y pendientes (preauditoría, segunda pasada) | Kevin Torres | 2026-11-06 |
+
+Este inventario lo agregó el PR #90 (tercera pasada de la preauditoría), que por eso no aparece en la tabla: su fusión queda registrada en GitHub, igual que la de cualquier PR posterior.
 
 Revisado por: Kevin Torres · Daniel Charry · Fecha: 2026-11-06
