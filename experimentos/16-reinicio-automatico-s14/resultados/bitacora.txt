@@ -1,0 +1,38 @@
+== Fase 1, control HR5: sin restart
+2026-11-06T01:55:12.466Z kill -9 pid=3708
+2026-11-06T01:55:42.470Z a los 30 s: estado=exited reinicios=0
+== Fase 2, R-10 sola (create-drop): HR1, HR2
+2026-11-06T01:55:50.469Z fase=r10 ciclo=1 kill -9 pid=4026 filas_antes=5,5 posts_201=5
+2026-11-06T01:55:57.928Z fase=r10 ciclo=1 primer_200_s=7.451732429
+2026-11-06T01:55:58.010Z fase=r10 ciclo=1 filas_despues=0,0 estado=running reinicios=1
+2026-11-06T01:55:58.490Z fase=r10 ciclo=2 kill -9 pid=4276 filas_antes=5,5 posts_201=5
+2026-11-06T01:56:06.398Z fase=r10 ciclo=2 primer_200_s=7.903809429
+2026-11-06T01:56:06.537Z fase=r10 ciclo=2 filas_despues=0,0 estado=running reinicios=2
+2026-11-06T01:56:06.995Z fase=r10 ciclo=3 kill -9 pid=4827 filas_antes=5,5 posts_201=5
+2026-11-06T01:56:14.922Z fase=r10 ciclo=3 primer_200_s=7.924819680
+2026-11-06T01:56:15.014Z fase=r10 ciclo=3 filas_despues=0,0 estado=running reinicios=3
+2026-11-06T01:56:15.492Z fase=r10 ciclo=4 kill -9 pid=5458 filas_antes=5,5 posts_201=5
+2026-11-06T01:56:23.421Z fase=r10 ciclo=4 primer_200_s=7.923761160
+2026-11-06T01:56:23.513Z fase=r10 ciclo=4 filas_despues=0,0 estado=running reinicios=4
+2026-11-06T01:56:24.004Z fase=r10 ciclo=5 kill -9 pid=6047 filas_antes=5,5 posts_201=5
+2026-11-06T01:56:32.598Z fase=r10 ciclo=5 primer_200_s=8.590811073
+2026-11-06T01:56:32.700Z fase=r10 ciclo=5 filas_despues=0,0 estado=running reinicios=5
+== Fase 2b, HR4: docker stop
+2026-11-06T01:56:33.092Z docker stop
+2026-11-06T01:57:03.095Z a los 30 s: estado=exited reinicios=5
+== Fase 3, R-10 + R-11 (update): HR1, HR3
+2026-11-06T01:57:11.118Z fase=r10r11 ciclo=1 kill -9 pid=7292 filas_antes=5,5 posts_201=5
+2026-11-06T01:57:18.529Z fase=r10r11 ciclo=1 primer_200_s=7.407918956
+2026-11-06T01:57:18.658Z fase=r10r11 ciclo=1 filas_despues=5,5 estado=running reinicios=1
+2026-11-06T01:57:19.121Z fase=r10r11 ciclo=2 kill -9 pid=7537 filas_antes=10,10 posts_201=5
+2026-11-06T01:57:27.019Z fase=r10r11 ciclo=2 primer_200_s=7.896289632
+2026-11-06T01:57:27.129Z fase=r10r11 ciclo=2 filas_despues=10,10 estado=running reinicios=2
+2026-11-06T01:57:27.632Z fase=r10r11 ciclo=3 kill -9 pid=8068 filas_antes=15,15 posts_201=5
+2026-11-06T01:57:35.376Z fase=r10r11 ciclo=3 primer_200_s=7.741116146
+2026-11-06T01:57:35.475Z fase=r10r11 ciclo=3 filas_despues=15,15 estado=running reinicios=3
+2026-11-06T01:57:35.911Z fase=r10r11 ciclo=4 kill -9 pid=8673 filas_antes=20,20 posts_201=5
+2026-11-06T01:57:44.173Z fase=r10r11 ciclo=4 primer_200_s=8.253114407
+2026-11-06T01:57:44.285Z fase=r10r11 ciclo=4 filas_despues=20,20 estado=running reinicios=4
+2026-11-06T01:57:44.785Z fase=r10r11 ciclo=5 kill -9 pid=9255 filas_antes=25,25 posts_201=5
+2026-11-06T01:57:53.789Z fase=r10r11 ciclo=5 primer_200_s=9.000034956
+2026-11-06T01:57:53.875Z fase=r10r11 ciclo=5 filas_despues=25,25 estado=running reinicios=5
