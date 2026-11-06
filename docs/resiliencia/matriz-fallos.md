@@ -59,7 +59,7 @@ Una fila hipotética **no** es un fallo demostrado.
 | I-2 | F-03 y F-01 dependen del mismo `connectionTimeout` (30 s por defecto), que nadie eligió | ¿El equipo acepta 30 s como tiempo máximo de fallo, o lo fija explícitamente? |
 | I-3 | F-13: `create-drop` es una configuración de desarrollo | ¿Es aceptable en el entorno donde se va a desplegar? |
 | I-4 | F-12 y F-10 son hipotéticos y son los de mayor impacto | **F-12 observado el 2026-11-05** (experimento 16). F-10 sigue hipotético: ¿con qué carga se prueba? |
-| I-5 | F-08 solo se observó detrás de un proxy TLS | **Respondida en parte el 2026-11-06:** construye en una máquina Linux limpia, sin proxy (`docs/verificacion/arranque-limpio-2026-11-06/`). Falta el computador del equipo, con Windows |
+| I-5 | F-08 solo se observó detrás de un proxy TLS | **Respondida el 2026-11-06:** construye en una máquina Linux limpia, sin proxy (`docs/verificacion/arranque-limpio-2026-11-06/`). También construye en el computador del equipo con Windows (`docs/verificacion/windows-2026-11-06/`) |
 
 | I-6 | F-14: una entrada larga da 500, y R-06 declaraba "nunca 500" | **Detectada el 2026-11-05** por la prueba de fuga. La corrección está en `feat/s13-capa-seguridad`, sin fusionar |
 

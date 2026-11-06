@@ -21,7 +21,7 @@
 | M7-13 | FF-02 en CI | `docs/fitness/ff-02-configuracion-segura.md` | Aceptado | Si se rechaza una decisión de ADR-05, hay que ajustar sus reglas |
 | M7-14 | Reclasificar R-06 de **Probada** a **Parcial**, y añadir F-14 | `docs/resiliencia/` | Aceptado | Corrige un documento que el equipo ya había revisado |
 | M7-15 | Pasar F-12 a **Observado**, R-10 y R-11 a **Probada** | `docs/resiliencia/` | Aceptado | Probadas, pero no fusionadas en `main` |
-| M7-16 | Verificar el arranque con `app/Dockerfile` en GitHub Actions, y marcar R-12 como **Probada en CI** | `docs/verificacion/arranque-limpio-2026-11-06/` | Aceptado; falta repetirlo en Windows | El equipo delegó esta prueba: nadie la ha repetido en un computador del equipo |
+| M7-16 | Verificar el arranque con `app/Dockerfile` en GitHub Actions, y marcar R-12 como **Probada en CI** | `docs/verificacion/arranque-limpio-2026-11-06/` | Aceptado; repetido en Windows por Kevin Torres el 2026-11-06 (`docs/verificacion/windows-2026-11-06/`) | El equipo delegó esta prueba: nadie la ha repetido en un computador del equipo |
 
 ## Rechazado por la propia IA al redactar (para que conste)
 

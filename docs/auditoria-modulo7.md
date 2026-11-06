@@ -65,7 +65,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 1. Daniel Charry revisa y fusiona #82, #83 y #84, en ese orden.
 2. Contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16 (2026-11-06).
 3. Antes de desplegar: las prioridades de `docs/13-riesgos-tradeoffs.md` §5.
-4. Probar el README en un computador con Windows.
+4. ~~Probar el README en un computador con Windows.~~ Hecho por Kevin Torres el 2026-11-06 (`docs/verificacion/windows-2026-11-06/`).
 5. Borrar en GitHub la rama temporal `prueba/s14-verificacion-arranque`.
 
 Revisado por: Kevin Torres · Daniel Charry · Fecha: 2026-11-06
