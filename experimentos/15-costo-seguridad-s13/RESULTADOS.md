@@ -2,7 +2,7 @@
 
 Preregistro: [README.md](./README.md), commit `0e9c109` y PR #82, abierto el 2026-11-06 a las 01:52:53 UTC. La primera corrida empezó a las 01:59:52 UTC. Las secciones 1 a 6 del README no cambian.
 
-Ejecutado por la IA; pendiente de revisión del equipo.
+Ejecutado por la IA. Fusionado en `main` con el PR #82 y auditado por el equipo en la EDAV 3 (2026-11-06).
 
 ## 1. Cómo se obtuvo cada dato
 
@@ -80,4 +80,4 @@ Ejecutado por la IA; pendiente de revisión del equipo.
 | D1 | El preregistro decía que durante las corridas no se ejecutaría nada más. Se hicieron 5 s de `git commit` y `git push` a las 02:08:12–02:08:17 UTC, dentro de la corrida válida `C/buscar-c2` del bloque 2 | Esa corrida dio p95 de 24,19 ms, y la misma corrida del bloque 5 dio 22,56 ms; CPU total de 19,5 % frente a 18,7 %. No se ve efecto, y no se repitió |
 | D2 | Durante la serie también se hicieron operaciones ligeras: escribir archivos, `git log`, `tail` y consultas a la API de GitHub. No se compiló nada ni se usó Docker | No se puede descartar un efecto mínimo. La CPU total máxima fue de 44,4 % |
 
-Revisión pendiente del equipo.
+Revisado por el equipo en la EDAV 3 (2026-11-06).

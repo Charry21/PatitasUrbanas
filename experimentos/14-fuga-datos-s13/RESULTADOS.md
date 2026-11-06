@@ -2,7 +2,7 @@
 
 Preregistro: [README.md](./README.md), commit `3c2b010` y PR #82, abierto el 2026-11-06 a las 01:52:53 UTC. La primera sonda corrió a las 01:53:58 UTC. Las secciones 1 a 5 del README no cambian.
 
-Ejecutado por la IA; pendiente de revisión del equipo.
+Ejecutado por la IA. Fusionado en `main` con el PR #82 y auditado por el equipo en la EDAV 3 (2026-11-06).
 
 ## 1. Cómo se obtuvo cada dato
 
@@ -78,4 +78,4 @@ H2 muestra por qué hace falta la prueba de caja negra: las 8 pruebas de integra
 | D3 | Hubo un primer intento de `despues` sobre `68f01c1`, que destapó H2. Sus archivos **no se conservaron**: se borraron al limpiar la carpeta temporal | Clasificación igual a la serie válida. Resultado de P04: `tipo=401 largo=403 test_fallo=403 ruta=401`; P08 con `historial=no`. Esos valores se conservan en este documento, no como archivos crudos |
 | D4 | `despues` se ejecutó con una copia de la carpeta del experimento dentro de la rama `feat/s13-capa-seguridad`, para que P08 revisara los archivos de esa rama. Los resultados se copiaron después a esta rama | `entorno.txt` registra el hash y la rama reales |
 
-Revisión pendiente del equipo.
+Revisado por el equipo en la EDAV 3 (2026-11-06).

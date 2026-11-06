@@ -2,7 +2,7 @@
 
 Preregistro: [README.md](./README.md). Evidencia cruda: [`resultados/bitacora.txt`](./resultados/bitacora.txt) y [`resultados/entorno.txt`](./resultados/entorno.txt).
 
-Fecha de ejecución: 2026-11-06 01:55–01:57 UTC (2026-11-05 en Bogotá). Imagen construida desde `main` (`3f4b124`). Ejecutado por la IA; pendiente de revisión del equipo.
+Fecha de ejecución: 2026-11-06 01:55–01:57 UTC (2026-11-05 en Bogotá). Imagen construida desde `main` (`3f4b124`). Ejecutado por la IA. Fusionado en `main` con el PR #82 y auditado por el equipo en la EDAV 3 (2026-11-06).
 
 ## 1. Veredicto de las hipótesis
 

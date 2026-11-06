@@ -4,7 +4,7 @@
 
 Fecha: 2026-11-05. Código analizado: `main` en `3f4b124`.
 
-**Conclusión:** el sistema no es seguro para exponerlo a internet. `main` no tiene autenticación, ni TLS, y publica la base de datos con una contraseña que está en el repositorio. Lo que atenúa el riesgo hoy es que no hay despliegue público ni datos personales guardados. La rama `feat/s13-capa-seguridad` propone los controles; hasta que el equipo la fusione, **`main` sigue como se describe aquí**.
+**Conclusión:** antes del PR #83, `main` no tenía autenticación ni TLS y publicaba la base de datos con una contraseña versionada. Desde que se fusionó el PR #83 (2026-11-06), los controles marcados "En `main`" en §4 están integrados. El sistema todavía no está listo para internet: faltan el emisor de tokens, las copias de la BD y las alertas, y hay riesgos aceptados que se revisan antes de desplegar. Las secciones 2 y 3 describen `main` antes de esos controles, que es lo que se probó.
 
 ---
 
@@ -108,27 +108,27 @@ Sin fuga en una sonda solo significa que esa sonda no obtuvo nada. **El sistema 
 
 Kevin Torres y Daniel Charry calificaron por separado y acordaron las diferencias. Las hojas y la comparación con los valores iniciales de la IA están en `docs/verificacion/revision-manual-s6-2026-11-06/`.
 
-**Estado del control:** **En PR** = implementado y probado en `feat/s13-capa-seguridad`, sin fusionar. **Sin implementar** = solo propuesto. **Existente** = ya está en `main`.
+**Estado del control:** **En `main`** = implementado, probado y fusionado con el PR #83 (2026-11-06). **Sin implementar** = solo propuesto. **Existente** = ya está en `main`.
 
 | Id | Riesgo | Amenazas | Elemento | Prob. | Impacto | Controles evaluados | Decisión del equipo (2026-11-06) | Justificación | Estado del control | Riesgo residual |
 |---|---|---|---|---|---|---|---|---|---|---|
-| RS-01 | Escritura sin autenticación | T-01 | `POST /api/adopciones` | Alta | Alto | JWT en la API; clave compartida; auth en el proxy; sesiones | **Mitigar:** JWT RS256 | Cumple el escenario 2 y no añade estado | En PR | RS-14 |
-| RS-02 | Accesos sin registro | T-04 | API | Alta | Medio | Línea de auditoría en el log; tabla en BD | **Mitigar:** línea en el log | Sin componentes nuevos | En PR, solo denegaciones | Los accesos permitidos no se registran |
-| RS-03 | Detalle de `health` expuesto | T-05 | Actuator | Alta | Medio | `show-details=never`; `when-authorized` | **Mitigar:** `never` | Una línea | En PR | — |
-| RS-04 | Endpoint de prueba abierto | T-07 | `test-fallo` | Alta | Medio | Eliminarlo; exigir permiso | **Mitigar:** permiso `adopciones:pruebas` | El test de rollback lo usa | En PR | — |
-| RS-05 | BD accesible desde fuera | T-08 | Puerto 5433 | Alta | Alto | No publicar; `127.0.0.1`; firewall | **Mitigar:** `127.0.0.1` en local y sin publicar en producción | Es el hallazgo más grave | En PR | — |
-| RS-06 | Secretos versionados | T-09 | Repositorio, jar | Alta | Alto | `.env`; Docker Secrets; gestor | **Mitigar:** `.env` sin versionar | Sin herramientas nuevas | En PR | RS-17 y TO-09 |
-| RS-07 | Tráfico en claro | T-10 | Cliente ↔ API | Alta | Alto | Caddy; TLS en Tomcat; proveedor | **Mitigar:** Caddy | Certificados automáticos | En PR, solo con `docker-compose.produccion.yml` | Probado con certificado local |
+| RS-01 | Escritura sin autenticación | T-01 | `POST /api/adopciones` | Alta | Alto | JWT en la API; clave compartida; auth en el proxy; sesiones | **Mitigar:** JWT RS256 | Cumple el escenario 2 y no añade estado | En `main` | RS-14 |
+| RS-02 | Accesos sin registro | T-04 | API | Alta | Medio | Línea de auditoría en el log; tabla en BD | **Mitigar:** línea en el log | Sin componentes nuevos | En `main`, solo denegaciones | Los accesos permitidos no se registran |
+| RS-03 | Detalle de `health` expuesto | T-05 | Actuator | Alta | Medio | `show-details=never`; `when-authorized` | **Mitigar:** `never` | Una línea | En `main` | — |
+| RS-04 | Endpoint de prueba abierto | T-07 | `test-fallo` | Alta | Medio | Eliminarlo; exigir permiso | **Mitigar:** permiso `adopciones:pruebas` | El test de rollback lo usa | En `main` | — |
+| RS-05 | BD accesible desde fuera | T-08 | Puerto 5433 | Alta | Alto | No publicar; `127.0.0.1`; firewall | **Mitigar:** `127.0.0.1` en local y sin publicar en producción | Es el hallazgo más grave | En `main` | — |
+| RS-06 | Secretos versionados | T-09 | Repositorio, jar | Alta | Alto | `.env`; Docker Secrets; gestor | **Mitigar:** `.env` sin versionar | Sin herramientas nuevas | En `main` | RS-17 y TO-09 |
+| RS-07 | Tráfico en claro | T-10 | Cliente ↔ API | Alta | Alto | Caddy; TLS en Tomcat; proveedor | **Mitigar:** Caddy | Certificados automáticos | En `main`, solo con `docker-compose.produccion.yml` | Probado con certificado local |
 | RS-08 | Sin límite de peticiones | T-11, T-12 | API | Alta | Medio | Límite en el proxy; en la API | **Aceptar por ahora** | No hay despliegue público. Revisar antes de abrirlo | Sin implementar | Abierto |
 | RS-09 | Identificadores secuenciales | T-06 | Respuesta de la API | Alta | Bajo | UUID; dejarlo | **Aceptar** | Solo revela volumen, y ahora exige token | Sin implementar | Quien tenga token ve el volumen |
-| RS-10 | Proceso como root | T-14 | Imagen | Media | Alto | `USER` sin privilegios | **Mitigar** | Una línea | En PR | — |
-| RS-11 | Entrada sin validar | T-02 | `AdopcionController` | Alta | Medio | Límite de largo; lista de estados | **Mitigar en parte:** largo máximo 255 | La lista de estados es regla de negocio | En PR, solo el largo | `estado` sigue siendo texto libre |
+| RS-10 | Proceso como root | T-14 | Imagen | Media | Alto | `USER` sin privilegios | **Mitigar** | Una línea | En `main` | — |
+| RS-11 | Entrada sin validar | T-02 | `AdopcionController` | Alta | Medio | Límite de largo; lista de estados | **Mitigar en parte:** largo máximo 255 | La lista de estados es regla de negocio | En `main`, solo el largo | `estado` sigue siendo texto libre |
 | RS-12 | Cadena de suministro | T-15 | Dependencias, imágenes, CI | Media | Alto | Fijar resúmenes; Dependabot; análisis de imágenes | **Aceptar por ahora** | Costo de mantenimiento para 2 personas | Sin implementar | Abierto |
 | RS-13 | Tráfico interno sin cifrar | T-10 | Proxy → API, API → BD | Baja | Medio | TLS interno | **Aceptar** | Misma máquina y red privada de Docker | Sin implementar | Se revisa si se separan |
 | RS-14 | Sin emisor de tokens ni custodia de la clave | T-17 | Identidad | Alta | Alto | Solución existente; desarrollo propio | **Aplazar:** solución de identidad de terceros | Identidad es genérico: conviene una solución existente | Sin implementar | **Bloquea el uso real** |
 | RS-15 | Datos personales futuros sin controles | — | Identidad | Media | Alto | Cifrado en reposo; consentimiento; retención | **Aceptar hasta que existan** | Hoy no se guardan | Sin implementar | Condición de revisión en ADR-05 |
 | RS-16 | IP en el log de auditoría | T-18 | Logs | Alta | Bajo | Retención limitada; anonimizar | **Aplazar:** definir la retención antes del despliegue público | Es consecuencia del control RS-02 | Sin implementar | Abierto |
-| RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Medio | Reescribir historial; cambiar la contraseña | **Aceptar temporalmente en desarrollo**, con purga obligatoria del historial (`git filter-repo`) antes de hacer público el repositorio | Los secretos en el historial son vectores de ataque pasivos, aunque la contraseña ya no sea la activa | En PR: deja de ser la contraseña obligatoria | Solo es válida si alguien la reutiliza |
+| RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Medio | Reescribir historial; cambiar la contraseña | **Aceptar temporalmente en desarrollo**, con purga obligatoria del historial (`git filter-repo`) antes de hacer público el repositorio | Los secretos en el historial son vectores de ataque pasivos, aunque la contraseña ya no sea la activa | En `main`: deja de ser la contraseña obligatoria | Solo es válida si alguien la reutiliza |
 
 **Inyección SQL (T-03):** no necesita control nuevo. El control existente, parámetros de JPA, resistió P05.
 

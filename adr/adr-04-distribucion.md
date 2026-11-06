@@ -139,7 +139,7 @@ Acta completa: `dossier/evidencia-comite-adr04.md`.
 
 ## Seguimiento (2026-11-06)
 
-- **Condición del veredicto (R-10):** R-10 está implementada junto con R-11 en `feat/s13-capa-seguridad` (PR #83). La prueba: 10/10 ciclos con recuperación en menos de 10 s (experimento 16), y verificación en una máquina limpia (`docs/verificacion/arranque-limpio-2026-11-06/`). **La condición queda cumplida cuando se fusione el #83**, ya después del cierre de la Semana 13.
+- **Condición del veredicto (R-10):** R-10 está implementada junto con R-11 en `feat/s13-capa-seguridad` (PR #83). La prueba: 10/10 ciclos con recuperación en menos de 10 s (experimento 16), y verificación en una máquina limpia (`docs/verificacion/arranque-limpio-2026-11-06/`). **La condición quedó cumplida el 2026-11-06, al fusionarse el PR #83**, después del cierre de la Semana 13.
 - **Margen del escenario 1 (I-09):** el p95 de 51,03 ms es de escritura. `/buscar` es simulado, así que el margen no refleja una búsqueda real (RO-12 de `docs/13-riesgos-tradeoffs.md`).
 - **Contenedores:** ADR-05 añade un proxy TLS en producción. D1 sigue con una sola instancia de la API, pero pasa de 2 a 3 contenedores.
 

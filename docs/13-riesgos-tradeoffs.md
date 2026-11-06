@@ -37,7 +37,7 @@ Este documento reúne los riesgos que siguen abiertos. Los riesgos de seguridad 
 | Id | Riesgo | Por qué se trae aquí |
 |---|---|---|
 | RS-01 | Cualquiera puede crear solicitudes | Sin la capa, el escenario 2 no se cumple |
-| RS-05 | La BD es accesible desde otra red con la contraseña del repositorio | La mitigación está en el PR, pero `main` sigue expuesto |
+| RS-05 | La BD es accesible desde otra red con la contraseña del repositorio | Fue el hallazgo más grave. Mitigado en `main` con el PR #83 (2026-11-06); en producción la BD no publica puertos |
 | RS-14 | No hay emisor de tokens | Bloquea el uso real de la capa |
 | RS-15 | Datos personales futuros bajo la Ley 1581 | Hoy no se guardan; cuando existan, varias aceptaciones de este documento se revisan |
 
