@@ -59,6 +59,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | I-14 | Baja | Calendario: la guía pone las semanas 13–14 en el Módulo 7, y el README titula "Módulo 6 (Semanas 11–14)" | `README.md` | Nota en el README | Equipo |
 | I-15 | Baja | Del 2026-10-24 al 2026-10-31 no hay commits de la cuenta de Kevin en `main`, aunque esos documentos llevan los dos nombres | `git log` | Se anota; no es un error, pero el tutor pide contribuciones identificables | Equipo |
 | I-16 | Baja | Las rutas sugeridas no coinciden con las del repositorio: `docs/ADR-05.md` frente a `adr/`, `experimentos/seguridad/` frente a la numeración. Tampoco existe `docs/11-*`, y `dossier/10`, `12` y `13` tratan otros temas | — | Se siguieron las convenciones del repositorio, como permite la guía | Equipo: confirmar con el tutor |
+| I-17 | Media | En el computador del equipo, dos corridas de la defensa de S8 no sostuvieron 100 req/s: una se bloqueó a los 4 s y la otra dio un p95 de 2,98 s. En S11 se sostuvieron unas 196 req/s con un p95 de unos 51 ms. Cambian la máquina, el código y el modelo de carga | `experimentos/defensa-s8-historico/` (registro histórico, recuperado el 2026-11-06) | Se registró como RO-15 sin cambiar ADR-04 | Equipo: repetir la carga en su computador con el código actual |
 
 ## 4. Pendientes que dependen del equipo
 
