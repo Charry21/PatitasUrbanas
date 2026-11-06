@@ -1,0 +1,6 @@
+GET /api/adopciones -> 401
+
+GET /api/adopciones/1 -> 401
+
+GET /api/solicitudes -> 401
+

@@ -1,0 +1,14 @@
+Fecha: 2026-11-06T02:53:20.051Z
+Etiqueta: despues
+Commit de esta rama: 94f2acf9bbec96029ae313b61ef5ddb228303ded
+Rama: feat/s13-capa-seguridad
+Código de la API (imagen): patitas-urbanas-api:s13-despues sha256:913deb54a9c9bf58caca50a3bbffe3f5af9fc863deff5172cc7adb053d27bdec
+SO: Ubuntu 24.04.5 LTS
+CPUs: 2
+Docker 29.9.2
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+URL_API: https://localhost
+Puertos publicados:
+patitas_urbanas_proxy 0.0.0.0:80->80/tcp, 0.0.0.0:443->443/tcp, 443/udp, 2019/tcp
+patitas_urbanas_api 3000/tcp
+patitas_urbanas_db 5432/tcp

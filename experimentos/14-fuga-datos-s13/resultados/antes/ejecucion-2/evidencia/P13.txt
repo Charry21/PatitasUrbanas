@@ -1,0 +1,9 @@
+sin_token -> 201
+firma_incorrecta -> 201 {"estado":"PENDIENTE","idSolicitud":41,"etapaInicial":"SOLICITUD_RECIBIDA"}
+caducado -> 201 {"estado":"PENDIENTE","idSolicitud":42,"etapaInicial":"SOLICITUD_RECIBIDA"}
+alg_none -> 201 {"estado":"PENDIENTE","idSolicitud":43,"etapaInicial":"SOLICITUD_RECIBIDA"}
+confusion_hs256 -> 201 {"estado":"PENDIENTE","idSolicitud":44,"etapaInicial":"SOLICITUD_RECIBIDA"}
+emisor_incorrecto -> 201 {"estado":"PENDIENTE","idSolicitud":45,"etapaInicial":"SOLICITUD_RECIBIDA"}
+audiencia_incorrecta -> 201 {"estado":"PENDIENTE","idSolicitud":46,"etapaInicial":"SOLICITUD_RECIBIDA"}
+sin_permiso -> 201 {"estado":"PENDIENTE","idSolicitud":47,"etapaInicial":"SOLICITUD_RECIBIDA"}
+valido -> 201

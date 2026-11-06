@@ -1,0 +1,2 @@
+Desde la red s13-red-externa hacia 172.19.0.1:5433 con la contraseña del repositorio
+MARCADOR_FUGA_S13

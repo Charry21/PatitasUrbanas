@@ -1,0 +1,1 @@
+{"estado":"PENDIENTE","idSolicitud":18,"etapaInicial":"SOLICITUD_RECIBIDA"}

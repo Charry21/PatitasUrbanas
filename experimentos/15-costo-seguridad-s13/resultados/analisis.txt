@@ -1,0 +1,27 @@
+Análisis del experimento 15 (reglas de README.md §6)
+
+HC1: p95 < 800 ms y fallos < 1 % en C y T
+  C/buscar: p95 = 21.34 ms; fallos = 0.0 %; NO REFUTADA
+  C/adopcion: p95 = 53.92 ms; fallos = 0.0 %; NO REFUTADA
+  T/buscar: p95 = 26.66 ms; fallos = 0.0 %; NO REFUTADA
+  T/adopcion: p95 = 55.02 ms; fallos = 0.0 %; NO REFUTADA
+
+HC2: Δ(C−S) ≤ 10 ms
+  buscar: Δ(C−S) = 5.23 ms; ruido = 4.07 ms; instrumento_ok = True; concluyente = True; límite = 10.0 ms; NO REFUTADA
+  adopcion: Δ(C−S) = 9.72 ms; ruido = 7.35 ms; instrumento_ok = True; concluyente = True; límite = 10.0 ms; NO REFUTADA
+
+HC3: Δ(T−C) ≤ 15 ms
+  buscar: Δ(T−C) = 5.32 ms; ruido = 10.57 ms; instrumento_ok = True; concluyente = False; límite = 15.0 ms; NO REFUTADA
+  adopcion: Δ(T−C) = 1.1 ms; ruido = 6.24 ms; instrumento_ok = True; concluyente = False; límite = 15.0 ms; NO REFUTADA
+
+HC4: k6 < 80 % de un núcleo y total < 90 % en cada corrida válida
+  S/buscar: k6 máx = 6.7; total máx = 14.2; NO REFUTADA
+  S/adopcion: k6 máx = 10.7; total máx = 27.9; NO REFUTADA
+  C/buscar: k6 máx = 7.9; total máx = 19.5; NO REFUTADA
+  C/adopcion: k6 máx = 11.4; total máx = 36.8; NO REFUTADA
+  C/sin_token: k6 máx = 7.5; total máx = 12.8; NO REFUTADA
+  T/buscar: k6 máx = 10.3; total máx = 24.5; NO REFUTADA
+  T/adopcion: k6 máx = 13.4; total máx = 44.4; NO REFUTADA
+
+HC5: sin_token
+  peticiones = 64000; 401 = 64000; líneas de auditoría = 64000; p95 = 17.44 ms; NO REFUTADA

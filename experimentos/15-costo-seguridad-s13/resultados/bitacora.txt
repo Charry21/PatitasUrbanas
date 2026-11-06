@@ -1,0 +1,63 @@
+2026-11-06T01:59:44Z bloque 1 condición S: arranque
+2026-11-06T01:59:52Z 2026-11-06T02:00:33Z bloque=1 cond=S buscar-c1 exit=0 filas_bd=0,0 :: operacion=buscar reqs=7981 rps=196.35 p50=1.59ms p95=22.29ms p99=229.17ms max=1101.93ms fallos=0.00%
+2026-11-06T02:00:44Z 2026-11-06T02:01:24Z bloque=1 cond=S buscar-c2 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=197.84 p50=1.96ms p95=18.00ms p99=40.12ms max=76.74ms fallos=0.00%
+2026-11-06T02:01:35Z 2026-11-06T02:02:16Z bloque=1 cond=S buscar-c3 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=198.11 p50=1.60ms p95=24.68ms p99=51.00ms max=89.98ms fallos=0.00%
+2026-11-06T02:02:27Z 2026-11-06T02:03:07Z bloque=1 cond=S buscar-c4 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=198.36 p50=1.77ms p95=9.43ms p99=17.79ms max=106.76ms fallos=0.00%
+2026-11-06T02:03:18Z 2026-11-06T02:04:00Z bloque=1 cond=S adopcion-c1 exit=0 filas_bd=7920,7920 :: operacion=adopcion reqs=7920 rps=193.30 p50=5.06ms p95=26.89ms p99=506.06ms max=722.85ms fallos=0.00%
+2026-11-06T02:04:10Z 2026-11-06T02:04:51Z bloque=1 cond=S adopcion-c2 exit=0 filas_bd=15920,15920 :: operacion=adopcion reqs=8000 rps=196.03 p50=4.74ms p95=46.71ms p99=140.54ms max=233.45ms fallos=0.00%
+2026-11-06T02:05:02Z 2026-11-06T02:05:44Z bloque=1 cond=S adopcion-c3 exit=0 filas_bd=23920,23920 :: operacion=adopcion reqs=8000 rps=196.05 p50=4.76ms p95=49.41ms p99=113.95ms max=184.06ms fallos=0.00%
+2026-11-06T02:05:54Z 2026-11-06T02:06:35Z bloque=1 cond=S adopcion-c4 exit=0 filas_bd=31920,31920 :: operacion=adopcion reqs=8000 rps=196.27 p50=5.48ms p95=41.69ms p99=97.98ms max=179.21ms fallos=0.00%
+2026-11-06T02:06:47Z bloque 2 condición C: arranque
+2026-11-06T02:06:55Z 2026-11-06T02:07:37Z bloque=2 cond=C buscar-c1 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=195.59 p50=1.77ms p95=24.06ms p99=401.34ms max=617.13ms fallos=0.00%
+2026-11-06T02:07:47Z 2026-11-06T02:08:28Z bloque=2 cond=C buscar-c2 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=197.67 p50=2.22ms p95=24.19ms p99=79.19ms max=187.41ms fallos=0.00%
+2026-11-06T02:08:38Z 2026-11-06T02:09:19Z bloque=2 cond=C buscar-c3 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=197.68 p50=1.98ms p95=25.57ms p99=44.81ms max=83.31ms fallos=0.00%
+2026-11-06T02:09:30Z 2026-11-06T02:10:11Z bloque=2 cond=C buscar-c4 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=198.27 p50=1.96ms p95=14.08ms p99=28.95ms max=42.80ms fallos=0.00%
+2026-11-06T02:10:22Z 2026-11-06T02:11:03Z bloque=2 cond=C adopcion-c1 exit=0 filas_bd=7775,7775 :: operacion=adopcion reqs=7775 rps=189.70 p50=7.56ms p95=59.85ms p99=1221.69ms max=1501.27ms fallos=0.00%
+2026-11-06T02:11:14Z 2026-11-06T02:11:55Z bloque=2 cond=C adopcion-c2 exit=0 filas_bd=15775,15775 :: operacion=adopcion reqs=8000 rps=195.11 p50=5.62ms p95=49.80ms p99=128.45ms max=231.87ms fallos=0.00%
+2026-11-06T02:12:06Z 2026-11-06T02:12:48Z bloque=2 cond=C adopcion-c3 exit=0 filas_bd=23774,23774 :: operacion=adopcion reqs=7999 rps=195.07 p50=5.84ms p95=57.04ms p99=129.87ms max=238.69ms fallos=0.00%
+2026-11-06T02:12:59Z 2026-11-06T02:13:40Z bloque=2 cond=C adopcion-c4 exit=0 filas_bd=31774,31774 :: operacion=adopcion reqs=8000 rps=195.84 p50=5.24ms p95=57.34ms p99=105.13ms max=169.70ms fallos=0.00%
+2026-11-06T02:13:51Z 2026-11-06T02:14:32Z bloque=2 cond=C sin_token-c1 exit=0 filas_bd=31774,31774 :: operacion=sin_token reqs=8000 rps=197.84 p50=1.70ms p95=14.75ms p99=31.79ms max=208.65ms fallos=0.00%
+2026-11-06T02:14:43Z 2026-11-06T02:15:24Z bloque=2 cond=C sin_token-c2 exit=0 filas_bd=31774,31774 :: operacion=sin_token reqs=8000 rps=197.76 p50=1.93ms p95=23.30ms p99=53.93ms max=90.65ms fallos=0.00%
+2026-11-06T02:15:34Z 2026-11-06T02:16:15Z bloque=2 cond=C sin_token-c3 exit=0 filas_bd=31774,31774 :: operacion=sin_token reqs=8000 rps=198.10 p50=1.78ms p95=18.23ms p99=44.22ms max=76.45ms fallos=0.00%
+2026-11-06T02:16:26Z 2026-11-06T02:17:07Z bloque=2 cond=C sin_token-c4 exit=0 filas_bd=31774,31774 :: operacion=sin_token reqs=8000 rps=198.14 p50=2.12ms p95=16.65ms p99=37.80ms max=84.02ms fallos=0.00%
+2026-11-06T02:17:31Z bloque 3 condición T: arranque
+2026-11-06T02:17:40Z 2026-11-06T02:18:22Z bloque=3 cond=T buscar-c1 exit=0 filas_bd=0,0 :: operacion=buscar reqs=7913 rps=192.98 p50=2.96ms p95=50.00ms p99=555.76ms max=782.69ms fallos=0.00%
+2026-11-06T02:18:32Z 2026-11-06T02:19:13Z bloque=3 cond=T buscar-c2 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=196.11 p50=3.62ms p95=27.01ms p99=91.77ms max=213.69ms fallos=0.00%
+2026-11-06T02:19:23Z 2026-11-06T02:20:05Z bloque=3 cond=T buscar-c3 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=196.61 p50=2.83ms p95=26.31ms p99=81.75ms max=175.87ms fallos=0.00%
+2026-11-06T02:20:15Z 2026-11-06T02:20:56Z bloque=3 cond=T buscar-c4 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=196.51 p50=2.67ms p95=19.06ms p99=100.68ms max=149.93ms fallos=0.00%
+2026-11-06T02:21:07Z 2026-11-06T02:21:48Z bloque=3 cond=T adopcion-c1 exit=0 filas_bd=7745,7745 :: operacion=adopcion reqs=7745 rps=189.06 p50=9.37ms p95=83.63ms p99=911.38ms max=1255.74ms fallos=0.00%
+2026-11-06T02:21:58Z 2026-11-06T02:22:40Z bloque=3 cond=T adopcion-c2 exit=0 filas_bd=15665,15665 :: operacion=adopcion reqs=7920 rps=193.14 p50=6.54ms p95=52.20ms p99=213.71ms max=388.25ms fallos=0.00%
+2026-11-06T02:22:51Z 2026-11-06T02:23:32Z bloque=3 cond=T adopcion-c3 exit=0 filas_bd=23601,23601 :: operacion=adopcion reqs=7936 rps=193.56 p50=6.34ms p95=38.37ms p99=142.98ms max=401.59ms fallos=0.00%
+2026-11-06T02:23:43Z 2026-11-06T02:24:25Z bloque=3 cond=T adopcion-c4 exit=0 filas_bd=31487,31487 :: operacion=adopcion reqs=7886 rps=192.32 p50=7.07ms p95=69.27ms p99=180.08ms max=332.67ms fallos=0.00%
+2026-11-06T02:24:38Z bloque 4 condición T: arranque
+2026-11-06T02:24:47Z 2026-11-06T02:25:29Z bloque=4 cond=T buscar-c1 exit=0 filas_bd=0,0 :: operacion=buscar reqs=7893 rps=192.74 p50=3.48ms p95=52.15ms p99=395.14ms max=652.41ms fallos=0.00%
+2026-11-06T02:25:40Z 2026-11-06T02:26:21Z bloque=4 cond=T buscar-c2 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=195.76 p50=2.77ms p95=38.16ms p99=111.73ms max=162.91ms fallos=0.00%
+2026-11-06T02:26:31Z 2026-11-06T02:27:12Z bloque=4 cond=T buscar-c3 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=196.79 p50=2.85ms p95=20.32ms p99=47.32ms max=131.99ms fallos=0.00%
+2026-11-06T02:27:23Z 2026-11-06T02:28:04Z bloque=4 cond=T buscar-c4 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=196.14 p50=2.91ms p95=36.88ms p99=79.84ms max=220.04ms fallos=0.00%
+2026-11-06T02:28:14Z 2026-11-06T02:28:56Z bloque=4 cond=T adopcion-c1 exit=0 filas_bd=7698,7698 :: operacion=adopcion reqs=7698 rps=187.72 p50=8.43ms p95=137.93ms p99=1102.82ms max=1435.76ms fallos=0.00%
+2026-11-06T02:29:07Z 2026-11-06T02:29:49Z bloque=4 cond=T adopcion-c2 exit=0 filas_bd=15617,15617 :: operacion=adopcion reqs=7919 rps=193.15 p50=7.00ms p95=56.33ms p99=240.48ms max=430.86ms fallos=0.00%
+2026-11-06T02:30:00Z 2026-11-06T02:30:41Z bloque=4 cond=T adopcion-c3 exit=0 filas_bd=23498,23498 :: operacion=adopcion reqs=7881 rps=192.26 p50=6.47ms p95=53.70ms p99=335.75ms max=459.63ms fallos=0.00%
+2026-11-06T02:30:51Z 2026-11-06T02:31:33Z bloque=4 cond=T adopcion-c4 exit=0 filas_bd=31400,31400 :: operacion=adopcion reqs=7902 rps=192.73 p50=6.61ms p95=60.80ms p99=242.66ms max=523.20ms fallos=0.00%
+2026-11-06T02:31:45Z bloque 5 condición C: arranque
+2026-11-06T02:31:53Z 2026-11-06T02:32:34Z bloque=5 cond=C buscar-c1 exit=0 filas_bd=0,0 :: operacion=buscar reqs=7945 rps=195.02 p50=1.91ms p95=44.82ms p99=293.57ms max=1199.24ms fallos=0.00%
+2026-11-06T02:32:45Z 2026-11-06T02:33:26Z bloque=5 cond=C buscar-c2 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=197.43 p50=2.43ms p95=22.56ms p99=85.97ms max=158.43ms fallos=0.00%
+2026-11-06T02:33:36Z 2026-11-06T02:34:17Z bloque=5 cond=C buscar-c3 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=197.91 p50=2.15ms p95=20.12ms p99=40.74ms max=57.20ms fallos=0.00%
+2026-11-06T02:34:28Z 2026-11-06T02:35:09Z bloque=5 cond=C buscar-c4 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=198.21 p50=1.69ms p95=14.93ms p99=47.94ms max=106.62ms fallos=0.00%
+2026-11-06T02:35:19Z 2026-11-06T02:36:01Z bloque=5 cond=C adopcion-c1 exit=0 filas_bd=7600,7600 :: operacion=adopcion reqs=7600 rps=185.33 p50=7.37ms p95=73.21ms p99=2062.22ms max=2336.22ms fallos=0.00%
+2026-11-06T02:36:11Z 2026-11-06T02:36:52Z bloque=5 cond=C adopcion-c2 exit=0 filas_bd=15600,15600 :: operacion=adopcion reqs=8000 rps=195.10 p50=6.55ms p95=41.56ms p99=138.86ms max=293.39ms fallos=0.00%
+2026-11-06T02:37:03Z 2026-11-06T02:37:45Z bloque=5 cond=C adopcion-c3 exit=0 filas_bd=23577,23577 :: operacion=adopcion reqs=7977 rps=194.55 p50=7.23ms p95=50.80ms p99=174.92ms max=266.48ms fallos=0.00%
+2026-11-06T02:37:55Z 2026-11-06T02:38:37Z bloque=5 cond=C adopcion-c4 exit=0 filas_bd=31551,31551 :: operacion=adopcion reqs=7974 rps=194.47 p50=5.43ms p95=59.59ms p99=163.65ms max=325.54ms fallos=0.00%
+2026-11-06T02:38:48Z 2026-11-06T02:39:29Z bloque=5 cond=C sin_token-c1 exit=0 filas_bd=31551,31551 :: operacion=sin_token reqs=8000 rps=197.45 p50=1.88ms p95=21.57ms p99=75.17ms max=231.77ms fallos=0.00%
+2026-11-06T02:39:39Z 2026-11-06T02:40:20Z bloque=5 cond=C sin_token-c2 exit=0 filas_bd=31551,31551 :: operacion=sin_token reqs=8000 rps=197.95 p50=2.05ms p95=14.08ms p99=49.44ms max=67.01ms fallos=0.00%
+2026-11-06T02:40:31Z 2026-11-06T02:41:12Z bloque=5 cond=C sin_token-c3 exit=0 filas_bd=31551,31551 :: operacion=sin_token reqs=8000 rps=197.54 p50=2.06ms p95=26.44ms p99=53.45ms max=113.51ms fallos=0.00%
+2026-11-06T02:41:22Z 2026-11-06T02:42:03Z bloque=5 cond=C sin_token-c4 exit=0 filas_bd=31551,31551 :: operacion=sin_token reqs=8000 rps=198.22 p50=2.05ms p95=12.38ms p99=29.32ms max=107.71ms fallos=0.00%
+2026-11-06T02:42:28Z bloque 6 condición S: arranque
+2026-11-06T02:42:35Z 2026-11-06T02:43:17Z bloque=6 cond=S buscar-c1 exit=0 filas_bd=0,0 :: operacion=buscar reqs=7984 rps=196.26 p50=1.78ms p95=26.41ms p99=239.73ms max=1098.20ms fallos=0.00%
+2026-11-06T02:43:27Z 2026-11-06T02:44:08Z bloque=6 cond=S buscar-c2 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=198.29 p50=1.84ms p95=13.15ms p99=38.25ms max=62.76ms fallos=0.00%
+2026-11-06T02:44:19Z 2026-11-06T02:44:59Z bloque=6 cond=S buscar-c3 exit=0 filas_bd=0,0 :: operacion=buscar reqs=7977 rps=197.55 p50=1.86ms p95=14.90ms p99=37.54ms max=1000.90ms fallos=0.00%
+2026-11-06T02:45:10Z 2026-11-06T02:45:51Z bloque=6 cond=S buscar-c4 exit=0 filas_bd=0,0 :: operacion=buscar reqs=8000 rps=197.85 p50=1.91ms p95=17.33ms p99=49.44ms max=110.92ms fallos=0.00%
+2026-11-06T02:46:02Z 2026-11-06T02:46:43Z bloque=6 cond=S adopcion-c1 exit=0 filas_bd=7870,7870 :: operacion=adopcion reqs=7870 rps=191.94 p50=5.84ms p95=49.35ms p99=626.14ms max=816.76ms fallos=0.00%
+2026-11-06T02:46:53Z 2026-11-06T02:47:35Z bloque=6 cond=S adopcion-c2 exit=0 filas_bd=15870,15870 :: operacion=adopcion reqs=8000 rps=195.94 p50=4.79ms p95=59.75ms p99=111.26ms max=181.70ms fallos=0.00%
+2026-11-06T02:47:45Z 2026-11-06T02:48:26Z bloque=6 cond=S adopcion-c3 exit=0 filas_bd=23870,23870 :: operacion=adopcion reqs=8000 rps=196.13 p50=5.17ms p95=39.36ms p99=151.75ms max=253.10ms fallos=0.00%
+2026-11-06T02:48:37Z 2026-11-06T02:49:18Z bloque=6 cond=S adopcion-c4 exit=0 filas_bd=31870,31870 :: operacion=adopcion reqs=8000 rps=196.24 p50=5.73ms p95=36.96ms p99=62.44ms max=106.05ms fallos=0.00%
+2026-11-06T02:49:30Z fin
