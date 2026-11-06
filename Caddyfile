@@ -1,0 +1,6 @@
+# Proxy TLS del despliegue propuesto en ADR-05. Con un dominio real, Caddy gestiona el certificado.
+{$DOMINIO} {
+	header Strict-Transport-Security "max-age=31536000"
+	header -Server
+	reverse_proxy api_app:3000
+}
