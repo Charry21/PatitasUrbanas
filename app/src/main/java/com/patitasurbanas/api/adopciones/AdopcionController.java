@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.Map;
 public class AdopcionController {
 
     private static final Logger log = LoggerFactory.getLogger(AdopcionController.class);
+    private static final int LARGO_MAXIMO = 255;
     private final AdopcionService adopcionService;
 
     public AdopcionController(AdopcionService adopcionService) {
@@ -28,6 +30,10 @@ public class AdopcionController {
     public ResponseEntity<Map<String, Object>> crearSolicitud(
             @RequestParam(defaultValue = "PENDIENTE") String estado,
             @RequestParam(defaultValue = "SOLICITUD_RECIBIDA") String nombreEtapa) {
+
+        if (estado.length() > LARGO_MAXIMO || nombreEtapa.length() > LARGO_MAXIMO) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
 
         long inicioNs = System.nanoTime();
         SolicitudAdopcion solicitud = adopcionService.crearSolicitudConEtapaInicial(estado, nombreEtapa, false);

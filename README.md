@@ -6,13 +6,26 @@ El proyecto utiliza PostgreSQL mediante Docker Compose. Para levantar la base de
 
 1. Instala [Docker Desktop](https://www.docker.com/products/docker-desktop/) y asegúrate de que esté iniciado.
 2. Abre una terminal en la carpeta raíz del proyecto.
-3. Ejecuta:
+3. Copia `.env.example` como `.env` y cambia la contraseña. `.env` no se versiona.
+4. Crea la clave pública que valida los tokens (requiere `pip install pyjwt cryptography`):
+
+```powershell
+python experimentos/14-fuga-datos-s13/generar_tokens.py secretos
+```
+
+5. Si ya levantaste el proyecto antes de este cambio, borra el volumen anterior. PostgreSQL guarda la contraseña en el volumen y no toma la nueva de `.env`, así que la API no podría conectarse. **Esto borra los datos locales:**
+
+```powershell
+docker compose down -v
+```
+
+6. Ejecuta:
 
 ```powershell
 docker compose up -d
 ```
 
-Este comando crea el contenedor `patitas_urbanas_db`, inicia PostgreSQL 16 y conserva los datos nuevos en el volumen `pgdata_v16`.
+Este comando crea el contenedor `patitas_urbanas_db`, inicia PostgreSQL 16 y conserva los datos en el volumen `pgdata_v16`. En Compose, la API usa `ddl-auto=update`, así que un reinicio no borra las tablas. Con `mvn spring-boot:run` se mantiene `create-drop`: al reiniciar se borran.
 
 Para comprobar el estado del servicio:
 
@@ -33,7 +46,24 @@ Datos de conexión local:
 - Nota: 5433 al conectarte desde tu máquina; 5432 es el puerto interno usado entre contenedores de Docker.
 - Base de datos: `patitas_urbanas`
 - Usuario: `admin`
-- Contraseña: `adminpassword`
+- Contraseña: la que definiste en `.env`
+- Los puertos 5433 y 3000 solo escuchan en `127.0.0.1`.
+
+Para llamar a `POST /api/adopciones` se necesita un token. El comando del paso 4 deja uno de prueba, válido por 24 horas, en `secretos/valido.jwt`.
+
+Para ejecutar las pruebas con esta misma BD, define la contraseña de `.env` en la terminal. **Las pruebas usan `create-drop` y borran las tablas:** al terminar, reinicia la API con `docker compose restart api_app`.
+
+```powershell
+$env:POSTGRES_PASSWORD="la-de-tu-.env"
+cd app
+mvn test
+```
+
+Despliegue propuesto, con TLS y sin publicar la API ni la BD:
+
+```powershell
+docker compose -f docker-compose.yml -f docker-compose.produccion.yml up -d
+```
 
 ## Evidencia de Ejecución Local (Semana 1)
 A continuación, se demuestra la correcta inicialización del contenedor y la conexión exitosa al motor de base de datos PostgreSQL en el entorno de desarrollo local.
