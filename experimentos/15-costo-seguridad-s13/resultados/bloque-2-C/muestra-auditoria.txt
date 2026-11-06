@@ -1,0 +1,5 @@
+2026-11-06T02:13:51.775Z  WARN 1 --- [patitas-urbanas-api] [o-3000-exec-163] AUDITORIA                                : AUDITORIA_ACCESO_DENEGADO estado=401 metodo=POST ruta=/api/adopciones origen=172.18.0.1
+2026-11-06T02:13:51.776Z  WARN 1 --- [patitas-urbanas-api] [io-3000-exec-78] AUDITORIA                                : AUDITORIA_ACCESO_DENEGADO estado=401 metodo=POST ruta=/api/adopciones origen=172.18.0.1
+2026-11-06T02:13:51.779Z  WARN 1 --- [patitas-urbanas-api] [o-3000-exec-104] AUDITORIA                                : AUDITORIA_ACCESO_DENEGADO estado=401 metodo=POST ruta=/api/adopciones origen=172.18.0.1
+2026-11-06T02:13:51.786Z  WARN 1 --- [patitas-urbanas-api] [io-3000-exec-77] AUDITORIA                                : AUDITORIA_ACCESO_DENEGADO estado=401 metodo=POST ruta=/api/adopciones origen=172.18.0.1
+2026-11-06T02:13:51.788Z  WARN 1 --- [patitas-urbanas-api] [io-3000-exec-96] AUDITORIA                                : AUDITORIA_ACCESO_DENEGADO estado=401 metodo=POST ruta=/api/adopciones origen=172.18.0.1

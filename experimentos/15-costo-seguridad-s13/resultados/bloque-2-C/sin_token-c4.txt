@@ -1,0 +1,1 @@
+operacion=sin_token reqs=8000 rps=198.14 p50=2.12ms p95=16.65ms p99=37.80ms max=84.02ms fallos=0.00%

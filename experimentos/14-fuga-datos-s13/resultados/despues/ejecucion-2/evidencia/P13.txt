@@ -1,0 +1,9 @@
+sin_token -> 401
+firma_incorrecta -> 401 
+caducado -> 401 
+alg_none -> 401 
+confusion_hs256 -> 401 
+emisor_incorrecto -> 401 
+audiencia_incorrecta -> 401 
+sin_permiso -> 403 
+valido -> 201
