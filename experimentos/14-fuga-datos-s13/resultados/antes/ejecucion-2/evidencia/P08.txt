@@ -1,0 +1,10 @@
+--- archivos versionados
+README.md:36:- Contraseña: `adminpassword`
+app/src/main/resources/application.properties:6:spring.datasource.password=adminpassword
+docker-compose.yml:10:      POSTGRES_PASSWORD: adminpassword
+docker-compose.yml:32:      - POSTGRES_PASSWORD=adminpassword
+--- jar
+spring.datasource.password=adminpassword
+--- variables del contenedor (valor oculto)
+POSTGRES_PASSWORD=<presente>
+--- en el historial de Git: si

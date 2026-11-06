@@ -1,0 +1,14 @@
+sonda	clasificacion	detalle
+P01	SIN_FUGA	/api/adopciones=405 /api/adopciones/1=404 /api/solicitudes=404 
+P02	SIN_FUGA	actuator=200 env=404 configprops=404 heapdump=404 threaddump=404 beans=404 mappings=404 metrics=404 loggers=404 prometheus=404 
+P03	FUGA	HTTP 200: {"status":"UP","components":{"db":{"status":"UP","details":{"database":"PostgreSQL","validationQuery":"isValid()"}},"diskSpace":{"status":"UP","details":{"total
+P04	FUGA	tipo=400 largo=500 test_fallo=500 (interno) ruta=404 
+P05	SIN_FUGA	filas 8,8 -> 14,14; aceptadas=6
+P06	FUGA	sin token: 201 201; cuerpos: {"estado":"PENDIENTE","idSolicitud":18,"etapaInicial":"SOLICITUD_RECIBIDA"} {"estado":"PENDIENTE","idSolicitud":19,"etapaInicial":"SOLICITUD_RECIBIDA"}
+P07	FUGA	desde otra red leyó el marcador por 172.19.0.1:5433
+P08	FUGA	versionados=4 jar=si entorno=1 historial=si
+P09	SIN_FUGA	marcador=0 token=0
+P10	SIN_FUGA	TRACE=405 preflight_aco=0 cabeceras: 
+P11	FUGA	HTTP en claro por 192.0.2.2:3000 -> 200
+P12	HALLAZGO	el proceso corre como root
+P13	FUGA	sin_token=201 firma_incorrecta=201 caducado=201 alg_none=201 confusion_hs256=201 emisor_incorrecto=201 audiencia_incorrecta=201 sin_permiso=201 valido=201

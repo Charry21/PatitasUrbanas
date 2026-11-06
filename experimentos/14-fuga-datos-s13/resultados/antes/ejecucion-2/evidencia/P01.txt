@@ -1,0 +1,6 @@
+GET /api/adopciones -> 405
+{"timestamp":"2026-11-06T01:54:12.251+00:00","status":405,"error":"Method Not Allowed","path":"/api/adopciones"}
+GET /api/adopciones/1 -> 404
+{"timestamp":"2026-11-06T01:54:12.266+00:00","status":404,"error":"Not Found","path":"/api/adopciones/1"}
+GET /api/solicitudes -> 404
+{"timestamp":"2026-11-06T01:54:12.280+00:00","status":404,"error":"Not Found","path":"/api/solicitudes"}

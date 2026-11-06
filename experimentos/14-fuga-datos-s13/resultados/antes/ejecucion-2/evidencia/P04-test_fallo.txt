@@ -1,0 +1,1 @@
+{"error":"Fallo simulado: rollback esperado"}
