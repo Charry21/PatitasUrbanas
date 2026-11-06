@@ -1,0 +1,1 @@
+operacion=buscar reqs=8000 rps=196.51 p50=2.67ms p95=19.06ms p99=100.68ms max=149.93ms fallos=0.00%

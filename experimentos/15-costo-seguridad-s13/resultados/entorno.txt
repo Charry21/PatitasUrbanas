@@ -1,0 +1,15 @@
+Fecha UTC: 2026-11-06T01:59:43Z
+Commit de esta rama: 15b6708b28ae1d4c879633d20683cebbe5854992
+Commit S: 3f4b12450d02657c42652ff3a8d59472edae5877
+Commit C y T: 07c8cacd310917b9f45924520306e9477b766323
+SO: Ubuntu 24.04.5 LTS, kernel 6.18.44-fc-v242, x86_64
+CPU: 2 vCPU —  Intel(R) Xeon(R) Processor @ 2.10GHz
+RAM: 7.8Gi
+Docker 29.9.2
+k6 v2.3.0 (commit/e088784614, go1.26.8, linux/amd64)
+openjdk version "21.0.13" 2026-10-20 LTS
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+v2.11.9 h1:bhZtcRKQOq0fuLvEgCdPYvUxXyGn9kzjG4lh2332DTE=
+Imagen s13-sin: sha256:9e935c3da0106c0d2bca489c4abc44c17e859392cc7870e15ed05138c2211e47
+Imagen s13-con: sha256:dfef46b403416755b9f30ca88729fa8c6bc70578dd534e01ed1241031825547a
+Generador, API, BD y proxy en la misma máquina: sí
