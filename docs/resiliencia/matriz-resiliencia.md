@@ -22,12 +22,12 @@ Relaciona cada fallo de la [matriz de fallos](./matriz-fallos.md) con una tácti
 | R-03 | F-02 | Reconexión automática del pool (validación y recreación de conexiones de Hikari) | Existente | Volver a aceptar escrituras sin reiniciar la API en ≤ 60 s desde que la BD está disponible | HF2 de S12: primer POST con 201 en < 0.06 s, en 3/3 ciclos | **Probada** | No se identificó ninguno medido |
 | R-04 | F-01, F-03 | Detección de la caída por health check (Actuator, `db` en el estado) | Existente | `/actuator/health` responde DOWN mientras la BD no está disponible | HF1c de S12: 9/9 respuestas 503 DOWN | **Parcial**: detecta la caída, pero tarda ~30 s en responder (F-03) | Un monitor con un tiempo de espera menor que 30 s no recibiría el 503. Tiempo **observado**; el efecto en un monitor real **no se probó** |
 | R-05 | F-01, F-10 | Aislamiento de la operación que no usa la BD | Existente, pero **incidental**: `/buscar` es simulado y no consulta la BD | `/buscar` sigue respondiendo 200 con la BD caída | HF1b de S12: 9/9 respuestas 200 | **Parcial**: probado sin carga concurrente; con carga (F-10) **no se probó** | Ninguno. **No es una táctica diseñada:** dejará de valer cuando `/buscar` consulte la BD |
-| R-06 | F-06 | Validación de parámetros de entrada (tipos de `@RequestParam` de Spring) | Existente | Entrada inválida → 400, nunca 500 | `verificacion-endpoints.txt`: faltante y no numérico → 400 | **Probada** | No se identificó ninguno |
+| R-06 | F-06, F-14 | Validación de parámetros de entrada (tipos de `@RequestParam` de Spring) | Existente | Entrada inválida → 400, nunca 500 | `verificacion-endpoints.txt`: faltante y no numérico → 400 | **Parcial** (corregido el 2026-11-05): `/buscar` cumple, pero `POST /api/adopciones` con 300 caracteres responde 500 (F-14). La validación de largo está en `feat/s13-capa-seguridad` | No se identificó ninguno |
 | R-07 | F-03, F-10 | Fijar explícitamente `connectionTimeout` y el tiempo del health check a un valor menor que 30 s | Propuesta (IA) | Error y estado DOWN en menos tiempo que el tiempo de espera del monitor | Repetir S12 con el nuevo valor | **Propuesta** | Posibles falsos DOWN o errores en picos de carga. **Hipotético**, sin medir |
 | R-08 | F-09, F-05 | Medir la espera de conexión de Hikari bajo carga antes de cambiar el tamaño del pool | Propuesta (IA) | Saber si F-05 se debe al pool | Repetir la serie B de S11 con las métricas de Hikari activadas | **Propuesta** | Ninguno en producción; es una medición |
 | R-09 | F-11 | Bajar el log SQL de DEBUG a INFO fuera de los experimentos | Propuesta (IA) | El log no crece con cada petición | Comparar el tamaño del log en una serie como la de S11 | **Propuesta** | Menos detalle para diagnosticar. **Hipotético** |
-| R-10 | F-12 | Reinicio automático del contenedor (`restart: unless-stopped` en `docker-compose.yml`) | Propuesta (IA) | La API vuelve sola tras detenerse el proceso | Matar el proceso de la API y medir el tiempo hasta un 200 | **Propuesta** | No evita la indisponibilidad mientras la API arranca (tiempo de arranque **no medido**) |
-| R-11 | F-13 | Usar `ddl-auto=validate` o `update` fuera del desarrollo | Propuesta (IA) | Reiniciar la API no borra datos | Reiniciar la API y contar filas | **Propuesta** | Requiere gestionar el esquema (por ejemplo, migraciones). **Hipotético** |
+| R-10 | F-12 | Reinicio automático del contenedor (`restart: unless-stopped` en `docker-compose.yml`) | Propuesta (IA), aceptada en M6-3 | La API vuelve sola tras detenerse el proceso | Matar el proceso de la API y medir el tiempo hasta un 200 | **Probada** con `kill -9`, 10/10 ciclos, 7,41–9,00 s (experimento 16). Implementada en `feat/s13-capa-seguridad`, **sin fusionar** | No evita ~8 s sin servicio. **Sola, con `create-drop`, borra los datos en cada caída** (HR2): exige R-11. Oculta las caídas si no hay alerta (RO-03) |
+| R-11 | F-13 | Usar `ddl-auto=validate` o `update` fuera del desarrollo | Propuesta (IA), aceptada en M6-3 | Reiniciar la API no borra datos | Reiniciar la API y contar filas | **Probada** con `update`, 5/5 ciclos, 25 = 25 filas (experimento 16). Implementada en `feat/s13-capa-seguridad`, **sin fusionar** | `update` no gestiona cambios incompatibles del esquema (RO-08) |
 | R-12 | F-08 | Construir la imagen en el computador del equipo o en CI sin proxy TLS | Propuesta (IA) | `docker build` termina sin error con el `Dockerfile` original | P1 de `09-cierre-spike-s10.md` | **Propuesta** | Ninguno identificado |
 
 ---
@@ -38,12 +38,15 @@ M6-3 de `docs/registro-ia-modulo6.md`: R-07 a R-12 se aceptan como plan. Se impl
 
 **Mini-comité del ADR-04 (2026-10-31):** R-10 pasa a ser la condición del veredicto **Ajustada**. Hay que implementarla y probarla antes del cierre de la Semana 13 (`dossier/evidencia-comite-adr04.md`).
 
+**Propuesta de la IA (2026-11-05), pendiente del equipo:** cambiar el orden de M6-3 para que R-11 entre junto con R-10, porque R-10 sola convierte cada caída en una pérdida de datos (HR2 del experimento 16). Ver ADR-05, decisión D.
+
 ## 2. Tácticas presentadas como probadas sin evidencia suficiente
 
-Ninguna fila figura como **Probada** sin una prueba o un experimento enlazado. Dos llevan reservas explícitas:
+Ninguna fila figura como **Probada** sin una prueba o un experimento enlazado. Tres llevan reservas explícitas:
 
 - **R-04:** el criterio "detecta la caída" se cumple, pero la latencia de 30 s limita su utilidad.
 - **R-05:** el aislamiento es una consecuencia de que `/buscar` es simulado, no una decisión de diseño.
+- **R-06:** figuró como **Probada** hasta el 2026-11-05 porque la prueba solo cubría `/buscar`. La prueba de fuga mostró que el criterio no se cumplía en `POST /api/adopciones`.
 
 ## 3. Preguntas para el equipo
 
@@ -55,3 +58,4 @@ Ninguna fila figura como **Probada** sin una prueba o un experimento enlazado. D
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Semana 12 · Módulo 6 · Arquitectura de Software*
+*Actualizada el 2026-11-05 por la IA (R-06, R-10, R-11), pendiente de revisión del equipo*

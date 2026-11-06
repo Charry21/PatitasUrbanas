@@ -16,6 +16,8 @@
 
 **Nota de auditoría:** este escenario está diseñado en la arquitectura del sistema, pero en el repositorio actual no existe dependencia de Spring Security en el [app/pom.xml](../app/pom.xml) ni código de autenticación implementado todavía. Por tanto, no hay evidencia real de medición de acceso ni de validación JWT; esta sección representa la estructura de diseño prevista y no un resultado verificado en ejecución.
 
+**Actualización (2026-11-05):** `main` sigue igual. La capa candidata de `feat/s13-capa-seguridad` y su verificación están en `experimentos/14-fuga-datos-s13/` y `experimentos/15-costo-seguridad-s13/`; se adopta o no en ADR-05.
+
 ## Reformulación de Escenarios Propuestos por la IA
 
 ### Escenario Reformulado 1: Rendimiento en Consultas Espaciales (Riesgo R01)
