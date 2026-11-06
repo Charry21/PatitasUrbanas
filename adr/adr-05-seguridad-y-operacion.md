@@ -181,7 +181,7 @@ Este ADR es la decisión de seguridad del sistema. ADR-01 daba por hecho "un ún
 ### Condiciones que puso el equipo
 
 1. `/api/mascotas/buscar` sigue pública **solo mientras los datos sean simulados**. Antes de usar datos reales hay que poner control de acceso (TO-10).
-2. Los riesgos aceptados (RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17) se revisan antes de un despliegue público o de guardar datos personales. RS-17 exige purgar el historial con `git filter-repo` antes de hacer público el repositorio (2026-11-06). El equipo los registra como deuda técnica.
+2. Los riesgos aceptados (RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17) se revisan antes de un despliegue público o de guardar datos personales. RS-17 se acepta sin purgar el historial: la contraseña se da por comprometida y no se reutiliza, y ya se rotó con `.env`. Purgar no la borraría de GitHub porque el repositorio ya es público y las referencias de los PR conservan los commits originales (2026-11-06, a partir de la preauditoría). El equipo los registra como deuda técnica.
 3. La retención de direcciones IP en el log (RS-16) se define antes del despliegue público.
 4. Antes de desplegar en un proveedor (EDAV 3, §8):
    - revisar a mano probabilidades, impactos y umbrales;

@@ -65,11 +65,10 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 
 Actualizado el 2026-11-06, después de fusionar los PR #82 a #88.
 
-1. **Credencial histórica (RS-17):** el repositorio es público y la contraseña anterior sigue en el historial de Git. Falta que el equipo declare si se usó fuera de sus computadores y decida cómo se trata (ver RS-17 en `docs/10-seguridad.md`).
-2. Confirmar con el profesor la categoría del catálogo y contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16.
-3. Elegir proveedor y convertir el costo a COP (punto 7).
-4. Antes de desplegar: las prioridades de `docs/13-riesgos-tradeoffs.md` §5.
+1. Confirmar con el profesor la categoría del catálogo y contrastar con la rúbrica (I-12, I-16). El tutor ya confirmó con el sílabo que ADR-05 no tiene mini-comité: se presenta en el comité técnico final, semanas 15–16.
+2. Elegir proveedor y convertir el costo a COP (punto 7).
+3. Antes de desplegar: las prioridades de `docs/13-riesgos-tradeoffs.md` §5.
 
-Cerrados: fusión de los PR #82 a #88; prueba en Windows (`docs/verificacion/windows-2026-11-06/`); revisión manual S6 (`docs/verificacion/revision-manual-s6-2026-11-06/`); rama temporal de verificación borrada.
+Cerrados: credencial histórica (RS-17: según el equipo no se usó fuera de sus computadores; se da por comprometida, no se reutiliza y no se purga el historial, 2026-11-06); fusión de los PR #82 a #88; prueba en Windows (`docs/verificacion/windows-2026-11-06/`); revisión manual S6 (`docs/verificacion/revision-manual-s6-2026-11-06/`); rama temporal de verificación borrada.
 
 Revisado por: Kevin Torres · Daniel Charry · Fecha: 2026-11-06

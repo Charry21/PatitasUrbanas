@@ -132,7 +132,7 @@ Kevin Torres y Daniel Charry calificaron por separado y acordaron las diferencia
 | RS-14 | Sin emisor de tokens ni custodia de la clave | T-17 | Identidad | Alta | Alto | Solución existente; desarrollo propio | **Aplazar:** solución de identidad de terceros | Identidad es genérico: conviene una solución existente | Sin implementar | **Bloquea el uso real** |
 | RS-15 | Datos personales futuros sin controles | — | Identidad | Media | Alto | Cifrado en reposo; consentimiento; retención | **Aceptar hasta que existan** | Hoy no se guardan | Sin implementar | Condición de revisión en ADR-05 |
 | RS-16 | IP en el log de auditoría | T-18 | Logs | Alta | Bajo | Retención limitada; anonimizar | **Aplazar:** definir la retención antes del despliegue público | Es consecuencia del control RS-02 | Sin implementar | Abierto |
-| RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Medio | Reescribir historial; cambiar la contraseña | **Aceptar temporalmente en desarrollo**, con purga obligatoria del historial (`git filter-repo`) antes de hacer público el repositorio | Los secretos en el historial son vectores de ataque pasivos, aunque la contraseña ya no sea la activa | En `main`: deja de ser la contraseña obligatoria | Solo es válida si alguien la reutiliza |
+| RS-17 | Contraseña en el historial de Git | T-09 | Repositorio | Alta | Medio | Reescribir historial; cambiar la contraseña | **Aceptar:** la contraseña se da por comprometida y no se reutiliza en ningún entorno; se rotó al pasar a `.env` (ADR-05). No se purga el historial | El repositorio ya es público y purgar no la borraría de las referencias de los PR en GitHub ni de los clones existentes; además rompería los hashes y la política de no reescribir `main`. Según el equipo, no se usó fuera de sus computadores (2026-11-06) | En `main` (rotación) | Solo es explotable si alguien reutiliza esa contraseña |
 
 **Inyección SQL (T-03):** no necesita control nuevo. El control existente, parámetros de JPA, resistió P05.
 
@@ -186,7 +186,7 @@ El equipo decidió ADR-05 el 2026-11-06. Queda pendiente antes de desplegar:
 1. ~~Revisar a mano las probabilidades y los impactos de §4 (S6 de la EDAV 3).~~ Hecho el 2026-11-06.
 2. Integrar un emisor de tokens de terceros (RS-14).
 3. Poner control de acceso a `/api/mascotas/buscar` antes de usar datos reales (TO-10).
-4. Revisar RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17, y definir la retención de RS-16. Para RS-17: purgar el historial con `git filter-repo` antes de hacer público el repositorio.
+4. Revisar RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17, y definir la retención de RS-16. RS-17 queda aceptado sin purga: la contraseña se da por comprometida y no se reutiliza (decisión del 2026-11-06).
 
 Lo que estas pruebas **no** cubren:
 
