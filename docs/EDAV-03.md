@@ -152,11 +152,11 @@ Ninguno.
 
 ## 8. Resultado integrado y responsabilidad de auditoría
 
-Conclusión del equipo, transcrita sin cambios:
+Conclusión del equipo, versión corregida recibida el 2026-11-06 a las 10:47, transcrita sin cambios:
 
-> Las decisiones estructuradas en el ADR-05 y el listado secundario construyen un entorno de desarrollo viable para la iteración actual, pero los hallazgos de la EDAV 3 demuestran que el proyecto opera bajo métricas y configuraciones simuladas. La dependencia de un emisor de tokens experimental, certificados locales y mediciones de rendimiento sin latencia de red documentan una alta acumulación de deuda técnica.
-> 
-> Para evitar conflictos en la estabilización de la arquitectura, la prioridad técnica debe centrarse en mitigar los hallazgos de la EDAV 3. Es imperativo ejecutar la revisión manual de los umbrales de impacto, sustituir los artefactos experimentales (como el emisor de tokens) por implementaciones definitivas, y robustecer las pruebas de integración para cubrir los puntos ciegos demostrados por `MockMvc` antes de proceder con el despliegue en un servidor proveedor.
+> Las decisiones estructuradas en el ADR-05 y el listado secundario construyen un entorno de desarrollo viable para la iteración actual, pero los hallazgos de la EDAV 3 demuestran que el proyecto opera bajo métricas y configuraciones simuladas. La dependencia de un script generador de tokens de prueba, certificados locales y mediciones de rendimiento sin latencia de red documentan una alta acumulación de deuda técnica.
+>
+> Para evitar conflictos en la estabilización de la arquitectura, la prioridad técnica debe centrarse en mitigar los hallazgos de la EDAV 3. Es imperativo ejecutar la revisión manual de los umbrales de impacto, sustituir los artefactos simulados (como el script de generación de tokens) por implementaciones de identidad definitivas, y robustecer las pruebas de integración para cubrir los puntos ciegos demostrados por `MockMvc` antes de proceder con el despliegue en un servidor proveedor.
 
 Nombre(s): Kevin Torres · Daniel Charry
 
@@ -166,23 +166,22 @@ Registro de la firma: Kevin Torres confirmó los nombres y la fecha en el chat c
 
 ---
 
-## Anexo A. Análisis del equipo (texto recibido el 2026-11-06, sin cambios)
+## Anexo A. Análisis del equipo (versión corregida, recibida el 2026-11-06 a las 10:47, sin cambios)
 
-Análisis de decisiones y posibles conflictos (ADR-05 y Otras Decisiones)
+Reemplaza la versión de las 10:21. Los cambios del equipo: precisa los riesgos aceptados, confirma las decisiones 3 a 15, deja S6 pendiente de corregir y nombra el script de tokens en lugar de un "emisor experimental". La versión anterior queda en el historial de Git.
+
+Análisis de decisiones y posibles conflictos (ADR-05 y Otras Decisiones) - Versión Corregida
 
 * Identidad y Autenticación: Se aprueba la validación de JWT RS256 en la API con denegación por defecto, pero se aplaza la implementación del emisor de tokens hasta integrar una solución de identidad de terceros. Esto es funcional para el estado actual de Patitas Urbanas, pero genera un bloqueo arquitectónico; el sistema no podrá operar en un entorno real hasta que se defina e integre dicho proveedor.
+
 * Exposición de Datos: Mantener el endpoint `/api/mascotas/buscar` público y sin token es aceptado condicionalmente mientras los datos sean simulados. Esto representa un riesgo si el paso a producción con datos reales se ejecuta sin antes implementar controles de acceso, comprometiendo la privacidad.
-* Gestión de Riesgos Posteriores: Aceptar los riesgos de seguridad (RS-08 al RS-17) bajo la condición de revisarlos antes de un despliegue público o almacenamiento de datos personales es una práctica de postergación. Acumular la mitigación de vulnerabilidades y la definición de tiempos de retención de IP en los logs para las fases finales incrementa la deuda técnica del ciclo de vida del software.
+
+* Gestión de Riesgos Posteriores: Aceptar los riesgos de seguridad específicos (RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17) bajo la condición de revisarlos antes de un despliegue público o almacenamiento de datos personales es una práctica de postergación. Acumular la mitigación de vulnerabilidades y la definición de tiempos de retención de IP en los logs para las fases finales incrementa la deuda técnica del ciclo de vida del software. Las demás decisiones del rango 3 al 15 se toman como aceptadas para el entorno de desarrollo, dejando la necesidad de un mini-comité (9) pendiente de consulta con el tutor y la retención de IP (11) aplazada.
 
 Análisis de hallazgos (EDAV 3)
 
 * Brechas en Pruebas de Integración: La corrección donde `MockMvc` no detectó que la primera capa rompía los errores 400 evidencia que el entorno de pruebas unitarias/integración no es completamente fiable para el enrutamiento y manejo de excepciones web.
-* Sesgo en la Evaluación de Riesgos: El hallazgo que indica que las probabilidades, impactos y umbrales son juicio de la inteligencia artificial y requieren revisión manual es crítico. En el marco de la ingeniería de sistemas, delegar matrices de riesgo a estimaciones algorítmicas sin validación humana invalida la objetividad de la planeación de contingencias.
+
+* Sesgo en la Evaluación de Riesgos: El hallazgo S6 que indica que las probabilidades, impactos y umbrales son juicio de la inteligencia artificial es crítico; al ser imperativa su revisión manual, este punto queda pendiente de corregir para evitar que la matriz siga basándose en un juicio automatizado. En ingeniería, delegar el cálculo de riesgos a estimaciones sin validación humana invalida la planeación de contingencias.
+
 * Limitaciones de Entorno: La medición del percentil 95 (p95) usando `Dockerfile.runtime` y las pruebas TLS con un certificado local sin dominio real indican que las métricas de rendimiento y seguridad actuales son exclusivas de un entorno aislado (sandbox).
-
-### Precisiones de la IA sobre el texto
-
-El texto del equipo no se modifica. Para que no se lea mal, dos datos:
-
-1. Los riesgos aceptados son RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17. RS-10 y RS-11 se mitigan en el PR #83; RS-14 y RS-16 quedaron aplazados.
-2. El sistema no tiene un emisor de tokens experimental: los tokens de las pruebas los genera `experimentos/14-fuga-datos-s13/generar_tokens.py`.
