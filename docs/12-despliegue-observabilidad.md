@@ -1,6 +1,6 @@
 # Despliegue, observabilidad y operación — Semana 14
 
-> **Estado: borrador de la IA, pendiente de revisión del equipo.** Lo que se propone aquí no es una decisión hasta que el equipo cierre [ADR-05](../adr/adr-05-seguridad-y-operacion.md).
+> **Estado: revisado por el equipo el 2026-11-06.** ADR-05 está aceptada: V1 con el proveedor por definir, observabilidad N1 y RPO de 24 h. **Los umbrales de alerta siguen siendo propuesta de la IA** y se revisarán a mano antes de desplegar (S6 de la EDAV 3).
 
 Insumos: ADR-04, C4 (`dossier/06`, `dossier/07`), matrices de fallos y resiliencia (`docs/resiliencia/`), comparación de distribución (`docs/distribucion/comparacion-distribucion.md`) y experimentos 11 a 16.
 
@@ -169,4 +169,4 @@ La matriz está en [`13-riesgos-tradeoffs.md`](./13-riesgos-tradeoffs.md).
 
 ---
 
-*Borrador de la IA · Semana 14 · Módulo 7 · Arquitectura de Software · Pendiente de revisión del equipo*
+*Borrador de la IA, revisado por el equipo (Kevin Torres · Daniel Charry, 2026-11-06) · Semana 14 · Módulo 7 · Arquitectura de Software*
