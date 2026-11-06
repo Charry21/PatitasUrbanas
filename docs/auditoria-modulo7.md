@@ -33,7 +33,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y **el equipo
 | Pregunta | Respuesta |
 |---|---|
 | ¿Cada riesgo documentado tiene evidencia de dónde se identificó? | Sí. Las amenazas citan sonda, archivo o experimento; las hipotéticas están marcadas |
-| ¿Las pruebas guardadas se pueden repetir? | Sí en lo técnico: scripts y comandos están versionados. Pero las imágenes se construyeron con `Dockerfile.runtime` (F-08) |
+| ¿Las pruebas guardadas se pueden repetir? | Sí en lo técnico: scripts y comandos están versionados. Las mediciones usaron `Dockerfile.runtime` (F-08) |
 | ¿El diagrama corresponde a los componentes reales? | La API y la BD sí. El proxy existe en el PR. El emisor de tokens y las copias se dibujan como inexistentes |
 | ¿El plan de observabilidad se relaciona con escenarios concretos? | Sí: cada señal cita F-xx o T-xx |
 | ¿El ADR 5 registra decisiones reales del equipo? | **Todavía no.** Es una propuesta de la IA, con una tabla para que el equipo decida |
@@ -65,7 +65,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y **el equipo
 1. Revisar y fusionar los PR en este orden: #82, #83 y #84.
 2. Decidir ADR-05, incluido el emisor de tokens, y si necesita mini-comité.
 3. Completar la EDAV 3 y firmar el registro de IA.
-4. Probar `docker compose up --build` con `app/Dockerfile` en un computador del equipo (R-12, I-5 de la matriz de fallos).
+4. Probar el README en un computador del equipo con Windows. En Linux ya pasó, en una máquina limpia (`docs/verificacion/arranque-limpio-2026-11-06/`): lo ejecutó la IA a pedido del equipo.
 5. Implementar lo que quedó solo propuesto: copias, alertas, R-09 y R-08.
 6. Contrastar esta auditoría con la rúbrica.
 

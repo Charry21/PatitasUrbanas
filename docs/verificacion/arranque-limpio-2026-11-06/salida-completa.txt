@@ -1,0 +1,364 @@
+﻿2026-11-06T14:20:11.5449163Z Current runner version: '2.338.2'
+##[group]Runner Image Provisioner
+Hosted Compute Agent
+Version: 20261028.624
+Commit: 54898b74c23fde5556c9b3c3a2290865feef0dfe
+Build Date: 2026-10-28T21:51:42Z
+Worker ID: {12cff3a6-e0d9-4051-b938-ac5df07d8239}
+Region: southcentralus
+Cloud: Azure
+##[endgroup]
+##[group]Operating System
+Ubuntu
+24.04.5
+LTS
+##[endgroup]
+##[group]Runner Image
+Image: ubuntu-24.04
+Version: 20261101.360.1
+Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261101.360/images/ubuntu/Ubuntu2404-Readme.md
+Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261101.360
+##[endgroup]
+##[group]GITHUB_TOKEN Permissions
+Contents: read
+Metadata: read
+Packages: read
+##[endgroup]
+Secret source: Actions
+Cache mode: write
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+Complete job name: verificar
+##[group]Run actions/checkout@v4
+with:
+  fetch-depth: 0
+  repository: Charry21/PatitasUrbanas
+  token: ***
+  ssh-strict: true
+  ssh-user: git
+  persist-credentials: true
+  clean: true
+  sparse-checkout-cone-mode: true
+  fetch-tags: false
+  show-progress: true
+  lfs: false
+  submodules: false
+  set-safe-directory: true
+  allow-unsafe-pr-checkout: false
+##[endgroup]
+Syncing repository: Charry21/PatitasUrbanas
+##[group]Getting Git version info
+Working directory is '/home/runner/work/PatitasUrbanas/PatitasUrbanas'
+[command]/usr/bin/git version
+git version 2.56.0
+##[endgroup]
+Temporarily overriding HOME='/home/runner/work/_temp/bccf6650-82f5-4070-b212-06d60b2ba711' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+[command]/usr/bin/git config --global --add safe.directory /home/runner/work/PatitasUrbanas/PatitasUrbanas
+Deleting the contents of '/home/runner/work/PatitasUrbanas/PatitasUrbanas'
+##[group]Initializing the repository
+[command]/usr/bin/git init /home/runner/work/PatitasUrbanas/PatitasUrbanas
+hint: Using 'master' as the name for the initial branch. This default branch name
+hint: will change to "main" in Git 3.0. To configure the initial branch name
+hint: to use in all of your new repositories, which will suppress this warning,
+hint: call:
+hint:
+hint: 	git config --global init.defaultBranch <name>
+hint:
+hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+hint: 'development'. The just-created branch can be renamed via this command:
+hint:
+hint: 	git branch -m <name>
+hint:
+hint: Disable this message with "git config set advice.defaultBranchName false"
+Initialized empty Git repository in /home/runner/work/PatitasUrbanas/PatitasUrbanas/.git/
+[command]/usr/bin/git remote add origin https://github.com/Charry21/PatitasUrbanas
+##[endgroup]
+##[group]Disabling automatic garbage collection
+[command]/usr/bin/git config --local gc.auto 0
+##[endgroup]
+##[group]Setting up auth
+[command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+[command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+[command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+[command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+[command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+[command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+[command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+##[endgroup]
+##[group]Fetching the repository
+[command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+From https://github.com/Charry21/PatitasUrbanas
+ * [new branch]      actualizacion-c4-modulo3 -> origin/actualizacion-c4-modulo3
+ * [new branch]      auditoria/cierre-tercera-revision -> origin/auditoria/cierre-tercera-revision
+ * [new branch]      auditoria/correspondencia-salidas -> origin/auditoria/correspondencia-salidas
+ * [new branch]      auditoria/reproducibilidad-s4-s10 -> origin/auditoria/reproducibilidad-s4-s10
+ * [new branch]      chore/quitar-redireccion-dossier18 -> origin/chore/quitar-redireccion-dossier18
+ * [new branch]      cierre/firmas-s10       -> origin/cierre/firmas-s10
+ * [new branch]      cierre/pendientes-s10   -> origin/cierre/pendientes-s10
+ * [new branch]      claude/determined-albattani-d1aliu -> origin/claude/determined-albattani-d1aliu
+ * [new branch]      claude/project-thread-4cy091 -> origin/claude/project-thread-4cy091
+ * [new branch]      claude/project-thread-66yxi6 -> origin/claude/project-thread-66yxi6
+ * [new branch]      claude/project-thread-hlv246 -> origin/claude/project-thread-hlv246
+ * [new branch]      docs/auditoria-consistencia -> origin/docs/auditoria-consistencia
+ * [new branch]      docs/d10-preregistro-spike2 -> origin/docs/d10-preregistro-spike2
+ * [new branch]      docs/entregable2-encuadre-spike -> origin/docs/entregable2-encuadre-spike
+ * [new branch]      docs/hipotesis-localizacion-s6 -> origin/docs/hipotesis-localizacion-s6
+ * [new branch]      docs/hipotesis2-localizacion-s6 -> origin/docs/hipotesis2-localizacion-s6
+ * [new branch]      docs/justificar-actor-equipo-dev-qa -> origin/docs/justificar-actor-equipo-dev-qa
+ * [new branch]      docs/linea-base-semana-6 -> origin/docs/linea-base-semana-6
+ * [new branch]      docs/localizacion-c4-semana-6 -> origin/docs/localizacion-c4-semana-6
+ * [new branch]      docs/modelo-dominio     -> origin/docs/modelo-dominio
+ * [new branch]      docs/modulo5-dominio-integracion -> origin/docs/modulo5-dominio-integracion
+ * [new branch]      docs/precisar-rutas-adopcion-controller -> origin/docs/precisar-rutas-adopcion-controller
+ * [new branch]      docs/registro-ia-seccion5 -> origin/docs/registro-ia-seccion5
+ * [new branch]      docs/resolver-pregunta-hipotesis-s3 -> origin/docs/resolver-pregunta-hipotesis-s3
+ * [new branch]      docs/respuestas-p1-p4   -> origin/docs/respuestas-p1-p4
+ * [new branch]      docs/resultado-hipotesis-s6 -> origin/docs/resultado-hipotesis-s6
+ * [new branch]      docs/resultado-hipotesis2-s6 -> origin/docs/resultado-hipotesis2-s6
+ * [new branch]      docs/s11-cierre-auditoria -> origin/docs/s11-cierre-auditoria
+ * [new branch]      docs/s11-desviacion-cpu -> origin/docs/s11-desviacion-cpu
+ * [new branch]      docs/segunda-ronda-medicion-s4-3-corridas -> origin/docs/segunda-ronda-medicion-s4-3-corridas
+ * [new branch]      docs/segunda-tercera-corrida-consultas -> origin/docs/segunda-tercera-corrida-consultas
+ * [new branch]      docs/trazabilidad-temporal -> origin/docs/trazabilidad-temporal
+ * [new branch]      docs/unificar-modelo-dominio -> origin/docs/unificar-modelo-dominio
+ * [new branch]      experimento/s11-crecimiento -> origin/experimento/s11-crecimiento
+ * [new branch]      experimento/s12-inyeccion-fallos -> origin/experimento/s12-inyeccion-fallos
+ * [new branch]      experimento/s12-semilla-memoria -> origin/experimento/s12-semilla-memoria
+ * [new branch]      experimento/s13-s14-seguridad-operacion -> origin/experimento/s13-s14-seguridad-operacion
+ * [new branch]      feat/decision-estilo-s7 -> origin/feat/decision-estilo-s7
+ * [new branch]      feat/instrumentar-timing-controlador-s6 -> origin/feat/instrumentar-timing-controlador-s6
+ * [new branch]      feat/s13-capa-seguridad -> origin/feat/s13-capa-seguridad
+ * [new branch]      feat/spike-especificacion-s9 -> origin/feat/spike-especificacion-s9
+ * [new branch]      feature/atributos-calidad -> origin/feature/atributos-calidad
+ * [new branch]      feature/c4-arquitectura -> origin/feature/c4-arquitectura
+ * [new branch]      feature/medicion-linea-base -> origin/feature/medicion-linea-base
+ * [new branch]      feature/s5-trazabilidad-c4-completa -> origin/feature/s5-trazabilidad-c4-completa
+ * [new branch]      feature/setup-arquitectura-inicial -> origin/feature/setup-arquitectura-inicial
+ * [new branch]      fix/actualizacion-trazabilidad-c4 -> origin/fix/actualizacion-trazabilidad-c4
+ * [new branch]      fix/cierre-documental-s5 -> origin/fix/cierre-documental-s5
+ * [new branch]      fix/cierre-metodologico-s5 -> origin/fix/cierre-metodologico-s5
+ * [new branch]      fix/edav2-firmantes     -> origin/fix/edav2-firmantes
+ * [new branch]      fix/sincronizacion-definitiva-s5 -> origin/fix/sincronizacion-definitiva-s5
+ * [new branch]      fix/sincronizacion-final-s5 -> origin/fix/sincronizacion-final-s5
+ * [new branch]      fix/trazabilidad-s5     -> origin/fix/trazabilidad-s5
+ * [new branch]      main                    -> origin/main
+ * [new branch]      modulo6/cierre-auditoria -> origin/modulo6/cierre-auditoria
+ * [new branch]      modulo6/cierre-decisiones -> origin/modulo6/cierre-decisiones
+ * [new branch]      modulo6/comite-adr04    -> origin/modulo6/comite-adr04
+ * [new branch]      modulo6/entregables-s12 -> origin/modulo6/entregables-s12
+ * [new branch]      modulo7/documentacion-s13-s14 -> origin/modulo7/documentacion-s13-s14
+ * [new branch]      prueba/s14-verificacion-arranque -> origin/prueba/s14-verificacion-arranque
+ * [new branch]      spike/control-y2-descartable -> origin/spike/control-y2-descartable
+ * [new branch]      spike/fronteras-modulares-s10 -> origin/spike/fronteras-modulares-s10
+[command]/usr/bin/git branch --list --remote origin/prueba/s14-verificacion-arranque
+  origin/prueba/s14-verificacion-arranque
+[command]/usr/bin/git rev-parse refs/remotes/origin/prueba/s14-verificacion-arranque
+f8533c3ae4c399e9f725a2a5946ad880e8fc64e1
+##[endgroup]
+##[group]Determining the checkout info
+##[endgroup]
+[command]/usr/bin/git sparse-checkout disable
+[command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+##[group]Checking out the ref
+[command]/usr/bin/git checkout --progress --force -B prueba/s14-verificacion-arranque refs/remotes/origin/prueba/s14-verificacion-arranque
+Switched to a new branch 'prueba/s14-verificacion-arranque'
+branch 'prueba/s14-verificacion-arranque' set up to track 'origin/prueba/s14-verificacion-arranque'.
+##[endgroup]
+[command]/usr/bin/git log -1 --format=%H
+f8533c3ae4c399e9f725a2a5946ad880e8fc64e1
+##[group]Run actions/setup-java@v4
+with:
+  distribution: temurin
+  java-version: 21
+  java-package: jdk
+  check-latest: false
+  server-id: github
+  server-username: GITHUB_ACTOR
+  server-password: GITHUB_TOKEN
+  overwrite-settings: true
+  job-status: success
+  token: ***
+##[endgroup]
+##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+##[group]Installed distributions
+Resolved Java 21.0.13+9 from tool-cache
+Setting Java 21.0.13+9 as the default
+(node:2131) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Creating toolchains.xml for JDK version 21 from temurin
+Writing to /home/runner/.m2/toolchains.xml
+
+Java configuration:
+  Distribution: temurin
+  Version: 21.0.13+9
+  Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+
+##[endgroup]
+Creating settings.xml with server-id: github
+Writing to /home/runner/.m2/settings.xml
+##[group]Run actions/setup-python@v5
+with:
+  python-version: 3.12
+  check-latest: false
+  token: ***
+  update-environment: true
+  allow-prereleases: false
+  freethreaded: false
+env:
+  JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+  JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+##[endgroup]
+##[group]Installed versions
+(node:2143) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Successfully set up CPython (3.12.16)
+##[endgroup]
+##[group]Run pip install pyjwt cryptography
+[36;1mpip install pyjwt cryptography[0m
+shell: /usr/bin/bash -e {0}
+env:
+  JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+  JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+  pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+  PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+  Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+  Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+  Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+  LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+##[endgroup]
+Collecting pyjwt
+  Downloading pyjwt-2.15.1-py3-none-any.whl.metadata (3.5 kB)
+Collecting cryptography
+  Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+Collecting cffi>=2.0.0 (from cryptography)
+  Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography)
+  Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Downloading pyjwt-2.15.1-py3-none-any.whl (33 kB)
+Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 78.8 MB/s  0:00:00
+Downloading cffi-2.1.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+Installing collected packages: pyjwt, pycparser, cffi, cryptography
+
+Successfully installed cffi-2.1.1 cryptography-50.0.2 pycparser-3.12 pyjwt-2.15.1
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+##[group]Run bash docs/verificacion/arranque-limpio-2026-11-06/verificar.sh
+[36;1mbash docs/verificacion/arranque-limpio-2026-11-06/verificar.sh[0m
+shell: /usr/bin/bash -e {0}
+env:
+  JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+  JAVA_HOME_21_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.13-9/x64
+  pythonLocation: /opt/hostedtoolcache/Python/3.12.16/x64
+  PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib/pkgconfig
+  Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+  Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+  Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.16/x64
+  LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.16/x64/lib
+##[endgroup]
+== Entorno
+2026-11-06T14:20:17Z
+f8533c3ae4c399e9f725a2a5946ad880e8fc64e1
+Docker 28.0.4
+Docker Compose version v2.38.2
+openjdk version "21.0.13" 2026-10-20 LTS
+== A. Arranque limpio según el README
+8 tokens en secretos
+ Container patitas_urbanas_db  Starting
+ Container patitas_urbanas_db  Started
+ Container patitas_urbanas_db  Waiting
+ Container patitas_urbanas_db  Healthy
+ Container patitas_urbanas_api  Starting
+ Container patitas_urbanas_api  Started
+OK   API arriba, construida con app/Dockerfile, en 57 s
+== B. Comprobaciones del paso 2
+OK   health sin detalles -> {"status":"UP"}
+OK   POST sin token -> 401
+OK   POST con token (1) -> 201
+OK   POST con token (2) -> 201
+OK   POST con token (3) -> 201
+OK   búsqueda pública -> 200
+OK   búsqueda con tipo inválido -> 400
+OK   estado de 300 caracteres -> 400
+OK   filas antes de reiniciar -> 3
+ Container patitas_urbanas_api  Started
+OK   filas después de docker compose restart -> 3
+primer 200 tras kill -9: 5.16 s
+OK   filas después de kill -9 -> 3
+OK   reinicios automáticos -> 1
+OK   usuario del proceso -> 10001
+OK   API solo en loopback -> 127.0.0.1:3000
+OK   BD solo en loopback -> 127.0.0.1:5433
+== C. Pruebas de la API contra la BD de Compose
+}
+2026-11-06T14:21:49.735Z  WARN 3750 --- [patitas-urbanas-api] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-06T14:21:49.819Z  INFO 3750 --- [patitas-urbanas-api] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-11-06T14:21:49.919Z  INFO 3750 --- [patitas-urbanas-api] [           main] c.p.PatitasUrbanasApplicationTests       : Started PatitasUrbanasApplicationTests in 0.436 seconds (process running for 6.747)
+mvn test: código 0
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.451 
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.608 
+Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.259 
+OK   las tablas quedan borradas por create-drop de las pruebas -> 0
+ Container patitas_urbanas_api  Started
+OK   tras reiniciar la API las tablas vuelven -> 201
+== D. Volumen con la contraseña anterior
+ Network patitasurbanas_default  Removed
+ Container patitas_urbanas_api  Started
+OK   con el volumen viejo la API no conecta: password authentication failed
+ Volume patitasurbanas_pgdata_v16  Removed
+ Container patitas_urbanas_api  Started
+OK   tras down -v arranca con la contraseña nueva
+ Volume patitasurbanas_pgdata_v16  Removed
+== E. Despliegue de producción y prueba de fuga con la imagen real
+ Container patitas_urbanas_proxy  Started
+OK   HTTPS por el proxy
+OK   HTTP redirige a HTTPS -> 308
+OK   POST con token por HTTPS -> 201
+OK   puerto 3000 cerrado -> 000
+OK   puerto 5433 cerrado -> 000
+sonda	predicho	ejecucion-1	ejecucion-2	ejecucion-3	veredicto
+P01	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P02	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P03	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P04	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P05	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P06	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P07	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P08	FUGA_PARCIAL	FUGA_PARCIAL	FUGA_PARCIAL	FUGA_PARCIAL	NO_REFUTADA
+P09	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P10	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P11	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P12	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+P13	SIN_FUGA	SIN_FUGA	SIN_FUGA	SIN_FUGA	NO_REFUTADA
+OK   predicciones refutadas en la prueba de fuga -> 0
+ Volume patitasurbanas_pgdata_v16  Removed
+== Resultado: 0 comprobaciones fallidas
+Post job cleanup.
+(node:8866) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Post job cleanup.
+(node:8874) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Post job cleanup.
+[command]/usr/bin/git version
+git version 2.56.0
+Temporarily overriding HOME='/home/runner/work/_temp/1cb172f5-6d0b-4065-9e70-8080c74b1442' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+[command]/usr/bin/git config --global --add safe.directory /home/runner/work/PatitasUrbanas/PatitasUrbanas
+[command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+[command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+[command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+http.https://github.com/.extraheader
+[command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+[command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+[command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+[command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Cleaning up orphan processes
+##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

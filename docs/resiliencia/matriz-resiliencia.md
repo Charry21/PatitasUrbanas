@@ -28,7 +28,7 @@ Relaciona cada fallo de la [matriz de fallos](./matriz-fallos.md) con una tácti
 | R-09 | F-11 | Bajar el log SQL de DEBUG a INFO fuera de los experimentos | Propuesta (IA) | El log no crece con cada petición | Comparar el tamaño del log en una serie como la de S11 | **Propuesta** | Menos detalle para diagnosticar. **Hipotético** |
 | R-10 | F-12 | Reinicio automático del contenedor (`restart: unless-stopped` en `docker-compose.yml`) | Propuesta (IA), aceptada en M6-3 | La API vuelve sola tras detenerse el proceso | Matar el proceso de la API y medir el tiempo hasta un 200 | **Probada** con `kill -9`, 10/10 ciclos, 7,41–9,00 s (experimento 16). Implementada en `feat/s13-capa-seguridad`, **sin fusionar** | No evita ~8 s sin servicio. **Sola, con `create-drop`, borra los datos en cada caída** (HR2): exige R-11. Oculta las caídas si no hay alerta (RO-03) |
 | R-11 | F-13 | Usar `ddl-auto=validate` o `update` fuera del desarrollo | Propuesta (IA), aceptada en M6-3 | Reiniciar la API no borra datos | Reiniciar la API y contar filas | **Probada** con `update`, 5/5 ciclos, 25 = 25 filas (experimento 16). Implementada en `feat/s13-capa-seguridad`, **sin fusionar** | `update` no gestiona cambios incompatibles del esquema (RO-08) |
-| R-12 | F-08 | Construir la imagen en el computador del equipo o en CI sin proxy TLS | Propuesta (IA) | `docker build` termina sin error con el `Dockerfile` original | P1 de `09-cierre-spike-s10.md` | **Propuesta** | Ninguno identificado |
+| R-12 | F-08 | Construir la imagen en el computador del equipo o en CI sin proxy TLS | Propuesta (IA) | `docker build` termina sin error con el `Dockerfile` original | P1 de `09-cierre-spike-s10.md` | **Probada en CI** el 2026-11-06, en una máquina limpia sin proxy (`docs/verificacion/arranque-limpio-2026-11-06/`). Falta Windows | Ninguno identificado |
 
 ---
 
@@ -58,4 +58,4 @@ Ninguna fila figura como **Probada** sin una prueba o un experimento enlazado. T
 
 *Autores: Kevin Steven Torres Caro · Charry Ríos Daniel Estiven*
 *Semana 12 · Módulo 6 · Arquitectura de Software*
-*Actualizada el 2026-11-05 por la IA (R-06, R-10, R-11), pendiente de revisión del equipo*
+*Actualizada el 2026-11-05 por la IA (R-06, R-10, R-11, R-12), pendiente de revisión del equipo*

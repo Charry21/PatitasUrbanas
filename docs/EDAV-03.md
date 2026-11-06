@@ -27,6 +27,10 @@ Texto exacto del pedido del 2026-11-05:
 
 Junto con el pedido se entregó la guía del tutor con los entregables de las semanas 13 y 14.
 
+Pedido posterior, del 2026-11-06, sobre la verificación local:
+
+> "Queremos omitir lo del paso 2, lo puedes hacer tu, para el paso 3 cuales son las decisiones que tenemos que revisar, nos la das por aca para validarlas y asi ya poder firmar ese documento y lo que haga falta"
+
 ### 1.2 Criterios de aceptación comunicados antes del resultado
 
 Los de la lista de verificación del tutor (17 puntos), revisados uno por uno en [`auditoria-modulo7.md`](./auditoria-modulo7.md).
@@ -90,7 +94,7 @@ Las hipótesis y los criterios se versionaron antes de cualquier ejecución. Dos
 | S1 | La capa de seguridad es una candidata construida por la IA. El pedido no la mencionaba: hizo falta para poder medir | `experimentos/15-costo-seguridad-s13/README.md` §1 | Sustantivo (alcance) | | |
 | S2 | El agente cambió configuración y código más allá de los documentos: Compose, Dockerfile, contrato y README | `git diff main...feat/s13-capa-seguridad` | Sustantivo (alcance) | | |
 | S3 | Se propone cambiar el orden aceptado en M6-3: R-11 con R-10 | HR2 del experimento 16 | Sustantivo (decisión previa) | | |
-| S4 | Las mediciones usaron `Dockerfile.runtime`, no `app/Dockerfile` | `experimentos/10-crecimiento-s11/entorno/Dockerfile.runtime` | Sustantivo (validez externa) | | |
+| S4 | Las mediciones de p95 usaron `Dockerfile.runtime`, no `app/Dockerfile`. La construcción real se verificó aparte, sin medir | `experimentos/10-crecimiento-s11/entorno/Dockerfile.runtime` | Sustantivo (validez externa) | | |
 | S5 | `despues` usa certificado local; no hay prueba con un dominio real | `experimentos/14-fuga-datos-s13/RESULTADOS.md` | Sustantivo (validez externa) | | |
 | S6 | Probabilidades, impactos y umbrales de alerta son juicio de la IA | `docs/10-seguridad.md` §4 | Sustantivo (criterio) | | |
 | S7 | Los tokens los generó el mismo experimento: no se probó un emisor real | `generar_tokens.py` | Sustantivo (validez externa) | | |
@@ -129,7 +133,8 @@ Las hipótesis y los criterios se versionaron antes de cualquier ejecución. Dos
 | Costo sobre el p95 | `experimentos/15-costo-seguridad-s13/ejecutar.sh` y `analizar.py` | `resultados/analisis.txt` | Hecho |
 | Reinicio | `experimentos/16-reinicio-automatico-s14/ejecutar.sh` | `resultados/bitacora.txt` | Hecho |
 | FF-02 y su prueba negativa | Workflow `fitness-functions` | Ejecución `42153384163` (PR #83, `94f2acf`), *success*; pasos en `docs/fitness/evidencias/ejecuciones-ci-2026-11-05.txt` | Hecho |
-| Construcción de `app/Dockerfile` en un computador del equipo | `docker compose up --build` | — | **Pendiente del equipo** |
+| Construcción con `app/Dockerfile` y arranque limpio | `verificar.sh` en GitHub Actions, ejecución `42232989485` | 0 comprobaciones fallidas; `docs/verificacion/arranque-limpio-2026-11-06/` | Hecho por la IA a pedido del equipo, en Linux |
+| Lo mismo en un computador del equipo con Windows | README | — | **Pendiente del equipo** |
 | Revisión humana del diff | PR | — | **Pendiente del equipo** |
 
 ## 7. Qué no se alcanzó a verificar
