@@ -8,7 +8,8 @@ import re
 import sys
 from pathlib import Path
 
-CLAVE_LITERAL = re.compile(r"(?i)password\s*[:=]\s*(?!\$\{)[^\s#]+")
+# La clave debe abrir la línea: así no cuenta el mensaje de ${POSTGRES_PASSWORD:?...}
+CLAVE_LITERAL = re.compile(r"(?im)^\s*(?:-\s*)?\w*password\s*[:=]\s*(?!\$\{)[^\s#]+")
 RUTA_PROPIEDADES = "app/src/main/resources/application.properties"
 RUTA_COMPOSE = "docker-compose.yml"
 RUTA_PRODUCCION = "docker-compose.produccion.yml"
