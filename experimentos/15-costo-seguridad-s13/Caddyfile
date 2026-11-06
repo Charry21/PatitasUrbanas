@@ -1,0 +1,10 @@
+# Proxy TLS de la condición T. Certificado interno porque es una prueba local.
+# En producción se usaría el dominio real y un certificado público.
+{
+	auto_https disable_redirects
+}
+
+https://localhost:8443 {
+	tls internal
+	reverse_proxy patitas_urbanas_api:3000
+}
