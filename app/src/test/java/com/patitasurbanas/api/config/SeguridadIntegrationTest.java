@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -24,12 +29,13 @@ import java.time.Instant;
 import java.util.Base64;
 import java.util.Date;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /** Verifica el escenario 2 con el decodificador real: la clave de prueba se crea en cada ejecución. */
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
 class SeguridadIntegrationTest {
@@ -42,6 +48,9 @@ class SeguridadIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private TestRestTemplate cliente;
 
     private static KeyPair generar() throws Exception {
         KeyPairGenerator generador = KeyPairGenerator.getInstance("RSA");
@@ -141,5 +150,19 @@ class SeguridadIntegrationTest {
         mockMvc.perform(post("/api/adopciones").param("estado", "x".repeat(300))
                         .header("Authorization", "Bearer " + valido("adopciones:escribir")))
                 .andExpect(status().isBadRequest());
+    }
+
+    /** Con Tomcat real: MockMvc no hace el reenvío a /error, por eso no detecta este fallo. */
+    @Test
+    void conServidorRealLaEntradaInvalidaSigueSiendo400() throws Exception {
+        ResponseEntity<String> tipoInvalido =
+                cliente.getForEntity("/api/mascotas/buscar?lat=abc&lng=0&radio=0", String.class);
+        assertThat(tipoInvalido.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+
+        HttpHeaders cabeceras = new HttpHeaders();
+        cabeceras.setBearerAuth(valido("adopciones:escribir"));
+        ResponseEntity<String> largo = cliente.postForEntity(
+                "/api/adopciones?estado=" + "x".repeat(300), new HttpEntity<>(cabeceras), String.class);
+        assertThat(largo.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 }
