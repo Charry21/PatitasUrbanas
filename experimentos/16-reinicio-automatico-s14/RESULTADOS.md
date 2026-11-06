@@ -34,6 +34,10 @@ Fecha de ejecución: 2026-11-06 01:55–01:57 UTC (2026-11-05 en Bogotá). Image
 - `app/Dockerfile` original: se usó la variante `Dockerfile.runtime` (F-08).
 - `update` frente a cambios incompatibles del esquema.
 
-## 5. Desviaciones
+## 5. Verificación complementaria (no preregistrada)
+
+Se repitió el `kill -9` en 3 ciclos con la pila final de `feat/s13-capa-seguridad`: Compose de producción, proxy TLS, imagen sin root y `update`. El primer 200 **a través del proxy** tardó 8,11–8,47 s, y las filas se conservaron en los 3 ciclos. Evidencia: [`resultados/verificacion-compose-final.txt`](./resultados/verificacion-compose-final.txt).
+
+## 6. Desviaciones
 
 Ninguna frente al preregistro.

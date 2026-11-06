@@ -1,0 +1,5 @@
+Verificación complementaria, no preregistrada. Pila real: docker-compose.yml + docker-compose.produccion.yml, rama feat/s13-capa-seguridad en 94f2acf
+Fecha UTC: 2026-11-06T02:53:49Z
+ciclo=1 kill -9 pid=27909 primer_200_por_el_proxy_s=8.141588837 filas_antes=49,49 filas_despues=49,49 reinicios=1
+ciclo=2 kill -9 pid=29621 primer_200_por_el_proxy_s=8.113937549 filas_antes=50,50 filas_despues=50,50 reinicios=2
+ciclo=3 kill -9 pid=30062 primer_200_por_el_proxy_s=8.471399715 filas_antes=51,51 filas_despues=51,51 reinicios=3
