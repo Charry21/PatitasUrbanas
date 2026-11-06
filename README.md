@@ -104,8 +104,8 @@ Borradores de la IA, pendientes de revisión del equipo. ADR-05 está en estado 
 | 14 | Riesgos operativos y compromisos | [`docs/13-riesgos-tradeoffs.md`](docs/13-riesgos-tradeoffs.md) |
 | 14 | R-10 y R-11 (condición del ADR-04) | [`experimentos/16-reinicio-automatico-s14/`](experimentos/16-reinicio-automatico-s14/) ([resultados](experimentos/16-reinicio-automatico-s14/RESULTADOS.md)) |
 | 14 | ADR 5 | [`adr/adr-05-seguridad-y-operacion.md`](adr/adr-05-seguridad-y-operacion.md) |
-| 14 | Fitness functions en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`docs/fitness/ff-02-configuracion-segura.md`](docs/fitness/ff-02-configuracion-segura.md) (llega con ⟦PR-FEAT⟧), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
+| 14 | Fitness functions en CI | [`docs/fitness/ff-01-fronteras-modulares.md`](docs/fitness/ff-01-fronteras-modulares.md), [`docs/fitness/ff-02-configuracion-segura.md`](docs/fitness/ff-02-configuracion-segura.md) (llega con el [PR #83](https://github.com/Charry21/PatitasUrbanas/pull/83)), [`.github/workflows/fitness-functions.yml`](.github/workflows/fitness-functions.yml) |
 | — | Autoauditoría e inconsistencias | [`docs/auditoria-modulo7.md`](docs/auditoria-modulo7.md) |
 | — | Registro crítico de IA | [`docs/registro-ia-modulo7.md`](docs/registro-ia-modulo7.md) |
 
-La capa de seguridad, el Compose de producción, R-10 y R-11 están en ⟦PR-FEAT⟧, sin fusionar: `main` sigue sin esos controles.
+La capa de seguridad, el Compose de producción, R-10 y R-11 están en el [PR #83](https://github.com/Charry21/PatitasUrbanas/pull/83), sin fusionar: `main` sigue sin esos controles.

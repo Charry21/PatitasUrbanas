@@ -53,9 +53,9 @@ Horas en UTC. Los hashes se pueden comprobar con `git log` en cada rama.
 | Preregistro de los experimentos 14, 15 y 16 | `3c2b010`, `0e9c109`, `c00438b` | 2026-11-06 01:52:50 | PR #82 abierto a las 01:52:53, antes de medir |
 | Corrección de 2 errores de Bash del script de fuga | `03e4c74` | 2026-11-06 | Desviación D1 de `experimentos/14-fuga-datos-s13/RESULTADOS.md` |
 | Primer resultado: fuga sobre `main` | `c99a20c` | 2026-11-06 | `experimentos/14-fuga-datos-s13/resultados/antes/` |
-| Resultado del reinicio | ⟦H16⟧ | 2026-11-06 | `experimentos/16-reinicio-automatico-s14/` |
+| Resultado del reinicio | `15b6708` | 2026-11-06 | `experimentos/16-reinicio-automatico-s14/` |
 | Capa de seguridad medida | `07c8cac` | 2026-11-06 | Rama `feat/s13-capa-seguridad` |
-| Medición del p95 | ⟦H15⟧ | 2026-11-06 | `experimentos/15-costo-seguridad-s13/` |
+| Medición del p95 | `b9f135f` (datos), `54bc0ab` (informe) | 2026-11-06 | `experimentos/15-costo-seguridad-s13/` |
 | Auditoría humana | *Pendiente* | | |
 
 ### 2.1 Declaración de trazabilidad temporal
@@ -71,13 +71,13 @@ Las hipótesis y los criterios se versionaron antes de cualquier ejecución. Dos
 |---|---|
 | Modelado de amenazas | 18 amenazas STRIDE en `docs/10-seguridad.md` |
 | Matriz de riesgos y controles | 17 riesgos con propuesta de mitigar o aceptar |
-| Fuga de datos | ⟦R14⟧ |
-| Costo sobre el p95 | ⟦R15⟧ |
+| Fuga de datos | `main`: 7 sondas con fuga y 1 hallazgo. Con los controles: 1 fuga parcial (P08). 0 de 26 predicciones refutadas |
+| Costo sobre el p95 | Δ(C − S) de +5,23 y +9,72 ms, con evidencia débil; TLS no concluyente; HC1–HC5 no refutadas |
 | R-10 y R-11 | R-10 recupera en < 10 s; con `create-drop` se pierden los datos; con `update` se conservan |
 | Despliegue y observabilidad | `docs/12-despliegue-observabilidad.md` |
 | Riesgos y compromisos | 14 riesgos operativos y 10 compromisos en `docs/13-riesgos-tradeoffs.md` |
 | ADR-05 | Estado **Propuesta** |
-| FF-02 | ⟦R-FF⟧ |
+| FF-02 | En CI en el PR #83, con prueba negativa de 10 casos |
 
 ## 4. Auditoría humana: hallazgos clasificados
 
@@ -94,6 +94,9 @@ Las hipótesis y los criterios se versionaron antes de cualquier ejecución. Dos
 | S5 | `despues` usa certificado local; no hay prueba con un dominio real | `experimentos/14-fuga-datos-s13/RESULTADOS.md` | Sustantivo (validez externa) | | |
 | S6 | Probabilidades, impactos y umbrales de alerta son juicio de la IA | `docs/10-seguridad.md` §4 | Sustantivo (criterio) | | |
 | S7 | Los tokens los generó el mismo experimento: no se probó un emisor real | `generar_tokens.py` | Sustantivo (validez externa) | | |
+| S8 | La primera versión de la capa rompía los errores 400 y las pruebas con MockMvc no lo vieron. Lo destapó la lectura de los códigos de P04 | `experimentos/14-fuga-datos-s13/RESULTADOS.md` §4, H2 | Sustantivo (calidad de las pruebas) | | `94f2acf` |
+| S9 | FF-02 tenía un falso positivo, y su prueba negativa daba verde igual porque la base ya fallaba | Commit `68f01c1` | Sustantivo (instrumento) | | `68f01c1` |
+| S10 | El agente commiteó durante una corrida válida del experimento 15 | `experimentos/15-costo-seguridad-s13/RESULTADOS.md` §6, D1 | Sustantivo (procedimiento) | | |
 
 ### 4.2 Hallazgos cosméticos
 
@@ -120,12 +123,12 @@ Las hipótesis y los criterios se versionaron antes de cualquier ejecución. Dos
 
 | Verificación | Comando o procedimiento | Evidencia/salida | Estado |
 |---|---|---|---|
-| Suite de pruebas | `mvn -B clean package` con PostgreSQL local | ⟦V-TEST⟧ | Hecho |
+| Suite de pruebas | `mvn -B clean package` con PostgreSQL local | 11/11 en `94f2acf` | Hecho |
 | Fronteras modulares | `python3 -I tools/fitness/fronteras_modulares.py app` | 8 clases, 0 violaciones | Hecho |
 | Fuga de datos, antes y después | `experimentos/14-fuga-datos-s13/ejecutar.sh` | `comparacion.tsv` de cada etiqueta | Hecho |
 | Costo sobre el p95 | `experimentos/15-costo-seguridad-s13/ejecutar.sh` y `analizar.py` | `resultados/analisis.txt` | Hecho |
 | Reinicio | `experimentos/16-reinicio-automatico-s14/ejecutar.sh` | `resultados/bitacora.txt` | Hecho |
-| FF-02 y su prueba negativa | Workflow `fitness-functions` | ⟦V-FF⟧ | Hecho |
+| FF-02 y su prueba negativa | Workflow `fitness-functions` | Ejecución `42153384163` (PR #83, `94f2acf`), *success*; pasos en `docs/fitness/evidencias/ejecuciones-ci-2026-11-05.txt` | Hecho |
 | Construcción de `app/Dockerfile` en un computador del equipo | `docker compose up --build` | — | **Pendiente del equipo** |
 | Revisión humana del diff | PR | — | **Pendiente del equipo** |
 
