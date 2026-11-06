@@ -138,7 +138,7 @@ Ninguno.
 | Reinicio | `experimentos/16-reinicio-automatico-s14/ejecutar.sh` | `resultados/bitacora.txt` | Hecho |
 | FF-02 y su prueba negativa | Workflow `fitness-functions` | Ejecución `42153384163` (PR #83, `94f2acf`), *success*; pasos en `docs/fitness/evidencias/ejecuciones-ci-2026-11-05.txt` | Hecho |
 | Construcción con `app/Dockerfile` y arranque limpio | `verificar.sh` en GitHub Actions, ejecución `42232989485` | 0 comprobaciones fallidas; `docs/verificacion/arranque-limpio-2026-11-06/` | Hecho por la IA a pedido del equipo, en Linux |
-| Lo mismo en un computador del equipo con Windows | README | — | **Pendiente del equipo** |
+| Lo mismo en un computador del equipo con Windows | README, en PowerShell | Build, 401, 201 y filas tras reiniciar, todo correcto; `docs/verificacion/windows-2026-11-06/` | Hecho por Kevin Torres el 2026-11-06 |
 | Revisión humana | Decisiones de §4 y §5 | Hecha por el equipo el 2026-11-06 | Hecho. Falta la aprobación del PR por Daniel Charry en GitHub |
 
 ## 7. Qué no se alcanzó a verificar

@@ -13,6 +13,12 @@ El proyecto utiliza PostgreSQL mediante Docker Compose. Para levantar la base de
 python experimentos/14-fuga-datos-s13/generar_tokens.py secretos
 ```
 
+Si no tienes Python, puedes generarlas con Docker:
+
+```powershell
+docker run --rm -v "${PWD}:/w" -w /w python:3.12-slim sh -c "pip install -q pyjwt cryptography && python experimentos/14-fuga-datos-s13/generar_tokens.py secretos"
+```
+
 5. Si ya levantaste el proyecto antes de este cambio, borra el volumen anterior. PostgreSQL guarda la contraseña en el volumen y no toma la nueva de `.env`, así que la API no podría conectarse. **Esto borra los datos locales:**
 
 ```powershell

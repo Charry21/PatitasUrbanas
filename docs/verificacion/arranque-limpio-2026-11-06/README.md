@@ -27,6 +27,6 @@ La rama temporal `prueba/s14-verificacion-arranque` ya no hace falta y se puede 
 
 ## Lo no verificado
 
-- **Windows con Docker Desktop y los comandos de PowerShell del README.** Se probó en Linux.
+- ~~Windows con Docker Desktop y los comandos de PowerShell del README.~~ Verificado por Kevin Torres el 2026-11-06 (`docs/verificacion/windows-2026-11-06/`).
 - El costo sobre el p95 con esta imagen: el experimento 15 usó `Dockerfile.runtime`.
 - La revisión de una persona del equipo.
