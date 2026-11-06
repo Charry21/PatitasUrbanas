@@ -1,0 +1,1 @@
+{"status":"success", "mensaje":"Endpoint geoespacial activo"}http://192.0.2.2:3000 -> 200

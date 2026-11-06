@@ -1,0 +1,13 @@
+Fecha: 2026-11-06T01:54:08.234Z
+Etiqueta: antes
+Commit de esta rama: c00438b8a6a74c378b7234f7dcaa0f50f258b82c
+Rama: experimento/s13-s14-seguridad-operacion
+Código de la API (imagen): patitas-urbanas-api:s13-sin sha256:9e935c3da0106c0d2bca489c4abc44c17e859392cc7870e15ed05138c2211e47
+SO: Ubuntu 24.04.5 LTS
+CPUs: 2
+Docker 29.9.2
+PostgreSQL 16.15 (Debian 16.15-1.pgdg13+2) on x86_64-pc-linux-gnu, compiled by gcc (Debian 14.2.0-19) 14.2.0, 64-bit
+URL_API: http://localhost:3000
+Puertos publicados:
+patitas_urbanas_api 0.0.0.0:3000->3000/tcp
+patitas_urbanas_db 0.0.0.0:5433->5432/tcp

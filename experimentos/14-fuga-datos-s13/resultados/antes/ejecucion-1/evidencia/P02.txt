@@ -1,0 +1,11 @@
+GET /actuator -> 200
+{"_links":{"self":{"href":"http://localhost:3000/actuator","templated":false},"health":{"href":"http://localhost:3000/actuator/health","templated":false},"health-path":{"href":"http://localhost:3000/actuator/health/{*path}","templated":true}}}
+GET /actuator/env -> 404
+GET /actuator/configprops -> 404
+GET /actuator/heapdump -> 404
+GET /actuator/threaddump -> 404
+GET /actuator/beans -> 404
+GET /actuator/mappings -> 404
+GET /actuator/metrics -> 404
+GET /actuator/loggers -> 404
+GET /actuator/prometheus -> 404
