@@ -10,7 +10,7 @@ Fecha: 2026-11-06. El equipo pidió a la IA hacer esta verificación. **No la ej
 | Por qué en Actions | En el entorno de la IA, `docker compose up --build` falla: el contenedor de build no puede descargar de Maven (F-08) |
 | Evidencia | [`verificar.sh`](./verificar.sh), [`workflow-usado.yml`](./workflow-usado.yml) y [`salida-completa.txt`](./salida-completa.txt) |
 
-La rama temporal `prueba/s14-verificacion-arranque` se borró al terminar; por eso el workflow se conserva aquí.
+La rama temporal `prueba/s14-verificacion-arranque` ya no hace falta y se puede borrar en GitHub. El workflow se conserva aquí para poder repetir la prueba.
 
 ## Resultado: 0 comprobaciones fallidas
 
