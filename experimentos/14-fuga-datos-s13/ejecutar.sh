@@ -129,7 +129,7 @@ CARGAS
   jar=$(unzip -p /tmp/fuga-app.$$.jar BOOT-INF/classes/application.properties 2>/dev/null | grep -E '^spring.datasource.password=' )
   rm -f /tmp/fuga-app.$$.jar
   entorno=$(docker inspect -f '{{range .Config.Env}}{{println .}}{{end}}' "$API" | grep -E 'PASSWORD=' | sed -E 's/=.*/=<presente>/')
-  git log --all -S"$CLAVE_REPO" --oneline -- docker-compose.yml 2>/dev/null | grep -q . && historial=si
+  [ -n "$(git log --all -S"$CLAVE_REPO" --oneline -- docker-compose.yml 2>/dev/null)" ] && historial=si
   { echo "--- archivos versionados"; echo "$versionados"; echo "--- jar"; echo "$jar"; echo "--- variables del contenedor (valor oculto)"; echo "$entorno"; echo "--- en el historial de Git: $historial"; } > "$E/P08.txt"
   local clave_en_jar=no; [[ $jar == *"$CLAVE_REPO"* ]] && clave_en_jar=si
   if [ -n "$versionados" ] || [ "$clave_en_jar" = si ]; then anotar P08 FUGA "versionados=$(grep -c . <<<"$versionados") jar=$clave_en_jar entorno=$(grep -c . <<<"$entorno") historial=$historial"
