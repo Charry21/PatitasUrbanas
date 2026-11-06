@@ -1,5 +1,6 @@
 package com.patitasurbanas.api.config;
 
+import jakarta.servlet.DispatcherType;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,8 @@ public class SeguridadConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .sessionManagement(sesion -> sesion.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(reglas -> reglas
+                        // Sin esto, Tomcat reenvía el 400 a /error y la denegación lo convierte en 401 o 403.
+                        .dispatcherTypeMatchers(DispatcherType.ERROR).permitAll()
                         .requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/mascotas/buscar").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/adopciones/test-fallo").hasAuthority(PERMISO_PRUEBAS)
