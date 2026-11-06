@@ -146,7 +146,7 @@ Borradores de la IA revisados por el equipo el 2026-11-06. ADR-05 está **acepta
 | — | Autoauditoría e inconsistencias | [`docs/auditoria-modulo7.md`](docs/auditoria-modulo7.md) |
 | — | Registro crítico de IA | [`docs/registro-ia-modulo7.md`](docs/registro-ia-modulo7.md) |
 
-La capa de seguridad, el Compose de producción, R-10 y R-11 están en el [PR #83](https://github.com/Charry21/PatitasUrbanas/pull/83), sin fusionar: `main` sigue sin esos controles.
+La capa de seguridad, el Compose de producción, R-10 y R-11 llegaron a `main` con el [PR #83](https://github.com/Charry21/PatitasUrbanas/pull/83), fusionado el 2026-11-06.
 
 ## Glosario de identificadores (I-07)
 

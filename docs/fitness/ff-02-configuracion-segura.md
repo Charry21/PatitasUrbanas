@@ -1,6 +1,6 @@
 # Contrato de fitness function FF-02 — Configuración segura y operable
 
-> **Estado: propuesta.** La IA la redactó para ADR-05. El equipo todavía no la ha revisado.
+> **Estado: aceptada por el equipo** el 2026-11-06 (ADR-05, decisión F). La redactó la IA. Corre en CI desde que se fusionó el PR #83 ese mismo día.
 
 | Campo | Contenido |
 |---|---|
@@ -36,4 +36,4 @@
 
 ---
 
-*Borrador de la IA · Semana 14 · pendiente de revisión del equipo*
+*Redactada por la IA · aceptada por el equipo (Kevin Torres · Daniel Charry, 2026-11-06) · Semana 14*

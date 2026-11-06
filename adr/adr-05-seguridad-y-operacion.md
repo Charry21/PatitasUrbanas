@@ -7,7 +7,7 @@
 
 **Aceptada por el equipo** (2026-11-06), con el emisor de tokens **aplazado**. No requiere mini-comité según el sílabo, como confirmó el tutor el 2026-11-06. Se presenta en el comité técnico final (semanas 15–16).
 
-Decidieron Kevin Torres · Daniel Charry, sobre la propuesta de la IA. El código está en el PR #83: las decisiones llegan a `main` cuando se fusione.
+Decidieron Kevin Torres · Daniel Charry, sobre la propuesta de la IA. El código llegó a `main` con el PR #83, fusionado el 2026-11-06.
 
 Historial: Propuesta por la IA (Semana 14, 2026-11-05) → Aceptada por el equipo con el emisor aplazado (2026-11-06).
 

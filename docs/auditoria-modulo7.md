@@ -4,7 +4,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 
 **Alcance de la revisión:** el sílabo y el arco del proyecto no están en el repositorio (I-12). Solo se revisó contra la guía del tutor.
 
-**Importante:** "Cumple" significa que el entregable existe en un pull request abierto. **Nada de esto está en `main` hasta que el equipo lo fusione.**
+**Estado (actualizado el 2026-11-06):** los PR #82 a #86 están fusionados en `main`, así que "Cumple" significa que el entregable está en `main`. La revisión manual S6 llega con el PR #87.
 
 ## 1. Lista de verificación del tutor
 
@@ -21,11 +21,11 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y la revisó 
 | 9 | Plan de monitoreo, alertas y recuperación | **Cumple** | Ídem §3.4 y §4 | Solo P-1 y P-2 están probados |
 | 10 | Matriz de riesgos operativos | **Cumple** | `docs/13-riesgos-tradeoffs.md` §1: 14 riesgos | Revisión del equipo |
 | 11 | ADR 5 documentado | **Cumple** | `adr/adr-05-seguridad-y-operacion.md`, aceptada por el equipo el 2026-11-06, con el emisor aplazado | Ninguno: el sílabo no asigna mini-comité a ADR-05 (tutor, 2026-11-06) |
-| 12 | Fitness function ejecutándose en CI | **Cumple** | FF-01 en `main` desde la Semana 12: `docs/fitness/ff-01-fronteras-modulares.md`, con ejecuciones actualizadas | FF-02 corre en su PR; pasa a `main` si se fusiona |
-| 13 | Archivos organizados y enlazados desde el README | **Cumple** | README, sección "Módulo 7" | Se ve en `main` al fusionar |
+| 12 | Fitness function ejecutándose en CI | **Cumple** | FF-01 en `main` desde la Semana 12 y FF-02 desde el PR #83 (2026-11-06), las dos en el workflow `fitness-functions` con su prueba negativa | — |
+| 13 | Archivos organizados y enlazados desde el README | **Cumple** | README, sección "Módulo 7" | — |
 | 14 | Evidencias técnicas guardadas en el repositorio | **Cumple** | `resultados/` de los experimentos 14, 15 y 16 | — |
-| 15 | Cambios subidos mediante commits y pull requests | **Parcial** | PR #82, #83 y #84, en borrador | Revisar y fusionar |
-| 16 | Cada integrante tiene contribuciones identificables | **Parcial** | Ambas cuentas aparecen en el historial, pero del 2026-10-24 al 2026-10-31 todos los commits de `main` son de Charry21, y los de esta semana son de la cuenta de Kevin | I-15: que cada uno revise o firme lo suyo |
+| 15 | Cambios subidos mediante commits y pull requests | **Cumple** | PR #82 a #87, revisados y fusionados por el equipo; uno por actividad | — |
+| 16 | Cada integrante tiene contribuciones identificables | **Parcial** | Commits de las dos cuentas; Daniel Charry fusionó el PR #84 y Kevin Torres los PR #82 y #83. La reescritura de `main` del 2026-11-06 está documentada en `experimentos/07-trazabilidad-temporal.md` | I-15: cada uno debe poder explicar lo que revisó y decidió |
 | 17 | Decisiones y mediciones con fechas y referencias | **Cumple** | Cada experimento registra fecha, commit, entorno y corridas | — |
 
 ## 2. Revisión cruzada del tutor
