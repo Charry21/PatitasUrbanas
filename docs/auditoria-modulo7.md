@@ -13,7 +13,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y **el equipo
 | 1 | Modelado de amenazas documentado | **Cumple** | `docs/10-seguridad.md` §1–§2: 18 amenazas, con activo, impacto y evidencia | Revisión del equipo |
 | 2 | Matriz de riesgos de seguridad y controles | **Parcial** | `docs/10-seguridad.md` §4: 17 riesgos | Los tratamientos son propuestas: el equipo decide qué se acepta |
 | 3 | Prueba de fuga reproducible y con resultados | **Cumple** | `experimentos/14-fuga-datos-s13/`: 13 sondas, 3 repeticiones, antes y después | — |
-| 4 | Costo de seguridad sobre el p95, con condiciones | ⟦A4⟧ | `experimentos/15-costo-seguridad-s13/` | — |
+| 4 | Costo de seguridad sobre el p95, con condiciones | **Cumple** | `experimentos/15-costo-seguridad-s13/` | — |
 | 5 | Evidencia del ciclo EDAV 3 formativo | **Parcial** | `docs/EDAV-03.md` | La auditoría humana y la firma son del equipo |
 | 6 | Diagrama de despliegue | **Cumple** | `docs/12-despliegue-observabilidad.md` §1; `docs/despliegue/` | — |
 | 7 | Comparación de costo relativo de alternativas | **Parcial** | `docs/12-despliegue-observabilidad.md` §2 | Elegir proveedor; el precio de V1 es de fuente secundaria y no hay COP |
@@ -24,7 +24,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y **el equipo
 | 12 | Fitness function ejecutándose en CI | **Cumple** | FF-01 en `main` desde la Semana 12: `docs/fitness/ff-01-fronteras-modulares.md`, con ejecuciones actualizadas | FF-02 corre en su PR; pasa a `main` si se fusiona |
 | 13 | Archivos organizados y enlazados desde el README | **Cumple** | README, sección "Módulo 7" | Se ve en `main` al fusionar |
 | 14 | Evidencias técnicas guardadas en el repositorio | **Cumple** | `resultados/` de los experimentos 14, 15 y 16 | — |
-| 15 | Cambios subidos mediante commits y pull requests | **Parcial** | PR #82, ⟦PRS⟧ | Revisar y fusionar |
+| 15 | Cambios subidos mediante commits y pull requests | **Parcial** | PR #82, #83 y #84, en borrador | Revisar y fusionar |
 | 16 | Cada integrante tiene contribuciones identificables | **Parcial** | Ambas cuentas aparecen en el historial, pero del 2026-10-24 al 2026-10-31 todos los commits de `main` son de Charry21, y los de esta semana son de la cuenta de Kevin | I-15: que cada uno revise o firme lo suyo |
 | 17 | Decisiones y mediciones con fechas y referencias | **Cumple** | Cada experimento registra fecha, commit, entorno y corridas | — |
 
@@ -62,7 +62,7 @@ Contrastada con la lista de verificación del tutor. La hizo la IA y **el equipo
 
 ## 4. Pendientes que dependen del equipo
 
-1. Revisar y fusionar los PR en este orden: ⟦ORDEN⟧.
+1. Revisar y fusionar los PR en este orden: #82, #83 y #84.
 2. Decidir ADR-05, incluido el emisor de tokens, y si necesita mini-comité.
 3. Completar la EDAV 3 y firmar el registro de IA.
 4. Probar `docker compose up --build` con `app/Dockerfile` en un computador del equipo (R-12, I-5 de la matriz de fallos).
