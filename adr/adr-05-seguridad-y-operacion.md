@@ -5,11 +5,11 @@
 
 ## Estado
 
-**Propuesta** — borrador de la IA, sin decisión del equipo ni veredicto de comité.
+**Aceptada por el equipo** (2026-11-06), con el emisor de tokens **aplazado**. Veredicto de comité: pendiente de confirmar con el tutor si hace falta.
 
-Las decisiones de este documento **no son del equipo todavía**. Cada una se puede aceptar, ajustar o rechazar en la sección "Decisión del equipo". El código que las implementa está en la rama `feat/s13-capa-seguridad` y no está en `main`.
+Decidieron Kevin Torres · Daniel Charry, sobre la propuesta de la IA. El código está en el PR #83: las decisiones llegan a `main` cuando se fusione.
 
-Historial: Propuesta por la IA (Semana 14, 2026-11-05).
+Historial: Propuesta por la IA (Semana 14, 2026-11-05) → Aceptada por el equipo con el emisor aplazado (2026-11-06).
 
 ---
 
@@ -170,17 +170,31 @@ Este ADR es la decisión de seguridad del sistema. ADR-01 daba por hecho "un ún
 
 | Decisión | Propuesta | Decisión del equipo | Fecha |
 |---|---|---|---|
-| A. Autenticación | A1, JWT en la API | ☐ Aceptada ☐ Ajustada ☐ Rechazada | |
-| A. Emisor de tokens | Sin propuesta | | |
-| B. Exposición | B1, proxy Caddy | ☐ Aceptada ☐ Ajustada ☐ Rechazada | |
-| C. Secretos y endurecimiento | `.env` y controles | ☐ Aceptada ☐ Ajustada ☐ Rechazada | |
-| D. Recuperación | R-10 + R-11 | ☐ Aceptada ☐ Ajustada ☐ Rechazada | |
-| E. Observabilidad | N1 | ☐ Aceptada ☐ Ajustada ☐ Rechazada | |
-| F. FF-02 | En CI | ☐ Aceptada ☐ Ajustada ☐ Rechazada | |
+| A. Autenticación | A1, JWT en la API | **Aceptada** | 2026-11-06 |
+| A. Emisor de tokens | Sin propuesta | **Aplazada:** se integrará una solución de identidad de terceros. Hasta entonces, el sistema no puede operar con clientes reales (RS-14, RO-14) | 2026-11-06 |
+| B. Exposición | B1, proxy Caddy | **Aceptada** | 2026-11-06 |
+| C. Secretos y endurecimiento | `.env` y controles | **Aceptada** | 2026-11-06 |
+| D. Recuperación | R-10 + R-11 | **Aceptada** | 2026-11-06 |
+| E. Observabilidad | N1 | **Aceptada** | 2026-11-06 |
+| F. FF-02 | En CI | **Aceptada** | 2026-11-06 |
+
+### Condiciones que puso el equipo
+
+1. `/api/mascotas/buscar` sigue pública **solo mientras los datos sean simulados**. Antes de usar datos reales hay que poner control de acceso (TO-10).
+2. Los riesgos aceptados (RS-08, RS-09, RS-12, RS-13, RS-15 y RS-17) se revisan antes de un despliegue público o de guardar datos personales. El equipo los registra como deuda técnica.
+3. La retención de direcciones IP en el log (RS-16) se define antes del despliegue público.
+4. Antes de desplegar en un proveedor (EDAV 3, §8):
+   - revisar a mano probabilidades, impactos y umbrales;
+   - integrar el emisor de terceros;
+   - reforzar las pruebas de integración con servidor real y en CI.
+5. Además:
+   - R-11 entra con R-10;
+   - se acepta un RPO de 24 h;
+   - se acepta V1, con el proveedor por definir.
 
 ## Veredicto del comité
 
-Pendiente. El sílabo y la rúbrica no están en el repositorio: el equipo debe confirmar si ADR-05 necesita mini-comité, como ADR-04.
+Pendiente: el equipo consultará al tutor si ADR-05 necesita mini-comité, como ADR-04.
 
 ---
 
@@ -194,4 +208,4 @@ Pendiente. El sílabo y la rúbrica no están en el repositorio: el equipo debe 
 
 ---
 
-*Borrador de la IA · Semana 14 · Módulo 7 · Arquitectura de Software · Pendiente de revisión y firma del equipo*
+*Propuesta de la IA (2026-11-05) · Decisión del equipo: Kevin Torres · Daniel Charry (2026-11-06) · Semana 14 · Módulo 7 · Arquitectura de Software*

@@ -38,7 +38,7 @@ M6-3 de `docs/registro-ia-modulo6.md`: R-07 a R-12 se aceptan como plan. Se impl
 
 **Mini-comité del ADR-04 (2026-10-31):** R-10 pasa a ser la condición del veredicto **Ajustada**. Hay que implementarla y probarla antes del cierre de la Semana 13 (`dossier/evidencia-comite-adr04.md`).
 
-**Propuesta de la IA (2026-11-05), pendiente del equipo:** cambiar el orden de M6-3 para que R-11 entre junto con R-10, porque R-10 sola convierte cada caída en una pérdida de datos (HR2 del experimento 16). Ver ADR-05, decisión D.
+**Decisión del equipo (2026-11-06, ADR-05 decisión D):** se cambia el orden de M6-3 y R-11 entra junto con R-10, porque R-10 sola convierte cada caída en una pérdida de datos (HR2 del experimento 16). Ver ADR-05, decisión D.
 
 ## 2. Tácticas presentadas como probadas sin evidencia suficiente
 
